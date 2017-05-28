@@ -40,3 +40,4 @@ static let requestManager = ServiceRequestManager()
         }
     }
 }
+}
