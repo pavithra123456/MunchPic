@@ -222,11 +222,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_bg.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Trc-GV-AHw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Trc-GV-AHw">
                                 <rect key="frame" x="0.0" y="0.0" width="419" height="736"/>
+                                <color key="backgroundColor" red="0.65566045049999999" green="0.21293087299999999" blue="0.18831302229999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottom_bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="i8y-8i-czY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i8y-8i-czY">
                                 <rect key="frame" x="0.0" y="0.0" width="415" height="61"/>
+                                <color key="backgroundColor" red="0.80790102480000003" green="0.3356257379" blue="0.24319101870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="yKg-eQ-ZEo"/>
                                 </constraints>
@@ -472,7 +474,7 @@
                                             <constraint firstAttribute="height" constant="27" id="s8e-sL-5Pr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mR-oh-2LQ">
@@ -482,7 +484,7 @@
                                             <constraint firstAttribute="height" constant="28" id="o68-M3-abH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contact number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eZa-6B-vdv">
@@ -509,7 +511,7 @@
                                             <constraint firstAttribute="height" constant="30" id="vyQ-bt-Hcy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BqI-dM-Ry5">
@@ -576,7 +578,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naU-4a-cKn">
                                         <rect key="frame" x="159.66666666666669" y="845" width="143.00000000000006" height="33"/>
-                                        <color key="backgroundColor" red="0.87425357100000001" green="0.29265260700000001" blue="0.196398288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.80790102480000003" green="0.3356257379" blue="0.24319101870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="143" id="ZPe-qm-c3r"/>
                                             <constraint firstAttribute="height" constant="33" id="oLM-tj-qdq"/>
@@ -603,6 +605,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.65566045049999999" green="0.21293087299999999" blue="0.18831302229999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="TiJ-eQ-h7X" firstAttribute="trailing" secondItem="OUh-80-LuQ" secondAttribute="trailing" id="125-rD-CgW"/>
                                     <constraint firstItem="gzX-fT-bBN" firstAttribute="top" secondItem="YBj-Bm-0E1" secondAttribute="bottom" constant="5" id="26U-Cl-Bie"/>
@@ -713,9 +716,7 @@
     </scenes>
     <resources>
         <image name="back1.png" width="34" height="34"/>
-        <image name="bottom_bg.png" width="480" height="80"/>
         <image name="checkbox@3.png" width="50" height="51"/>
-        <image name="main_bg.jpg" width="1536" height="2048"/>
         <image name="rd1.png" width="35" height="35"/>
         <image name="rd2.png" width="35" height="35"/>
         <image name="txtbg.png" width="324" height="46"/>
