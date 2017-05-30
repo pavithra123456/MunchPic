@@ -5,13 +5,15 @@
 //  Created by Pavithra Jayanna on 27/05/17.
 //  Copyright © 2017 Pavithra Jayanna. All rights reserved.
 //
+
  import UIKit
-import Alamofire
+//import Alamofire
 
 class ServiceRequestManager: NSObject {
 static let requestManager = ServiceRequestManager()
     func getPosts(){
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetPost, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        
+/*        Alamofire.request(Constants.kBaseUrl + Constants.kGetPost, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
                 
@@ -38,6 +40,6 @@ static let requestManager = ServiceRequestManager()
 //                completion(nil,response.result.error?.localizedDescription, false)
 //            }
         }
-    }
+    } */
 }
 }
