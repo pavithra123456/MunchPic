@@ -7,7 +7,41 @@
 //
 
 import UIKit
-
+import Alamofire
 class ServiceLayer: NSObject {
-
+    static let requestManager = ServiceLayer()
+    private override init() {
+        
+    }
+    func getPosts(){
+        
+        Alamofire.request(Constants.kBaseUrl + Constants.kGetPost, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            
+            if response.result.isSuccess {
+                
+                // handle the response here
+                
+                
+                //                if let jsonDictionary = response.result.value as? NSDictionary {
+                //                    if let errorDictionary = jsonDictionary[Constants.kError] as? NSDictionary {
+                //                        completion(nil,errorDictionary[Constants.KErrorMessage] as? String,false)
+                //                    }
+                //                    else if let resultDict = jsonDictionary[Constants.kResult] as? NSDictionary {
+                //                        completion(resultDict,nil,true)
+                //                    }
+                //                    else {
+                //                        completion(nil,Constants.kAGeneralError, false)
+                //                    }
+                //                }
+                //                else {
+                //                    completion(nil,Constants.kAGeneralError, false)
+                //                }
+                //                
+                //            }
+                //            else {
+                //                completion(nil,response.result.error?.localizedDescription, false)
+                //            }
+            }
+        }
+    }
 }

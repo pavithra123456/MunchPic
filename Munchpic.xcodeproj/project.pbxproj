@@ -26,7 +26,6 @@
 		7B3576931ED9AC0100FF610A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3576921ED9AC0100FF610A /* DetailViewController.swift */; };
 		7B3576951ED9AC7B00FF610A /* Receipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3576941ED9AC7B00FF610A /* Receipe.swift */; };
 		7B3576971ED9B8FA00FF610A /* ServiceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3576961ED9B8FA00FF610A /* ServiceLayer.swift */; };
-		7B3576991ED9B90A00FF610A /* ServiceRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3576981ED9B90A00FF610A /* ServiceRequestManager.swift */; };
 		7BD1D3011EDB3E3F003CE82F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1D3001EDB3E3F003CE82F /* Constants.swift */; };
 		87B1E6CC1EDC4B0300A331C0 /* userimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6CB1EDC4B0300A331C0 /* userimage.png */; };
 		87B1E6CE1EDC4B0D00A331C0 /* bottom_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */; };
@@ -89,7 +88,6 @@
 		7B3576921ED9AC0100FF610A /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7B3576941ED9AC7B00FF610A /* Receipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receipe.swift; sourceTree = "<group>"; };
 		7B3576961ED9B8FA00FF610A /* ServiceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceLayer.swift; sourceTree = "<group>"; };
-		7B3576981ED9B90A00FF610A /* ServiceRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequestManager.swift; sourceTree = "<group>"; };
 		7BD1D3001EDB3E3F003CE82F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		87B1E6CB1EDC4B0300A331C0 /* userimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userimage.png; sourceTree = "<group>"; };
 		87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_bg.png; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				7B3576961ED9B8FA00FF610A /* ServiceLayer.swift */,
-				7B3576981ED9B90A00FF610A /* ServiceRequestManager.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -574,7 +571,6 @@
 				87B1E6E21EDC503200A331C0 /* SweetAlert.swift in Sources */,
 				7B3576971ED9B8FA00FF610A /* ServiceLayer.swift in Sources */,
 				7BD1D3011EDB3E3F003CE82F /* Constants.swift in Sources */,
-				7B3576991ED9B90A00FF610A /* ServiceRequestManager.swift in Sources */,
 				7B3576911ED9ABDB00FF610A /* AddIngredientsViewController.swift in Sources */,
 				7B3576851ED9AB4E00FF610A /* HomeTabViewController.swift in Sources */,
 				7B3576541ED9AA8500FF610A /* ViewController.swift in Sources */,
