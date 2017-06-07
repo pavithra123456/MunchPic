@@ -38,15 +38,15 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
         
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0){
             
-            _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill all the feilds", style: AlertStyle.none)
+           // _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill all the feilds", style: AlertStyle.none)
             
         }else if(emailid.text?.characters.count == 0 ){
             
-             _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your registered Emailid", style: AlertStyle.none)
+            // _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your registered Emailid", style: AlertStyle.none)
             
         }else if(password.text?.characters.count == 0 ){
             
-              _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your password", style: AlertStyle.none)
+             // _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your password", style: AlertStyle.none)
             
         }else{
             
@@ -56,7 +56,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
                 
                  // call login api
                 
-                _ = SweetAlert().showAlert("Alert!", subTitle: "You are logged in successfully!", style: AlertStyle.success)
+               // _ = SweetAlert().showAlert("Alert!", subTitle: "You are logged in successfully!", style: AlertStyle.success)
                 
             }else{
                 
