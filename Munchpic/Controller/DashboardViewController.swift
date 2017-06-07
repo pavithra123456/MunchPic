@@ -96,8 +96,13 @@ class DashboardViewController: UIViewController {
         homeContainer.isHidden = false
         
         windowContainer.isHidden = true
+        windowBorder?.isHidden = true
+        
         searchContainer.isHidden = true
+        searchBorder?.isHidden = true
+        
         profileContainer.isHidden = true
+        profileBorder?.isHidden = true
         
         
     }
@@ -122,7 +127,7 @@ extension UIView {
     }
     
     /// Add borders to UIView based on position.
-    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.white, borderWidth: CGFloat = 1.0) -> UIView {
+    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.0) -> UIView {
         
         let borderName = "bottomBorder"
         
