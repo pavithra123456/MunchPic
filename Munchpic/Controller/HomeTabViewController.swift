@@ -8,11 +8,11 @@
 
 import UIKit
 
-class HomeTabViewController: UITableViewController {
+class HomeTabViewController: UITabBarController,UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -21,7 +21,14 @@ class HomeTabViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        var headerTransform = CATransform3DIdentity
 
+        viewController.view.layer.transform =
+        CATransform3DTranslate(headerTransform, 0, 2, 0)
+    }
+    
     /*
     // MARK: - Navigation
 

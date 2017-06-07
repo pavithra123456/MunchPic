@@ -38,11 +38,12 @@
             </objects>
             <point key="canvasLocation" x="5130" y="351"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Home Tab View Controller-->
         <scene sceneID="NK1-Em-JxM">
             <objects>
                 <tabBarController id="EiU-C8-3hn" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="mWE-7S-cbj"/>
+
                     <tabBar key="tabBar" contentMode="scaleToFill" id="8qU-0D-USy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

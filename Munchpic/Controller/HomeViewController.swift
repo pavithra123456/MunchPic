@@ -116,6 +116,11 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+
+    override func viewDidAppear(_ animated: Bool) {
+        ServiceLayer.requestManager.GetCollections(parameter: nil) { (array, status, message) in
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {

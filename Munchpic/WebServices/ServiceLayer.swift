@@ -45,7 +45,7 @@ class ServiceLayer: NSObject {
         }
     }
     
-    func GetCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    func GetCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetCollections, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
