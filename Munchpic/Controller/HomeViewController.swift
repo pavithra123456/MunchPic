@@ -14,6 +14,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     @IBOutlet var pagecontroller: UIPageControl!
     @IBOutlet var mscrollview: UIScrollView!
     @IBOutlet var Hometableview: UITableView!
+    let images = ["img0","img1","img2","","","",""]
     
     
     var slidearrayData:NSMutableArray = NSMutableArray()
@@ -94,7 +95,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return slidearrayData.count
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,8 +107,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         }
         
         let servicesList1: (AnyObject) = (slidearrayData[indexPath.row] as AnyObject)
-        cell.foodrecipeImage.image = UIImage(named: servicesList1 as! String)
-        
+        cell.foodrecipeImage.image = UIImage(named: images[indexPath.row] as! String)
         
         
         return cell
