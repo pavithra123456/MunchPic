@@ -770,32 +770,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEh-YM-eKY">
-                                <rect key="frame" x="4" y="0.0" width="406" height="788"/>
+                                <rect key="frame" x="4" y="0.0" width="406" height="617"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sxu-oE-JrM">
-                                        <rect key="frame" x="0.0" y="0.0" width="406" height="193"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="406" id="uKw-cw-id0"/>
-                                        </constraints>
-                                    </imageView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="afA-Wo-nww">
-                                        <rect key="frame" x="0.0" y="124" width="406" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="37" id="k2F-nI-1Yi"/>
-                                        </constraints>
-                                        <connections>
-                                            <action selector="Pagecontroller_Action:" destination="aJ0-KG-Jpm" eventType="valueChanged" id="TeE-73-Rmr"/>
-                                        </connections>
-                                    </pageControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="368" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="INr-Zl-hWN">
-                                        <rect key="frame" x="0.0" y="201" width="406" height="480"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="406" height="681"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="480" id="awl-lz-lfQ"/>
+                                            <constraint firstAttribute="height" constant="681" id="Tet-br-KPn"/>
+                                            <constraint firstAttribute="width" constant="406" id="uBD-Yw-Yl9"/>
                                         </constraints>
+                                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.png" id="Sxu-oE-JrM">
+                                            <rect key="frame" x="0.0" y="0.0" width="406" height="193"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Hcell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Hcell" rowHeight="368" id="5D7-zN-86n" customClass="CustomTableViewCell" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="406" height="368"/>
+                                                <rect key="frame" x="0.0" y="221" width="406" height="368"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5D7-zN-86n" id="dXz-4F-sfu">
                                                     <rect key="frame" x="0.0" y="0.0" width="406" height="367"/>
@@ -902,6 +892,7 @@
                                                     <constraints>
                                                         <constraint firstItem="JIK-f9-WUi" firstAttribute="top" secondItem="IqH-To-9Yf" secondAttribute="bottom" constant="13" id="8iU-p0-bjR"/>
                                                         <constraint firstItem="ran-ju-cTn" firstAttribute="leading" secondItem="dXz-4F-sfu" secondAttribute="leadingMargin" id="FTa-Nb-Se6"/>
+                                                        <constraint firstItem="JIK-f9-WUi" firstAttribute="leading" secondItem="dXz-4F-sfu" secondAttribute="leadingMargin" constant="-16" id="Hpk-Db-P1P"/>
                                                         <constraint firstAttribute="bottom" secondItem="D2N-bF-Rn8" secondAttribute="bottom" id="IWZ-Vu-Z0g"/>
                                                         <constraint firstAttribute="trailing" secondItem="JIK-f9-WUi" secondAttribute="trailing" id="Lim-sY-2j0"/>
                                                         <constraint firstItem="znU-D5-2gh" firstAttribute="centerY" secondItem="ran-ju-cTn" secondAttribute="centerY" id="SMk-Yo-xnK"/>
@@ -929,20 +920,24 @@
                                             <outlet property="delegate" destination="aJ0-KG-Jpm" id="hgV-jm-cdk"/>
                                         </connections>
                                     </tableView>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="afA-Wo-nww">
+                                        <rect key="frame" x="0.0" y="124" width="406" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="406" id="68v-bc-quv"/>
+                                            <constraint firstAttribute="height" constant="37" id="k2F-nI-1Yi"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="Pagecontroller_Action:" destination="aJ0-KG-Jpm" eventType="valueChanged" id="TeE-73-Rmr"/>
+                                        </connections>
+                                    </pageControl>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="INr-Zl-hWN" secondAttribute="bottom" constant="107" id="06h-Sy-A82"/>
-                                    <constraint firstItem="Sxu-oE-JrM" firstAttribute="trailing" secondItem="afA-Wo-nww" secondAttribute="trailing" id="A5Z-aQ-Sql"/>
-                                    <constraint firstItem="Sxu-oE-JrM" firstAttribute="top" secondItem="fEh-YM-eKY" secondAttribute="top" id="HGv-c6-1kh"/>
-                                    <constraint firstItem="INr-Zl-hWN" firstAttribute="top" secondItem="fEh-YM-eKY" secondAttribute="top" constant="201" id="Jmr-0Y-dvR"/>
+                                    <constraint firstAttribute="bottom" secondItem="INr-Zl-hWN" secondAttribute="bottom" id="06h-Sy-A82"/>
+                                    <constraint firstItem="INr-Zl-hWN" firstAttribute="top" secondItem="fEh-YM-eKY" secondAttribute="top" id="Jmr-0Y-dvR"/>
                                     <constraint firstItem="afA-Wo-nww" firstAttribute="leading" secondItem="fEh-YM-eKY" secondAttribute="leading" id="L7e-e6-D48"/>
                                     <constraint firstAttribute="trailing" secondItem="afA-Wo-nww" secondAttribute="trailing" id="OYe-q8-flU"/>
-                                    <constraint firstAttribute="trailing" secondItem="INr-Zl-hWN" secondAttribute="trailing" id="Sdu-Z8-5K4"/>
                                     <constraint firstItem="INr-Zl-hWN" firstAttribute="leading" secondItem="fEh-YM-eKY" secondAttribute="leading" id="U3o-Yx-opn"/>
-                                    <constraint firstItem="Sxu-oE-JrM" firstAttribute="leading" secondItem="afA-Wo-nww" secondAttribute="leading" id="a0e-Xq-gDb"/>
                                     <constraint firstItem="afA-Wo-nww" firstAttribute="top" secondItem="fEh-YM-eKY" secondAttribute="top" constant="124" id="kYd-dh-Tel"/>
-                                    <constraint firstItem="INr-Zl-hWN" firstAttribute="top" secondItem="Sxu-oE-JrM" secondAttribute="bottom" constant="8" symbolic="YES" id="pcw-BT-HMY"/>
-                                    <constraint firstItem="Sxu-oE-JrM" firstAttribute="centerX" secondItem="fEh-YM-eKY" secondAttribute="centerX" id="z4z-gC-xAo"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="aJ0-KG-Jpm" id="sKz-4A-3Pg"/>
@@ -953,7 +948,7 @@
                         <constraints>
                             <constraint firstItem="fEh-YM-eKY" firstAttribute="top" secondItem="AQx-nr-AlY" secondAttribute="bottom" id="FNX-cY-klK"/>
                             <constraint firstItem="fEh-YM-eKY" firstAttribute="leading" secondItem="j8J-xI-z9n" secondAttribute="leadingMargin" constant="-16" id="G6J-Wd-oAU"/>
-                            <constraint firstItem="OVy-iZ-eJw" firstAttribute="top" secondItem="fEh-YM-eKY" secondAttribute="bottom" constant="-171" id="pPT-Vh-gnR"/>
+                            <constraint firstAttribute="bottom" secondItem="fEh-YM-eKY" secondAttribute="bottom" id="ddc-Lw-8a0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fEh-YM-eKY" secondAttribute="trailing" constant="-16" id="zFH-sf-ZAx"/>
                         </constraints>
                     </view>
