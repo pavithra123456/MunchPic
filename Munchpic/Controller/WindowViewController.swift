@@ -8,13 +8,56 @@
 
 import UIKit
 
-class WindowViewController: UIViewController {
+class WindowViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
+    
+    @IBOutlet var mscrollview: UIScrollView!
+    @IBOutlet var menucollectionview: UICollectionView!
+    @IBOutlet var menutableview: UITableView!
+    @IBOutlet var heightconstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidLayoutSubviews() {
+        mscrollview.isScrollEnabled = true
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = menucollectionview.dequeueReusableCell(withReuseIdentifier: "HCell", for:indexPath) as! CustomCollectionViewCell
+        
+        //let servicesList1: (AnyObject) = (imagedata[indexPath.item])
+        cell.menuimage.image = UIImage(named: "1.png");
+        
+        mscrollview.isScrollEnabled = true
+        mscrollview.isUserInteractionEnabled = true
+        
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
+        menutableview.frame.size.height = menutableview.contentSize.height
+        heightconstraint.constant = menutableview.frame.size.height
+        
+        return cell
+        
+        
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
