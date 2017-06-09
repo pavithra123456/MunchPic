@@ -15,6 +15,7 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet var menutableview: UITableView!
     @IBOutlet var heightconstraint: NSLayoutConstraint!
 
+    let imageNameArray = ["food1","food2","food3","food4","img0"]
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +32,7 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return imageNameArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,7 +40,6 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
         let cell = menucollectionview.dequeueReusableCell(withReuseIdentifier: "HCell", for:indexPath) as! CustomCollectionViewCell
         
         //let servicesList1: (AnyObject) = (imagedata[indexPath.item])
-        cell.menuimage.image = UIImage(named: "1.png");
         
         mscrollview.isScrollEnabled = true
         mscrollview.isUserInteractionEnabled = true
@@ -48,6 +48,9 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
         menutableview.frame.size.height = menutableview.contentSize.height
         heightconstraint.constant = menutableview.frame.size.height
         
+            cell.menuimage.image = UIImage(named: "1.png");
+        
+       
         return cell
         
         
@@ -86,7 +89,7 @@ extension WindowViewController : UITableViewDataSource {
     //    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,8 +104,8 @@ extension WindowViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView:UIView =  UIView()
-        let imageViewGame = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 100));
-        let image = UIImage(named: "3.png");
+        let imageViewGame = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200));
+        let image = UIImage(named: imageNameArray[section]);
         imageViewGame.image = image;
         headerView.addSubview(imageViewGame)
         
@@ -111,9 +114,8 @@ extension WindowViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        return 100
+        return 200
     }
-    
     
     
 }

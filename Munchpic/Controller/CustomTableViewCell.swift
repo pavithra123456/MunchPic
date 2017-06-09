@@ -12,6 +12,8 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var foodrecipeImage: UIImageView!
+    let imageNameArray = ["food1","food2","food3","food4","img0"]
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,11 +33,14 @@ class CustomTableViewCell: UITableViewCell {
 extension CustomTableViewCell : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return imageNameArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Rcell", for: indexPath) as! CustomCollectionViewCell
+        
+        cell.imageView.image = UIImage(named: imageNameArray[indexPath.row])
+
         return cell
     }
     
