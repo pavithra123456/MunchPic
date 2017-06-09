@@ -744,6 +744,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "d7cfbbc9-862a-44d0-8d3c-b05e21bd8e2d";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -789,6 +790,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "d7cfbbc9-862a-44d0-8d3c-b05e21bd8e2d";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -801,15 +803,15 @@
 			baseConfigurationReference = BA15765971EB4BD62F67CDF0 /* Pods-Munchpic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = QSLY5SF2LD;
 				INFOPLIST_FILE = Munchpic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.opteamix.Munchpic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "108442b8-23c6-4427-aa2e-9d721d792744";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
+				PROVISIONING_PROFILE = "d7cfbbc9-862a-44d0-8d3c-b05e21bd8e2d";
+				PROVISIONING_PROFILE_SPECIFIER = MunchPic_adoc;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -819,16 +821,16 @@
 			baseConfigurationReference = 29360438760831E031DBB521 /* Pods-Munchpic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shrinivas Ramanujan (253T3J3RX9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = QSLY5SF2LD;
 				INFOPLIST_FILE = Munchpic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.opteamix.Munchpic;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "108442b8-23c6-4427-aa2e-9d721d792744";
-				PROVISIONING_PROFILE_SPECIFIER = iosdevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: *";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
