@@ -14,6 +14,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     @IBOutlet var pagecontroller: UIPageControl!
     @IBOutlet var mscrollview: UIScrollView!
     @IBOutlet var Hometableview: UITableView!
+    @IBOutlet var heightconstraint: NSLayoutConstraint!
     let images = ["img0","img1","img2","","","",""]
     
     
@@ -40,6 +41,11 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         
         slidetimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector:#selector(HomeViewController.handleSwipeLeft(gesture:)), userInfo: nil, repeats: true)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        mscrollview.isScrollEnabled = true
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: Hometableview.contentSize.height+250)
     }
     
     @IBAction func Pagecontroller_Action(_ sender: Any) {
@@ -107,8 +113,14 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         }
         
         let servicesList1: (AnyObject) = (slidearrayData[indexPath.row] as AnyObject)
-        cell.foodrecipeImage.image = UIImage(named: images[indexPath.row] as! String)
+        cell.foodrecipeImage.image = UIImage(named: images[indexPath.row] )
         
+        mscrollview.isScrollEnabled = true
+        mscrollview.isUserInteractionEnabled = true
+        
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: Hometableview.contentSize.height+250)
+        Hometableview.frame.size.height = Hometableview.contentSize.height
+        heightconstraint.constant = Hometableview.frame.size.height
         
         return cell
         
