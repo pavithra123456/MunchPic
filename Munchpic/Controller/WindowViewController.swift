@@ -109,6 +109,12 @@ extension WindowViewController : UITableViewDataSource {
         imageViewGame.image = image;
         headerView.addSubview(imageViewGame)
         
+       let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        
+        label.text = "South Indian Style"
+        headerView.addSubview(label)
+        
+        
         return headerView
     }
     
