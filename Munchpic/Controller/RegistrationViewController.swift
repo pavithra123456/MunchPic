@@ -164,7 +164,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     // MARK: - imagepicker delegate
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
@@ -215,6 +215,24 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             // login
             
             if Reachability.isConnectedToNetwork() == true {
+                
+                let parameter  = ["name":(first_name.text! + " " + last_name.text!),
+                                  "dob":DOB.text!,
+                                  "gender":genderstring,
+                                  "country":country.text!,
+                                  "state":state.text!,
+                                  "city":city.text!,
+                                  "email":country.text!,
+                                  "password":password.text!,
+                                  "mobile":contact_number.text!,
+                                  "image": profilepic.image  ?? UIImage(),
+                                  "about":aboutyou.text!
+                ] as [String : Any]
+                
+                
+                LoginServiceLayer.register(parameter: parameter, completion: { (response, status, msg) in
+                    
+                })
                 
                  _ = SweetAlert().showAlert("Alert!", subTitle: "You are registered in successfully!", style: AlertStyle.success)
                 

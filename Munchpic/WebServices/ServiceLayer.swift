@@ -13,6 +13,7 @@ class ServiceLayer: NSObject {
     private override init() {
         
     }
+    
     func getPosts(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetPost, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

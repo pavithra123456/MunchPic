@@ -50,13 +50,20 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
             
         }else{
             
-           
-            
             if Reachability.isConnectedToNetwork() == true {
                 
-                 // call login api
-                
-               // _ = SweetAlert().showAlert("Alert!", subTitle: "You are logged in successfully!", style: AlertStyle.success)
+                 //TODO: -  call login api
+                let parameter  = ["email":emailid.text! ,
+                                  "password":password.text!
+                    ] as [String : AnyObject]
+                LoginServiceLayer.login(parameter: parameter, completion: { (response, status, message) in
+                    if status {
+                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                    }
+                    else  {
+                        Utility.showAlert(title: "Error", message: message, controller: self,completion:nil)
+                    }
+                })
                 
             }else{
                 
@@ -68,7 +75,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
         
     }
 
-    @IBAction func ForgetPAssword(_ sender: Any) {
+    @IBAction func ForgotPassword(_ sender: Any) {
         
         let alertController = UIAlertController(title: "", message: "Please enter your email", preferredStyle: .alert)
         

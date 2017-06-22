@@ -371,11 +371,12 @@
                     <connections>
                         <outlet property="emailid" destination="q0b-jK-krd" id="BEu-jv-N4q"/>
                         <outlet property="password" destination="bL1-WV-eIP" id="9sH-V4-yKm"/>
+                        <segue destination="bR7-7L-LeN" kind="presentation" identifier="ShowDashbosrd" id="TVX-Xt-qfU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9PB-Wg-ocW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4194" y="-107"/>
+            <point key="canvasLocation" x="4502" y="-351"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="pJa-1g-sOz">
@@ -1229,6 +1230,12 @@
                         <barButtonItem key="leftBarButtonItem" image="btn_hamburger" id="nNX-jQ-gwj">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="1Ip-O5-sjg">
+                            <string key="title">.
+.
+.</string>
+                            <color key="tintColor" red="0.59583875868055558" green="0.84315321180555558" blue="0.039306640625" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="homeBtn" destination="mdZ-A6-oXX" id="k8l-5k-f4I"/>
@@ -1268,7 +1275,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkZ-g2-xmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2926" y="506"/>
+            <point key="canvasLocation" x="2880" y="655"/>
         </scene>
         <!--Window View Controller-->
         <scene sceneID="aKZ-43-NlJ">
@@ -1293,14 +1300,14 @@
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="PlD-hG-Ee8" customClass="CustomTableViewCell" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="150"/>
+                                                <rect key="frame" x="0.0" y="28" width="324" height="150"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PlD-hG-Ee8" id="htF-7L-9kg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="324" height="149.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dfh-QH-PzR">
-                                                            <rect key="frame" x="0.0" y="1" width="414" height="146"/>
+                                                            <rect key="frame" x="0.0" y="1" width="324" height="146"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ByP-Bc-4Fk">
                                                                 <size key="itemSize" width="98" height="126"/>
@@ -1507,7 +1514,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sankanthi" translatesAutoresizingMaskIntoConstraints="NO" id="ECw-Wx-3R5">
-                                                            <rect key="frame" x="0.0" y="90" width="412" height="180"/>
+                                                            <rect key="frame" x="0.0" y="90" width="268" height="180"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userimage.png" translatesAutoresizingMaskIntoConstraints="NO" id="dBS-dY-kei">
                                                             <rect key="frame" x="7" y="9" width="38" height="38"/>
@@ -1516,7 +1523,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icb-si-SBz">
-                                                            <rect key="frame" x="53" y="15" width="339" height="26"/>
+                                                            <rect key="frame" x="53" y="15" width="195" height="26"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="26" id="Zkj-Yo-e0z"/>
                                                             </constraints>
@@ -1525,7 +1532,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6q-gb-yTb">
-                                                            <rect key="frame" x="245" y="281" width="40" height="40"/>
+                                                            <rect key="frame" x="101" y="281" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="R71-kq-cOt"/>
                                                                 <constraint firstAttribute="height" constant="40" id="wcH-Tv-Bux"/>
@@ -1535,7 +1542,7 @@
                                                             </state>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nN-cH-upv">
-                                                            <rect key="frame" x="361" y="281" width="40" height="40"/>
+                                                            <rect key="frame" x="217" y="281" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="CcK-7l-eRp"/>
                                                                 <constraint firstAttribute="width" constant="40" id="ttg-lB-dma"/>
@@ -1543,7 +1550,7 @@
                                                             <state key="normal" image="share"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFk-ul-mvM">
-                                                            <rect key="frame" x="313" y="281" width="40" height="40"/>
+                                                            <rect key="frame" x="169" y="281" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="LoD-PG-ACA"/>
                                                                 <constraint firstAttribute="height" constant="40" id="dN9-0Z-jQc"/>
@@ -1571,7 +1578,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCC-ST-tFK">
-                                                            <rect key="frame" x="282" y="290" width="23" height="21"/>
+                                                            <rect key="frame" x="138" y="290" width="23" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="23" id="vh8-X3-zwD"/>
                                                                 <constraint firstAttribute="height" constant="21" id="yGM-qV-zhS"/>
@@ -1696,6 +1703,7 @@
         <image name="userimage.png" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TVX-Xt-qfU"/>
         <segue reference="MTY-cL-nPt"/>
         <segue reference="RfE-wc-EgB"/>
         <segue reference="Hky-Z7-ZbS"/>

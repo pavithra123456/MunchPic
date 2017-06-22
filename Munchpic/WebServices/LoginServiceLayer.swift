@@ -9,20 +9,25 @@
 import Foundation
 import Alamofire
 class LoginServiceLayer: NSObject {
-    func login(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func login(parameter:[String:AnyObject]?,completion:@escaping (AnyObject?,Bool,String) ->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KLogin, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(Constants.kBaseUrl + Constants.KLogin, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
+                completion(response as AnyObject,true,"Login succesfully")
+            }
+            else {
+                completion(nil,true,(response.error?.localizedDescription)!)
             }
         }
     }
     
-    func register(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func register(parameter:[String:Any]?,completion:@escaping (AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.KRegister, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
+                completion(response as AnyObject,true,"Registered succesfully")
             }
         }
     }
