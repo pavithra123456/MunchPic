@@ -10,6 +10,7 @@ import UIKit
 
 class CustomCollectionViewCell: UICollectionViewCell {
     
-     @IBOutlet weak var imageView: UIImageView!
-     @IBOutlet var menuimage: UIImageView!
+     @IBOutlet weak var menuImage: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
 }

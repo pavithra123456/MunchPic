@@ -225,7 +225,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                                   "email":country.text!,
                                   "password":password.text!,
                                   "mobile":contact_number.text!,
-                                  "image": profilepic.image  ?? UIImage(),
                                   "about":aboutyou.text!
                 ] as [String : Any]
                 

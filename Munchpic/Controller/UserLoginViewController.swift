@@ -53,17 +53,23 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
             if Reachability.isConnectedToNetwork() == true {
                 
                  //TODO: -  call login api
-                let parameter  = ["email":emailid.text! ,
-                                  "password":password.text!
-                    ] as [String : AnyObject]
-                LoginServiceLayer.login(parameter: parameter, completion: { (response, status, message) in
-                    if status {
-                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                    }
-                    else  {
-                        Utility.showAlert(title: "Error", message: message, controller: self,completion:nil)
-                    }
-                })
+//                let parameter  = ["email":emailid.text! ,
+//                                  "password":password.text!
+//                    ] as [String : AnyObject]
+                
+                if let email = emailid.text ,let  pwd = emailid.text {
+                    let url = Constants.kBaseUrl + Constants.KLogin + "email=\(email)" + "password=\(pwd)"
+
+                    LoginServiceLayer.login(relativeUrl:url, completion: { (response, status, message) in
+                        if status {
+                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                        }
+                        else  {
+                            Utility.showAlert(title: "Error", message: message, controller: self,completion:nil)
+                        }
+                    })
+
+                }
                 
             }else{
                 

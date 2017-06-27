@@ -7,6 +7,8 @@ target 'Munchpic' do
 
   # Pods for Munchpic
 	pod ‘Alamofire’
+    pod 'MBProgressHUD' , '1.0.0'
+
   target 'MunchpicTests' do
     inherit! :search_paths
     # Pods for testing

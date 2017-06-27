@@ -14,12 +14,13 @@ class ServiceLayer: NSObject {
         
     }
     
-    func getPosts(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func getPosts(relativeUrl:String,completion:@escaping (AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetPost, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(relativeUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
                 
+                completion(response.result.value as AnyObject, true, "")
                 // handle the response here
                 
                 
@@ -46,7 +47,7 @@ class ServiceLayer: NSObject {
         }
     }
     
-    func GetCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
+    class func getCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetCollections, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -54,7 +55,7 @@ class ServiceLayer: NSObject {
                 }
         }
     }
-    func GetIngredients(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func GetIngredients(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetIngredients, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -63,7 +64,7 @@ class ServiceLayer: NSObject {
         }
     }
 
-    func GetComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func GetComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetComments, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -71,15 +72,46 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func GetCornivals(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func getCornivals(completion:@escaping (AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetCornivals, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(Constants.kBaseUrl + Constants.kGetCornivals, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
+                completion(response.result.value as AnyObject, true, "")
             }
         }
     }
-    func GetCollectionCategories(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func getCollectionCategories(completion:@escaping (AnyObject?,Bool,String)->Void){
+        
+        Alamofire.request(Constants.kBaseUrl + Constants.kGetCollectionCategories, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            
+            if response.result.isSuccess {
+                
+                let response1 =  response.result.value as! [String:AnyObject]
+                if let array = response1["result"] as? Array<AnyObject> {
+                    var collectionArray = [[String:String]]()
+
+                    for obj in array {
+                        collectionArray.append(obj as! [String : String])
+                    }
+                    completion(collectionArray as AnyObject, true, "Success")
+                }
+                
+            }
+        }
+    }
+    
+    
+    class func getLoves(completion:(AnyObject?,Bool,String)->Void){
+        let parameter = ["userId":38]
+        Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            
+            if response.result.isSuccess {
+                
+            }
+        }
+    }
+    class func GetParticularPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetCollectionCategories, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -88,33 +120,17 @@ class ServiceLayer: NSObject {
         }
     }
     
-    
-    func GetLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func getTrends(completion:@escaping (AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(Constants.kBaseUrl + Constants.kGetTrends, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
-            }
-        }
-    }
-    func GetParticularPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetCollectionCategories, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
-        }
-    }
-    func GetTrends(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetTrends, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
+                completion(response.result.value as  AnyObject,true,"Success")
             }
         }
     }
 
-    func GetUserPosts(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+   class  func GetUserPosts(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetUserPosts, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -122,7 +138,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func insertLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func insertLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kInsertLoves, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -130,7 +146,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func insertCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func insertCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kInsertCollections, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -138,7 +154,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func insertComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+   class  func insertComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kInsertComments, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -146,7 +162,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func insertPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+   class  func insertPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kInsertPost, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -154,7 +170,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-    func deleteCollection(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    class func deleteCollection(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kDeleteCollection, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -163,6 +179,14 @@ class ServiceLayer: NSObject {
         }
     }
 
+    class func getusetInfo(relativeUrl:String,completion:@escaping (AnyObject?,Bool,String)->Void) {
+        Alamofire.request(relativeUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+            print(response)
+            if response.result.isSuccess {
+               // completion(response.result.value as AnyObject, true, "")
+            }
+        }
     
+    }
 
 }

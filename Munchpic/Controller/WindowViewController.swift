@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import  MBProgressHUD
+
 
 class WindowViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
     
@@ -14,17 +16,89 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     @IBOutlet var menucollectionview: UICollectionView!
     @IBOutlet var menutableview: UITableView!
     @IBOutlet var heightconstraint: NSLayoutConstraint!
-
+    var trendsArray = [TrendsModel]()
+    var cornibvalsArray = [[String:String]]()
     let imageNameArray = ["food1","food2","food3","food4","img0"]
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        ServiceLayer.getCornivals { (response, status, message) in
+            MBProgressHUD.hide(for: self.view, animated: true)
+
+            if status == true {
+                
+                let response1 = response as! [String:AnyObject]
+                if let array = response1["result"] as? Array<AnyObject> {
+                    for obj in array {
+                        let trendObject = obj
+                        let str =  trendObject["cornivalsName"] as! String
+                        let imgString =  trendObject["cornivalsImageUrl"] as! String
+                        let dict = ["labelName":str,"imageName":imgString]
+                        self.cornibvalsArray.append(dict)
+                    }
+                }
+                self.menucollectionview.reloadData()
+            }
+        }
+        
+        ServiceLayer.getTrends { (response, status, errorMessage) in
+            if status == true {
+                
+                let response1 = response as! [String:AnyObject]
+                if let array = response1["result"] as? Array<AnyObject> {
+                    for obj in array {
+                        let trendObject = obj
+                        
+                         let trendModel = TrendsModel()
+                          trendModel.heading = trendObject["trendsHeading"] as! String
+                          trendModel.sSubHeading = trendObject["trendsSubHeading"] as! String
+                           trendModel.mainImage = trendObject["trendsMainImage"] as! String
+                        
+                        if let img1 = trendObject["trendsImageUrl1"] {
+                            
+ 
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                        if let img1 = trendObject["trendsImageUrl2"] {
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                        if let img1 = trendObject["trendsImageUrl3"] {
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                        if let img1 = trendObject["trendsImageUrl4"] {
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                        if let img1 = trendObject["trendsImageUrl5"] {
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                        if let img1 = trendObject["trendsImageUrl6"] {
+                            trendModel.imagesArray.append(img1 as! String)
+                        }
+                           self.trendsArray.append(trendModel)
+                    }
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    self.menutableview.reloadData()
+
+                })
+                
+            }
+        }
+        
+        menutableview.contentSize = CGSize(width: menutableview.contentSize.width, height: menutableview.contentSize.height + 500)
+    }
+    
     override func viewDidLayoutSubviews() {
-        mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
+        //mscrollview.isScrollEnabled = true
+       // mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -32,7 +106,7 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageNameArray.count
+        return cornibvalsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,19 +115,20 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
         
         //let servicesList1: (AnyObject) = (imagedata[indexPath.item])
         
-        mscrollview.isScrollEnabled = true
-        mscrollview.isUserInteractionEnabled = true
+               
+       // mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
+        //menutableview.frame.size.height = menutableview.contentSize.height
+       // heightconstraint.constant = menutableview.frame.size.height
+        let dict = cornibvalsArray[indexPath.row]
         
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: menutableview.contentSize.height+200)
-        menutableview.frame.size.height = menutableview.contentSize.height
-        heightconstraint.constant = menutableview.frame.size.height
-        
-            cell.menuimage.image = UIImage(named: "1.png");
-        
-       
+        URLSession.shared.dataTask(with: URL(string:dict["imageName"]!)!) { (data1, response, error) in
+            DispatchQueue.main.async(execute: {
+                cell.menuImage.image = UIImage(data: data1!)
+            })
+            }.resume()
+        cell.nameLabel.text = dict["labelName"]
+        cell.layoutIfNeeded()
         return cell
-        
-        
         
     }
     
@@ -88,40 +163,25 @@ extension WindowViewController : UITableViewDataSource {
     //        return categories[section]
     //    }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
-    }
-    
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return trendsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomTableViewCell
+        URLSession.shared.dataTask(with: URL(string:trendsArray[indexPath.row].mainImage)!) { (data1, response, error) in
+            DispatchQueue.main.async(execute: {
+                cell.foodrecipeImage.image = UIImage(data: data1!)
+                cell.layoutIfNeeded()
+
+            })
+            }.resume()
+        cell.userName.text = trendsArray[indexPath.row].heading
+        cell.subHeading.text = trendsArray[indexPath.row].sSubHeading
+        cell.imageNameArray = trendsArray[indexPath.row].imagesArray
+        cell.layoutIfNeeded()
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let headerView:UIView =  UIView()
-        let imageViewGame = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 200));
-        let image = UIImage(named: imageNameArray[section]);
-        imageViewGame.image = image;
-        headerView.addSubview(imageViewGame)
-        
-       let label =  UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
-        
-        label.text = "South Indian Style"
-        headerView.addSubview(label)
-        
-        
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        return 200
-    }
-    
     
 }

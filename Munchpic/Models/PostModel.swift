@@ -9,5 +9,13 @@
 import UIKit
 
 class PostModel: NSObject {
-
+    var postId :Int = 0
+    var userName = ""
+    var dishName = ""
+    var category = ""
+    var description1 = ""
+    var comments = 0
+    var loves = 0
+    var ImagePath1 = ""
+    var userId = 0
 }

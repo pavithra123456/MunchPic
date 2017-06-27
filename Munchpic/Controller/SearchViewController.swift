@@ -8,10 +8,15 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
 
+    @IBOutlet weak var scrollview: UIScrollView!
+    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+//        self.collectionView.delegate = self
+//        self.collectionView.register( UINib(nibName: "SearchHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchHeader")
+//        self.collectionView.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +26,42 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+30)
+    }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
+        //cell.menuImage.image = UIImage(named: images[indexPath.row])
+        
+        return cell
+        
+    }
+
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchHeader", for: indexPath)
+            
+            
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return  CGSize(width: 100, height: 120)
+    }
+
 
     /*
     // MARK: - Navigation

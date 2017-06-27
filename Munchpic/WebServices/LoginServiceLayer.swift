@@ -9,15 +9,15 @@
 import Foundation
 import Alamofire
 class LoginServiceLayer: NSObject {
-    class func login(parameter:[String:AnyObject]?,completion:@escaping (AnyObject?,Bool,String) ->Void){
+    class func login(relativeUrl :String,completion:@escaping (AnyObject?,Bool,String) ->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KLogin, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        Alamofire.request(relativeUrl, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
                 completion(response as AnyObject,true,"Login succesfully")
             }
             else {
-                completion(nil,true,(response.error?.localizedDescription)!)
+                completion(nil,false,(response.error?.localizedDescription)!)
             }
         }
     }

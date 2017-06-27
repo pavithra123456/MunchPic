@@ -9,5 +9,9 @@
 import UIKit
 
 class TrendsModel: NSObject {
-
+    var heading = ""
+    var sSubHeading = ""
+    var mainImage = ""
+    var imagesArray = [String] ()
 }
+
