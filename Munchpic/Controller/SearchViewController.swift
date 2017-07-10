@@ -62,7 +62,11 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         return  CGSize(width: 100, height: 120)
     }
 
-
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchFilterCtrl")
+        self.navigationController?.pushViewController(vc!, animated: true)
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -72,5 +76,12 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func showFilterList(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl")
+        self.navigationController?.present(vc, animated: true, completion: nil)
+        //pushViewController(vc, animated: true)
+
+    }
 
 }

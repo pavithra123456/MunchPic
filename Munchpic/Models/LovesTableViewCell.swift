@@ -10,6 +10,9 @@ import UIKit
 
 class LovesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet weak var postName: UILabel!
+    @IBOutlet weak var postImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

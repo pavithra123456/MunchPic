@@ -8,12 +8,30 @@
 
 import UIKit
 import Alamofire
+import Foundation
+
 class ServiceLayer: NSObject {
     static let requestManager = ServiceLayer()
     private override init() {
         
     }
     
+    class func login(relativeUrl :String,completion:@escaping (AnyObject?,Bool,String) ->Void){
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KLogin, postbody: relativeUrl) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+
+            }
+        }
+
+        
+    }
+
     class func getPosts(relativeUrl:String,completion:@escaping (AnyObject?,Bool,String)->Void){
         
         Alamofire.request(relativeUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -21,28 +39,7 @@ class ServiceLayer: NSObject {
             if response.result.isSuccess {
                 
                 completion(response.result.value as AnyObject, true, "")
-                // handle the response here
-                
-                
-                //                if let jsonDictionary = response.result.value as? NSDictionary {
-                //                    if let errorDictionary = jsonDictionary[Constants.kError] as? NSDictionary {
-                //                        completion(nil,errorDictionary[Constants.KErrorMessage] as? String,false)
-                //                    }
-                //                    else if let resultDict = jsonDictionary[Constants.kResult] as? NSDictionary {
-                //                        completion(resultDict,nil,true)
-                //                    }
-                //                    else {
-                //                        completion(nil,Constants.kAGeneralError, false)
-                //                    }
-                //                }
-                //                else {
-                //                    completion(nil,Constants.kAGeneralError, false)
-                //                }
-                //                
-                //            }
-                //            else {
-                //                completion(nil,response.result.error?.localizedDescription, false)
-                //            }
+
             }
         }
     }
@@ -64,14 +61,36 @@ class ServiceLayer: NSObject {
         }
     }
 
-    class func GetComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetComments, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
+    class func GetComments(forPostId:Int,completion:@escaping ([[String:AnyObject]]?,Bool,String)->Void){
+      
+       
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetComments, postbody: "postId=\(forPostId)") { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] , true, "Success")
+
+            }
+            else {
+                
             }
         }
+        
     }
+    
+    class func getPostDetails(forPostId:Int,completion:@escaping ([[String:AnyObject]]?,Bool,String)->Void){
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetParticularPost, postbody: "postId=\(forPostId)") { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] , true, "Success")
+                
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    
     class func getCornivals(completion:@escaping (AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetCornivals, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -102,24 +121,29 @@ class ServiceLayer: NSObject {
     }
     
     
-    class func getLoves(completion:(AnyObject?,Bool,String)->Void){
+    class func getLoves(completion:@escaping ([ProfilkeLovesModel]?,Bool,String)->Void) {
         let parameter = ["userId":38]
         Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
             if response.result.isSuccess {
-                
+                let response1 =  response.result.value as! [String:AnyObject]
+                if let array = response1["result"] as? Array<AnyObject> {
+                    var collectionArray = [ProfilkeLovesModel]()
+                    
+                    for obj in array {
+                        let lovemOdel = ProfilkeLovesModel()
+                        lovemOdel.dishName = obj["dishName"] as! String
+                        lovemOdel.dateSaved = obj["dateSaved"] as! String
+
+                        lovemOdel.imageName = ""
+                        collectionArray.append(lovemOdel )
+                    }
+                    completion(collectionArray, true, "Success")
+                }
             }
         }
     }
-    class func GetParticularPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetCollectionCategories, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
-        }
-    }
-    
+       
     class func getTrends(completion:@escaping (AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetTrends, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -130,13 +154,24 @@ class ServiceLayer: NSObject {
         }
     }
 
-   class  func GetUserPosts(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetUserPosts, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
+    class  func getUserPosts(relativeUrl:String,completion:@escaping ([[String : AnyObject]]?,Bool,String)->Void){
+    
+    ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetUserPosts, postbody: relativeUrl) { (response, status, msg) in
+        if status == true {
+            completion(response as? [[String : AnyObject]]   , true, "Success")
         }
+        else {
+            
+            
+        }
+    }
+
+    
+//        Alamofire.request(Constants.kBaseUrl + Constants.kGetUserPosts, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//            }
+//        }
     }
     class func insertLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
@@ -179,14 +214,57 @@ class ServiceLayer: NSObject {
         }
     }
 
-    class func getusetInfo(relativeUrl:String,completion:@escaping (AnyObject?,Bool,String)->Void) {
-        Alamofire.request(relativeUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            print(response)
-            if response.result.isSuccess {
-               // completion(response.result.value as AnyObject, true, "")
+    class func getusetInfo(forUserID:String,completion:@escaping ([[String:AnyObject]]?,Bool,String)->Void){
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KGetUserInfo, postbody: "userId=\(forUserID)") { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] , true, "Success")
+                
+            }
+            else {
+                
             }
         }
+
     
+    }
+    
+    class func excuteQuery(url:String,postbody:String,completion:@escaping (AnyObject?,Bool,String)->Void) {
+        
+        let url = URL(string: url)
+        var req =  URLRequest(url: url!)
+        req.httpMethod = "POST"
+        req.httpBody = postbody.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: req) { (data, resposne, error) in
+            print(Data())
+            guard let data = data, error == nil else {                                                 // check for fundamental networking error
+                completion(nil, false, (error?.localizedDescription)!)
+
+                return
+            }
+            
+            if let httpStatus = resposne as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                completion(nil, false, (error?.localizedDescription)!)
+
+            }
+            
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString))")
+            do {
+                let repsonseJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
+                print(repsonseJson["result"])
+                completion(repsonseJson["result"] as? [[String : AnyObject]] as AnyObject, true, "Success")
+            }
+            catch {
+                completion(nil, false, (error.localizedDescription))
+
+            }
+            
+            
+            }.resume()
     }
 
 }

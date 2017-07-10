@@ -9,7 +9,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController,UICollectionViewDataSource{
+    @IBOutlet weak var profilePic: UIImageView!
 
+    @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var lovesTableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userPostsTableView: UITableView!
@@ -17,14 +19,35 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     let images = ["food1","food2","food3","food4","img1","img0","img2","food5"]
     @IBOutlet var headerView: UIView!
     var collectionArray = [[String:String]]()
+    var lovesArray = [ProfilkeLovesModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
        collectionView.dataSource = self
+        collectionView.delegate = self
 //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
 //        self.collectionview.reloadData()
         
         // Do any additional setup after loading the view.
+        
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(String(describing: userId))/user.jpg"
+            URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let data =  data1 {
+                        self.profilePic.image = UIImage(data: data)
+                        self.profilePic.layoutIfNeeded()
+                        self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2
+                        self.profilePic.layer.masksToBounds = true
+                    }
+                })
+                }.resume()
+
+            
+        }
+
+        
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,10 +66,33 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     }
     
     func getLoves() {
-        ServiceLayer.getLoves { (response, status, msg) in
-            
+        ServiceLayer.getLoves { (lovesArray, status, msg) in
+            self.lovesArray = lovesArray!
+            self.lovesTableView.reloadData()
         }
     }
+    
+    //MARK: - ButtonActions
+    
+    @IBAction func collectionButtonAction(_ sender: Any) {
+        self.lovesTableView.isHidden = true
+        self.collectionView.isHidden = false
+    }
+    
+    @IBAction func cameraButtonAction(_ sender: Any) {
+        self.lovesTableView.isHidden = true
+        self.collectionView.isHidden = true
+    }
+    
+    @IBAction func lovesButtonAction(_ sender: Any) {
+        self.lovesTableView.isHidden = false
+        self.collectionView.isHidden = true
+    }
+    
+    @IBAction func aboutAction(_ sender: Any) {
+        self.parent?.performSegue(withIdentifier: "showAbout", sender: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -64,12 +110,22 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
-        let obj = collectionArray[indexPath.row]
+        let section = indexPath.section * 2
+        var obj = collectionArray[indexPath.row]
+        if indexPath.row == 0 {
+            obj = collectionArray[ section]
+        }
+        else {
+            obj = collectionArray[1 + section]
+        }
         
+        //obj = collectionArray[indexPath.row + section]
+
         URLSession.shared.dataTask(with: URL(string:obj["categoryImage"]!)!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {
-
-                cell.menuImage.image = UIImage(data: data1!)
+                if let imageData = data1 {
+                    cell.menuImage.image = UIImage(data: data1!)
+                }
             })
             }.resume()
         cell.nameLabel.text = obj["categoryName"]
@@ -92,21 +148,34 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
 
 extension ProfileViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.lovesArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return tableView.dequeueReusableCell(withIdentifier: "cell")!
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        if cell is LovesTableViewCell {
+           let loveCell =  cell as! LovesTableViewCell
+            loveCell.postName.text = lovesArray[indexPath.row].dishName
+            loveCell.creationDateLabel.text = lovesArray[indexPath.row].dateSaved
+            //loveCell.postImage.image = UIImage(named: lovesArray[indexPath.row].imageName)
+        }
+        return cell
     }
 }
 
 extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDelegate  {
     
-      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
-        return CGSize(width: collectionView.frame.width/2, height: 200)
+//      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+//    {
+//        return CGSize(width: 40, height: 200)
+//    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+            return CGSize(width: collectionView.bounds.size.width/2-5, height:  180)
     }
+    
 //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 //        if kind == UICollectionElementKindSectionHeader {
 //            

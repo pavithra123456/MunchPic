@@ -12,6 +12,7 @@ import  MBProgressHUD
 
 class WindowViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource{
     
+    @IBOutlet weak var exploreBythemeLabel: UILabel!
     @IBOutlet var mscrollview: UIScrollView!
     @IBOutlet var menucollectionview: UICollectionView!
     @IBOutlet var menutableview: UITableView!
@@ -20,39 +21,53 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     var cornibvalsArray = [[String:String]]()
     let imageNameArray = ["food1","food2","food3","food4","img0"]
     
-
+    
+    @IBOutlet weak var exploreByThemeView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appdelegate =  (UIApplication.shared.delegate as! AppDelegate)
+        if appdelegate .isForWindowDetailView == false {
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+            ServiceLayer.getCornivals { (response, status, message) in
+                MBProgressHUD.hide(for: self.view, animated: true)
+                
+                if status == true {
+                    
+                    let response1 = response as! [String:AnyObject]
+                    if let array = response1["result"] as? Array<AnyObject> {
+                        for obj in array {
+                            let trendObject = obj
+                            let str =  trendObject["cornivalsName"] as! String
+                            let imgString =  trendObject["cornivalsImageUrl"] as! String
+                            let dict = ["labelName":str,"imageName":imgString]
+                            self.cornibvalsArray.append(dict)
+                        }
+                    }
+                    self.menucollectionview.reloadData()
+                }
+            }
+        }
+            
+        else {
+            exploreByThemeView.frame =  CGRect(x: exploreByThemeView.frame.origin.x, y: exploreByThemeView.frame.origin.y, width: exploreByThemeView.frame.width, height: 40)// .width = 10
+            self.menucollectionview.isHidden = true
+            self.exploreBythemeLabel.isHidden = true
+        }
+
         
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        ServiceLayer.getCornivals { (response, status, message) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-
-            if status == true {
-                
-                let response1 = response as! [String:AnyObject]
-                if let array = response1["result"] as? Array<AnyObject> {
-                    for obj in array {
-                        let trendObject = obj
-                        let str =  trendObject["cornivalsName"] as! String
-                        let imgString =  trendObject["cornivalsImageUrl"] as! String
-                        let dict = ["labelName":str,"imageName":imgString]
-                        self.cornibvalsArray.append(dict)
-                    }
-                }
-                self.menucollectionview.reloadData()
-            }
-        }
         
         ServiceLayer.getTrends { (response, status, errorMessage) in
             if status == true {
                 
                 let response1 = response as! [String:AnyObject]
                 if let array = response1["result"] as? Array<AnyObject> {
+                    self.trendsArray.removeAll()
                     for obj in array {
                         let trendObject = obj
                         
@@ -172,7 +187,9 @@ extension WindowViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! CustomTableViewCell
         URLSession.shared.dataTask(with: URL(string:trendsArray[indexPath.row].mainImage)!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {
-                cell.foodrecipeImage.image = UIImage(data: data1!)
+                if let data =  data1 {
+                    cell.foodrecipeImage.image = UIImage(data: data1!)
+                }
                 cell.layoutIfNeeded()
 
             })

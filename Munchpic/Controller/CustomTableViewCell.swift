@@ -10,6 +10,7 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var emojiImage: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     //home
     @IBOutlet var foodrecipeImage: UIImageView!
@@ -19,7 +20,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var subHeading: UILabel!
     var useId = 0 {
         didSet {
-            self.getYUserDetails()
         }
     }
     
@@ -29,7 +29,7 @@ class CustomTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var comments: UILabel!
+    @IBOutlet weak var collectionCount: UILabel!
     @IBOutlet weak var description1: UILabel!
 
     @IBOutlet weak var loves: UILabel!
@@ -50,6 +50,8 @@ class CustomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBOutlet weak var commentBtn: UIButton!
+    
 }
 
 
@@ -64,10 +66,12 @@ extension CustomTableViewCell : UICollectionViewDataSource {
         
         URLSession.shared.dataTask(with: URL(string:imageNameArray[indexPath.row] )!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {
-                cell.menuImage.image = UIImage(data: data1!)
+                if let imgdata = data1 {
+                    cell.menuImage.image = UIImage(data: imgdata)
+                }
             })
             }.resume()
-        let str = imageNameArray[indexPath.row]  
+        let str = imageNameArray[indexPath.row]
         let start = str.index(str.startIndex, offsetBy: 73)
         let end = str.index(str.endIndex, offsetBy: -4)
         let range = start..<end
@@ -88,15 +92,4 @@ extension CustomTableViewCell : UICollectionViewDataSource {
 //        return CGSize(width: itemWidth, height: itemHeight)
 //    }
 //}
-
-extension CustomTableViewCell {
-    func getYUserDetails() {
-        let url = Constants.kBaseUrl + Constants.KGetUserInfo + "userId=\(self.useId)"
-        ServiceLayer.getusetInfo(relativeUrl: url) { (data, status, message) in
-            if data != nil {
-                self.profilePic.image = UIImage(data: data as! Data)
-            }
-        }
-    }
-}
 

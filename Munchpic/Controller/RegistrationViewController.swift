@@ -204,12 +204,10 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0 && reenterpassword.text?.characters.count == 0 && contact_number.text?.characters.count == 0 ){
             
-            _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill the mandatory feilds", style: AlertStyle.none)
             
         }else if(password.text != reenterpassword.text){
             
-            _ = SweetAlert().showAlert("Alert!", subTitle: "Password and Re-enter password are not same", style: AlertStyle.none)
-        }
+                  }
         else{
             
             // login
@@ -233,9 +231,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                     
                 })
                 
-                 _ = SweetAlert().showAlert("Alert!", subTitle: "You are registered in successfully!", style: AlertStyle.success)
-                
-            }else{
+                           }else{
                 
                 let alert = UIAlertController(title: "Alert!", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))

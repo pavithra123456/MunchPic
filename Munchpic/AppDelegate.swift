@@ -12,10 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var  isForWindowDetailView = false
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            print(userId)
+            let stroyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let askFeedbackVc = stroyBoard.instantiateViewController(withIdentifier: "DashBoard")
+            self.window?.rootViewController = askFeedbackVc
+            
+        
+        }
+
+        
         return true
     }
 

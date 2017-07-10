@@ -115,6 +115,14 @@ class DashboardViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showDetail" {
+//            let detaILVC = segue.destination as! DetailViewController
+//            detaILVC.postId = selectedPostId
+//            selectedPostId = 0
+//        }
+//    }
 
 }
 

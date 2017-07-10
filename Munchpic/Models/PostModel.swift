@@ -14,6 +14,7 @@ class PostModel: NSObject {
     var dishName = ""
     var category = ""
     var description1 = ""
+    var noOfCollection = 0
     var comments = 0
     var loves = 0
     var ImagePath1 = ""

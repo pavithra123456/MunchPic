@@ -52,20 +52,33 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
             
             if Reachability.isConnectedToNetwork() == true {
                 
-                 //TODO: -  call login api
-//                let parameter  = ["email":emailid.text! ,
-//                                  "password":password.text!
-//                    ] as [String : AnyObject]
-                
-                if let email = emailid.text ,let  pwd = emailid.text {
-                    let url = Constants.kBaseUrl + Constants.KLogin + "email=\(email)" + "password=\(pwd)"
 
-                    LoginServiceLayer.login(relativeUrl:url, completion: { (response, status, message) in
+                
+                if let email = emailid.text ,let  pwd = password.text {
+
+                    ServiceLayer.login(relativeUrl:"email=\(email)" + "&password=\(pwd)", completion: { (response, status, message) in
                         if status {
-                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            let responseArray = response as![ [String:AnyObject]]
+                            let responsedict = responseArray[0]
+                            
+                            if let result = responsedict["userId"] {
+                                UserDefaults.standard.set(result, forKey: "userId")
+                                
+                                User.sharedUserInstance.usertId = Int(result as! String)!
+                                
+                            }
+                            
+                            
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            }
+
                         }
                         else  {
+                            DispatchQueue.main.async {
+
                             Utility.showAlert(title: "Error", message: message, controller: self,completion:nil)
+                            }
                         }
                     })
 
