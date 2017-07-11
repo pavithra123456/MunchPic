@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
 
@@ -61,7 +62,13 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         tableView.estimatedRowHeight = 15
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         ServiceLayer.getPostDetails(forPostId: postId) { (responseArray , status, msg) in
+            
+            DispatchQueue.main.async(execute: {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                 })
+
             if status == true && (responseArray?.count)! > 0 {
                 self.postDetails = responseArray?[0]
                 DispatchQueue.main.async(execute: {
