@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class CustomTableViewCell: UITableViewCell {
 
@@ -17,9 +18,70 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
     
+    @IBOutlet weak var effortView1: UIView!
+    @IBOutlet weak var effortView2: UIView!
+    @IBOutlet weak var effortView3: UIView!
+    @IBOutlet weak var effortView4: UIView!
+    @IBOutlet weak var effortView5: UIView!
+    
+    @IBOutlet weak var smilesView: UIView!
+    
     @IBOutlet weak var subHeading: UILabel!
     var useId = 0 {
         didSet {
+            
+        }
+    }
+    var efforts  = "" {
+        didSet {
+            print(efforts)
+            let start = efforts.index(efforts.startIndex, offsetBy:0)
+            let end = efforts.index(efforts.endIndex, offsetBy: -4)
+            let range = start..<end
+            let actualEffort = Int(efforts.substring(with: range))
+            print(actualEffort)
+
+            if  actualEffort != nil {
+                let effortCount =  actualEffort!/12
+                
+                if effortCount < 5 {
+                    for i in effortCount+1...5 {
+                        self.viewWithTag(i)?.backgroundColor = UIColor.lightGray
+                    }
+                }
+                
+                
+//                if effortCount == 1 {
+//                    let labelColor = UIColor(hexColor: 0x336141)
+//                    
+//                    effortView1.backgroundColor = labelColor
+//                    
+//                    
+//                }
+//                else if effortCount == 2 {
+//                    let labelColor = UIColor(hexColor: 0x008000)
+//                    
+//                    effortView2.backgroundColor = labelColor
+//                }
+//                else if effortCount == 3 {
+//                    let labelColor = UIColor(hexColor: 0xF44336)
+//                    
+//                    effortView3.backgroundColor = labelColor
+//                }
+//                else if effortCount == 4 {
+//                    let labelColor = UIColor(hexColor: 0xCC543C)
+//                    
+//                    effortView4.backgroundColor = labelColor
+//                }
+//                else if effortCount == 5 {
+//                    let labelColor = UIColor(hexColor: 0xCC543C)
+//                    
+//                    effortView5.backgroundColor = labelColor
+//                }
+
+            }
+            
+            
         }
     }
     

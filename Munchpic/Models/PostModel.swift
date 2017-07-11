@@ -19,4 +19,5 @@ class PostModel: NSObject {
     var loves = 0
     var ImagePath1 = ""
     var userId = 0
+    var efforts = ""
 }

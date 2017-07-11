@@ -28,7 +28,6 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     @IBOutlet var mscrollview: UIScrollView!
     @IBOutlet var Hometableview: UITableView!
     @IBOutlet var heightconstraint: NSLayoutConstraint!
-    let images = ["img0","img1","img2","","","",""]
     
     var selectedEmojiIndex = 0
     var selectedPostId = 0
@@ -53,6 +52,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     @IBOutlet weak var radioBtn4: RadioButton!
     @IBOutlet weak var radioBtn5: RadioButton!
     @IBOutlet weak var radioBtn6: RadioButton!
+    
     
     var tapguesture : UITapGestureRecognizer?
     
@@ -97,6 +97,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     model.comments = Int(postobject["comments"] as! String)!
                     model.userId = Int(postobject["userId"] as! String)!
                     model.noOfCollection = Int(postobject["collections"] as! String)!
+                    model.efforts = postobject["effort"] as! String
 
                     self.postArray.append(model)
                 }
@@ -266,10 +267,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             
             cell.userName.text = postArray[indexPath.row].userName
             cell.description1.text = postArray[indexPath.row].description1
-            cell.loves.text = "\(postArray[indexPath.row].loves)"
-            cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
+            //cell.loves.text = "\(postArray[indexPath.row].loves)"
+            //cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
             cell.useId = postArray[indexPath.row].userId
-            
+            cell.efforts  = postArray[indexPath.row].efforts
             cell.emojiImage.tag = indexPath.row
             cell.commentBtn.tag = indexPath.row
             URLSession.shared.dataTask(with: URL(string:postArray[indexPath.row].ImagePath1)!) { (data1, response, error) in
@@ -297,6 +298,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: Hometableview.contentSize.height+250)
             Hometableview.frame.size.height = Hometableview.contentSize.height
             heightconstraint.constant = Hometableview.frame.size.height
+            
             
             return cell
 
@@ -331,11 +333,15 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     @IBAction func emojisBtnAction(_ sender: Any) {
         selectedEmojiIndex = (sender as! UIButton).tag
         
-        self.emojisView.isHidden = false
-        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-            self.emojiViewHeight.constant = self.view.frame.height/2 + 20
-            self.view.layoutIfNeeded()
-        })
+        
+        let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
+cell.smilesView .isHidden = !cell.smilesView.isHidden
+        
+//        self.emojisView.isHidden = false
+//        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+//            self.emojiViewHeight.constant = self.view.frame.height/2 + 20
+//            self.view.layoutIfNeeded()
+//        })
     }
     
     @IBAction func updateEmoi(_ sender: Any) {

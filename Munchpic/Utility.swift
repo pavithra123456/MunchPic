@@ -61,10 +61,20 @@ class BorderedView : UIView {
         }
     }
     
+    
+    @IBInspectable var cornerRadius: CGFloat = 6 {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+            
+            //            let position = self.position(from: self.beginningOfDocument, offset: 3)!
+            //            self.selectedTextRange = self.textRange(from: position, to: position)
+        }
+    }
+    
     @IBInspectable var roundedBorder: Bool = true {
         didSet {
             self.layer.borderWidth = 1
-            self.layer.cornerRadius = 6
+            self.layer.cornerRadius = cornerRadius
             self.layer.masksToBounds = true
             
             //            let position = self.position(from: self.beginningOfDocument, offset: 3)!
@@ -74,3 +84,23 @@ class BorderedView : UIView {
 
     
 }
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(hexColor:Int) {
+        self.init(red:(hexColor >> 16) & 0xff, green:(hexColor >> 8) & 0xff, blue:hexColor & 0xff)
+    }
+    
+    static func placeHolderLabelColor() -> UIColor {
+        return UIColor.black//(red: 83/255.0, green: 83/255.0, blue: 83/255.0, alpha: 1.0)
+    }
+    
+}
+
