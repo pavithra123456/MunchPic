@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import FacebookLogin
+import FacebookCore
+import Google
 
-class UserLoginViewController: UIViewController,UITextFieldDelegate {
+class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDelegate,GIDSignInUIDelegate {
     
     
     @IBOutlet var password: UITextField!
@@ -133,13 +136,124 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate {
         
     }
     
+    //MARK: - Facebook Login
+    @IBAction func facebookLoginAction(_ sender: Any) {
+        let loginManager = LoginManager()
+        loginManager.logIn([.userFriends, .email, .publicProfile], viewController: self) { loginResult in
+            switch loginResult {
+            case .failed(let error):
+                print(error)
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print(accessToken)
+                print("Logged in!")
+                self.fetchProfile()
+            }
+        }
+    }
+    
+    func fetchProfile() {
+        let parameters: [String: Any] = ["fields": "id, name, email, first_name, last_name,gender,city,state,country,mobile, picture.width(160).height(160)"]
+        let graphReq = GraphRequest(graphPath: "me", parameters: parameters)
+        
+        graphReq.start { (connection, result) in
+            switch result {
+            case .failed(let error):
+                print(error.localizedDescription)
+                return
+                
+            case .success(let response):
+                let string =  response.dictionaryValue?["emailAddress"]
+                LoginServiceLayer.register(relativeUrl: string as! String, completion: { (response, status, msg) in
+                    
+                })
+                
+                //                print(response.dictionaryValue)
+                //self.registerUser(userDict: response.dictionaryValue!,platform:"facebook")
+                break
+            }
+            
+        }
+    }
+    
    
+    @IBAction  func googleBtnTapped(_ sender: Any) {
+        configureGoogleSignInUI()
+        configureGoogleSignIn()
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    func configureGoogleSignInUI() {
+        
+        if GIDSignIn.sharedInstance().hasAuthInKeychain() {
+            GIDSignIn.sharedInstance().signInSilently()
+        }
+    }
+    
+    func configureGoogleSignIn() {
+        // Initialize sign-in
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        GIDSignIn.sharedInstance().delegate = self // as! GIDSignInDelegate!
+        GIDSignIn.sharedInstance().uiDelegate = self //.parentController as! GIDSignInUIDelegate!
+        GIDSignIn.sharedInstance().shouldFetchBasicProfile = true
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error != nil{
+            print(error?.localizedDescription ?? "")
+            return
+        }
+        
+        var userDict = [String:Any]()
+        userDict["id"] = user.userID
+        userDict["name"] = user.profile.name
+        userDict["email"] = user.profile.email
+        
+        if GIDSignIn.sharedInstance().currentUser.profile.hasImage {
+            let dimension = round(100 * UIScreen.main.scale)
+            let imageURL = user.profile.imageURL(withDimension:UInt(Int(dimension)))
+            if let profileUrl = imageURL  {
+                userDict["profileLogoUrl"] = profileUrl.absoluteString
+            }
+            
+            do {
+                
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
+        print(userDict)
+        var string = ""
+        
+        if let email = user.profile.email {
+            string = "email=\(email)"
+            
+        }
+        
+        if let pwd = password.text {
+            //string = string + "&password=\(pwd)"
+            
+        }
+        
+        LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
+            
+        })
+        //self.registerUser(userDict: userDict, platform: "googleplus")
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func ForgetPAssword(sender:AnyObject){
+        
+    }
 
     /*
     // MARK: - Navigation

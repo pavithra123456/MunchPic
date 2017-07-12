@@ -8,6 +8,15 @@ target 'Munchpic' do
   # Pods for Munchpic
 	pod ‘Alamofire’
     pod 'MBProgressHUD' , '1.0.0'
+    
+    # Pods for LoginComponent
+    # pod files for Google Sign in
+    pod 'Google/SignIn'
+    
+    # pod files for Facebook SignIn
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'FacebookShare'
 
   target 'MunchpicTests' do
     inherit! :search_paths

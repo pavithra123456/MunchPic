@@ -10,16 +10,32 @@ import Foundation
 import Alamofire
 class LoginServiceLayer: NSObject {
        
-    class func register(parameter:[String:Any]?,completion:@escaping (AnyObject?,Bool,String)->Void){
+//    class func register(parameter:[String:Any]?,completion:@escaping (AnyObject?,Bool,String)->Void){
+//        
+//        Alamofire.request(Constants.kBaseUrl + Constants.KRegister, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//                completion(response as AnyObject,true,"Registered succesfully")
+//            }
+//        }
+//    }
+    
+    
+    class func register(relativeUrl :String,completion:@escaping (AnyObject?,Bool,String) ->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KRegister, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-                completion(response as AnyObject,true,"Registered succesfully")
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KLogin, postbody: relativeUrl) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+                
             }
         }
+        
+        
     }
-    
     func getUserInfo(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
         
         Alamofire.request(Constants.kBaseUrl + Constants.KGetUserInfo, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

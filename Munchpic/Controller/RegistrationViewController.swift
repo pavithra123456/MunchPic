@@ -214,20 +214,49 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             
             if Reachability.isConnectedToNetwork() == true {
                 
-                let parameter  = ["name":(first_name.text! + " " + last_name.text!),
-                                  "dob":DOB.text!,
-                                  "gender":genderstring,
-                                  "country":country.text!,
-                                  "state":state.text!,
-                                  "city":city.text!,
-                                  "email":country.text!,
-                                  "password":password.text!,
-                                  "mobile":contact_number.text!,
-                                  "about":aboutyou.text!
-                ] as [String : Any]
+                var  string =  ""
                 
                 
-                LoginServiceLayer.register(parameter: parameter, completion: { (response, status, msg) in
+//                let parameter  = ["name":(first_name.text! + " " + last_name.text!),
+//                                  "dob":DOB.text!,
+//                                  "gender":genderstring,
+//                                  "country":country.text!,
+//                                  "state":state.text!,
+//                                  "city":city.text!,
+//                                  "email":emailid.text!,
+//                                  "password":password.text!,
+//                                  "mobile":contact_number.text!,
+//                                  "about":aboutyou.text!
+//                ] as [String : Any]
+                
+               let email =  self.emailid.text  ??  ""
+                
+               let password = self.password.text ?? ""
+                
+                let firstName = self.first_name.text ?? ""
+                let lastName = self.last_name.text ?? ""
+                let dob  = self.DOB.text ?? ""
+                let country = self.country.text ?? ""
+                let state = self.state.text ?? ""
+                let city = self.city.text ?? ""
+                let mobile =  self.contact_number.text ?? ""
+                let about = self.aboutyou.text ?? ""
+                
+
+                
+                
+                
+                
+                //let email =  emailid.text != nil ? emailid.text : ""
+                
+                
+                     string = "email=\(email)" + "&password=\(password)" +  "&password=\(password)" + "name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)"
+                    
+                
+                
+                
+            
+                LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
                     
                 })
                 

@@ -39,6 +39,52 @@
 	<string>My description about why I need this capability</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb275880706175701</string>
+				<string>li5108976</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.opteamix.LoginComponent</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.163795269091-9tau0hh3hn6fphaq365naebco5jf8vr1</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>275880706175701</string>
+	<key>FacebookDisplayName</key>
+	<string>Login Component</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>linkedin</string>
+		<string>linkedin-sdk2</string>
+		<string>linkedin-sdk</string>
+		<string>dbapi-8-emm</string>
+		<string>dbapi-2</string>
+	</array>
+	<key>NSCameraUsageDescription - 2</key>
+	<string>Facebook is using camera</string>
+	<key>NSPhotoLibraryUsageDescription - 2</key>
+	<string>used by facebook</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
