@@ -97,7 +97,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     model.comments = Int(postobject["comments"] as! String)!
                     model.userId = Int(postobject["userId"] as! String)!
                     model.noOfCollection = Int(postobject["collections"] as! String)!
-                    model.efforts = postobject["effort"] as! String
+                    model.efforts = postobject["difficulty"] as! String
 
                     self.postArray.append(model)
                 }

@@ -19,18 +19,21 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        password.delegate = self
+        emailid.delegate = self
 
     }
 
      // MARK: - Check validations
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if(textField == emailid){
-            password.becomeFirstResponder()
-        }else {
-            textField.resignFirstResponder()
-        }
+                  textField.resignFirstResponder()
+
+//        if(textField == emailid){
+//            password.becomeFirstResponder()
+//        }else {
+//            textField.resignFirstResponder()
+//        }
         
         return true
     }
@@ -154,7 +157,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     }
     
     func fetchProfile() {
-        let parameters: [String: Any] = ["fields": "id, name, email, first_name, last_name,gender,city,state,country,mobile, picture.width(160).height(160)"]
+        let parameters: [String: Any] = ["fields": "id, name, email, first_name, last_name,gender, picture.width(160).height(160)"]
         let graphReq = GraphRequest(graphPath: "me", parameters: parameters)
         
         graphReq.start { (connection, result) in
@@ -164,9 +167,37 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                 return
                 
             case .success(let response):
-                let string =  response.dictionaryValue?["emailAddress"]
-                LoginServiceLayer.register(relativeUrl: string as! String, completion: { (response, status, msg) in
-                    
+                var email =  response.dictionaryValue?["email"]  as! String
+                email = "pavithra.amc12@gmail.com"
+                LoginServiceLayer.register(relativeUrl: "email=\(email)", completion: { (response, status, msg) in
+                    if status == true {
+                        let responseArray = response as![ [String:AnyObject]]
+                        let responsedict = responseArray[0]
+                        
+                        if let result = responsedict["userId"] {
+                            UserDefaults.standard.set(result, forKey: "userId")
+                            
+                            User.sharedUserInstance.usertId = Int(result as! String)!
+                            
+                        }
+                        
+                        
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                        }
+                    }
+                    else {
+                        if msg == "Registered Successfully!, Please check your mail for activation!"{
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
+                        }
+                    }
                 })
                 
                 //                print(response.dictionaryValue)
@@ -240,7 +271,42 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
         }
         
         LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
-            
+            if status == true {
+                let responseArray = response as![ [String:AnyObject]]
+                let responsedict = responseArray[0]
+                
+                if let result = responsedict["userId"] {
+                    UserDefaults.standard.set(result, forKey: "userId")
+                    
+                    User.sharedUserInstance.usertId = Int(result as! String)!
+                    
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                }
+            }
+            else {
+                if msg == "Registered Successfully!, Please check your mail for activation!"{
+                    DispatchQueue.main.async {
+                        
+                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                    }
+                }
+                
+                if msg == "This Mail ID already exists!!"{
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                    }
+                }
+                
+                
+                DispatchQueue.main.async {
+                    
+                    Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
+                }
+            }
         })
         //self.registerUser(userDict: userDict, platform: "googleplus")
         

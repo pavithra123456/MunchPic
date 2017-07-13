@@ -35,20 +35,24 @@ class CustomTableViewCell: UITableViewCell {
     var efforts  = "" {
         didSet {
             print(efforts)
-            let start = efforts.index(efforts.startIndex, offsetBy:0)
-            let end = efforts.index(efforts.endIndex, offsetBy: -4)
-            let range = start..<end
-            let actualEffort = Int(efforts.substring(with: range))
-            print(actualEffort)
+//            let start = efforts.index(efforts.startIndex, offsetBy:0)
+//            let end = efforts.index(efforts.endIndex, offsetBy: -4)
+//            let range = start..<end
+//            let actualEffort = Int(efforts.substring(with: range))
+//            print(actualEffort)
 
-            if  actualEffort != nil {
-                let effortCount =  actualEffort!/12
-                
+//            if  efforts != nil {
+//                let effortCount =  actualEffort!/12
+            
+            if let effortCount =  Int(efforts) {
                 if effortCount < 5 {
                     for i in effortCount+1...5 {
                         self.viewWithTag(i)?.backgroundColor = UIColor.lightGray
                     }
                 }
+                
+            }
+            
                 
                 
 //                if effortCount == 1 {
@@ -79,7 +83,7 @@ class CustomTableViewCell: UITableViewCell {
 //                    effortView5.backgroundColor = labelColor
 //                }
 
-            }
+            //}
             
             
         }

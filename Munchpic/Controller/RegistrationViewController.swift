@@ -8,7 +8,7 @@
 
 import UIKit
 import MobileCoreServices
-
+import Alamofire
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate {
 
     @IBOutlet var first_name: UITextField!
@@ -64,30 +64,9 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if(textField == first_name){
-            last_name.becomeFirstResponder()
-        }else if(textField == last_name){
-            aboutyou.becomeFirstResponder()
-        }else if(textField == aboutyou){
-            DOB.becomeFirstResponder()
-        }else if(textField == DOB){
-            country.becomeFirstResponder()
-        }else if(textField == country){
-            state.becomeFirstResponder()
-        }else if(textField == state){
-            city.becomeFirstResponder()
-        }else if(textField == city){
-            contact_number.becomeFirstResponder()
-        }else if(textField == contact_number){
-            emailid.becomeFirstResponder()
-        }else if(textField == emailid){
-            password.becomeFirstResponder()
-        }else if(textField == password){
-            reenterpassword.becomeFirstResponder()
-        }else{
-            textField.resignFirstResponder()
-        }
         
+            textField.resignFirstResponder()
+    
         return true
     }
 
@@ -250,17 +229,76 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 //let email =  emailid.text != nil ? emailid.text : ""
                 
                 
-                     string = "email=\(email)" + "&password=\(password)" +  "&password=\(password)" + "name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)"
+                     string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)"
                     
+               /* var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KRegister)!)
+                url.httpMethod = "POST"
+                url.httpBody = string.data(using: String.Encoding.utf8)
                 
                 
                 
+                               Alamofire.upload(multipartFormData: { (multipartFormData) in
+
+                                multipartFormData.append(UIImagePNGRepresentation(self.profilepic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+
+                               }, with: url, encodingCompletion: { (encodingResult) in
+                                 switch encodingResult {
+                                 case .success(let upload, _, _):
+                                    upload.responseString(completionHandler: { (responseString) in
+                                        print(responseString.description)
+                                        DispatchQueue.main.async {
+                                            
+                                            Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
+                                        }
+                                    })//                                 case .success(let upload, _, _):
+//                                    upload.responseJSON { response in
+//                                        debugPrint(response)
+//                                    }
+                                 case .failure(let encodingError):
+                                    print(encodingError)
+                                }
+                                
+                               });
+//
+                
+                
+                */
+
             
                 LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
-                    
+                    if status == true {
+                        let responseArray = response as![ [String:AnyObject]]
+                        let responsedict = responseArray[0]
+                        
+                        if let result = responsedict["userId"] {
+                            UserDefaults.standard.set(result, forKey: "userId")
+                            
+                            User.sharedUserInstance.usertId = Int(result as! String)!
+                            
+                        }
+                        
+                        
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                        }
+                    }
+                    else {
+                        if msg == "Registered Successfully!, Please check your mail for activation!"{
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            }
+                        }
+                        
+                        DispatchQueue.main.async {
+                            
+                            Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
+                        }
+                    }
+
                 })
-                
-                           }else{
+ 
+                           }
+            else{
                 
                 let alert = UIAlertController(title: "Alert!", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))

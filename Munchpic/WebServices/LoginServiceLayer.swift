@@ -24,7 +24,7 @@ class LoginServiceLayer: NSObject {
     class func register(relativeUrl :String,completion:@escaping (AnyObject?,Bool,String) ->Void){
         
         
-        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KLogin, postbody: relativeUrl) { (response, status, msg) in
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KRegister, postbody: relativeUrl) { (response, status, msg) in
             if status == true {
                 completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
             }

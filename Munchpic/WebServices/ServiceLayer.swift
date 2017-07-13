@@ -259,7 +259,7 @@ class ServiceLayer: NSObject {
                 completion(repsonseJson["result"] as? [[String : AnyObject]] as AnyObject, true, "Success")
             }
             catch {
-                completion(nil, false, (error.localizedDescription))
+                completion(nil, false, responseString!)
 
             }
             

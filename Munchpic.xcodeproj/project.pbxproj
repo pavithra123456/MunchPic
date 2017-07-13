@@ -890,8 +890,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4a8443bf-5f48-410a-9e5a-28f73d1551eb";
-				PROVISIONING_PROFILE_SPECIFIER = MunchPic_june26_Distribution;
+				PROVISIONING_PROFILE = "c4a03382-6d99-454d-bea4-fd299958e9d6";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.lineology.app";
 				SWIFT_OBJC_BRIDGING_HEADER = "Munchpic/Munchpic-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -912,8 +912,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4a8443bf-5f48-410a-9e5a-28f73d1551eb";
-				PROVISIONING_PROFILE_SPECIFIER = MunchPic_june26_Distribution;
+				PROVISIONING_PROFILE = "c4a03382-6d99-454d-bea4-fd299958e9d6";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.lineology.app";
 				SWIFT_OBJC_BRIDGING_HEADER = "Munchpic/Munchpic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
