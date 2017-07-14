@@ -2092,7 +2092,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="nGw-8W-Jhg">
-                                    <rect key="frame" x="0.0" y="0.0" width="389" height="213"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="213"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore by theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrO-FM-xFe">
@@ -2200,10 +2200,10 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="cell" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="299" id="PlD-hG-Ee8" customClass="CustomTableViewCell" customModule="Munchpic" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="241" width="389" height="299"/>
+                                        <rect key="frame" x="0.0" y="241" width="375" height="299"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PlD-hG-Ee8" id="htF-7L-9kg">
-                                            <rect key="frame" x="0.0" y="0.0" width="389" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="298"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dfh-QH-PzR">
