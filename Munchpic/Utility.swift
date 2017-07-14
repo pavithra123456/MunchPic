@@ -27,17 +27,39 @@ class Utility {
 
 @IBDesignable
 class CustomTextField : UITextField {
-    @IBInspectable var borderColor: UIColor = UIColor.red {
-        didSet {
-            self.layer.borderColor = borderColor.cgColor
-            self.layer.borderWidth = 1
-            self.layer.cornerRadius = 5
-            self.layer.masksToBounds = true
+    
+    
+    var borderColor : UIColor? {
+        get {
+            if let cgcolor = layer.borderColor {
+                return UIColor(cgColor: cgcolor)
+            } else {
+                return nil
+            }
+        }
+        set {
+            layer.borderColor = newValue?.cgColor
             
-//            let position = self.position(from: self.beginningOfDocument, offset: 3)!
-//            self.selectedTextRange = self.textRange(from: position, to: position)
+            // width must be at least 1.0
+            if layer.borderWidth < 1.0 {
+                layer.borderWidth = 1.0
+            }
         }
     }
+    
+    @IBInspectable var cornerRadius: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = cornerRadius > 0
+        }
+    }
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    
      func setCursorPosition(input: UITextField, position: Int) {
             let position = input.position(from: input.beginningOfDocument, offset: position)!
             input.selectedTextRange = input.textRange(from: position, to: position)

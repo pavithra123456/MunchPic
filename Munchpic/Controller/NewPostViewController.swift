@@ -235,7 +235,9 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         
-       // _ = SweetAlert().showAlert("Alert!", subTitle: "Veryeasy to prepare.", style: AlertStyle.warning)
+        Utility.showAlert(title: "", message: "Veryeasy to prepare.", controller: self,completion:nil)
+        
+   
     }
     @IBAction func easybtn_Action(_ sender: Any) {
         
@@ -244,7 +246,9 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
-      //  _ = SweetAlert().showAlert("Alert!", subTitle: "Easy to prepare.", style: AlertStyle.warning)
+        
+        Utility.showAlert(title: "", message: "Easy to prepare.", controller: self,completion:nil)
+     
         
     }
     @IBAction func mediumbtn_Action(_ sender: Any) {
@@ -254,7 +258,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
-       // _ = SweetAlert().showAlert("Alert!", subTitle: "Medium to prepare.", style: AlertStyle.warning)
+         Utility.showAlert(title: "", message: "Medium to prepare.", controller: self,completion:nil)
+     
         
     }
     @IBAction func difficultbtn_Action(_ sender: Any) {
@@ -264,7 +269,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
-       // _ = SweetAlert().showAlert("Alert!", subTitle: "Difficult to prepare.", style: AlertStyle.warning)
+         Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
+      
         
     }
     @IBAction func verydifficult_Action(_ sender: Any) {
@@ -274,7 +280,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
-      //  _ = SweetAlert().showAlert("Alert!", subTitle: "Verydifficuly to prepare.", style: AlertStyle.warning)
+         Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
+      
       
     }
     
