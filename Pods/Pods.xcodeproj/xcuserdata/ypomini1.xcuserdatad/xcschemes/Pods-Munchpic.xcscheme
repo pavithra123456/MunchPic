@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "298055C87E4910F99E504DEC53B53C9D"
+               BlueprintIdentifier = "3FC2C73BB0BCB0A747F4A6E05EA13490"
                BuildableName = "Pods_Munchpic.framework"
                BlueprintName = "Pods-Munchpic"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "298055C87E4910F99E504DEC53B53C9D"
+            BlueprintIdentifier = "3FC2C73BB0BCB0A747F4A6E05EA13490"
             BuildableName = "Pods_Munchpic.framework"
             BlueprintName = "Pods-Munchpic"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "298055C87E4910F99E504DEC53B53C9D"
-            BuildableName = "Pods_Munchpic.framework"
-            BlueprintName = "Pods-Munchpic"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

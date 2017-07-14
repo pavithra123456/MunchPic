@@ -42,6 +42,9 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     
     @IBAction func Login_Action(_ sender: Any) {
         
+        emailid.text = "chaitanyakumari4b5@gmail.com"
+        password.text = "chaithu"
+        
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0){
             
            // _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill all the feilds", style: AlertStyle.none)
