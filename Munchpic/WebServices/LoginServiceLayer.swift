@@ -34,8 +34,8 @@ class LoginServiceLayer: NSObject {
             }
         }
         
-        
     }
+    
     func getUserInfo(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
         
         Alamofire.request(Constants.kBaseUrl + Constants.KGetUserInfo, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in

@@ -10,6 +10,7 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 import Google
+import  MBProgressHUD
 
 class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDelegate,GIDSignInUIDelegate {
     
@@ -172,7 +173,15 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
             case .success(let response):
                 var email =  response.dictionaryValue?["email"]  as! String
                 email = "pavithra.amc12@gmail.com"
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+
+                
                 LoginServiceLayer.register(relativeUrl: "email=\(email)", completion: { (response, status, msg) in
+                   
+                    DispatchQueue.main.async {
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+
                     if status == true {
                         let responseArray = response as![ [String:AnyObject]]
                         let responsedict = responseArray[0]
@@ -191,6 +200,12 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                     }
                     else {
                         if msg == "Registered Successfully!, Please check your mail for activation!"{
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            }
+                        }
+                        
+                        if msg == "This Mail ID already exists!!"{
                             DispatchQueue.main.async {
                                 self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
                             }
@@ -272,8 +287,13 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
             //string = string + "&password=\(pwd)"
             
         }
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         
         LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
             if status == true {
                 let responseArray = response as![ [String:AnyObject]]
                 let responsedict = responseArray[0]

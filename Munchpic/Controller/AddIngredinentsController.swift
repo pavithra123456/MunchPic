@@ -1,14 +1,14 @@
 //
-//  AddIngredientsViewController.swift
+//  AddIngredinentsController.swift
 //  Munchpic
 //
-//  Created by Pavithra Jayanna on 27/05/17.
+//  Created by Pavithra Jayanna on 17/07/17.
 //  Copyright © 2017 Pavithra Jayanna. All rights reserved.
 //
 
 import UIKit
 
-class AddIngredientsViewController: UIViewController {
+class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,11 @@ class AddIngredientsViewController: UIViewController {
         let _ = self.navigationController?.popViewController(animated: true)
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 

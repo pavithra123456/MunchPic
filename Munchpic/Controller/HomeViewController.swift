@@ -97,7 +97,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     model.comments = Int(postobject["comments"] as! String)!
                     model.userId = Int(postobject["userId"] as! String)!
                     model.noOfCollection = Int(postobject["collections"] as! String)!
-                    model.efforts = postobject["difficulty"] as! String
+                    if let diff = postobject["difficulty"] {
+                        model.efforts = diff as! String
+
+                    }
 
                     self.postArray.append(model)
                 }
@@ -390,6 +393,11 @@ cell.smilesView .isHidden = !cell.smilesView.isHidden
     }
     //MARK: - Other
 
+    @IBAction func cameraAction(_ sender: Any) {
+        
+        self.parent?.performSegue(withIdentifier: "showNewPost", sender: nil)
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -93,6 +93,11 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         self.parent?.performSegue(withIdentifier: "showAbout", sender: nil)
     }
     
+    @IBAction func cameraAction(_ sender: Any) {
+        
+        self.parent?.performSegue(withIdentifier: "addNewPost", sender: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

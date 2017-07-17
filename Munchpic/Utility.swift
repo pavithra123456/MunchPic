@@ -82,7 +82,11 @@ class BorderedView : UIView {
             //            self.selectedTextRange = self.textRange(from: position, to: position)
         }
     }
-    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
     
     @IBInspectable var cornerRadius: CGFloat = 6 {
         didSet {

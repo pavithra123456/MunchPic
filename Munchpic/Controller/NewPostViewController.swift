@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate {
+class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet var pageimage: UIImageView!
     @IBOutlet var pagecontroller: UIPageControl!
@@ -39,6 +39,11 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     @IBOutlet var step4: UITextField!
     @IBOutlet var timelabel: UITextField!
     
+    @IBOutlet weak var step5: UITextField!
+    @IBOutlet weak var titileTextField: UITextField!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,18 +54,26 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         self.swipeGestureRight.direction = UISwipeGestureRecognizerDirection.right
         self.swipeGestureLeft.addTarget(self, action:#selector(NewPostViewController.handleSwipeLeft(gesture:)))
         self.swipeGestureRight.addTarget(self, action:#selector(NewPostViewController.handleSwipeRight(gesture:)))
-        mscrollview.addGestureRecognizer(self.swipeGestureLeft)
-        mscrollview.addGestureRecognizer(self.swipeGestureRight)
+        //mscrollview.addGestureRecognizer(self.swipeGestureLeft)
+        //mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
        // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
-        imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
-
-    }
+        imagesarray = [UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost")]
+       collectionView.reloadData()
+        
+       // self.navigationItem.leftBarButtonItems = []
+//        self.navigationController?.navigationItem .leftBarButtonItems?.append(UIBarButtonItem(image:  UIImage(named: "btn_hamburger"), style: .plain, target: self, action: nil))
+        
+       //self.navigationItem.leftBarButtonItem.
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: scrollView.contentSize.height+1350)
+        
+}
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height)
+        mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+350)
     }
+    
     //Left gesture
     func handleSwipeLeft(gesture: UISwipeGestureRecognizer){
         
@@ -101,6 +114,27 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         }
         
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.bounds.size.width, height:  200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)
+        let imgView = cell.viewWithTag(1) as! UIImageView
+        imgView.image = imagesarray[indexPath.row] as? UIImage
+        return cell
+        
+    }
+    
+    @IBAction func BackAction(_ sender: Any) {
+        let _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cam1(_ sender: Any) {
@@ -206,11 +240,16 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
              imagesarray.replaceObject(at: indexval, with: image)
             print("imageinsert at \(imagesarray) at indexof \(indexval)")
             pagecontroller.currentPage = indexval
-            
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: IndexPath(item: indexval, section: 0), at: .left, animated: true)
         }
         
     }
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     
     
@@ -293,6 +332,25 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     
     @IBAction func ingrediantsBtn_Avtiom(_ sender: Any) {
+        let dishName = titileTextField.text ?? ""
+        let description = titileTextField.text ?? ""
+        let category = veglabel.text ?? ""
+        let subCategory = selectCategory.text ?? ""
+        let cuisine = selectcuisine.text ?? ""
+        let step1 = self.step1.text ?? ""
+        let step2 = self.step2.text ?? ""
+        let step3 = setp3.text ?? ""
+        let step4 = self.step4.text ?? ""
+        let step5 = self.step5.text ?? ""
+
+
+        var string = ""
+        string = "userId=\(38)" + "dishName\(dishName )" +
+                "description=\(description)" +
+                "category=\(category)"
+                    + "subCategory=\(subCategory)" + "cuisine=\(cuisine)" +
+                "step1\(step1)"
+        
     }
     
     
