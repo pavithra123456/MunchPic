@@ -11,6 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController,UICollectionViewDataSource{
     @IBOutlet weak var profilePic: UIImageView!
 
+    @IBOutlet weak var mscrollview: UIScrollView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var lovesTableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,6 +22,9 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     var collectionArray = [[String:String]]()
     var lovesArray = [ProfilkeLovesModel]()
 
+    @IBOutlet weak var tableviewheight: NSLayoutConstraint!
+    @IBOutlet weak var collectionviewheight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        collectionView.dataSource = self
@@ -75,8 +79,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     //MARK: - ButtonActions
     
     @IBAction func collectionButtonAction(_ sender: Any) {
+        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
+        collectionView.reloadData()
     }
     
     @IBAction func cameraButtonAction(_ sender: Any) {
@@ -85,8 +91,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     }
     
     @IBAction func lovesButtonAction(_ sender: Any) {
+        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = false
         self.collectionView.isHidden = true
+        lovesTableView.reloadData()
     }
     
     @IBAction func aboutAction(_ sender: Any) {
@@ -134,6 +142,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
             })
             }.resume()
         cell.nameLabel.text = obj["categoryName"]
+        
+        collectionviewheight.constant = collectionView.contentSize.height
+        mscrollview.contentSize.height = collectionView.contentSize.height + 300
+        
 
         return cell
         
@@ -164,6 +176,11 @@ extension ProfileViewController:UITableViewDataSource {
             loveCell.creationDateLabel.text = lovesArray[indexPath.row].dateSaved
             //loveCell.postImage.image = UIImage(named: lovesArray[indexPath.row].imageName)
         }
+        
+        tableviewheight.constant = lovesTableView.contentSize.height
+        mscrollview.contentSize.height = lovesTableView.contentSize.height + 300
+        collectionviewheight.constant = lovesTableView.contentSize.height
+        
         return cell
     }
 }

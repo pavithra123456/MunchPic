@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 import Alamofire
-class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate {
+class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet var first_name: UITextField!
     @IBOutlet var last_name: UITextField!
@@ -28,6 +28,16 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet var profilepic: UIImageView!
     @IBOutlet var remembermebtn: UIButton!
     
+    @IBOutlet weak var countryview: UIView!
+    @IBOutlet weak var countriestable: UITableView!
+    @IBOutlet weak var viewconstraint: NSLayoutConstraint!
+    var countriesarray = NSMutableArray()
+    var statesarray = NSMutableArray()
+    var countrystr = NSString()
+    var pickerView:UIView = UIView()
+    var datePicker:UIDatePicker = UIDatePicker()
+
+    
     var genderstring = NSString()
     var checkmarkbool = Bool()
     
@@ -36,6 +46,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
 
         
         mscrollview.delegate = self
+        
+        // add default country arrays
+        
+        countriesarray = ["India","UK","USA","China","Africa","France"]
+        statesarray = ["Select State","Andhra pradesh","Karnataka","Goa","Thamil Nadu","Kerala","UP"]
+        
+        countryview.isHidden = true
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,10 +82,53 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        
+        if(textField == country){
+            
+            state.becomeFirstResponder()
+            
+        }else if( textField == state){
+            
+            city.becomeFirstResponder()
+            
+        }else{
+            
             textField.resignFirstResponder()
-    
+        }
+        
+        
         return true
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if(textField == country){
+            
+            countrystr = "country"
+            countryview.isHidden = false
+            countriestable.reloadData()
+            country.resignFirstResponder()
+            
+            
+        }else if( textField == state){
+            
+            countrystr = "state"
+            countryview.isHidden = false
+            countriestable.reloadData()
+            state.resignFirstResponder()
+            
+            
+        }else if( textField == DOB){
+            
+            DOB.resignFirstResponder()
+            self.selectdobpicker()
+            
+            
+        }else{
+            
+            
+        }
+        
+        
     }
 
     // MARK: - Takepic action
@@ -307,6 +368,197 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
 
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if(countrystr == "country"){
+            return countriesarray.count
+        }else if( countrystr == "state"){
+            return statesarray.count
+        }
+        
+        return 0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        self.countriestable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
+        
+        if(countrystr == "country"){
+            cell.textLabel?.text = self.countriesarray[indexPath.row] as? String
+        }else if( countrystr == "state"){
+            cell.textLabel?.text = self.statesarray[indexPath.row] as? String
+        }
+        
+        cell.textLabel?.textColor = UIColor.black
+        
+        return cell
+        
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        if(countrystr == "country"){
+            
+            country.text = self.countriesarray[indexPath.row] as? String
+            countryview.isHidden = true
+            country.resignFirstResponder()
+            state.becomeFirstResponder()
+            
+        }else if( countrystr == "state"){
+            
+            state.text = self.statesarray[indexPath.row] as? String
+            countryview.isHidden = true
+            state.resignFirstResponder()
+            city.becomeFirstResponder()
+        }
+        
+        
+        
+    }
+
+    
+    // selecteing dateofbirth
+    
+    func selectdobpicker(){
+        
+        
+        pickerView.removeFromSuperview()
+        
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+        {
+            // Ipad
+            if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation))
+            {
+               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
+                
+            }else{
+               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
+                
+            }
+            
+        }
+        else
+        {
+            // Iphone
+            if(UIDeviceOrientationIsLandscape(UIDevice.current
+                .orientation))
+            {
+              //  mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 200)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 200, width: self.view.frame.size.width, height: 200)
+            }else{
+               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 180)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-220, width: self.view.frame.size.width, height: 200)
+                
+            }
+        }
+        
+        
+        pickerView.backgroundColor = UIColor.white
+        datePicker.datePickerMode = UIDatePickerMode.date
+        datePicker.backgroundColor = UIColor.white
+        datePicker.date = NSDate() as Date
+      
+        //datePicker.tag = (sender as AnyObject).tag
+        
+        let toolbar = UIToolbar()
+        toolbar.frame = CGRect(x: 0,y: 0,width: pickerView.frame.size.width,height: 44)
+        toolbar.barStyle = UIBarStyle.blackTranslucent;
+        //toolbar.backgroundColor = [UIColor whiteColor];
+        
+        let flexibleSpaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        let cancelbtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(RegistrationViewController.cancelbutton(sender:)))
+        cancelbtn.tintColor = UIColor.white
+       //cancelbtn.tag = (sender as AnyObject).tag
+        
+        let donebtn = UIBarButtonItem(title: "Done", style: .plain, target: self,action:#selector(RegistrationViewController.donebutton(sender:)))
+        donebtn.tintColor = UIColor.white
+     
+       //donebtn.tag = (sender as AnyObject).tag
+        
+        
+        let toolbarButtonItems = [
+            cancelbtn,
+            flexibleSpaceLeft,
+            donebtn
+        ]
+        toolbar.setItems(toolbarButtonItems, animated: true)
+        
+        
+        pickerView .addSubview(toolbar)
+        pickerView .addSubview(datePicker)
+        self.view.addSubview(pickerView)
+        
+    }
+    
+    
+    func cancelbutton(sender: UIBarButtonItem) {
+        
+        pickerView.removeFromSuperview()
+    }
+    
+    func donebutton(sender: UIBarButtonItem) {
+        LabelTitle(sender: sender)
+        pickerView.removeFromSuperview()
+    }
+    
+    
+    
+    func LabelTitle(sender: AnyObject) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        dateFormatter.dateFormat = "d-MMM-yyy"
+        
+        let value:NSString =  dateFormatter .string(from: datePicker.date) as NSString
+        let currDate = NSDate()
+        let newDate =  dateFormatter .string(from: currDate as Date)
+        
+        let date1:NSDate = dateFormatter .date(from: value as String)! as NSDate
+        let date2:NSDate = dateFormatter .date(from: newDate)! as NSDate
+        
+        
+        let dateComparisionResult:ComparisonResult = date1.compare(date2 as Date)
+        
+        if dateComparisionResult == ComparisonResult.orderedDescending
+        {
+            
+             Utility.showAlert(title: "Warning!", message: "Invalid Date,Please select a valid date.", controller: self,completion:nil)
+          
+            
+        }
+            
+        else if dateComparisionResult == ComparisonResult.orderedAscending
+        {
+           
+            DOB.text = value as String
+        }
+            
+        else if dateComparisionResult == ComparisonResult.orderedSame
+        {
+
+            
+            DOB.text = value as String
+        }
+        
+    }
+    
+
     
 
     override func didReceiveMemoryWarning() {
