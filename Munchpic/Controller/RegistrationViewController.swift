@@ -52,7 +52,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         countriesarray = ["India","UK","USA","China","Africa","France"]
         statesarray = ["Select State","Andhra pradesh","Karnataka","Goa","Thamil Nadu","Kerala","UP"]
         
-        countryview.isHidden = true
+        //countryview.isHidden = true
 
     }
     
@@ -100,32 +100,41 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
+        let pos = self.view.convert(textField.frame.origin, to: self.view)
+        print(pos)
+
         if(textField == country){
             
             countrystr = "country"
-            countryview.isHidden = false
+            //countryview.isHidden = false
             countriestable.reloadData()
             country.resignFirstResponder()
-            
+            countriestable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: countriestable.frame.width, height: countriestable.frame.height)
+
+            countriestable.isHidden = false
+
             
         }else if( textField == state){
             
             countrystr = "state"
-            countryview.isHidden = false
+            //countryview.isHidden = false
             countriestable.reloadData()
             state.resignFirstResponder()
-            
+            countriestable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: countriestable.frame.width, height: countriestable.frame.height)
+
+            countriestable.isHidden = false
+
             
         }else if( textField == DOB){
             
             DOB.resignFirstResponder()
             self.selectdobpicker()
-            
+            countriestable.isHidden = true
+
             
         }else{
             
-            
+            countriestable.isHidden = true
         }
         
         
@@ -407,14 +416,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         if(countrystr == "country"){
             
             country.text = self.countriesarray[indexPath.row] as? String
-            countryview.isHidden = true
+           // countryview.isHidden = true
             country.resignFirstResponder()
             state.becomeFirstResponder()
             
         }else if( countrystr == "state"){
             
             state.text = self.statesarray[indexPath.row] as? String
-            countryview.isHidden = true
+           // countryview.isHidden = true
             state.resignFirstResponder()
             city.becomeFirstResponder()
         }
