@@ -312,6 +312,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
       
         
     }
+    
     @IBAction func verydifficult_Action(_ sender: Any) {
         
         veryeasyBtn.backgroundColor = UIColor(hex: "276C22")
@@ -320,7 +321,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
          Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
-      
       
     }
     
@@ -361,15 +361,18 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "AddIngredients" {
+            let vc =  segue.destination as! AddIngredinentsController
+        }
     }
-    */
+ 
 
 }
 

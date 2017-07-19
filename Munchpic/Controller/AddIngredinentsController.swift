@@ -10,6 +10,37 @@ import UIKit
 
 class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
 
+    @IBOutlet weak var ingredients1: UITextField!
+    @IBOutlet weak var ingredients2: UITextField!
+    
+    @IBOutlet weak var ingredients3: UITextField!
+    
+    @IBOutlet weak var ingredients4: UITextField!
+    
+    @IBOutlet weak var ingredients5: UITextField!
+    
+    @IBOutlet weak var ingredients6: UITextField!
+    
+    @IBOutlet weak var ingredients7: UITextField!
+    
+    @IBOutlet weak var ingredients8: UITextField!
+    
+    @IBOutlet weak var ingredients9: UITextField!
+    
+    @IBOutlet weak var ingredients110: UITextField!
+    
+    @IBOutlet weak var ingredients11: UITextField!
+    
+    @IBOutlet weak var ingredients12: UITextField!
+    
+    @IBOutlet weak var ingredients13: UITextField!
+    
+    @IBOutlet weak var ingredients14: UITextField!
+    
+    @IBOutlet weak var ingredients15: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
