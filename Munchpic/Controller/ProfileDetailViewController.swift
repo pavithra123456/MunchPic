@@ -18,10 +18,14 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
     @IBOutlet weak var cityTxtField: UITextField!
     @IBOutlet weak var phoneNoTxtField: UITextField!
     @IBOutlet weak var emailTxtField: UITextField!
-    
     @IBOutlet weak var editBtn: UIButton!
-    
+    @IBOutlet var malebtn: UIButton!
+    @IBOutlet var femalebtn: UIButton!
     @IBOutlet weak var userPic: UIImageView!
+    
+    
+    var genderstring = NSString()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +50,16 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
             
             
         }
+        
+        nameTxtField.isUserInteractionEnabled = false
+        aboutTxtField.isUserInteractionEnabled = false
+        dobTxtField.isUserInteractionEnabled = false
+        countryTxtField.isUserInteractionEnabled = false
+        stateTxtField.isUserInteractionEnabled = false
+        cityTxtField.isUserInteractionEnabled = false
+        phoneNoTxtField.isUserInteractionEnabled = false
+        emailTxtField.isUserInteractionEnabled = false
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,22 +67,41 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func genderBtnAction(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-        }
-        else {
-            sender.isSelected = true
-        }
+    // MARK: - mail button selected
+    @IBAction func malebtn_Action(_ sender: Any) {
+        
+        genderstring = "male"
+        malebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
+        femalebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+    }
+    
+    // MARK: - femail button selected
+    @IBAction func Femalebtn_Action(_ sender: Any) {
+        
+        genderstring = "female"
+        malebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+        femalebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
     }
     
     @IBAction func editAction(_ sender: UIButton) {
         if sender.currentTitle == "EDIT" {
             sender.setTitle("UPDATE", for: .normal)
+            
+            nameTxtField.isUserInteractionEnabled = true
+            aboutTxtField.isUserInteractionEnabled = true
+            dobTxtField.isUserInteractionEnabled = true
+            countryTxtField.isUserInteractionEnabled = true
+            stateTxtField.isUserInteractionEnabled = true
+            cityTxtField.isUserInteractionEnabled = true
+            phoneNoTxtField.isUserInteractionEnabled = true
+            emailTxtField.isUserInteractionEnabled = true
 
         }
+            
         else {
             // call update api
+            
+            self.Updateuserprofile()
         }
         
     }
@@ -78,6 +111,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
     }
     
     func getProfileDetails() {
+        
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             ServiceLayer.getusetInfo(forUserID: userId as! String , completion: { (respose, status, msg) in
                 DispatchQueue.main.async {
@@ -91,7 +125,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
                     
                     self.phoneNoTxtField.text = respose?[0]["mobile"] as? String
                     self.emailTxtField.text = respose?[0]["email"] as? String
-
+                    self.genderstring = (respose?[0]["gender"])! as! NSString
                 }
 
 
@@ -100,6 +134,55 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
         }
 
     }
+    
+    func Updateuserprofile(){
+        
+        
+         let userId =  UserDefaults.standard.value(forKey: "userId")
+            
+        var parametersstring = " "
+        
+        let uId = userId as! String
+        let name = nameTxtField.text! as String
+        let dob = dobTxtField.text! as String
+        let country = countryTxtField.text! as String
+        let state = stateTxtField.text! as String
+        let city = cityTxtField.text! as String
+        let email = emailTxtField.text! as String
+        let mobile = phoneNoTxtField.text! as String
+        let about = aboutTxtField.text! as String
+        
+            
+         parametersstring = "userId=\(uId)" + "&name=\(name)" + "&dob=\(dob)" + "&gender=\(genderstring)"  + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "email=\(email)" + "&mobile=\(mobile)" + "&about=\(about)"
+            
+        LoginServiceLayer().updateUserInfo(parameter:parametersstring  ,completion: { (response, status, message) in
+            
+            if status {
+                
+                let responseArray = response as![ [String:AnyObject]]
+                let responsedict = responseArray[0]
+                
+            }
+            else  {
+                DispatchQueue.main.async {
+                    
+            Utility.showAlert(title: "Alert!", message: message, controller: self,completion:nil)
+             
+                }
+            }
+           
+        })
+
+        
+        self.getProfileDetails()
+       
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+
     
     //MARK: - Textfielkd Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {

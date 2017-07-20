@@ -55,6 +55,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
             
             return headerView
         }
+        
         return UICollectionReusableView()
     }
     

@@ -45,7 +45,7 @@ class LoginServiceLayer: NSObject {
         }
     }
     
-    func activateUser(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+  func activateUser(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
         
         Alamofire.request(Constants.kBaseUrl + Constants.KActivation, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             
@@ -54,29 +54,64 @@ class LoginServiceLayer: NSObject {
         }
     }
 
-    func forgotPassword(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+     func forgotPassword(parameter:String,completion:@escaping(AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KForgotPassword, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KForgotPassword, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+                
+            }
+        }
+
+    }
+    
+   
+    
+    func resetPassword(parameter:String,completion:@escaping(AnyObject?,Bool,String)->Void){
+        
+//        Alamofire.request(Constants.kBaseUrl + Constants.KResetPassword, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//            }
+//        }
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KResetPassword, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+                
             }
         }
     }
     
-    func resetPassword(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+    
+    func updateUserInfo(parameter:String,completion:@escaping(AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KResetPassword, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
+//        Alamofire.request(Constants.kBaseUrl + Constants.KUpdateUserInfo, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//            }
+//        }
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KUpdateUserInfo, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+                
             }
         }
-    }
-    func updateUserInfo(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)){
+
         
-        Alamofire.request(Constants.kBaseUrl + Constants.KUpdateUserInfo, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
-        }
+        
+        
     }
  }

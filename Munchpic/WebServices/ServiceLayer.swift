@@ -4,7 +4,7 @@
 //
 //  Created by Pavithra Jayanna on 27/05/17.
 //  Copyright © 2017 Pavithra Jayanna. All rights reserved.
-//
+///Users/ypo/Desktop/Chaitanya/Munchpic/Munchpic.xcodeproj
 
 import UIKit
 import Alamofire
@@ -229,6 +229,8 @@ class ServiceLayer: NSObject {
 
     
     }
+    
+    
     
     class func excuteQuery(url:String,postbody:String,completion:@escaping (AnyObject?,Bool,String)->Void) {
         

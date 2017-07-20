@@ -117,20 +117,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
         let confirmAction = UIAlertAction(title: "Ok", style: .default) { (_) in
             if let field = alertController.textFields![0] as? UITextField {
                 
-                /*
-                 // store your data
-                 if(field.text?.characters.count == 0){
-                 
-                 self.alertmsgstring = "Feild should not be nil"
-                 self.alertstring(messagestring: self.alertmsgstring)
-                 
-                 }else{
-                 
-                 UserDefaults.standard.set(field.text, forKey: "userEmail")
-                 UserDefaults.standard.synchronize()
-                 }
-                 
-                 */
+               
                 
             } else {
                 
@@ -342,7 +329,57 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     
     @IBAction func ForgetPAssword(sender:AnyObject){
         
+
+        let alertController = UIAlertController(title: "", message: "Please enter your email", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
+     
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Email"
+        }
+        
+        let confirmAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+            if let field = alertController.textFields![0] as? UITextField {
+                if let registermail = field.text {
+                   
+                    
+                LoginServiceLayer().forgotPassword(parameter:"email=\(registermail)"  ,completion: { (response, status, message) in
+                
+                    if status {
+                        
+                        let responseArray = response as![ [String:AnyObject]]
+                        let responsedict = responseArray[0]
+                        
+                    }
+                    else  {
+                        DispatchQueue.main.async {
+                            
+                            Utility.showAlert(title: "Alert!", message: message, controller: self,completion:nil)
+                        }
+                    }
+                    
+                    
+                })
+                    
+                    
+                    self.performSegue(withIdentifier: "resetpassword", sender: self)
+
+                }
+                
+            } else {
+                
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(confirmAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+      
+        
+        
+        
     }
+
 
     /*
     // MARK: - Navigation

@@ -71,6 +71,7 @@
 		87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */; };
 		87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */; };
 		87B1E6E41EDC504300A331C0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6E31EDC504300A331C0 /* Reachability.swift */; };
+		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
 		DC27A2D94EC41819E2069395 /* Pods_MunchpicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */; };
 		DD6961A5045E66814DC7CF7C /* Pods_MunchpicUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */; };
 /* End PBXBuildFile section */
@@ -170,6 +171,7 @@
 		8FB862E1B66F01BFBC6049AD /* Pods-MunchpicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.release.xcconfig"; sourceTree = "<group>"; };
 		912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA15765971EB4BD62F67CDF0 /* Pods-Munchpic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Munchpic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Munchpic/Pods-Munchpic.debug.xcconfig"; sourceTree = "<group>"; };
+		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		D97D6F6D3DC9587022628620 /* Pods-MunchpicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -333,6 +335,7 @@
 			children = (
 				7B3576821ED9AB2E00FF610A /* RegistrationViewController.swift */,
 				87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */,
+				C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */,
 			);
 			name = UserLogin;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */,
 				7B24DF931EFFC08F00AD85EA /* SearchHeaderView.swift in Sources */,
 				7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */,
+				C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */,
 				7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */,
 				7B3576541ED9AA8500FF610A /* ViewController.swift in Sources */,
 				7B1147B41F0258A400CA48D6 /* ProfilkeLovesModel.swift in Sources */,
