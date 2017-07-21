@@ -344,13 +344,14 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                     
                 LoginServiceLayer().forgotPassword(parameter:"email=\(registermail)"  ,completion: { (response, status, message) in
                 
-                    if status {
+                    if(message == "Your password reset link send to your e-mail address."){
                         
-                        let responseArray = response as![ [String:AnyObject]]
-                        let responsedict = responseArray[0]
+                        UserDefaults.standard.set(registermail, forKey: "emailid")
+                        self.performSegue(withIdentifier: "resetpassword", sender: self)
                         
-                    }
-                    else  {
+                    }else{
+                        
+                        
                         DispatchQueue.main.async {
                             
                             Utility.showAlert(title: "Alert!", message: message, controller: self,completion:nil)

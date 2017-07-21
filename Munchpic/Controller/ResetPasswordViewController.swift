@@ -24,6 +24,7 @@ class ResetPasswordViewController: UIViewController,UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
     @IBAction func back_Action(_ sender: Any) {
         
     
@@ -31,10 +32,17 @@ class ResetPasswordViewController: UIViewController,UITextFieldDelegate {
 
     @IBAction func Submit_Action(_ sender: Any) {
         
+        
+        if(password.text != reenterpassword.text){
+            
+            Utility.showAlert(title: "Alert!", message: "Password and Reenterpassword should be same!", controller: self,completion:nil)
+            return
+        }
+        
         var parametersstring = ""
         
-        let email = "chaitanyakumari4b5@gmail.com"
-        let password = self.password.text! as String
+        let email = UserDefaults.standard.value(forKey: "emailid")
+        let password1 = self.password.text! as String
         let resetkeyval = resetkey.text! as String
         
         
@@ -57,8 +65,6 @@ class ResetPasswordViewController: UIViewController,UITextFieldDelegate {
         })
 
     }
-    
-    
     
     
     override func didReceiveMemoryWarning() {

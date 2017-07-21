@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet var pageimage: UIImageView!
     @IBOutlet var pagecontroller: UIPageControl!
@@ -45,6 +45,15 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    
+    @IBOutlet weak var categoryview: UIView!
+    @IBOutlet weak var categorytable: UITableView!
+    
+    var catagoriesarray = NSMutableArray()
+    var cuisinearray = NSMutableArray()
+    var categorystr = NSString()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,6 +76,11 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
        //self.navigationItem.leftBarButtonItem.
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: scrollView.contentSize.height+1350)
         
+        
+        catagoriesarray = ["Select SubCategory","Break Fast","Lunch","Dinner","Dessert"]
+        cuisinearray = ["Select Cuisine","North Indian","Rajasthani","Chinese","South Indian","North_East Indian"]
+        
+        categorytable.isHidden = true
 }
     
     override func viewDidLayoutSubviews() {
@@ -247,10 +261,58 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if(textField == selectCategory){
+            
+            selectcuisine.becomeFirstResponder()
+            
+        }else if( textField == selectcuisine){
+            
+            step1.becomeFirstResponder()
+            
+        }else{
+            
+            textField.resignFirstResponder()
+        }
+        
+        
         return true
     }
-    
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let pos = self.view.convert(textField.frame.origin, to: self.view)
+        print(pos)
+        
+        if(textField == selectCategory){
+            
+            categorystr = "selectCategory"
+            //countryview.isHidden = false
+            categorytable.reloadData()
+            selectCategory.resignFirstResponder()
+            categorytable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: categorytable.frame.width, height: categorytable.frame.height)
+            
+            categorytable.isHidden = false
+            
+            
+        }else if( textField == selectcuisine){
+            
+            categorystr = "selectcuisine"
+            //countryview.isHidden = false
+            categorytable.reloadData()
+            selectcuisine.resignFirstResponder()
+            categorytable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: categorytable.frame.width, height: categorytable.frame.height)
+            
+            categorytable.isHidden = false
+            
+            
+        }else{
+            
+            categorytable.isHidden = true
+        }
+        
+        
+    }
+
     
     
     @IBAction func vegandnonvegbtn_Action(_ sender: Any) {
@@ -398,6 +460,61 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             
         }
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        if(categorystr == "selectCategory"){
+            return catagoriesarray.count
+        }else if(categorystr == "selectcuisine"){
+            return cuisinearray.count
+        }
+        
+        return 0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        self.categorytable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
+        
+        if(categorystr == "selectCategory"){
+            cell.textLabel?.text = self.catagoriesarray[indexPath.row] as? String
+        }else if(categorystr == "selectcuisine"){
+            cell.textLabel?.text = self.cuisinearray[indexPath.row] as? String
+        }
+        
+        cell.textLabel?.textColor = UIColor.black
+        
+        return cell
+        
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+       
+        if(categorystr == "selectCategory"){
+            
+            selectCategory.text = self.catagoriesarray[indexPath.row] as? String
+            // countryview.isHidden = true
+            selectCategory.resignFirstResponder()
+            selectcuisine.becomeFirstResponder()
+            
+        }else if(categorystr == "selectcuisine"){
+            
+            selectcuisine.text = self.cuisinearray[indexPath.row] as? String
+            // countryview.isHidden = true
+            selectcuisine.resignFirstResponder()
+            step1.becomeFirstResponder()
+        }
+        
+        
+        
+    }
+
 }
 
 extension UIColor {
