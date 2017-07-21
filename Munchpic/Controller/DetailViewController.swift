@@ -8,8 +8,11 @@
 
 import UIKit
 import MBProgressHUD
+let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its transformations
+let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
+let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
 
-class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate{
 
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
@@ -56,6 +59,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBOutlet weak var headingLabel: UILabel!
     
+    @IBOutlet weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +173,43 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
     }
 
+    //MARK:- Scrollview deleagte 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        var avatarTransform = CATransform3DIdentity
+        var headerTransform = CATransform3DIdentity
+        
+        //        if pos.y < 0 {
+        //            self.navigationController?.navigationBar.isHidden = true
+        //            self.navigationController?.navigationBar.alpha = 1
+        //        }
+        //        else {
+        //            self.navigationController?.navigationBar.isHidden = false
+        //            self.navigationController?.navigationBar.alpha = 0.5
+        //
+        //        }
+        
+        print(offset)
+        
+        if offset <= 730 {
+            
+//            let headerScaleFactor:CGFloat = -(offset) / headerView.bounds.height
+//            let headerSizevariation = ((headerView.bounds.height * (1.0 + headerScaleFactor)) - headerView.bounds.height)/2.0
+//            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+//            //headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+//            
+//            headerView.layer.transform = headerTransform
+            headerView.alpha = 0
+        }
+            
+        else if (offset > 730) && (offset < 800) {
+            headerView.frame .origin = CGPoint(x: headerView.frame.origin.x, y: headerView.frame.origin.y-1)
+//            headerTransform = CATransform3DTranslate(headerTransform, 0,headerView.frame.origin.y+1 , 0)
+            headerView.alpha = 1
+            
+        }
+        //headerView.layer.transform = headerTransform
+    }
     
     //MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

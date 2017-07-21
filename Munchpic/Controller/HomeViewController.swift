@@ -80,13 +80,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         let url = Constants.kBaseUrl + Constants.kGetPost + "userId=\(38)"
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-
+        //TODO: - Need Add nill check
         ServiceLayer.getPosts( relativeUrl:url) { (response, true, message) in
             MBProgressHUD.hide(for: self.view, animated: true)
 
             let response1 = response as! [String:AnyObject]
             if let array = response1["result"] as? Array<Any> {
-                for post in array {
+               /* for post in array {
                     let postobject = post  as! [String:AnyObject]
                     let model = PostModel()
                     model.postId = Int(postobject["postId"] as! String)!
@@ -103,7 +103,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     }
 
                     self.postArray.append(model)
-                }
+                }*/
             }
             self.Hometableview.reloadData()
         }

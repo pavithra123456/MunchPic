@@ -287,9 +287,9 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         
         Utility.showAlert(title: "", message: "Easy to prepare.", controller: self,completion:nil)
-     
         
     }
+    
     @IBAction func mediumbtn_Action(_ sender: Any) {
         
         veryeasyBtn.backgroundColor = UIColor(hex: "276C22")
@@ -301,6 +301,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
      
         
     }
+    
     @IBAction func difficultbtn_Action(_ sender: Any) {
         
         veryeasyBtn.backgroundColor = UIColor(hex: "276C22")
@@ -310,7 +311,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
          Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
       
-        
     }
     
     @IBAction func verydifficult_Action(_ sender: Any) {
@@ -333,23 +333,46 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     @IBAction func ingrediantsBtn_Avtiom(_ sender: Any) {
         let dishName = titileTextField.text ?? ""
-        let description = titileTextField.text ?? ""
+        
+        let description1 = self.step1.text ?? ""
+        let description2 = self.step2.text ?? ""
+        let description3 = setp3.text ?? ""
+        let description4 = self.step4.text ?? ""
+        let description5 = self.step5.text ?? ""
+        
         let category = veglabel.text ?? ""
         let subCategory = selectCategory.text ?? ""
         let cuisine = selectcuisine.text ?? ""
-        let step1 = self.step1.text ?? ""
-        let step2 = self.step2.text ?? ""
-        let step3 = setp3.text ?? ""
-        let step4 = self.step4.text ?? ""
-        let step5 = self.step5.text ?? ""
+     
 
 
         var string = ""
         string = "userId=\(38)" + "dishName\(dishName )" +
-                "description=\(description)" +
+                "description=\(description1)" +
                 "category=\(category)"
-                    + "subCategory=\(subCategory)" + "cuisine=\(cuisine)" +
-                "step1\(step1)"
+                    + "subCategory=\(subCategory)" + "cuisine=\(cuisine)"
+        
+        let post = PostModel()
+        post.dishName = dishName
+        post.description1 = description1
+        post.description2 = description2
+        post.description3 = description3
+        post.description4 = description4
+        post.description5 = description5
+        
+        post.category = category
+        post.subCategory = subCategory
+        post.cuisine = cuisine
+        
+        post.post1 = imagesarray[0] as? UIImage
+        post.post2 = imagesarray[1] as? UIImage
+        post.post3 = imagesarray[2] as? UIImage
+        
+        post.difficulty = "\(3)"
+        post.efforts = self.timelabel.text!
+        
+        self.performSegue(withIdentifier: "AddIngredients", sender: post)
+        
         
     }
     
@@ -370,10 +393,11 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         // Pass the selected object to the new view controller.
         if segue.identifier == "AddIngredients" {
             let vc =  segue.destination as! AddIngredinentsController
+            
+            vc .postModel = sender as? PostModel
+            
         }
     }
- 
-
 }
 
 extension UIColor {

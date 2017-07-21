@@ -13,11 +13,26 @@ class PostModel: NSObject {
     var userName = ""
     var dishName = ""
     var category = ""
+    var subCategory = ""
+    var cuisine = ""
+    
     var description1 = ""
+    var description2 = ""
+    var description3 = ""
+    var description4 = ""
+    var description5 = ""
+    
     var noOfCollection = 0
     var comments = 0
     var loves = 0
     var ImagePath1 = ""
     var userId = 0
     var efforts = ""
+    
+    var post1 :UIImage?
+    var post2 :UIImage?
+    var post3 :UIImage?
+    var duration = ""
+    var difficulty = ""
+    
 }

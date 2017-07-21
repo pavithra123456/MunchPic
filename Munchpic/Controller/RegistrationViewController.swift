@@ -299,7 +299,8 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 //let email =  emailid.text != nil ? emailid.text : ""
                 
                 
-                     string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)"
+                     string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)" +
+                "image\(String(describing: UIImagePNGRepresentation(profilepic.image!)))"
                     
                /* var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KRegister)!)
                 url.httpMethod = "POST"

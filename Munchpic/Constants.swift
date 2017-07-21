@@ -10,7 +10,6 @@ import Foundation
 class Constants{
     
     static let kBaseUrl : String = "http://ekalavyatech.com/munchpic.com/munchpicPHP/"
-    static let kBaseImageUrl : String = "http://ekalavyatech.com/munchpic.com/munchpicPHP/uploads/"
 
     static let kGetPost : String = "getPosts.php?"
     static let kGetCollections : String = "getCollections.php"

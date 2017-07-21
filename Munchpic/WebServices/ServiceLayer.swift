@@ -165,14 +165,24 @@ class ServiceLayer: NSObject {
             
         }
     }
-
-    
-//        Alamofire.request(Constants.kBaseUrl + Constants.kGetUserPosts, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-//            
-//            if response.result.isSuccess {
-//            }
-//        }
     }
+       class func insertPost(parameter:String,completion:@escaping (AnyObject?,Bool,String)->Void){
+            
+            
+            ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kInsertPost, postbody: parameter) { (response, status, msg) in
+                if status == true {
+                    completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+                }
+                else {
+                    completion(nil , false, msg)
+                    
+                }
+            }
+
+            
+        }
+        
+    
     class func insertLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kInsertLoves, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -197,14 +207,7 @@ class ServiceLayer: NSObject {
             }
         }
     }
-   class  func insertPost(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kInsertPost, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
-        }
-    }
+  
     class func deleteCollection(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kDeleteCollection, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
