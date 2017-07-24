@@ -13,7 +13,7 @@ class ProfilkeLovesModel: NSObject {
     var dateSaved = ""
     var imageName = ""
     var userId = 0
-    var lovesPostId = "0"
+    var postId = "0"
     var postedUserId = "0"
     var emoji = ""
 }

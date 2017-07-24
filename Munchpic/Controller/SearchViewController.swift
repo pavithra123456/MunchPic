@@ -8,8 +8,28 @@
 
 import UIKit
 
+enum SubCategory : String{
+    case Breakfast
+    case Lunch
+    case Dinner
+    case Desserts
+}
+
+enum Cuisine : String{
+    case NorthIndia = "North India"
+    case Rajasthani
+    case Gujarathi
+    case Chinese
+    case SouthIndia = "South India"
+    case NorthEastIndia = "North East India"
+}
+
 class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource {
 
+    var category = "veg"
+    
+  private let cuisineArray = [Cuisine.NorthIndia,Cuisine.Rajasthani,Cuisine.Gujarathi,Cuisine.Chinese,Cuisine.SouthIndia,Cuisine.NorthEastIndia]
+    
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
@@ -34,39 +54,50 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return cuisineArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
-        //cell.menuImage.image = UIImage(named: images[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "serachCell", for:indexPath) as! CustomCollectionViewCell
+        
+        let trimmedString = cuisineArray[indexPath.row].rawValue.replacingOccurrences(of: " ", with: "")
+        print(trimmedString)
+
+        cell.menuImage.image = UIImage(named:trimmedString)
+        cell.nameLabel.text = cuisineArray[indexPath.row].rawValue
         
         return cell
         
     }
 
+//    
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        if kind == UICollectionElementKindSectionHeader {
+//            
+//            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchHeader", for: indexPath)
+//            
+//            
+//            return headerView
+//        }
+//        
+//        return UICollectionReusableView()
+//    }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
-            
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "searchHeader", for: indexPath)
-            
-            
-            return headerView
-        }
-        
-        return UICollectionReusableView()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return  CGSize(width: 100, height: 120)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return  CGSize(width: 100, height: 120)
+//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchFilterCtrl")
-        self.navigationController?.pushViewController(vc!, animated: true)
         
+        let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
+        vc.category = category
+        vc.cuisine = cuisineArray[indexPath.row].rawValue
+        vc.subCategory = ""
+        
+        self.navigationController?.present(vc, animated: true, completion: nil)
+
     }
     /*
     // MARK: - Navigation
@@ -77,16 +108,42 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func showFilterList(_ sender: Any) {
+    @IBAction func showFilterList(_ sender: UIButton) {
+        var subCategory =  SubCategory.Breakfast
+
+        switch sender.tag {
+        case 2:
+            subCategory =  SubCategory.Lunch
+        case 3:
+            subCategory =  SubCategory.Dinner
+            
+        default:
+            subCategory =  SubCategory.Desserts
+
+        }
+        
+        
         let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
         let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
-        vc.category = "veg"
-        vc.cuisine = "Rajsthani"
-        vc.subCategory = "Lunch"
+        vc.category = category
+        vc.cuisine = ""
+        vc.subCategory = subCategory.rawValue
         
         self.navigationController?.present(vc, animated: true, completion: nil)
         //pushViewController(vc, animated: true)
 
     }
 
+    @IBAction func vegBtnAction(_ sender: UIButton) {
+        if category == "veg" {
+            category = "Non-Veg"
+            sender.setImage(UIImage(named:"nonveg"), for: .normal)
+            
+        }
+        else {
+            sender.setImage(UIImage(named:"veg"), for: .normal)
+            category = "veg"
+        }
+        
+    }
 }

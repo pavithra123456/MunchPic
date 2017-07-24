@@ -95,14 +95,17 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     model.userName = postobject["userName"] as? String ?? ""
                     model.description1 = postobject["description1"] as? String ?? ""
                     model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
-                    model.loves = Int(postobject["loves"] as? String ?? "0")!
+                    if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
+                        model.loves = loveCount
+                    }
+                    
                     model.comments = Int(postobject["comments"] as? String ?? "0")!
                     model.userId = Int(postobject["userId"] as! String )!
                     model.noOfCollection = Int(postobject["collections"] as? String ?? "0")!
-                    if let diff = postobject["difficulty"] {
-                        model.efforts = diff as! String
-                    }
+                    model.comments = Int(postobject["comments"] as? String ?? "0")!
 
+                    model.efforts = postobject["difficulty"] as? String ?? ""
+                    
                     self.postArray.append(model)
                 }
             }
@@ -275,13 +278,19 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             cell.efforts  = postArray[indexPath.row].efforts
             cell.emojiImage.tag = indexPath.row
             cell.commentBtn.tag = indexPath.row
-            URLSession.shared.dataTask(with: URL(string:postArray[indexPath.row].ImagePath1)!) { (data1, response, error) in
-                DispatchQueue.main.async(execute: {
-                    if let imageData = data1 {
-                        cell.foodrecipeImage.image = UIImage(data: imageData)
-                    }
-                })
-                }.resume()
+            
+            let mainImgUrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(postArray[indexPath.row].userId)/\(postArray[indexPath.row].postId)_post1.jpg"
+
+            
+                URLSession.shared.dataTask(with: URL(string:mainImgUrl)!) { (data1, response, error) in
+                    DispatchQueue.main.async(execute: {
+                        if let imageData = data1 {
+                            cell.foodrecipeImage.image = UIImage(data: imageData)
+                        }
+                    })
+                    }.resume()
+            
+            
             
             let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(postArray[indexPath.row].userId)/user.jpg"
             URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in

@@ -44,14 +44,30 @@ class ServiceLayer: NSObject {
         }
     }
     
-    class func getCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
+    class func getCollections(parameter:String,completion:@escaping ([ProfilkeLovesModel]?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetCollections, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-                }
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetCollections, postbody: parameter) { (response, status, msg) in
+            if status {
+                let response1 = response as! [[String:AnyObject]]
+                    var collectionArray = [ProfilkeLovesModel]()
+                    
+                    for obj in response1 {
+                        let lovemOdel = ProfilkeLovesModel()
+                        lovemOdel.dishName = obj["dishName"] as! String
+                        lovemOdel.dateSaved = obj["dateSaved"] as! String
+                        lovemOdel.postId = obj["collectionPostId"] as! String
+                        lovemOdel.postedUserId =  obj["postedUserId"] as! String
+                        
+                        lovemOdel.imageName = ""
+                        collectionArray.append(lovemOdel )
+                    }
+                    completion(collectionArray , true, "Success")
+                
+            }
+
         }
     }
+    
     class func GetIngredients(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetIngredients, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -152,7 +168,7 @@ class ServiceLayer: NSObject {
                             let lovemOdel = ProfilkeLovesModel()
                             lovemOdel.dishName = obj["dishName"] as! String
                             lovemOdel.dateSaved = obj["dateSaved"] as! String
-                            lovemOdel.lovesPostId = obj["lovesPostId"] as! String
+                            lovemOdel.postId = obj["lovesPostId"] as! String
                             lovemOdel.postedUserId =  obj["postedUserId"] as! String
                             
                             lovemOdel.imageName = ""

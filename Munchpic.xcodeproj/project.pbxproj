@@ -42,6 +42,8 @@
 		7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */; };
 		7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF91F0F8AEC00404220 /* PostCell.swift */; };
 		7B95BAFC1F0FCBC300404220 /* SearchFilterListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */; };
+		7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */; };
+		7BB9F0941F26592B004E78AA /* UserCollectionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */; };
 		7BD1D3011EDB3E3F003CE82F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1D3001EDB3E3F003CE82F /* Constants.swift */; };
 		7BE1C8E41EFE269E001570BD /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E31EFE269E001570BD /* PostModel.swift */; };
 		7BE1C8E61EFE8267001570BD /* TrendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E51EFE8267001570BD /* TrendsModel.swift */; };
@@ -138,6 +140,8 @@
 		7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostsController.swift; sourceTree = "<group>"; };
 		7B95BAF91F0F8AEC00404220 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCell.swift; path = CustomTableViewCells/PostCell.swift; sourceTree = "<group>"; };
 		7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterListController.swift; sourceTree = "<group>"; };
+		7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFileterCell.swift; path = CustomTableViewCells/SearchFileterCell.swift; sourceTree = "<group>"; };
+		7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionListController.swift; sourceTree = "<group>"; };
 		7BD1D3001EDB3E3F003CE82F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7BE1C8E31EFE269E001570BD /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		7BE1C8E51EFE8267001570BD /* TrendsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendsModel.swift; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 				7B94B4951F0BF71900B05AA4 /* RadioButton.swift */,
 				87AC68FC1F188EF0008F2CA9 /* NewPostViewController.swift */,
 				7B3715081F1E410700D4A406 /* AddIngredinentsController.swift */,
+				7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 			children = (
 				7B95BAEC1F0CE1CC00404220 /* CommentCell.swift */,
 				7B95BAF91F0F8AEC00404220 /* PostCell.swift */,
+				7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */,
 			);
 			name = CustomTableViewCells;
 			sourceTree = "<group>";
@@ -482,9 +488,8 @@
 				TargetAttributes = {
 					7B35764D1ED9AA8500FF610A = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = JGYRRAGU35;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					7B3576611ED9AA8500FF610A = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -729,10 +734,12 @@
 				7BD1D3011EDB3E3F003CE82F /* Constants.swift in Sources */,
 				7B1147B21F0253E500CA48D6 /* LovesTableViewCell.swift in Sources */,
 				7B95BAF21F0E7B2100404220 /* ProfileDetailViewController.swift in Sources */,
+				7BB9F0941F26592B004E78AA /* UserCollectionListController.swift in Sources */,
 				7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */,
 				7B24DF931EFFC08F00AD85EA /* SearchHeaderView.swift in Sources */,
 				7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */,
 				C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */,
+				7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */,
 				7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */,
 				7B3576541ED9AA8500FF610A /* ViewController.swift in Sources */,
 				7B1147B41F0258A400CA48D6 /* ProfilkeLovesModel.swift in Sources */,
@@ -908,7 +915,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JGYRRAGU35;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Munchpic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -929,15 +936,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JGYRRAGU35;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = QSLY5SF2LD;
 				INFOPLIST_FILE = Munchpic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3306d846-3bba-4cd2-81e7-25be12ed0eae";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.lineology.app";
 				SWIFT_OBJC_BRIDGING_HEADER = "Munchpic/Munchpic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
