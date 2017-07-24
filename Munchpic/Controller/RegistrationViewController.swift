@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import Alamofire
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UIScrollViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate {
-
+    
     @IBOutlet var first_name: UITextField!
     @IBOutlet var last_name: UITextField!
     @IBOutlet var aboutyou: UITextField!
@@ -35,14 +35,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     var countrystr = NSString()
     var pickerView:UIView = UIView()
     var datePicker:UIDatePicker = UIDatePicker()
-
+    
     
     var genderstring = NSString()
     var checkmarkbool = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         mscrollview.delegate = self
         countriestable.isHidden = true
@@ -52,12 +52,16 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         countriesarray = ["India","UK","USA","China","Africa","France"]
         statesarray = ["Select State","Andhra pradesh","Karnataka","Goa","Thamil Nadu","Kerala","UP"]
         
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false
+        mscrollview .addGestureRecognizer(tapGesture)
+        
     }
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: 1500)
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: 1700)
     }
     
     
@@ -81,7 +85,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if(textField == country){
+        if(textField == aboutyou){
+            
+            aboutyou.resignFirstResponder()
+            DOB.becomeFirstResponder()
+        }
+            
+        else if(textField == country){
             
             state.becomeFirstResponder()
             
@@ -97,10 +107,10 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         return true
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-
+        
         if(textField == country){
             
             countrystr = "country"
@@ -108,9 +118,8 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             countriestable.reloadData()
             country.resignFirstResponder()
             countriestable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: countriestable.frame.width, height: countriestable.frame.height)
-
+            
             countriestable.isHidden = false
-
             
         }else if( textField == state){
             
@@ -119,16 +128,16 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             countriestable.reloadData()
             state.resignFirstResponder()
             countriestable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: countriestable.frame.width, height: countriestable.frame.height)
-
+            
             countriestable.isHidden = false
-
+            
             
         }else if( textField == DOB){
             
-            DOB.resignFirstResponder()
+            textField.resignFirstResponder()
             self.selectdobpicker()
             countriestable.isHidden = true
-
+            
             
         }else{
             
@@ -137,7 +146,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         
     }
-
+    
     // MARK: - Takepic action
     
     @IBAction func selectpic_action(_ sender: Any) {
@@ -211,7 +220,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     // MARK: - imagepicker delegate
     
-     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
@@ -240,7 +249,15 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             remembermebtn.setImage(UIImage(named: "uncheckbox@3.png"), for: UIControlState.normal)
             checkmarkbool = false
         }
-
+        
+    }
+    
+    func isValidEmail(testStr:String) -> Bool {
+        print("validate emilId: \(testStr)")
+        let emailRegEx = "^(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?(?:(?:(?:[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+(?:\\.[-A-Za-z0-9!#$%&’*+/=?^_'{|}~]+)*)|(?:\"(?:(?:(?:(?: )*(?:(?:[!#-Z^-~]|\\[|\\])|(?:\\\\(?:\\t|[ -~]))))+(?: )*)|(?: )+)\"))(?:@)(?:(?:(?:[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)(?:\\.[A-Za-z0-9](?:[-A-Za-z0-9]{0,61}[A-Za-z0-9])?)*)|(?:\\[(?:(?:(?:(?:(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))\\.){3}(?:[0-9]|(?:[1-9][0-9])|(?:1[0-9][0-9])|(?:2[0-4][0-9])|(?:25[0-5]))))|(?:(?:(?: )*[!-Z^-~])*(?: )*)|(?:[Vv][0-9A-Fa-f]+\\.[-A-Za-z0-9._~!$&'()*+,;=:]+))\\])))(?:(?:(?:(?: )*(?:(?:(?:\\t| )*\\r\\n)?(?:\\t| )+))+(?: )*)|(?: )+)?$"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        let result = emailTest.evaluate(with: testStr)
+        return result
     }
     
     @IBAction func termsandconditions(_ sender: Any) {
@@ -253,13 +270,40 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     @IBAction func submit_action(_ sender: Any) {
         
-        if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0 && reenterpassword.text?.characters.count == 0 && contact_number.text?.characters.count == 0 ){
+        if(first_name.text?.characters.count == 0||last_name.text?.characters.count == 0||aboutyou.text?.characters.count == 0||DOB.text?.characters.count == 0||city.text?.characters.count == 0||contact_number.text?.characters.count == 0||emailid.text?.characters.count == 0||password.text?.characters.count == 0||reenterpassword.text?.characters.count == 0){
+            
+            Utility.showAlert(title: "Alert!", message: "please fill all the feilds", controller: self,completion:nil)
+            return
+            
+        }else if((password.text?.characters.count)! < 6){
+            
+            Utility.showAlert(title: "Alert", message: "Password should be minimum 6 characters", controller: self,completion:nil)
+            return
+        }
+            
+        else if(password.text != reenterpassword.text){
+            
+            Utility.showAlert(title: "Alert", message: "Password and reenterpassword should be same", controller: self,completion:nil)
+            return
             
             
-        }else if(password.text != reenterpassword.text){
+        }else if(checkmarkbool == false){
             
-                  }
-        else{
+            Utility.showAlert(title: "Alert", message: "Please accept the terms and conditions", controller: self,completion:nil)
+            return
+            
+            
+        }else{
+            
+            if isValidEmail(testStr: self.emailid.text!){
+                
+                print("Validate EmailID")
+                
+            }else{
+                
+                Utility.showAlert(title: "Alert", message: "Please enter a valide EmailID", controller: self,completion:nil)
+                
+            }
             
             // login
             
@@ -268,22 +312,20 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 var  string =  ""
                 
                 
-//                let parameter  = ["name":(first_name.text! + " " + last_name.text!),
-//                                  "dob":DOB.text!,
-//                                  "gender":genderstring,
-//                                  "country":country.text!,
-//                                  "state":state.text!,
-//                                  "city":city.text!,
-//                                  "email":emailid.text!,
-//                                  "password":password.text!,
-//                                  "mobile":contact_number.text!,
-//                                  "about":aboutyou.text!
-//                ] as [String : Any]
+                //                let parameter  = ["name":(first_name.text! + " " + last_name.text!),
+                //                                  "dob":DOB.text!,
+                //                                  "gender":genderstring,
+                //                                  "country":country.text!,
+                //                                  "state":state.text!,
+                //                                  "city":city.text!,
+                //                                  "email":emailid.text!,
+                //                                  "password":password.text!,
+                //                                  "mobile":contact_number.text!,
+                //                                  "about":aboutyou.text!
+                //                ] as [String : Any]
                 
-               let email =  self.emailid.text  ??  ""
-                
-               let password = self.password.text ?? ""
-                
+                let email =  self.emailid.text  ??  ""
+                let password = self.password.text ?? ""
                 let firstName = self.first_name.text ?? ""
                 let lastName = self.last_name.text ?? ""
                 let dob  = self.DOB.text ?? ""
@@ -293,95 +335,92 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 let mobile =  self.contact_number.text ?? ""
                 let about = self.aboutyou.text ?? ""
                 
-
-                
-                
                 
                 
                 //let email =  emailid.text != nil ? emailid.text : ""
                 
                 
-                     string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)" +
+                string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)" +
                 "image\(String(describing: UIImagePNGRepresentation(profilepic.image!)))"
-                    
+                
                 var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KRegister)!)
                 url.httpMethod = "POST"
                 //url.httpBody = string.data(using: String.Encoding.utf8)
                 
                 
                 
-                               Alamofire.upload(multipartFormData: { (multipartFormData) in
-
-                                multipartFormData.append(UIImagePNGRepresentation(self.profilepic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
-                                multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
-                                multipartFormData.append((password.data(using: String.Encoding.utf8)!), withName: "password")
-                                multipartFormData.append(((firstName + " " + lastName).data(using: String.Encoding.utf8)!), withName: "name")
-                                multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
-                                multipartFormData.append((country.data(using: String.Encoding.utf8)!), withName: "country")
-                                multipartFormData.append((state.data(using: String.Encoding.utf8)!), withName: "state")
-                                multipartFormData.append((city.data(using: String.Encoding.utf8)!), withName: "city")
-                                multipartFormData.append((mobile.data(using: String.Encoding.utf8)!), withName: "mobile")
-                                multipartFormData.append((about.data(using: String.Encoding.utf8)!), withName: "about")
-
-                               }, with: url, encodingCompletion: { (encodingResult) in
-                                 switch encodingResult {
-                                 case .success(let upload, _, _):
-                                    upload.responseString(completionHandler: { (responseString) in
-                                        print(responseString.description)
-                                        if responseString.description == "Registered Successfully!, Please check your mail for activation!"{
-                                            DispatchQueue.main.async {
-                                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                                            }
-                                        }
-
-                                        DispatchQueue.main.async {
-                                            Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
-                                        }
-                                    })
-                                 case .failure(let encodingError):
-                                    print(encodingError)
+                Alamofire.upload(multipartFormData: { (multipartFormData) in
+                    
+                    multipartFormData.append(UIImagePNGRepresentation(self.profilepic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+                    multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
+                    multipartFormData.append((password.data(using: String.Encoding.utf8)!), withName: "password")
+                    multipartFormData.append(((firstName + " " + lastName).data(using: String.Encoding.utf8)!), withName: "name")
+                    multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
+                    multipartFormData.append((country.data(using: String.Encoding.utf8)!), withName: "country")
+                    multipartFormData.append((state.data(using: String.Encoding.utf8)!), withName: "state")
+                    multipartFormData.append((city.data(using: String.Encoding.utf8)!), withName: "city")
+                    multipartFormData.append((mobile.data(using: String.Encoding.utf8)!), withName: "mobile")
+                    multipartFormData.append((about.data(using: String.Encoding.utf8)!), withName: "about")
+                    
+                }, with: url, encodingCompletion: { (encodingResult) in
+                    switch encodingResult {
+                    case .success(let upload, _, _):
+                        upload.responseString(completionHandler: { (responseString) in
+                            print(responseString.description)
+                            if responseString.description == "Registered Successfully!, Please check your mail for activation!"{
+                                DispatchQueue.main.async {
+                                    self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
                                 }
-                                
-                               });
-//
-                
-                
- 
-
-            
-              /*  LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
-                    if status == true {
-                        let responseArray = response as![ [String:AnyObject]]
-                        let responsedict = responseArray[0]
-                        
-                        if let result = responsedict["userId"] {
-                            UserDefaults.standard.set(result, forKey: "userId")
-                            
-                            User.sharedUserInstance.usertId = Int(result as! String)!
-                            
-                        }
-                        
-                        
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                        }
-                    }
-                    else {
-                        if msg == "Registered Successfully!, Please check your mail for activation!"{
-                            DispatchQueue.main.async {
-                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
                             }
-                        }
-                        
-                        DispatchQueue.main.async {
                             
-                            Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
-                        }
+                            DispatchQueue.main.async {
+                                Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
+                            }
+                        })
+                    case .failure(let encodingError):
+                        print(encodingError)
                     }
-
-                })*/
- 
-                           }
+                    
+                });
+                //
+                
+                
+                
+                
+                
+                /*  LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
+                 if status == true {
+                 let responseArray = response as![ [String:AnyObject]]
+                 let responsedict = responseArray[0]
+                 
+                 if let result = responsedict["userId"] {
+                 UserDefaults.standard.set(result, forKey: "userId")
+                 
+                 User.sharedUserInstance.usertId = Int(result as! String)!
+                 
+                 }
+                 
+                 
+                 DispatchQueue.main.async {
+                 self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                 }
+                 }
+                 else {
+                 if msg == "Registered Successfully!, Please check your mail for activation!"{
+                 DispatchQueue.main.async {
+                 self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                 }
+                 }
+                 
+                 DispatchQueue.main.async {
+                 
+                 Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
+                 }
+                 }
+                 
+                 })*/
+                
+            }
             else{
                 
                 let alert = UIAlertController(title: "Alert!", message: "Please check your internet connection", preferredStyle: UIAlertControllerStyle.alert)
@@ -389,7 +428,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 self.present(alert, animated: true, completion: nil)
             }
         }
-
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -430,14 +469,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         if(countrystr == "country"){
             
             country.text = self.countriesarray[indexPath.row] as? String
-           // countryview.isHidden = true
+            // countryview.isHidden = true
             country.resignFirstResponder()
             state.becomeFirstResponder()
             
         }else if( countrystr == "state"){
             
             state.text = self.statesarray[indexPath.row] as? String
-           // countryview.isHidden = true
+            // countryview.isHidden = true
             state.resignFirstResponder()
             city.becomeFirstResponder()
         }
@@ -445,13 +484,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         
     }
-
+    
     
     // selecteing dateofbirth
     
     func selectdobpicker(){
         
-        
+        mscrollview.isScrollEnabled = false
         pickerView.removeFromSuperview()
         
         
@@ -460,12 +499,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             // Ipad
             if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation))
             {
-               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
                 datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
                 pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
                 
             }else{
-               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
                 datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
                 pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
                 
@@ -478,11 +517,11 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             if(UIDeviceOrientationIsLandscape(UIDevice.current
                 .orientation))
             {
-              //  mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                //  mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
                 datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 200)
                 pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 200, width: self.view.frame.size.width, height: 200)
             }else{
-               // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
                 datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 180)
                 pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-220, width: self.view.frame.size.width, height: 200)
                 
@@ -494,7 +533,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         datePicker.datePickerMode = UIDatePickerMode.date
         datePicker.backgroundColor = UIColor.white
         datePicker.date = NSDate() as Date
-      
+        
         //datePicker.tag = (sender as AnyObject).tag
         
         let toolbar = UIToolbar()
@@ -506,12 +545,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         let cancelbtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(RegistrationViewController.cancelbutton(sender:)))
         cancelbtn.tintColor = UIColor.white
-       //cancelbtn.tag = (sender as AnyObject).tag
+        //cancelbtn.tag = (sender as AnyObject).tag
         
         let donebtn = UIBarButtonItem(title: "Done", style: .plain, target: self,action:#selector(RegistrationViewController.donebutton(sender:)))
         donebtn.tintColor = UIColor.white
-     
-       //donebtn.tag = (sender as AnyObject).tag
+        
+        //donebtn.tag = (sender as AnyObject).tag
         
         
         let toolbarButtonItems = [
@@ -532,11 +571,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     func cancelbutton(sender: UIBarButtonItem) {
         
         pickerView.removeFromSuperview()
+        mscrollview.isScrollEnabled = true
     }
     
     func donebutton(sender: UIBarButtonItem) {
         LabelTitle(sender: sender)
         pickerView.removeFromSuperview()
+        mscrollview.isScrollEnabled = true
     }
     
     
@@ -561,43 +602,57 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         if dateComparisionResult == ComparisonResult.orderedDescending
         {
             
-             Utility.showAlert(title: "Warning!", message: "Invalid Date,Please select a valid date.", controller: self,completion:nil)
-          
+            Utility.showAlert(title: "Warning!", message: "Invalid Date,Please select a valid date.", controller: self,completion:nil)
+            
             
         }
             
         else if dateComparisionResult == ComparisonResult.orderedAscending
         {
-           
+            
             DOB.text = value as String
         }
             
         else if dateComparisionResult == ComparisonResult.orderedSame
         {
-
+            
             
             DOB.text = value as String
         }
         
     }
     
-
+    func hideKeyboard(){
+        
+        first_name.resignFirstResponder()
+        last_name.resignFirstResponder()
+        aboutyou.resignFirstResponder()
+        DOB.resignFirstResponder()
+        country.resignFirstResponder()
+        state.resignFirstResponder()
+        city.resignFirstResponder()
+        contact_number.resignFirstResponder()
+        emailid.resignFirstResponder()
+        password.resignFirstResponder()
+        reenterpassword.resignFirstResponder()
+        
+    }
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

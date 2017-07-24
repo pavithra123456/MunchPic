@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 
 class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
-
+    
     @IBOutlet var pageimage: UIImageView!
     @IBOutlet var pagecontroller: UIPageControl!
     @IBOutlet var vegandnonvegbtn: UIButton!
@@ -57,7 +57,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         self.swipeGestureLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -67,14 +67,14 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         //mscrollview.addGestureRecognizer(self.swipeGestureLeft)
         //mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
-       // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
+        // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
         imagesarray = [UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost")]
-       collectionView.reloadData()
+        collectionView.reloadData()
         
-       // self.navigationItem.leftBarButtonItems = []
-//        self.navigationController?.navigationItem .leftBarButtonItems?.append(UIBarButtonItem(image:  UIImage(named: "btn_hamburger"), style: .plain, target: self, action: nil))
+        // self.navigationItem.leftBarButtonItems = []
+        //        self.navigationController?.navigationItem .leftBarButtonItems?.append(UIBarButtonItem(image:  UIImage(named: "btn_hamburger"), style: .plain, target: self, action: nil))
         
-       //self.navigationItem.leftBarButtonItem.
+        //self.navigationItem.leftBarButtonItem.
         scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: scrollView.contentSize.height+1350)
         
         
@@ -82,7 +82,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         cuisinearray = ["Select Cuisine","North Indian","Rajasthani","Chinese","South Indian","North_East Indian"]
         
         categorytable.isHidden = true
-}
+    }
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
@@ -141,7 +141,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)
+        let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)
         let imgView = cell.viewWithTag(1) as! UIImageView
         imgView.image = imagesarray[indexPath.row] as? UIImage
         return cell
@@ -248,11 +248,11 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         if mediaType.isEqual(kUTTypeImage as NSString) {
             let image = info[UIImagePickerControllerOriginalImage]as! UIImage
-           // profilepic.image = image
+            // profilepic.image = image
             
             pageimage.image = image
-          //  imagesarray.insert(image, at: indexval)
-             imagesarray.replaceObject(at: indexval, with: image)
+            //  imagesarray.insert(image, at: indexval)
+            imagesarray.replaceObject(at: indexval, with: image)
             print("imageinsert at \(imagesarray) at indexof \(indexval)")
             pagecontroller.currentPage = indexval
             self.collectionView.reloadData()
@@ -260,10 +260,14 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         }
         
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if(textField == selectCategory){
+        if(textField == titileTextField){
+            
+            selectCategory.becomeFirstResponder()
+            
+        }else if(textField == selectCategory){
             
             selectcuisine.becomeFirstResponder()
             
@@ -279,17 +283,17 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         return true
     }
-
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let pos = self.view.convert(textField.frame.origin, to: self.view)
         print(pos)
         
         if(textField == selectCategory){
             
+            titileTextField.resignFirstResponder()
             categorystr = "selectCategory"
             //countryview.isHidden = false
             categorytable.reloadData()
-            //selectCategory.resignFirstResponder()
             categorytable.frame = CGRect(x: (textField.superview?.frame.origin.x)!, y: (textField.superview?.frame.origin.y)!-10, width: categorytable.frame.width, height: categorytable.frame.height)
             
             categorytable.isHidden = false
@@ -313,7 +317,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         
     }
-
+    
     
     
     @IBAction func vegandnonvegbtn_Action(_ sender: Any) {
@@ -339,7 +343,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficulty = 1
         Utility.showAlert(title: "", message: "Veryeasy to prepare.", controller: self,completion:nil)
         
-   
+        
     }
     @IBAction func easybtn_Action(_ sender: Any) {
         
@@ -362,8 +366,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficulty = 3
-         Utility.showAlert(title: "", message: "Medium to prepare.", controller: self,completion:nil)
-     
+        Utility.showAlert(title: "", message: "Medium to prepare.", controller: self,completion:nil)
+        
         
     }
     
@@ -375,8 +379,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficulty = 4
-         Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
-      
+        Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
+        
     }
     
     @IBAction func verydifficult_Action(_ sender: Any) {
@@ -387,73 +391,113 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
         difficulty = 5
-         Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
-      
+        Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
+        
     }
     
     
     @IBAction func Back_Action(_ sender: Any) {
-     
+        
         self.dismiss(animated: true, completion: nil)
         
     }
     
     @IBAction func ingrediantsBtn_Avtiom(_ sender: Any) {
-        let dishName = titileTextField.text ?? ""
         
-        let description1 = self.step1.text ?? ""
-        let description2 = self.step2.text ?? ""
-        let description3 = setp3.text ?? ""
-        let description4 = self.step4.text ?? ""
-        let description5 = self.step5.text ?? ""
-        
-        let category = veglabel.text ?? ""
-        let subCategory = selectCategory.text ?? ""
-        let cuisine = selectcuisine.text ?? ""
-     
-
-
-        var string = ""
-        string = "userId=\(38)" + "dishName\(dishName )" +
+        if(titileTextField.text?.characters.count == 0){
+            
+            titileTextField.attributedPlaceholder = NSAttributedString(string: "Please add title",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            return
+            
+        }else if (step1.text?.characters.count == 0){
+            
+            step1.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            return
+            
+        }else if (step2.text?.characters.count == 0){
+            step2.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            return
+            
+        }else if (setp3.text?.characters.count == 0){
+            
+            setp3.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            
+            return
+        }else if (step4.text?.characters.count == 0){
+            
+            step4.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            
+            return
+            
+            
+        }else if (step5.text?.characters.count == 0){
+            
+            step5.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            
+            return
+            
+            
+        }
+        else if (timelabel.text?.characters.count == 0){
+            
+            timelabel.attributedPlaceholder = NSAttributedString(string: "Please add time",attributes: [NSForegroundColorAttributeName: UIColor.red])
+            
+            return
+            
+        }else{
+            
+            let dishName = titileTextField.text ?? ""
+            let description1 = self.step1.text ?? ""
+            let description2 = self.step2.text ?? ""
+            let description3 = setp3.text ?? ""
+            let description4 = self.step4.text ?? ""
+            let description5 = self.step5.text ?? ""
+            let category = veglabel.text ?? ""
+            let subCategory = selectCategory.text ?? ""
+            let cuisine = selectcuisine.text ?? ""
+            
+            var string = ""
+            string = "userId=\(38)" + "dishName\(dishName )" +
                 "description=\(description1)" +
                 "category=\(category)"
-                    + "subCategory=\(subCategory)" + "cuisine=\(cuisine)"
-        
-        let post = PostModel()
-        post.dishName = dishName
-        post.description1 = description1
-        post.description2 = description2
-        post.description3 = description3
-        post.description4 = description4
-        post.description5 = description5
-        
-        post.category = category
-        post.subCategory = subCategory
-        post.cuisine = cuisine
-        
-        post.post1 = imagesarray[0] as? UIImage
-        post.post2 = imagesarray[1] as? UIImage
-        post.post3 = imagesarray[2] as? UIImage
-        
-        post.difficulty = "\(difficulty)"
-        post.efforts = self.timelabel.text!
-        
-        self.performSegue(withIdentifier: "AddIngredients", sender: post)
-        
+                + "subCategory=\(subCategory)" + "cuisine=\(cuisine)"
+            
+            let post = PostModel()
+            post.dishName = dishName
+            post.description1 = description1
+            post.description2 = description2
+            post.description3 = description3
+            post.description4 = description4
+            post.description5 = description5
+            
+            post.category = category
+            post.subCategory = subCategory
+            post.cuisine = cuisine
+            
+            post.post1 = imagesarray[0] as? UIImage
+            post.post2 = imagesarray[1] as? UIImage
+            post.post3 = imagesarray[2] as? UIImage
+            
+            post.difficulty = "\(difficulty)"
+            post.efforts = self.timelabel.text!
+            
+            self.performSegue(withIdentifier: "AddIngredients", sender: post)
+            
+        }
         
     }
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -471,7 +515,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         if(categorystr == "selectCategory"){
             return catagoriesarray.count
         }else if(categorystr == "selectcuisine"){
@@ -500,7 +544,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-       
+        
         if(categorystr == "selectCategory"){
             
             selectCategory.text = self.catagoriesarray[indexPath.row] as? String
@@ -519,7 +563,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         
     }
-
+    
 }
 
 extension UIColor {
@@ -540,5 +584,12 @@ extension UIColor {
             green: CGFloat(g) / 0xff,
             blue: CGFloat(b) / 0xff, alpha: 1
         )
+    }
+}
+
+extension UITextField{
+    
+    func setPlaceHolderColor(){
+        self.attributedPlaceholder = NSAttributedString(string: self.placeholder!, attributes: [NSForegroundColorAttributeName : UIColor.white])
     }
 }
