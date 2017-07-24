@@ -382,10 +382,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                     }
                     
                 });
-                //
-                
-                
-                
+                                
                 
                 
                 /*  LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in

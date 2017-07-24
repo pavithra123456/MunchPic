@@ -71,6 +71,7 @@
 		87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */; };
 		87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */; };
 		87B1E6E41EDC504300A331C0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6E31EDC504300A331C0 /* Reachability.swift */; };
+		C14BB6641F2626CA00D4E448 /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14BB6631F2626CA00D4E448 /* GetPostDetailsViewController.swift */; };
 		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
 		DC27A2D94EC41819E2069395 /* Pods_MunchpicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */; };
 		DD6961A5045E66814DC7CF7C /* Pods_MunchpicUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */; };
@@ -171,6 +172,7 @@
 		8FB862E1B66F01BFBC6049AD /* Pods-MunchpicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.release.xcconfig"; sourceTree = "<group>"; };
 		912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA15765971EB4BD62F67CDF0 /* Pods-Munchpic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Munchpic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Munchpic/Pods-Munchpic.debug.xcconfig"; sourceTree = "<group>"; };
+		C14BB6631F2626CA00D4E448 /* GetPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPostDetailsViewController.swift; sourceTree = "<group>"; };
 		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		D97D6F6D3DC9587022628620 /* Pods-MunchpicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +292,7 @@
 				7B95BAF01F0CEE9D00404220 /* HomePage */,
 				7B3576921ED9AC0100FF610A /* DetailViewController.swift */,
 				7B95BAF11F0E7B2100404220 /* ProfileDetailViewController.swift */,
+				C14BB6631F2626CA00D4E448 /* GetPostDetailsViewController.swift */,
 				7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */,
 				7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */,
 				7B94B4951F0BF71900B05AA4 /* RadioButton.swift */,
@@ -744,6 +747,7 @@
 				7B3576521ED9AA8500FF610A /* AppDelegate.swift in Sources */,
 				87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */,
 				7BE1C8E61EFE8267001570BD /* TrendsModel.swift in Sources */,
+				C14BB6641F2626CA00D4E448 /* GetPostDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
