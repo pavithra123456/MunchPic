@@ -79,7 +79,11 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     */
     @IBAction func showFilterList(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl")
+        let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
+        vc.category = "veg"
+        vc.cuisine = "Rajsthani"
+        vc.subCategory = "Lunch"
+        
         self.navigationController?.present(vc, animated: true, completion: nil)
         //pushViewController(vc, animated: true)
 

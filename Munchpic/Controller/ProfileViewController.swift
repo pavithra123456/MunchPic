@@ -21,6 +21,9 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     @IBOutlet var headerView: UIView!
     var collectionArray = [[String:String]]()
     var lovesArray = [ProfilkeLovesModel]()
+    var userPostsArray = [PostModel]()
+    var collectionViewDataValue = "posts"
+
 
     @IBOutlet weak var tableviewheight: NSLayoutConstraint!
     @IBOutlet weak var collectionviewheight: NSLayoutConstraint!
@@ -59,6 +62,29 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         getLoves()
     }
     
+    func getUserPosts () {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            ServiceLayer.getUserPosts(relativeUrl: "userId=\(userId)") { (response, status, msg) in
+                for post in response! {
+                    let postobject = post
+                    let model = PostModel()
+                    model.postId = Int(postobject["postId"] as! String)!
+                    model.userName = postobject["userName"] as! String
+                    model.ImagePath1 = postobject["ImagePath1"] as! String
+                    model.dishName = postobject["dishName"] as! String
+                    
+                    self.userPostsArray.append(model)
+                }
+                DispatchQueue.main.async {
+                    self.tableview.reloadData()
+                    
+                }
+                
+            }
+        }
+
+    }
+    
     func getCollectioncategories() {
         ServiceLayer.getCollectionCategories { (data, status, msg) in
             self.collectionArray = data as! [[String : String]]
@@ -82,6 +108,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
+        collectionViewDataValue = "collection"
         collectionView.reloadData()
     }
     
@@ -124,6 +151,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
         let section = indexPath.section * 2
+        if collectionViewDataValue == "posts" {
+            
+        }
+        
         var obj = collectionArray[indexPath.row]
         if indexPath.row == 0 {
             obj = collectionArray[ section]
@@ -174,7 +205,18 @@ extension ProfileViewController:UITableViewDataSource {
            let loveCell =  cell as! LovesTableViewCell
             loveCell.postName.text = lovesArray[indexPath.row].dishName
             loveCell.creationDateLabel.text = lovesArray[indexPath.row].dateSaved
-            //loveCell.postImage.image = UIImage(named: lovesArray[indexPath.row].imageName)
+           
+            
+            
+            let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(lovesArray[indexPath.row].postedUserId)/\(lovesArray[indexPath.row].lovesPostId)_post1.jpg"
+            URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let data =  data1 {
+                        loveCell.postImage.image = UIImage(data: data)
+                        
+                    }
+                })
+                }.resume()
         }
         
         tableviewheight.constant = lovesTableView.contentSize.height

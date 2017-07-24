@@ -91,6 +91,23 @@ class ServiceLayer: NSObject {
         
     }
     
+    class func filter(param:String,completion:@escaping ([[String:AnyObject]]?,Bool,String)->Void){
+        
+        
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.KFilter, postbody: param) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]]  , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
+                
+            }
+        }
+    }
+    
+    
+    
     class func getCornivals(completion:@escaping (AnyObject?,Bool,String)->Void){
         
         Alamofire.request(Constants.kBaseUrl + Constants.kGetCornivals, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
@@ -122,23 +139,27 @@ class ServiceLayer: NSObject {
     
     
     class func getLoves(completion:@escaping ([ProfilkeLovesModel]?,Bool,String)->Void) {
-        let parameter = ["userId":38]
-        Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-                let response1 =  response.result.value as! [String:AnyObject]
-                if let array = response1["result"] as? Array<AnyObject> {
-                    var collectionArray = [ProfilkeLovesModel]()
-                    
-                    for obj in array {
-                        let lovemOdel = ProfilkeLovesModel()
-                        lovemOdel.dishName = obj["dishName"] as! String
-                        lovemOdel.dateSaved = obj["dateSaved"] as! String
-
-                        lovemOdel.imageName = ""
-                        collectionArray.append(lovemOdel )
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let parameter = ["userId":userId]
+            Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+                
+                if response.result.isSuccess {
+                    let response1 =  response.result.value as! [String:AnyObject]
+                    if let array = response1["result"] as? Array<AnyObject> {
+                        var collectionArray = [ProfilkeLovesModel]()
+                        
+                        for obj in array {
+                            let lovemOdel = ProfilkeLovesModel()
+                            lovemOdel.dishName = obj["dishName"] as! String
+                            lovemOdel.dateSaved = obj["dateSaved"] as! String
+                            lovemOdel.lovesPostId = obj["lovesPostId"] as! String
+                            lovemOdel.postedUserId =  obj["postedUserId"] as! String
+                            
+                            lovemOdel.imageName = ""
+                            collectionArray.append(lovemOdel )
+                        }
+                        completion(collectionArray, true, "Success")
                     }
-                    completion(collectionArray, true, "Success")
                 }
             }
         }

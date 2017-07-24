@@ -68,7 +68,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         //mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
        // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
-        imagesarray = [UIImage(named: "iconcamera"),UIImage(named: "iconcamera"),UIImage(named: "iconcamera")]
+        imagesarray = [UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost")]
        collectionView.reloadData()
         
        // self.navigationItem.leftBarButtonItems = []

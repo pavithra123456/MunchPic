@@ -318,7 +318,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         let view =  cell?.viewWithTag(3)!
         
         
-        view?.layer.borderColor = UIColor.red.cgColor
+        view?.layer.borderColor = UIColor.gray.cgColor
         view?.layer.borderWidth = 1
         let label =  view?.viewWithTag(10) as! UILabel
 

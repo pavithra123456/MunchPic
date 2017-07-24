@@ -10,9 +10,14 @@ import UIKit
 
 class SearchFilterListController: UIViewController ,UITableViewDataSource{
 
+    var cuisine = ""
+    var category = ""
+    var subCategory = ""
+    var searchBar = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        filter()
         // Do any additional setup after loading the view.
     }
 
@@ -31,6 +36,23 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource{
     
     @IBAction func backAction(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
+    }
+    
+    func filter() {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&searchBar=\(searchBar)" +
+            "&category=\(category)"
+                +
+                "&subCategory=\(subCategory)" +
+            "&cuisine=\(cuisine)"
+            
+            ServiceLayer.filter(param: param, completion: { (reponse, status, msg) in
+                print(msg,reponse)
+                
+            })
+        }
+        
     }
     /*
     // MARK: - Navigation
