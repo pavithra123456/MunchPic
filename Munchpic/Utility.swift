@@ -77,9 +77,7 @@ class BorderedView : UIView {
             self.layer.borderWidth = 1
             self.layer.cornerRadius = 5
             self.layer.masksToBounds = true
-            
-            //            let position = self.position(from: self.beginningOfDocument, offset: 3)!
-            //            self.selectedTextRange = self.textRange(from: position, to: position)
+
         }
     }
     @IBInspectable var borderWidth: CGFloat = 0 {
@@ -91,9 +89,7 @@ class BorderedView : UIView {
     @IBInspectable var cornerRadius: CGFloat = 6 {
         didSet {
             self.layer.cornerRadius = cornerRadius
-            
-            //            let position = self.position(from: self.beginningOfDocument, offset: 3)!
-            //            self.selectedTextRange = self.textRange(from: position, to: position)
+
         }
     }
     
@@ -103,13 +99,38 @@ class BorderedView : UIView {
             self.layer.cornerRadius = cornerRadius
             self.layer.masksToBounds = true
             
-            //            let position = self.position(from: self.beginningOfDocument, offset: 3)!
-            //            self.selectedTextRange = self.textRange(from: position, to: position)
+        }
+    }
+    
+}
+
+class RoundedImage:UIImageView {
+    
+    @IBInspectable var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
+        }
+    }
+    
+    @IBInspectable var cornerRadius: CGFloat = 6 {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+            
+        }
+    }
+    
+    @IBInspectable var roundedBorder: Bool = true {
+        didSet {
+            self.layer.borderWidth = 1
+            self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = true
+            
         }
     }
 
     
 }
+
 
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {

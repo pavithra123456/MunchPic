@@ -39,6 +39,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBOutlet weak var commentsContainerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var smiliesView: BorderedView!
     
     @IBOutlet weak var commentsTextviewContainer: UIView!
     
@@ -157,7 +158,30 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
     }
 
-    //MARK: - Radio Button Actions
+    @IBAction func addLoves(_ sender: UIButton) {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(postId)" +
+            "&loveId=\(sender.tag)"
+            
+            ServiceLayer.insertLoves(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status && (msg == "Loved" || msg == "Expression updated") {
+                    DispatchQueue.main.async(execute: {
+                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
+                        self.smiliesView .isHidden = true
+                    })
+                    
+                }
+            }
+        }
+    }
+    
+    @IBAction func showSmiles(_ sender: Any) {
+        smiliesView.isHidden = !smiliesView.isHidden
+    }
+    
+    //MARK: -  Radio Button Actions
     
     @IBAction func radioBtnAction(_ sender: UIButton) {
         for btn in  self.radioButtonArray {
@@ -173,6 +197,42 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
     }
 
+    @IBAction func AddCollection(_ sender: Any) {
+        var categoryName = ""
+
+        for btn in  self.radioButtonArray {
+            if btn.isSelected {
+                categoryName = (btn.categoryLabel?.text)!
+            }
+        }
+        
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(postId)" +
+            "&toCategory=\(categoryName )"
+            
+            ServiceLayer.insertCollections(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status == false && (msg == "Added to your collections list"  || msg == "Updated your collections list!"){
+                    DispatchQueue.main.async(execute: {
+                        self.collectionListView.isHidden = true
+                        Utility.showAlert(title: "Muchpic", message:msg, controller: self,completion:nil)
+                    })
+                }
+            }
+        }
+    
+    }
+    
+    @IBAction func cancelCollection(_ sender: Any) {
+        for btn in  self.radioButtonArray {
+             btn.isSelected = false
+                        }
+
+        self.collectionListView.isHidden = true
+    }
+    
+    
     //MARK:- Scrollview deleagte 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
@@ -265,12 +325,13 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let detail = postDetails {
             if isShowingDescription {
                 let key = "description\(indexPath.row+1)"
-                label.text = detail[key] as? String
+                label.text = "step\(indexPath.row+1):" + ( detail[key] as? String)!
 
             }
             else {
                 let key = "ingradients\(indexPath.row+1)"
-                label.text = detail[key] as? String
+                label.text = "\(indexPath.row+1)." + ( detail[key] as? String)!
+
             }
         }
         return cell!
@@ -302,7 +363,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         self.timeToCookLabel.text = postDetails?["effort"] as? String
         self.caloriesLabel.text = postDetails?["calories"] as? String
         noOfCollectionLabel.text = postDetails?["collections"] as? String
-        noOfCommentsLabel.text = postDetails?["comments"] as? String
+       // noOfCommentsLabel.text = postDetails?["comments"] as? String
         if let name = postDetails?["dishName"] {
             headingLabel.text = "How to prepare \(name))"
 

@@ -183,29 +183,59 @@ class ServiceLayer: NSObject {
         }
         
     
-    class func insertLoves(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
+    class func insertLoves(parameter:String,completion:@escaping (AnyObject?,Bool,String)->Void){
         
-        Alamofire.request(Constants.kBaseUrl + Constants.kInsertLoves, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kInsertLoves, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else if msg == "Loved" || msg == "Expression updated" {
+                completion(nil , true, msg)
+            }
+            else {
+                completion(nil , false, msg)
+
+            }
+        }
+        
+    }
+    
+    class func insertCollections(parameter:String,completion:@escaping (AnyObject?,Bool,String)->Void){
+        
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kInsertCollections, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+            }
+            else {
+                completion(nil , false, msg)
             }
         }
     }
-    class func insertCollections(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kInsertCollections, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+    
+   class  func insertComments(parameter:String,completion:@escaping (AnyObject?,Bool,String)->Void){
+    
+//        Alamofire.request(Constants.kBaseUrl + Constants.kInsertComments, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//            }
+//        }
+    
+    ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kInsertComments, postbody: parameter) { (response, status, msg) in
+        if status == true {
+            completion(response as? [[String : AnyObject]] as AnyObject , true, "Success")
+        }
+        else if msg == "Commented"{
+            completion(nil , true, msg)
             
-            if response.result.isSuccess {
-            }
+        }
+        else {
+            completion(nil , true, msg)
+
         }
     }
-   class  func insertComments(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(Constants.kBaseUrl + Constants.kInsertComments, method: .get, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-            }
-        }
+
+    
+    
     }
   
     class func deleteCollection(parameter:[String:AnyObject]?,completion:(AnyObject?,Bool,String)->Void){

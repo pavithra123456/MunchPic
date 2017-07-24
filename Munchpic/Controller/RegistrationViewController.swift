@@ -28,7 +28,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet var profilepic: UIImageView!
     @IBOutlet var remembermebtn: UIButton!
     
-    @IBOutlet weak var countryview: UIView!
     @IBOutlet weak var countriestable: UITableView!
     @IBOutlet weak var viewconstraint: NSLayoutConstraint!
     var countriesarray = NSMutableArray()
@@ -46,13 +45,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
 
         
         mscrollview.delegate = self
+        countriestable.isHidden = true
         
         // add default country arrays
         
         countriesarray = ["India","UK","USA","China","Africa","France"]
         statesarray = ["Select State","Andhra pradesh","Karnataka","Goa","Thamil Nadu","Kerala","UP"]
         
-        //countryview.isHidden = true
 
     }
     
@@ -100,8 +99,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let pos = self.view.convert(textField.frame.origin, to: self.view)
-        print(pos)
+        
 
         if(textField == country){
             
@@ -249,6 +247,10 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func submit_action(_ sender: Any) {
         
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0 && reenterpassword.text?.characters.count == 0 && contact_number.text?.characters.count == 0 ){
@@ -302,29 +304,40 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                      string = "email=\(email)" + "&password=\(password)"  + "&name\(firstName + " " + lastName)" + "&dob=\(dob)" + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&mobile=\(mobile)"  + "&about=\(about)" +
                 "image\(String(describing: UIImagePNGRepresentation(profilepic.image!)))"
                     
-               /* var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KRegister)!)
+                var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KRegister)!)
                 url.httpMethod = "POST"
-                url.httpBody = string.data(using: String.Encoding.utf8)
+                //url.httpBody = string.data(using: String.Encoding.utf8)
                 
                 
                 
                                Alamofire.upload(multipartFormData: { (multipartFormData) in
 
                                 multipartFormData.append(UIImagePNGRepresentation(self.profilepic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+                                multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
+                                multipartFormData.append((password.data(using: String.Encoding.utf8)!), withName: "password")
+                                multipartFormData.append(((firstName + " " + lastName).data(using: String.Encoding.utf8)!), withName: "name")
+                                multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
+                                multipartFormData.append((country.data(using: String.Encoding.utf8)!), withName: "country")
+                                multipartFormData.append((state.data(using: String.Encoding.utf8)!), withName: "state")
+                                multipartFormData.append((city.data(using: String.Encoding.utf8)!), withName: "city")
+                                multipartFormData.append((mobile.data(using: String.Encoding.utf8)!), withName: "mobile")
+                                multipartFormData.append((about.data(using: String.Encoding.utf8)!), withName: "about")
 
                                }, with: url, encodingCompletion: { (encodingResult) in
                                  switch encodingResult {
                                  case .success(let upload, _, _):
                                     upload.responseString(completionHandler: { (responseString) in
                                         print(responseString.description)
+                                        if responseString.description == "Registered Successfully!, Please check your mail for activation!"{
+                                            DispatchQueue.main.async {
+                                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                                            }
+                                        }
+
                                         DispatchQueue.main.async {
-                                            
                                             Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
                                         }
-                                    })//                                 case .success(let upload, _, _):
-//                                    upload.responseJSON { response in
-//                                        debugPrint(response)
-//                                    }
+                                    })
                                  case .failure(let encodingError):
                                     print(encodingError)
                                 }
@@ -333,10 +346,10 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
 //
                 
                 
-                */
+ 
 
             
-                LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
+              /*  LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
                     if status == true {
                         let responseArray = response as![ [String:AnyObject]]
                         let responsedict = responseArray[0]
@@ -366,7 +379,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                         }
                     }
 
-                })
+                })*/
  
                            }
             else{

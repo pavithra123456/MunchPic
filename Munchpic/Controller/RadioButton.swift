@@ -12,6 +12,7 @@ import UIKit
 class RadioButton: UIButton {
     fileprivate var circleLayer = CAShapeLayer()
     fileprivate var fillCircleLayer = CAShapeLayer()
+   @IBOutlet weak var categoryLabel: UILabel?
     override var isSelected: Bool {
         didSet {
             toggleButon()

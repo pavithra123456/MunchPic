@@ -65,7 +65,10 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
             multipartFormData.append(UIImageJPEGRepresentation((self.postModel?.post2!)!, 1)!, withName: "post2", fileName: "_post2.jpg", mimeType: "image/jpeg")
             multipartFormData.append(UIImageJPEGRepresentation((self.postModel?.post3!)!, 1)!, withName: "post3", fileName: "_post3.jpg", mimeType: "image/jpeg")
 
-            multipartFormData.append("\(38)".data(using: String.Encoding.utf8)!, withName: "userId")
+            if let userId =  UserDefaults.standard.value(forKey: "userId") {
+                multipartFormData.append("\(userId)".data(using: String.Encoding.utf8)!, withName: "userId")
+            }
+
             multipartFormData.append((self.postModel?.dishName.data(using: String.Encoding.utf8)!)!, withName: "dishName")
             
             multipartFormData.append((self.postModel?.description1.data(using: String.Encoding.utf8)!)!, withName: "description1")

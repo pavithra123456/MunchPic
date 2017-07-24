@@ -159,61 +159,96 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                 
             case .success(let response):
                 var email =  response.dictionaryValue?["email"]  as! String
-                email = "pavithra.amc12@gmail.com"
+//                email = "pavithra.amc12frfhjbbbhfr@gmail.com"
                 MBProgressHUD.showAdded(to: self.view, animated: true)
-
-                
-                LoginServiceLayer.register(relativeUrl: "email=\(email)", completion: { (response, status, msg) in
-                   
-                    DispatchQueue.main.async {
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                    }
-
-                    if status == true {
-                        let responseArray = response as![ [String:AnyObject]]
-                        let responsedict = responseArray[0]
-                        
-                        if let result = responsedict["userId"] {
-                            UserDefaults.standard.set(result, forKey: "userId")
-                            
-                            User.sharedUserInstance.usertId = Int(result as! String)!
-                            
-                        }
-                        
-                        
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                        }
-                    }
-                    else {
-                        if msg == "Registered Successfully!, Please check your mail for activation!"{
-                            DispatchQueue.main.async {
-                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                            }
-                        }
-                        
-                        if msg == "This Mail ID already exists!!"{
-                            DispatchQueue.main.async {
-                                self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                            }
-                        }
-                        
-                        DispatchQueue.main.async {
-                            
-                            Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
-                        }
-                    }
-                })
-                
-                //                print(response.dictionaryValue)
-                //self.registerUser(userDict: response.dictionaryValue!,platform:"facebook")
+                self.socialLogin(email: email)
                 break
             }
             
         }
     }
     
-   
+   func socialLogin(email:String)
+   {
+    ServiceLayer.login(relativeUrl:"email=\(email)" + "&password=bySocialNW", completion: { (response, status, message) in
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+        if status {
+            let responseArray = response as![ [String:AnyObject]]
+            let responsedict = responseArray[0]
+            
+            if let result = responsedict["userId"] {
+                UserDefaults.standard.set(result, forKey: "userId")
+                
+                User.sharedUserInstance.usertId = Int(result as! String)!
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                }
+                
+            }
+            
+            
+            
+            
+        }
+        else  {
+            if message == "Failure, Please ensure your email verification" {
+                self.socialRegisterUser(email: email)
+            }
+            //                        DispatchQueue.main.async {
+            //
+            //                            Utility.showAlert(title: "Error", message: message, controller: self,completion:nil)
+            //                        }
+        }
+    })
+    }
+    
+    func socialRegisterUser (email:String) {
+        LoginServiceLayer.register(relativeUrl: "email=\(email)", completion: { (response, status, msg) in
+            
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
+            
+            if status == true {
+                let responseArray = response as![ [String:AnyObject]]
+                let responsedict = responseArray[0]
+                
+                if let result = responsedict["userId"] {
+                    UserDefaults.standard.set(result, forKey: "userId")
+                    
+                    User.sharedUserInstance.usertId = Int(result as! String)!
+                    
+                }
+                
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                }
+            }
+            else {
+                if msg == "Registered Successfully!, Please check your mail for activation!"{
+                    DispatchQueue.main.async {
+                        self.socialLogin(email: email)
+                        //self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                    }
+                }
+                
+                if msg == "This Mail ID already exists!!"{
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    //Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
+                }
+            }
+        })
+    }
+    
     @IBAction  func googleBtnTapped(_ sender: Any) {
         configureGoogleSignInUI()
         configureGoogleSignIn()

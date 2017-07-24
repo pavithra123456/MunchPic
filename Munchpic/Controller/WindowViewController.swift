@@ -137,9 +137,11 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
         let dict = cornibvalsArray[indexPath.row]
         
         URLSession.shared.dataTask(with: URL(string:dict["imageName"]!)!) { (data1, response, error) in
-            DispatchQueue.main.async(execute: {
+            if data1 != nil {
+       DispatchQueue.main.async(execute: {
+                
                 cell.menuImage.image = UIImage(data: data1!)
-            })
+       }) }
             }.resume()
         cell.nameLabel.text = dict["labelName"]
         cell.layoutIfNeeded()

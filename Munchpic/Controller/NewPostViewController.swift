@@ -48,6 +48,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     @IBOutlet weak var categoryview: UIView!
     @IBOutlet weak var categorytable: UITableView!
+    var difficulty = 3
     
     var catagoriesarray = NSMutableArray()
     var cuisinearray = NSMutableArray()
@@ -67,7 +68,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         //mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
        // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
-        imagesarray = [UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost")]
+        imagesarray = [UIImage(named: "iconcamera"),UIImage(named: "iconcamera"),UIImage(named: "iconcamera")]
        collectionView.reloadData()
         
        // self.navigationItem.leftBarButtonItems = []
@@ -288,8 +289,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             categorystr = "selectCategory"
             //countryview.isHidden = false
             categorytable.reloadData()
-            selectCategory.resignFirstResponder()
-            categorytable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: categorytable.frame.width, height: categorytable.frame.height)
+            //selectCategory.resignFirstResponder()
+            categorytable.frame = CGRect(x: (textField.superview?.frame.origin.x)!, y: (textField.superview?.frame.origin.y)!-10, width: categorytable.frame.width, height: categorytable.frame.height)
             
             categorytable.isHidden = false
             
@@ -299,8 +300,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             categorystr = "selectcuisine"
             //countryview.isHidden = false
             categorytable.reloadData()
-            selectcuisine.resignFirstResponder()
-            categorytable.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y-10, width: categorytable.frame.width, height: categorytable.frame.height)
+            //selectcuisine.resignFirstResponder()
+            categorytable.frame = CGRect(x: (textField.superview?.frame.origin.x)!, y: (textField.superview?.frame.origin.y)!-10, width: categorytable.frame.width, height: categorytable.frame.height)
             
             categorytable.isHidden = false
             
@@ -335,7 +336,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
-        
+        difficulty = 1
         Utility.showAlert(title: "", message: "Veryeasy to prepare.", controller: self,completion:nil)
         
    
@@ -348,6 +349,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         
+        difficulty = 2
         Utility.showAlert(title: "", message: "Easy to prepare.", controller: self,completion:nil)
         
     }
@@ -359,6 +361,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        difficulty = 3
          Utility.showAlert(title: "", message: "Medium to prepare.", controller: self,completion:nil)
      
         
@@ -371,6 +374,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        difficulty = 4
          Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
       
     }
@@ -382,6 +386,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
+        difficulty = 5
          Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
       
     }
@@ -430,7 +435,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         post.post2 = imagesarray[1] as? UIImage
         post.post3 = imagesarray[2] as? UIImage
         
-        post.difficulty = "\(3)"
+        post.difficulty = "\(difficulty)"
         post.efforts = self.timelabel.text!
         
         self.performSegue(withIdentifier: "AddIngredients", sender: post)

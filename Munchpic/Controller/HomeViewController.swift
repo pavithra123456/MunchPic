@@ -9,7 +9,7 @@
 import UIKit
 import  MBProgressHUD
 
-class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource {
+class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     
     
     @IBOutlet weak var commentsContainerHeight: NSLayoutConstraint!
@@ -22,6 +22,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     @IBOutlet weak var commentsTableView: UITableView!
     
+    @IBOutlet weak var commentsTextView: UITextView!
+    @IBOutlet weak var commentsViewCahtImage: UIImageView!
     @IBOutlet weak var emojisView: UIView!
     @IBOutlet var Pagingimage: UIImageView!
     @IBOutlet var pagecontroller: UIPageControl!
@@ -86,24 +88,23 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
 
             let response1 = response as! [String:AnyObject]
             if let array = response1["result"] as? Array<Any> {
-               /* for post in array {
+                for post in array {
                     let postobject = post  as! [String:AnyObject]
                     let model = PostModel()
-                    model.postId = Int(postobject["postId"] as! String)!
-                    model.userName = postobject["userName"] as! String
-                    model.description1 = postobject["description1"] as! String
-                    model.ImagePath1 = postobject["ImagePath1"] as! String
-                    model.loves = Int(postobject["loves"] as! String)!
-                    model.comments = Int(postobject["comments"] as! String)!
-                    model.userId = Int(postobject["userId"] as! String)!
-                    model.noOfCollection = Int(postobject["collections"] as! String)!
+                    model.postId = Int(postobject["postId"] as? String ?? "0")!
+                    model.userName = postobject["userName"] as? String ?? ""
+                    model.description1 = postobject["description1"] as? String ?? ""
+                    model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
+                    model.loves = Int(postobject["loves"] as? String ?? "0")!
+                    model.comments = Int(postobject["comments"] as? String ?? "0")!
+                    model.userId = Int(postobject["userId"] as! String )!
+                    model.noOfCollection = Int(postobject["collections"] as? String ?? "0")!
                     if let diff = postobject["difficulty"] {
                         model.efforts = diff as! String
-
                     }
 
                     self.postArray.append(model)
-                }*/
+                }
             }
             self.Hometableview.reloadData()
         }
@@ -173,18 +174,16 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     }
     
    
+    
     //MARK: - Pagecontroller
     @IBAction func Pagecontroller_Action(_ sender: Any) {
         
         let servicesList1: (AnyObject) = (slidearrayData[(pagecontroller.currentPage)] as AnyObject)
         Pagingimage.image = UIImage(named: servicesList1 as! String)
         mPosition = pagecontroller.currentPage
-        
-        
-        
     }
     
-    //Left gesture
+       //Left gesture
     func handleSwipeLeft(gesture: UISwipeGestureRecognizer){
         
         if pagecontroller.currentPage < slidearrayData.count-1 {
@@ -270,7 +269,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             
             cell.userName.text = postArray[indexPath.row].userName
             cell.description1.text = postArray[indexPath.row].description1
-            //cell.loves.text = "\(postArray[indexPath.row].loves)"
+            cell.loves.text = "\(postArray[indexPath.row].loves)"
             //cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
             cell.useId = postArray[indexPath.row].userId
             cell.efforts  = postArray[indexPath.row].efforts
@@ -323,10 +322,26 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     //MARK: - Custom cell Actions
     
-    @IBAction func addComments(_ sender: Any) {
-        
+    @IBAction func addComment(_ sender: Any) {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(selectedPostId)" +
+                "&comments=\(self.commentsTextView.text ?? "")"
+
+            ServiceLayer.insertComments(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status && msg == "Commented" {
+                    DispatchQueue.main.async(execute: {
+                        self.commentsView.isHidden = false
+                        Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
+
+                    })
+
+                }
+            }
+        }
     }
-   
+
     
     @IBAction func shareButtonAction(_ sender: Any) {
         let activityViewController = UIActivityViewController(activityItems: ["" as NSString], applicationActivities: nil)
@@ -335,17 +350,36 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
 
     @IBAction func emojisBtnAction(_ sender: Any) {
         selectedEmojiIndex = (sender as! UIButton).tag
-        
+        selectedPostId = postArray[selectedEmojiIndex].postId
         
         let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
-cell.smilesView .isHidden = !cell.smilesView.isHidden
+        cell.smilesView .isHidden = !cell.smilesView.isHidden
         
-//        self.emojisView.isHidden = false
-//        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-//            self.emojiViewHeight.constant = self.view.frame.height/2 + 20
-//            self.view.layoutIfNeeded()
-//        })
     }
+    
+    @IBAction func addloves(_ sender: UIButton) {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(selectedPostId)" +
+            "&loveId=\(sender.tag)"
+            
+            ServiceLayer.insertLoves(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status && (msg == "Loved" || msg == "Expression updated") {
+                    DispatchQueue.main.async(execute: {
+                        self.commentsView.isHidden = false
+                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
+                        let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
+                        cell.smilesView .isHidden = !cell.smilesView.isHidden
+                        
+                    })
+                    
+                }
+            }
+        }
+    }
+    
+
     
     @IBAction func updateEmoi(_ sender: Any) {
         let index = (sender as! UIButton).tag
@@ -366,9 +400,15 @@ cell.smilesView .isHidden = !cell.smilesView.isHidden
     @IBAction func commentButtonAction(_ sender: Any) {
         self.tapguesture?.isEnabled = true
         let index = (sender as! UIButton).tag
-        let postid = postArray[index].postId
-        ServiceLayer.GetComments(forPostId:postid) { (response, status, mess) in
-        
+        selectedPostId = postArray[index].postId
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        ServiceLayer.GetComments(forPostId:selectedPostId) { (response, status, mess) in
+            
+            DispatchQueue.main.async(execute: {
+
+                MBProgressHUD.hide(for: self.view, animated: true)
+            })
+
             if let resCommentsArray = response {
                 self.commentsArray = resCommentsArray
                
@@ -391,6 +431,36 @@ cell.smilesView .isHidden = !cell.smilesView.isHidden
             })
         }
     }
+    //MARK: - Textview Delegates
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView.text == "" {
+            textView.text = "Add Comment"
+            textView.textColor = UIColor.lightGray
+            commentsViewCahtImage.image = UIImage(named: "commentnew")
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        commentsViewCahtImage.image = UIImage(named: "iconright")
+        textView.text = ""
+    }
+
+      func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+      {
+        if textView.text == "Add Comment" && text != ""{
+            textView.text = ""
+            textView.textColor = UIColor.black
+            commentsViewCahtImage.image = UIImage(named: "iconright")
+
+
+        }
+        if textView.text == "Add Comment" && text == ""{
+           return  false
+        }
+        return  true
+    }
+    
     //MARK: - Other
 
     @IBAction func cameraAction(_ sender: Any) {
