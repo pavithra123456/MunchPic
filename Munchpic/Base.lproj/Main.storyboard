@@ -4440,13 +4440,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dUo-Fi-YnZ">
-                                        <rect key="frame" x="8" y="787" width="382" height="35"/>
+                                        <rect key="frame" x="8" y="782" width="382" height="30"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hLW-rJ-jIT">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIo-IW-3AG">
-                                                        <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="35"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="30"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <state key="normal">
                                                             <color key="titleColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4456,28 +4456,28 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS6-Rw-cR0">
-                                                        <rect key="frame" x="76.666666666666657" y="0.0" width="74.999999999999972" height="35"/>
+                                                        <rect key="frame" x="76.666666666666657" y="0.0" width="74.999999999999972" height="30"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="easybtn_Action:" destination="S5z-kJ-qqU" eventType="touchUpInside" id="BiL-7f-AXM"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXw-d0-0rP">
-                                                        <rect key="frame" x="153.66666666666666" y="0.0" width="74.666666666666686" height="35"/>
+                                                        <rect key="frame" x="153.66666666666666" y="0.0" width="74.666666666666686" height="30"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="mediumbtn_Action:" destination="S5z-kJ-qqU" eventType="touchUpInside" id="rgR-MD-4Fs"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDQ-yX-b2L">
-                                                        <rect key="frame" x="230.33333333333331" y="0.0" width="74.999999999999943" height="35"/>
+                                                        <rect key="frame" x="230.33333333333331" y="0.0" width="74.999999999999943" height="30"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="difficultbtn_Action:" destination="S5z-kJ-qqU" eventType="touchUpInside" id="Msm-vI-Zsp"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tvM-Jo-H1i">
-                                                        <rect key="frame" x="307.33333333333326" y="0.0" width="74.666666666666686" height="35"/>
+                                                        <rect key="frame" x="307.33333333333326" y="0.0" width="74.666666666666686" height="30"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <action selector="verydifficult_Action:" destination="S5z-kJ-qqU" eventType="touchUpInside" id="Ki3-13-d8g"/>
@@ -4489,14 +4489,14 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="hLW-rJ-jIT" firstAttribute="leading" secondItem="dUo-Fi-YnZ" secondAttribute="leading" id="0Vl-eR-BHc"/>
-                                            <constraint firstAttribute="height" constant="35" id="7q3-wN-Anb"/>
+                                            <constraint firstAttribute="height" constant="30" id="7q3-wN-Anb"/>
                                             <constraint firstItem="hLW-rJ-jIT" firstAttribute="top" secondItem="dUo-Fi-YnZ" secondAttribute="top" id="CJd-y6-ohk"/>
                                             <constraint firstAttribute="trailing" secondItem="hLW-rJ-jIT" secondAttribute="trailing" id="XNo-HO-2yk"/>
                                             <constraint firstAttribute="bottom" secondItem="hLW-rJ-jIT" secondAttribute="bottom" id="j6O-fG-olA"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZH-fd-16o">
-                                        <rect key="frame" x="124" y="830" width="150" height="42"/>
+                                        <rect key="frame" x="124" y="820" width="150" height="42"/>
                                         <color key="backgroundColor" red="0.86254024505615234" green="0.29566085338592529" blue="0.25888103246688843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="ccM-fN-mjC"/>
@@ -4805,7 +4805,7 @@
                                     <constraint firstItem="moz-qT-gOl" firstAttribute="top" secondItem="4UK-YK-NSl" secondAttribute="bottom" constant="16" id="At3-iK-AQp"/>
                                     <constraint firstItem="MPN-ml-Gk4" firstAttribute="leading" secondItem="WFK-Ia-N8a" secondAttribute="leading" id="D4z-n0-XdZ"/>
                                     <constraint firstItem="4UK-YK-NSl" firstAttribute="top" secondItem="Lge-Ot-1un" secondAttribute="bottom" constant="-2" id="DHs-se-wAj"/>
-                                    <constraint firstItem="dUo-Fi-YnZ" firstAttribute="top" secondItem="4Nc-U0-BxP" secondAttribute="bottom" constant="15" id="Dfa-BI-P51"/>
+                                    <constraint firstItem="dUo-Fi-YnZ" firstAttribute="top" secondItem="4Nc-U0-BxP" secondAttribute="bottom" constant="10" id="Dfa-BI-P51"/>
                                     <constraint firstItem="d42-63-s5l" firstAttribute="top" secondItem="4UK-YK-NSl" secondAttribute="bottom" constant="16" id="EOi-E2-7Om"/>
                                     <constraint firstItem="Wsq-1N-yn8" firstAttribute="top" secondItem="WFK-Ia-N8a" secondAttribute="top" constant="30" id="FSQ-Pk-PsP"/>
                                     <constraint firstItem="LZH-fd-16o" firstAttribute="top" secondItem="dUo-Fi-YnZ" secondAttribute="bottom" constant="8" id="H4n-59-gEO"/>
