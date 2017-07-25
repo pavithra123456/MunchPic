@@ -155,30 +155,75 @@ class ServiceLayer: NSObject {
     
     
     class func getLoves(completion:@escaping ([ProfilkeLovesModel]?,Bool,String)->Void) {
-        if let userId =  UserDefaults.standard.value(forKey: "userId") {
-            let parameter = ["userId":userId]
-            Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-                
-                if response.result.isSuccess {
-                    let response1 =  response.result.value as! [String:AnyObject]
-                    if let array = response1["result"] as? Array<AnyObject> {
-                        var collectionArray = [ProfilkeLovesModel]()
-                        
-                        for obj in array {
-                            let lovemOdel = ProfilkeLovesModel()
-                            lovemOdel.dishName = obj["dishName"] as! String
-                            lovemOdel.dateSaved = obj["dateSaved"] as! String
-                            lovemOdel.postId = obj["lovesPostId"] as! String
-                            lovemOdel.postedUserId =  obj["postedUserId"] as! String
-                            
-                            lovemOdel.imageName = ""
-                            collectionArray.append(lovemOdel )
-                        }
-                        completion(collectionArray, true, "Success")
-                    }
+//        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+//            let parameter = ["userId":38]
+//            Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//                
+//                if response.result.isSuccess {
+//                    let response1 =  response.result.value as! [String:AnyObject]
+//                    if let array = response1["result"] as? Array<AnyObject> {
+//                        var collectionArray = [ProfilkeLovesModel]()
+//                        
+//                        for obj in array {
+//                            let lovemOdel = ProfilkeLovesModel()
+//                            lovemOdel.dishName = obj["dishName"] as! String
+//                            lovemOdel.dateSaved = obj["dateSaved"] as! String
+//                            lovemOdel.postId = obj["lovesPostId"] as! String
+//                            lovemOdel.postedUserId =  obj["postedUserId"] as! String
+//                            
+//                            lovemOdel.imageName = ""
+//                            collectionArray.append(lovemOdel )
+//                        }
+//                        completion(collectionArray, true, "Success")
+//                    }
+//                }
+//            }
+//        }
+        
+        let parameter = "userId=38"
+        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetLoves, postbody: parameter) { (response, status, msg) in
+            if status == true {
+                var collectionArray = [ProfilkeLovesModel]()
+                let responseArray = response as! Array<AnyObject>
+                for obj in responseArray {
+                    let lovemOdel = ProfilkeLovesModel()
+                    lovemOdel.dishName = obj["dishName"] as! String
+                    lovemOdel.dateSaved = obj["dateSaved"] as! String
+                    lovemOdel.postId = obj["lovesPostId"] as! String
+                    lovemOdel.postedUserId =  obj["postedUserId"] as! String
+
+                    
+                    lovemOdel.imageName = ""
+                    collectionArray.append(lovemOdel)
                 }
+                completion(collectionArray, true, "Success")
+            }
+            else {
+                
             }
         }
+        
+//        Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+//            
+//            if response.result.isSuccess {
+//                let response1 =  response.result.value as! [String:AnyObject]
+//                if let array = response1["result"] as? Array<AnyObject> {
+//                    var collectionArray = [ProfilkeLovesModel]()
+//                    
+//                    for obj in array {
+//                        let lovemOdel = ProfilkeLovesModel()
+//                        lovemOdel.dishName = obj["dishName"] as! String
+//                        lovemOdel.dateSaved = obj["dateSaved"] as! String
+//                        
+//                        lovemOdel.imageName = ""
+//                        collectionArray.append(lovemOdel)
+//                    }
+//                                            completion(collectionArray, true, "Success")
+//
+//                }
+//            
+//            }
+//        }
     }
        
     class func getTrends(completion:@escaping (AnyObject?,Bool,String)->Void){
