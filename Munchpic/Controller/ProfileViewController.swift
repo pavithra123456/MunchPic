@@ -258,8 +258,13 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
+//       let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
+//        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
+//        self.navigationController?.pushViewController(detailVc, animated: true)
+        
+        let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
         detailVc.postId = Int(lovesArray[indexPath.row].postId)!
+        print("needed array is = \(lovesArray[indexPath.row])")
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
 }
