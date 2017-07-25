@@ -376,11 +376,9 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 print(msg)
                 if status && (msg == "Loved" || msg == "Expression updated") {
                     DispatchQueue.main.async(execute: {
-                        self.commentsView.isHidden = false
                         Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
                         let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
                         cell.smilesView .isHidden = !cell.smilesView.isHidden
-                        
                     })
                     
                 }
