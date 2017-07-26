@@ -64,12 +64,21 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        lovesTableView.reloadData()
+        collectionView.reloadData()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         self.getCollectioncategories()
         getLoves()
         getUserPosts()
     }
+    
+    
+    
     
     func getUserPosts () {
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
@@ -262,10 +271,10 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
 //        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
 //        self.navigationController?.pushViewController(detailVc, animated: true)
         
-        let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
-        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
+        let postVc =  self.storyboard?.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
+        postVc.postId = Int(lovesArray[indexPath.row].postId)!
         print("needed array is = \(lovesArray[indexPath.row])")
-        self.navigationController?.pushViewController(detailVc, animated: true)
+        self.navigationController?.pushViewController(postVc, animated: true)
     }
 }
 

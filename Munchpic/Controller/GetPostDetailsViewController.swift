@@ -33,6 +33,8 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     @IBOutlet weak var comments: UILabel!
     @IBOutlet weak var effoert: UILabel!
     @IBOutlet weak var itemname: UILabel!
+    @IBOutlet weak var tableheightconstraint: NSLayoutConstraint!
+    
     
      var isShowingDescription = true
      var emojiesviewbool = Bool()
@@ -40,6 +42,9 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     var commentsArray = [[String:AnyObject]] ()
     var postId = Int()
     var postDetails :[String:AnyObject]?
+    var ingrediantordicrstr = NSString()
+    
+    var ingrediantsarray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +57,10 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         tapGesture.cancelsTouchesInView = false
         commentsview .addGestureRecognizer(tapGesture)
         
+        post_text.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        post_text.layer.cornerRadius = 5
+        post_text.layer.borderWidth = 0.5
+        post_text.clipsToBounds = true
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         ServiceLayer.getPostDetails(forPostId: postId) { (responseArray , status, msg) in
@@ -63,13 +72,22 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
             if status == true && (responseArray?.count)! > 0 {
                 self.postDetails = responseArray?[0]
                 DispatchQueue.main.async(execute: {
-//                    self.ingrediantstable.reloadData()
+                
+                self.loadingrediantsTabledata()
+                self.disc_view.isHidden =  true
+                self.ingrediantstable.isHidden = false
+                self.ingrediantstable.estimatedRowHeight = 80;
+                self.ingrediantstable.rowHeight = UITableViewAutomaticDimension;
+                self.ingrediantstable.reloadData()
                    self.UpdateUI()
+                    
                 })
             }
             
         }
 
+        
+        
         
     }
     
@@ -146,7 +164,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
                 self.commentsview.isHidden = false
                 if self.commentsArray.count == 0 {
                    
-                                   }
+                            }
                 else {
                     
                     
@@ -201,16 +219,20 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     
     @IBAction func Ingrediants_action(_ sender: Any) {
         
-        selected_label.text = "Ingrediants needed"
         disc_view.isHidden =  true
         ingrediantstable.isHidden = false
+        ingrediantordicrstr = "Ingrediantsneeded"
+        self.loadingrediantsTabledata()
+        self.ingrediantstable.reloadData()
         
     }
     @IBAction func discription_action(_ sender: Any) {
         
-        selected_label.text = "Discription"
-         ingrediantstable.isHidden = true
-        disc_view.isHidden = false
+        ingrediantordicrstr = "Discription"
+        disc_view.isHidden =  true
+        ingrediantstable.isHidden = false
+        self.loadingrediantsTabledata()
+        self.ingrediantstable.reloadData()
        
     }
     
@@ -220,20 +242,20 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         return 1
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-    }
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
         if(tableView == commentsTable){
             return self.commentsArray.count
         }
-        if isShowingDescription == false {
-         return getRowCountForIngredients(coloumnKey:"ingradients")
+        if(tableView == ingrediantstable){
+            
+           return self.ingrediantsarray.count
+            
         }
-        return getRowCountForIngredients(coloumnKey:"description")
-        
+
+        return 0
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -265,57 +287,42 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         }
         
         
-        let cell = ingrediantstable.dequeueReusableCell(withIdentifier: "cell")
-        let view =  cell?.viewWithTag(3)!
-        view?.layer.borderColor = UIColor.gray.cgColor
-        view?.layer.borderWidth = 1
-        let label =  view?.viewWithTag(10) as! UILabel
-        
-        if let detail = postDetails {
-            if isShowingDescription {
-                let key = "description\(indexPath.row+1)"
-                label.text = "step\(indexPath.row+1):" + ( detail[key] as? String)!
-                
-            }
-            else {
-                let key = "ingradients\(indexPath.row+1)"
-                label.text = "\(indexPath.row+1)." + ( detail[key] as? String)!
-                
-            }
+        var cell:UITableViewCell? = ingrediantstable.dequeueReusableCell(withIdentifier: "cell")
+        if(cell == nil)
+        {
+            cell = UITableViewCell(style:UITableViewCellStyle.default, reuseIdentifier: "cell")
+            cell?.selectionStyle = UITableViewCellSelectionStyle.none
         }
-        return cell!
+        cell?.textLabel?.font = UIFont.systemFont(ofSize: 15.0)
+        cell?.textLabel?.sizeToFit()
+        cell?.textLabel?.text = "\(indexPath.row+1)." + (ingrediantsarray[indexPath.row] as? String)!
+        cell?.textLabel?.numberOfLines = 0
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.black.cgColor
+        tableheightconstraint.constant = ingrediantstable.contentSize.height
+        ingrediantstable.frame.size.height = ingrediantstable.contentSize.height
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height:1024)
+        return cell!;
 
-       
        
     }
-
     
-    func getRowCountForIngredients(coloumnKey:String)->Int {
-        
-        var lenghth = 0
-        for i in 1...16 {
-            let key = "\(coloumnKey)\(i)"
-            if let value =  postDetails?[key]  as? String{
-                if value == "" {
-                    continue
-                }
-                lenghth = i
-            }
-        }
-        
-        return lenghth
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
+    
+
     
     //MARK: - Update UI
     func UpdateUI() {
         self.user_name.text = postDetails?["userName"] as? String
         self.itemname.text = postDetails?["dishName"] as? String
-        
+        self.effoert.text = postDetails?["difficulty"] as? String
         self.smiles.text = postDetails?["loves"] as? String
         self.timetaken.text = postDetails?["effort"] as? String
         self.calories.text = postDetails?["calories"] as? String
-        comments.text = postDetails?["collections"] as? String
-        // noOfCommentsLabel.text = postDetails?["comments"] as? String
+        comments.text = postDetails?["comments"] as? String
+    
         if let name = postDetails?["dishName"] {
             selected_label.text = "How to prepare \(name))"
             
@@ -347,6 +354,47 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         
     }
 
+    func loadingrediantsTabledata(){
+        
+        if(ingrediantordicrstr == "Ingrediantsneeded"){
+            ingrediantsarray.removeAllObjects()
+        var arraylength = 0
+        for i in 1...16 {
+            
+            let idno = "ingradients\(i)"
+            let ingrediantstr = postDetails?["\(idno)"] as? String
+            if ingrediantstr == "" || ingrediantstr == nil {
+                
+            }else{
+                
+            ingrediantsarray.insert(ingrediantstr , at: arraylength)
+                arraylength = arraylength + 1
+        
+            }
+        }
+
+        }else if(ingrediantordicrstr == "Discription"){
+            
+            ingrediantsarray.removeAllObjects()
+            var arraylength = 0
+            
+            for i in 1...16 {
+                
+                let dno = "description\(i)"
+                let discstr = postDetails?["\(dno)"] as? String
+                if discstr == "null" || discstr == nil || discstr == ""{
+                    
+                }else{
+                    
+                    ingrediantsarray.insert(discstr , at: arraylength)
+                    arraylength = arraylength + 1
+                    
+                }
+            }
+
+            
+        }
+    }
     
 
     override func didReceiveMemoryWarning() {
