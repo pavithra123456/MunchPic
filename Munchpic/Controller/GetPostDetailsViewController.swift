@@ -9,7 +9,7 @@
 import UIKit
 import  MBProgressHUD
 
-class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate {
     
     @IBOutlet weak var user_image: UIImageView!
     @IBOutlet weak var user_name: UILabel!
@@ -17,7 +17,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     @IBOutlet weak var emojis_view: UIView!
    
     @IBOutlet weak var disc_label: UILabel!
-    @IBOutlet weak var disc_view: UIView!
+  
     @IBOutlet weak var ingrediantstable: UITableView!
     @IBOutlet weak var selected_label: UILabel!
     @IBOutlet weak var commentsview: UIView!
@@ -35,6 +35,8 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     @IBOutlet weak var itemname: UILabel!
     @IBOutlet weak var tableheightconstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var effortview: UIView!
+    @IBOutlet weak var effortlevelimage: UIImageView!
     
      var isShowingDescription = true
      var emojiesviewbool = Bool()
@@ -51,16 +53,20 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
 
         emojis_view.isHidden = true
         commentsview.isHidden = true
+        effortview.isHidden = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GetPostDetailsViewController.closeview))
         self.view.addGestureRecognizer(tapGesture)
         tapGesture.cancelsTouchesInView = false
         commentsview .addGestureRecognizer(tapGesture)
         
+        
         post_text.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         post_text.layer.cornerRadius = 5
         post_text.layer.borderWidth = 0.5
         post_text.clipsToBounds = true
+        
+        ingrediantstable.isScrollEnabled = false
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         ServiceLayer.getPostDetails(forPostId: postId) { (responseArray , status, msg) in
@@ -71,23 +77,21 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
             
             if status == true && (responseArray?.count)! > 0 {
                 self.postDetails = responseArray?[0]
-                DispatchQueue.main.async(execute: {
                 
-                self.loadingrediantsTabledata()
-                self.disc_view.isHidden =  true
-                self.ingrediantstable.isHidden = false
-                self.ingrediantstable.estimatedRowHeight = 80;
-                self.ingrediantstable.rowHeight = UITableViewAutomaticDimension;
-                self.ingrediantstable.reloadData()
-                   self.UpdateUI()
+                DispatchQueue.main.async(execute: {
+                    self.UpdateUI()
+                    self.ingrediantstable.estimatedRowHeight = 80;
+                    self.ingrediantstable.rowHeight = UITableViewAutomaticDimension;
+                    self.ingrediantordicrstr = "Ingrediantsneeded"
+                    self.loadingrediantsTabledata()
+                    self.ingrediantstable.reloadData()
+
                     
                 })
             }
             
         }
 
-        
-        
         
     }
     
@@ -98,9 +102,15 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         
     }
     
+    func closeeffortview(){
+        
+        effortview.isHidden = true
+    }
+    
     override func viewDidLayoutSubviews() {
+        
         mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height:1024)
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height:mscrollview.contentSize.height)
     }
     
     @IBAction func smiles_Action(_ sender: Any) {
@@ -194,6 +204,30 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     }
     @IBAction func preparetation_type(_ sender: Any) {
         
+        effortview.isHidden = false
+        
+        let effertlevellabl = postDetails?["difficulty"] as? String
+        
+        if (effertlevellabl == "1"){
+            effortlevelimage.image = UIImage(named:"prepare")
+        }else if(effertlevellabl == "2"){
+            effortlevelimage.image = UIImage(named:"prepare")
+        }else if(effertlevellabl == "3"){
+            effortlevelimage.image = UIImage(named:"prepare")
+        }else if(effertlevellabl == "4"){
+            effortlevelimage.image = UIImage(named:"prepare")
+        }else{
+            effortlevelimage.image = UIImage(named:"prepare")
+        }
+        
+        
+        let tapGesture1 = UITapGestureRecognizer(target: self, action: #selector(GetPostDetailsViewController.closeeffortview))
+        self.view.addGestureRecognizer(tapGesture1)
+        tapGesture1.cancelsTouchesInView = false
+        effortview .addGestureRecognizer(tapGesture1)
+        
+       
+        
     }
     
     //Emojise Button actions
@@ -219,24 +253,21 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     
     @IBAction func Ingrediants_action(_ sender: Any) {
         
-        disc_view.isHidden =  true
-        ingrediantstable.isHidden = false
         ingrediantordicrstr = "Ingrediantsneeded"
         self.loadingrediantsTabledata()
         self.ingrediantstable.reloadData()
         
     }
+    
     @IBAction func discription_action(_ sender: Any) {
         
         ingrediantordicrstr = "Discription"
-        disc_view.isHidden =  true
-        ingrediantstable.isHidden = false
         self.loadingrediantsTabledata()
         self.ingrediantstable.reloadData()
        
     }
     
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
@@ -301,7 +332,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         cell?.layer.borderColor = UIColor.black.cgColor
         tableheightconstraint.constant = ingrediantstable.contentSize.height
         ingrediantstable.frame.size.height = ingrediantstable.contentSize.height
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height:1024)
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height:mscrollview.frame.size.width+ingrediantstable.contentSize.height+200)
         return cell!;
 
        
@@ -395,6 +426,15 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
             
         }
     }
+    
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        
+        postbtn.setImage(UIImage(named :"postarrow"), for: UIControlState.normal)
+        
+    }
+    
+    
     
 
     override func didReceiveMemoryWarning() {

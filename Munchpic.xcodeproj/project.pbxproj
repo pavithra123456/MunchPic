@@ -54,7 +54,6 @@
 		87748A911EE58AE8007064D1 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8E1EE58AE8007064D1 /* 2.png */; };
 		87748A921EE58AE8007064D1 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8F1EE58AE8007064D1 /* 3.png */; };
 		87AC68FD1F188EF0008F2CA9 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC68FC1F188EF0008F2CA9 /* NewPostViewController.swift */; };
-		87AC69031F188F4D008F2CA9 /* camaraicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87AC68FE1F188F4D008F2CA9 /* camaraicon.jpg */; };
 		87AC69051F188F4D008F2CA9 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69001F188F4D008F2CA9 /* cam.png */; };
 		87AC69061F188F4D008F2CA9 /* Nonveg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69011F188F4D008F2CA9 /* Nonveg.png */; };
 		87AC69071F188F4D008F2CA9 /* veg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69021F188F4D008F2CA9 /* veg.png */; };
@@ -73,6 +72,7 @@
 		87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */; };
 		87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */; };
 		87B1E6E41EDC504300A331C0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6E31EDC504300A331C0 /* Reachability.swift */; };
+		C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */; };
 		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
 		C1A560701F2761E000738E4B /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */; };
 		DC27A2D94EC41819E2069395 /* Pods_MunchpicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */; };
@@ -152,7 +152,6 @@
 		87748A8E1EE58AE8007064D1 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		87748A8F1EE58AE8007064D1 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		87AC68FC1F188EF0008F2CA9 /* NewPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
-		87AC68FE1F188F4D008F2CA9 /* camaraicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camaraicon.jpg; sourceTree = "<group>"; };
 		87AC69001F188F4D008F2CA9 /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
 		87AC69011F188F4D008F2CA9 /* Nonveg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nonveg.png; sourceTree = "<group>"; };
 		87AC69021F188F4D008F2CA9 /* veg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = veg.png; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		8FB862E1B66F01BFBC6049AD /* Pods-MunchpicTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.release.xcconfig"; sourceTree = "<group>"; };
 		912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA15765971EB4BD62F67CDF0 /* Pods-Munchpic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Munchpic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Munchpic/Pods-Munchpic.debug.xcconfig"; sourceTree = "<group>"; };
+		C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camaraicon.jpg; sourceTree = "<group>"; };
 		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPostDetailsViewController.swift; sourceTree = "<group>"; };
 		D97D6F6D3DC9587022628620 /* Pods-MunchpicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -373,6 +373,7 @@
 				87AF5CF81EE57B9800EEC7A3 /* homeicon.png */,
 				87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */,
 				87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */,
+				C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */,
 				87B1E6CB1EDC4B0300A331C0 /* userimage.png */,
 				870940F01EE6DA3E00292713 /* logo.png */,
 				87B1E6D11EDC4B1800A331C0 /* txtbg.png */,
@@ -380,7 +381,6 @@
 				87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */,
 				87B1E6D51EDC4B5600A331C0 /* rd1.png */,
 				87B1E6D61EDC4B5600A331C0 /* rd2.png */,
-				87AC68FE1F188F4D008F2CA9 /* camaraicon.jpg */,
 				87AC69001F188F4D008F2CA9 /* cam.png */,
 				87AC69011F188F4D008F2CA9 /* Nonveg.png */,
 				87AC69021F188F4D008F2CA9 /* veg.png */,
@@ -536,10 +536,10 @@
 				87B1E6CE1EDC4B0D00A331C0 /* bottom_bg.png in Resources */,
 				7B35765C1ED9AA8500FF610A /* LaunchScreen.storyboard in Resources */,
 				87AF5CFF1EE57C8800EEC7A3 /* menu12.png in Resources */,
+				C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */,
 				87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */,
 				87AF5CFB1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png in Resources */,
 				87AF5CFD1EE57C6C00EEC7A3 /* about.png in Resources */,
-				87AC69031F188F4D008F2CA9 /* camaraicon.jpg in Resources */,
 				87748A901EE58AE8007064D1 /* 1.png in Resources */,
 				87B1E6D71EDC4B5600A331C0 /* checkbox@3.png in Resources */,
 				7B95BAF41F0F861300404220 /* UserPosts.storyboard in Resources */,

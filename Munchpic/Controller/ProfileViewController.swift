@@ -37,7 +37,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       collectionView.dataSource = self
+        collectionView.dataSource = self
         collectionView.delegate = self
         lovesTableView.delegate = self
 //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
@@ -67,14 +67,19 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     
     override func viewWillAppear(_ animated: Bool) {
         
-        lovesTableView.reloadData()
+        mscrollview.contentSize.height = self.view.frame.size.height
+        self.lovesTableView.isHidden = true
+        self.collectionView.isHidden = false
+        collectionViewDataValue = "collection"
         collectionView.reloadData()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         self.getCollectioncategories()
         getLoves()
         getUserPosts()
+       
     }
     
     
@@ -236,6 +241,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
 }
 
 extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.lovesArray.count
     }

@@ -144,6 +144,7 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
        }) }
             }.resume()
         cell.nameLabel.text = dict["labelName"]
+        cell.nameLabel.adjustsFontSizeToFitWidth = true
         cell.layoutIfNeeded()
         return cell
         
