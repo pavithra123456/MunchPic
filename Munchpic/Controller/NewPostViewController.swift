@@ -38,8 +38,25 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     @IBOutlet var setp3: UITextField!
     @IBOutlet var step4: UITextField!
     @IBOutlet var timelabel: UITextField!
-    
     @IBOutlet weak var step5: UITextField!
+    
+    @IBOutlet weak var step6: UITextField!
+    @IBOutlet weak var step7: UITextField!
+    @IBOutlet weak var step8: UITextField!
+    @IBOutlet weak var step9: UITextField!
+    @IBOutlet weak var step10: UITextField!
+    @IBOutlet weak var DiscBGView: UIView!
+    @IBOutlet weak var BV6: BorderedView!
+    @IBOutlet weak var BV7: BorderedView!
+    @IBOutlet weak var BV8: BorderedView!
+    @IBOutlet weak var BV9: BorderedView!
+    @IBOutlet weak var BV10: BorderedView!
+    
+    @IBOutlet weak var viewheightconstraint: NSLayoutConstraint!
+    var downint : Int = 6
+    var hconstant :Int = 15
+    
+    
     @IBOutlet weak var titileTextField: UITextField!
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -402,6 +419,43 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
     }
     
+    @IBAction func addDisc_Action(_ sender: Any) {
+        
+        
+        if(downint>10){
+            
+            Utility.showAlert(title: "Alert", message: "Maximum 10 Descriptions ", controller: self,completion:nil)
+            
+        }else{
+            
+            hconstant = hconstant + 60
+            viewheightconstraint.constant = CGFloat(hconstant)
+            
+            if(downint == 6){
+                BV6.isHidden = false
+            }else if(downint == 7){
+                BV7.isHidden = false
+                
+            }else if(downint == 8){
+                BV8.isHidden = false
+                
+            }else if(downint == 9){
+                BV9.isHidden = false
+                
+            }else if(downint == 10){
+                BV10.isHidden = false
+                
+            }else{
+                
+            }
+            downint = downint+1
+        }
+        
+
+        
+    }
+    
+    
     @IBAction func ingrediantsBtn_Avtiom(_ sender: Any) {
         
         if(titileTextField.text?.characters.count == 0){
@@ -444,7 +498,64 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             
             return
             
-        }else{
+        } else{
+            
+            if (BV6.isHidden == false){
+                
+                if (step6.text?.characters.count == 0){
+                    
+                    step6.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+                    
+                    return
+                    
+                }
+                
+            }
+            
+            if (BV7.isHidden == false){
+                
+                if (step7.text?.characters.count == 0){
+                    
+                    step7.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+                    
+                    return
+                    
+                }
+                
+            }
+            if (BV8.isHidden == false){
+                
+                if (step8.text?.characters.count == 0){
+                    
+                    step8.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+                    
+                    return
+                    
+                }
+                
+            }
+            if (BV9.isHidden == false){
+                
+                if (step9.text?.characters.count == 0){
+                    
+                    step9.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+                    
+                    return
+                    
+                }
+                
+            }
+            if (BV10.isHidden == false){
+                
+                if (step10.text?.characters.count == 0){
+                    
+                    step10.attributedPlaceholder = NSAttributedString(string: "Please add discription",attributes: [NSForegroundColorAttributeName: UIColor.red])
+                    
+                    return
+                    
+                }
+                
+            }
             
             let dishName = titileTextField.text ?? ""
             let description1 = self.step1.text ?? ""
@@ -452,6 +563,12 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             let description3 = setp3.text ?? ""
             let description4 = self.step4.text ?? ""
             let description5 = self.step5.text ?? ""
+            let description6 = self.step6.text ?? ""
+            let description7 = self.step7.text ?? ""
+            let description8 = self.step8.text ?? ""
+            let description9 = self.step9.text ?? ""
+            let description10 = self.step10.text ?? ""
+            
             let category = veglabel.text ?? ""
             let subCategory = selectCategory.text ?? ""
             let cuisine = selectcuisine.text ?? ""
@@ -469,6 +586,12 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             post.description3 = description3
             post.description4 = description4
             post.description5 = description5
+            post.description6 = description6
+            post.description7 = description7
+            post.description8 = description8
+            post.description9 = description9
+            post.description10 = description10
+          
             
             post.category = category
             post.subCategory = subCategory

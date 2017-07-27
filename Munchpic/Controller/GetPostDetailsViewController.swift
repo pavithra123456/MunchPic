@@ -393,7 +393,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
             
             let idno = "ingradients\(i)"
             let ingrediantstr = postDetails?["\(idno)"] as? String
-            if ingrediantstr == "" || ingrediantstr == nil {
+            if ingrediantstr == "" || ingrediantstr == nil || ingrediantstr == "null" {
                 
             }else{
                 

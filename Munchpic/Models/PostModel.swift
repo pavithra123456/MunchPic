@@ -21,6 +21,11 @@ class PostModel: NSObject {
     var description3 = ""
     var description4 = ""
     var description5 = ""
+    var description6 = ""
+    var description7 = ""
+    var description8 = ""
+    var description9 = ""
+    var description10 = ""
     
     var noOfCollection = 0
     var comments = 0
