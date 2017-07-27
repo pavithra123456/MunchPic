@@ -106,6 +106,10 @@ class BorderedView : UIView {
 
 class RoundedImage:UIImageView {
     
+    convenience init(image1:UIImage) {
+        self.init(image: image1)
+    }
+    
     @IBInspectable var borderWidth: CGFloat = 0 {
         didSet {
             layer.borderWidth = borderWidth
@@ -115,7 +119,6 @@ class RoundedImage:UIImageView {
     @IBInspectable var cornerRadius: CGFloat = 6 {
         didSet {
             self.layer.cornerRadius = cornerRadius
-            
         }
     }
     
@@ -127,8 +130,6 @@ class RoundedImage:UIImageView {
             
         }
     }
-
-    
 }
 
 

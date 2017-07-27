@@ -8,15 +8,15 @@
 
 import UIKit
 enum CollectionCategory :String {
-    case FastFood = "Fast Food"
+    case FastFood 
     case Sweets
     case Gravy
+    case Deserts
     case NonVeg
     case MyFavourtites
-    
-    
 }
-class ProfileViewController: UIViewController,UICollectionViewDataSource{
+
+class ProfileViewController: UIViewController{
     @IBOutlet weak var profilePic: UIImageView!
 
     @IBOutlet weak var mscrollview: UIScrollView!
@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     var collectionArray = [[String:String]]()
     var lovesArray = [ProfilkeLovesModel]()
     var userPostsArray = [PostModel]()
-    var collectionViewDataValue = ""
+    var collectionViewDataValue = "posts"
 
     @IBOutlet weak var tableviewheight: NSLayoutConstraint!
     @IBOutlet weak var collectionviewheight: NSLayoutConstraint!
@@ -40,6 +40,8 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         collectionView.dataSource = self
         collectionView.delegate = self
         lovesTableView.delegate = self
+        self.collectionView.isHidden = false
+        self.collectionView.reloadData()
 //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
 //        self.collectionview.reloadData()
         
@@ -60,8 +62,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
 
             
         }
-
-        
         
     }
     
@@ -70,16 +70,14 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
         mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
-        collectionViewDataValue = "collection"
         collectionView.reloadData()
 
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        getUserPosts()
         self.getCollectioncategories()
         getLoves()
-        getUserPosts()
-       
     }
     
     
@@ -88,6 +86,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     func getUserPosts () {
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             ServiceLayer.getUserPosts(relativeUrl: "userId=\(userId)") { (response, status, msg) in
+                self.userPostsArray.removeAll()
                 for post in response! {
                     let postobject = post
                     let model = PostModel()
@@ -113,7 +112,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
             self.collectionArray = data as! [[String : String]]
             DispatchQueue.main.async(execute: {
                 self.collectionView.reloadData()
-
             })
         }
     }
@@ -121,7 +119,10 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     func getLoves() {
         ServiceLayer.getLoves { (lovesArray, status, msg) in
             self.lovesArray = lovesArray!
-            self.lovesTableView.reloadData()
+            DispatchQueue.main.async(execute: {
+                self.lovesTableView.reloadData()
+                
+            })
         }
     }
     
@@ -165,68 +166,7 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
     }
     
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        if collectionViewDataValue == "posts" {
-            return  userPostsArray.count/2
-        }
-        return  collectionArray.count/2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
-        let section = indexPath.section * 2
-        if collectionViewDataValue == "posts" {
-            var obj = userPostsArray[indexPath.row]
-            if indexPath.row == 0 {
-                obj = userPostsArray[ section]
-            }
-            else {
-                obj = userPostsArray[1 + section]
-            }
-            
-            URLSession.shared.dataTask(with: URL(string:obj.ImagePath1)!) { (data1, response, error) in
-                DispatchQueue.main.async(execute: {
-                    if let imageData = data1 {
-                        cell.menuImage.image = UIImage(data: imageData)
-                    }
-                })
-                }.resume()
-            cell.nameLabel.text = userPostsArray[indexPath.row].dishName
-        }
-        
-       
-        else {
-            var obj = collectionArray[indexPath.row]
-            if indexPath.row == 0 {
-                obj = collectionArray[ section]
-            }
-            else {
-                obj = collectionArray[1 + section]
-            }
-            URLSession.shared.dataTask(with: URL(string:obj["categoryImage"]!)!) { (data1, response, error) in
-                DispatchQueue.main.async(execute: {
-                    if let imageData = data1 {
-                        cell.menuImage.image = UIImage(data: data1!)
-                    }
-                })
-                }.resume()
-            cell.nameLabel.text = obj["categoryName"]
-        }
-        
-        
-        
-        collectionviewheight.constant = collectionView.contentSize.height
-        mscrollview.contentSize.height = collectionView.contentSize.height + 300
-        
-
-        return cell
-        
-    }
+   
 
     /*
     // MARK: - Navigation
@@ -241,7 +181,6 @@ class ProfileViewController: UIViewController,UICollectionViewDataSource{
 }
 
 extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.lovesArray.count
     }
@@ -276,31 +215,138 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
 //       let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
 //        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
 //        self.navigationController?.pushViewController(detailVc, animated: true)
-        
-        let postVc =  self.storyboard?.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
+        let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+        let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
         postVc.postId = Int(lovesArray[indexPath.row].postId)!
         print("needed array is = \(lovesArray[indexPath.row])")
         self.navigationController?.pushViewController(postVc, animated: true)
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDelegate  {
+extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollectionViewDelegate ,UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        if collectionViewDataValue == "posts" {
+            return  userPostsArray.count/2
+        }
+        return  collectionArray.count/2
+    }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
+        let section = indexPath.section * 2
+        if collectionViewDataValue == "posts" {
+            var obj = userPostsArray[indexPath.row]
+            if indexPath.row == 0 {
+                obj = userPostsArray[ section]
+            }
+            else {
+                obj = userPostsArray[1 + section]
+            }
+            
+            URLSession.shared.dataTask(with: URL(string:obj.ImagePath1)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let imageData = data1 {
+                        cell.menuImage.image = UIImage(data: imageData)
+                    }
+                })
+                }.resume()
+            cell.nameLabel.text = userPostsArray[indexPath.row].dishName
+        }
+            
+        else {
+            var obj = collectionArray[indexPath.row]
+            if indexPath.row == 0 {
+                obj = collectionArray[ section]
+                cell.nameLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0)
+            }
+            else {
+                obj = collectionArray[1 + section]
+            }
+            URLSession.shared.dataTask(with: URL(string:obj["categoryImage"]!)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let imageData = data1 {
+                        cell.menuImage.image = UIImage(data: data1!)
+                        cell.nameLabel.backgroundColor = UIColor.clear
+                        cell.labelTopHeight.constant = cell.frame.size.height/2 - 20
+                    }
+                })
+                }.resume()
+            cell.nameLabel.text = obj["categoryName"]
+            
+        }
+        
+        
+        
+        collectionviewheight.constant = collectionView.contentSize.height
+        mscrollview.contentSize.height = collectionView.contentSize.height + 300
+        
+
+        return cell
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-            return CGSize(width: collectionView.bounds.size.width/2-5, height:  180)
+        return CGSize(width: collectionView.bounds.size.width/2-1, height:  150)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let section = indexPath.section * 2
+        
+        if collectionViewDataValue == "posts" {
+            var obj = userPostsArray[indexPath.row]
+            if indexPath.row == 0 {
+                obj = userPostsArray[ section]
+            }
+            else {
+                obj = userPostsArray[1 + section]
+            }
+            
+            let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+            let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
+            postVc.postId = obj.postId //Int(lovesArray[indexPath.row].postId)!
+            print("needed array is = \(lovesArray[indexPath.row])")
+            self.navigationController?.pushViewController(postVc, animated: true)
+            return
+        }
+        
         let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
         let vc = storyBoard.instantiateViewController(withIdentifier: "UserCllectionListCntrl") as!UserCollectionListController
-        //detailVc.toc = Int(lovesArray[indexPath.row].postId)!
+        
+        var obj:AnyObject?
+        if indexPath.row == 0 {
+            obj = collectionArray[ section] as AnyObject
+        }
+        else {
+            obj = collectionArray[1 + section] as AnyObject
+        }
+        
+        vc.toCategory = ((CollectionCategory.init(rawValue:(obj?["categoryName"] as! String).replacingOccurrences(of: " ", with: "")))?.rawValue)!
+        
         self.navigationController?.pushViewController(vc, animated: true)
-
+        
     }
-
+    
 }
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+
+
+
 

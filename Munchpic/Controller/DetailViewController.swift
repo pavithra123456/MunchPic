@@ -209,7 +209,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let param = "userId=\(userId)" +
                 "&postId=\(postId)" +
-            "&toCategory=\(categoryName )"
+            "&toCategory=\(categoryName)"
             
             ServiceLayer.insertCollections(parameter: param) { (response, status, msg) in
                 print(msg)

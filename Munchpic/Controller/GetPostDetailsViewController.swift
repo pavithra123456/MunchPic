@@ -86,13 +86,12 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
                     self.loadingrediantsTabledata()
                     self.ingrediantstable.reloadData()
 
-                    
+
                 })
             }
             
         }
 
-        
     }
     
     func closeview(){

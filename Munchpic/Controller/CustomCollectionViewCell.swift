@@ -13,4 +13,5 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var menuImage: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var labelTopHeight: NSLayoutConstraint!
 }

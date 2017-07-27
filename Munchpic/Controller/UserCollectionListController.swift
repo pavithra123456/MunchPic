@@ -11,7 +11,7 @@ import MBProgressHUD
 class UserCollectionListController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var tableview: UITableView!
-    let toCategory = "Deserts"
+    var  toCategory = "Deserrts"
     var collectionArray = [ProfilkeLovesModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,10 @@ class UserCollectionListController: UIViewController,UITableViewDelegate,UITable
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func backAction(_ sender: Any) {
+        let _ = self.navigationController?.popViewController(animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,7 +58,7 @@ class UserCollectionListController: UIViewController,UITableViewDelegate,UITable
     func getCollecions () {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
-            let prameter = "userId=\(userId) &toCategory=\(toCategory)"
+            let prameter = "userId=\(userId) +&toCategory=\(toCategory)"
             ServiceLayer.getCollections(parameter: prameter , completion: { (collectionlist, true,msg) in
                 self.collectionArray = collectionlist!
                 DispatchQueue.main.async {

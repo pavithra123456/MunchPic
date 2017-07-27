@@ -61,6 +61,11 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     @IBOutlet weak var emojiViewHeight: NSLayoutConstraint!
     override func viewDidLoad() {
+        
+        
+      
+        
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
@@ -341,7 +346,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 print(msg)
                 if status && msg == "Commented" {
                     DispatchQueue.main.async(execute: {
-                        self.commentsView.isHidden = false
+                        self.commentsView.isHidden = true
                         Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
 
                     })
