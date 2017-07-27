@@ -8,14 +8,6 @@
 
 import UIKit
 
-class Receipe {
-    var id:Int = 0
-    var name:String = ""
-    var ingredients = [String]()
-    var creationDate = Date()
-    var author :Profile?
-}
-
 class Profile {
     var name:String?
     var phoneNumber:NSNumber?

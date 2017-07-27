@@ -32,14 +32,49 @@ class ServiceLayer: NSObject {
         
     }
 
-    class func getPosts(relativeUrl:String,completion:@escaping (AnyObject?,Bool,String)->Void){
-        
-        Alamofire.request(relativeUrl, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-            
-            if response.result.isSuccess {
-                
-                completion(response.result.value as AnyObject, true, "")
+    class func getPosts(completion:@escaping ([PostModel]?,Bool,String)->Void){
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let parameter = "userId=\(userId)"
 
+            ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetPost, postbody: parameter) { (response, status, msg) in
+                if status {
+                    let response1 = response as! [[String:AnyObject]]
+                    var postArray = [PostModel]()
+                    
+                    for postobject in response1 {
+                        let model = PostModel()
+                        model.postId = Int(postobject["postId"] as? String ?? "0")!
+                        model.userName = postobject["userName"] as? String ?? ""
+                        model.description1 = postobject["description1"] as? String ?? ""
+                        model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
+                        if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
+                            model.loves = loveCount
+                        }
+                        
+                        model.comments = Int(postobject["comments"] as? String ?? "0")!
+                        model.userId = Int(postobject["userId"] as! String )!
+                        model.noOfCollection = Int(postobject["collections"] as? String ?? "0")!
+                        model.comments = Int(postobject["comments"] as? String ?? "0")!
+                        
+                        model.efforts = postobject["difficulty"] as? String ?? ""
+                        model.love1 = postobject["love1"] as? String ?? ""
+                        model.love2 = postobject["love2"] as? String ?? ""
+                        model.love3 = postobject["love3"] as? String ?? ""
+                        model.love4 = postobject["love4"] as? String ?? ""
+                        model.love5 = postobject["love5"] as? String ?? ""
+                        model.love6 = postobject["love6"] as? String ?? ""
+                        model.lovesStatus = postobject["lovesStatus"] as? String ?? ""
+                        
+                        postArray.append(model)
+                    }
+                    completion(postArray, true, "Success")
+                    
+                }
+                else {
+                    completion(nil, false, "fail")
+
+                }
+                
             }
         }
     }
@@ -155,53 +190,32 @@ class ServiceLayer: NSObject {
     
     
     class func getLoves(completion:@escaping ([ProfilkeLovesModel]?,Bool,String)->Void) {
-//        if let userId =  UserDefaults.standard.value(forKey: "userId") {
-//            let parameter = ["userId":38]
-//            Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
-//                
-//                if response.result.isSuccess {
-//                    let response1 =  response.result.value as! [String:AnyObject]
-//                    if let array = response1["result"] as? Array<AnyObject> {
-//                        var collectionArray = [ProfilkeLovesModel]()
-//                        
-//                        for obj in array {
-//                            let lovemOdel = ProfilkeLovesModel()
-//                            lovemOdel.dishName = obj["dishName"] as! String
-//                            lovemOdel.dateSaved = obj["dateSaved"] as! String
-//                            lovemOdel.postId = obj["lovesPostId"] as! String
-//                            lovemOdel.postedUserId =  obj["postedUserId"] as! String
-//                            
-//                            lovemOdel.imageName = ""
-//                            collectionArray.append(lovemOdel )
-//                        }
-//                        completion(collectionArray, true, "Success")
-//                    }
-//                }
-//            }
-//        }
-        
-        let parameter = "userId=38"
-        ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetLoves, postbody: parameter) { (response, status, msg) in
-            if status == true {
-                var collectionArray = [ProfilkeLovesModel]()
-                let responseArray = response as! Array<AnyObject>
-                for obj in responseArray {
-                    let lovemOdel = ProfilkeLovesModel()
-                    lovemOdel.dishName = obj["dishName"] as! String
-                    lovemOdel.dateSaved = obj["dateSaved"] as! String
-                    lovemOdel.postId = obj["lovesPostId"] as! String
-                    lovemOdel.postedUserId =  obj["postedUserId"] as! String
-
-                    
-                    lovemOdel.imageName = ""
-                    collectionArray.append(lovemOdel)
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let parameter = "userId=\(userId)"
+            ServiceLayer.excuteQuery(url: Constants.kBaseUrl + Constants.kGetLoves, postbody: parameter) { (response, status, msg) in
+                if status == true {
+                    var collectionArray = [ProfilkeLovesModel]()
+                    let responseArray = response as! Array<AnyObject>
+                    for obj in responseArray {
+                        let lovemOdel = ProfilkeLovesModel()
+                        lovemOdel.dishName = obj["dishName"] as! String
+                        lovemOdel.dateSaved = obj["dateSaved"] as! String
+                        lovemOdel.postId = obj["lovesPostId"] as! String
+                        lovemOdel.postedUserId =  obj["postedUserId"] as! String
+                        
+                        
+                        lovemOdel.imageName = ""
+                        collectionArray.append(lovemOdel)
+                    }
+                    completion(collectionArray, true, "Success")
                 }
-                completion(collectionArray, true, "Success")
-            }
-            else {
-                
+                else {
+                    
+                }
             }
         }
+        
+       
         
 //        Alamofire.request(Constants.kBaseUrl + Constants.kGetLoves, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
 //            

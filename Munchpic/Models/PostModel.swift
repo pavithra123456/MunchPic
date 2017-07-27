@@ -29,7 +29,16 @@ class PostModel: NSObject {
     
     var noOfCollection = 0
     var comments = 0
+    
     var loves = 0
+    var love1 = ""
+    var love2 = ""
+    var love3	= ""
+    var love4	= ""
+    var love5	= ""
+    var love6	= ""
+    var lovesStatus = ""
+    
     var ImagePath1 = ""
     var userId = 0
     var efforts = ""
@@ -39,5 +48,7 @@ class PostModel: NSObject {
     var post3 :UIImage?
     var duration = ""
     var difficulty = ""
+    
+    
     
 }

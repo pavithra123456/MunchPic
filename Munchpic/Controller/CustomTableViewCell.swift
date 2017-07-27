@@ -11,7 +11,6 @@ import Foundation
 
 class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var emojiImage: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     //home
     @IBOutlet var foodrecipeImage: UIImageView!
@@ -25,8 +24,12 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var effortView5: UIView!
     
     @IBOutlet weak var smilesView: UIView!
+    @IBOutlet weak var likeButton: UIButton!
     
+    @IBOutlet weak var ShowSmilyBtn: UIButton!
     @IBOutlet weak var subHeading: UILabel!
+    var lovesStatus = ""
+    var postId = 0
     var useId = 0 {
         didSet {
             
@@ -34,16 +37,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     var efforts  = "" {
         didSet {
-            print(efforts)
-//            let start = efforts.index(efforts.startIndex, offsetBy:0)
-//            let end = efforts.index(efforts.endIndex, offsetBy: -4)
-//            let range = start..<end
-//            let actualEffort = Int(efforts.substring(with: range))
-//            print(actualEffort)
 
-//            if  efforts != nil {
-//                let effortCount =  actualEffort!/12
-            
             if let effortCount =  Int(efforts) {
                 if effortCount < 5 {
                     for i in effortCount+1...5 {
@@ -52,40 +46,6 @@ class CustomTableViewCell: UITableViewCell {
                 }
                 
             }
-            
-                
-                
-//                if effortCount == 1 {
-//                    let labelColor = UIColor(hexColor: 0x336141)
-//                    
-//                    effortView1.backgroundColor = labelColor
-//                    
-//                    
-//                }
-//                else if effortCount == 2 {
-//                    let labelColor = UIColor(hexColor: 0x008000)
-//                    
-//                    effortView2.backgroundColor = labelColor
-//                }
-//                else if effortCount == 3 {
-//                    let labelColor = UIColor(hexColor: 0xF44336)
-//                    
-//                    effortView3.backgroundColor = labelColor
-//                }
-//                else if effortCount == 4 {
-//                    let labelColor = UIColor(hexColor: 0xCC543C)
-//                    
-//                    effortView4.backgroundColor = labelColor
-//                }
-//                else if effortCount == 5 {
-//                    let labelColor = UIColor(hexColor: 0xCC543C)
-//                    
-//                    effortView5.backgroundColor = labelColor
-//                }
-
-            //}
-            
-            
         }
     }
     
@@ -100,15 +60,33 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var loves: UILabel!
 
+    var longGuesture :UILongPressGestureRecognizer?
+    var tapGuesture:UITapGestureRecognizer?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         if let  collectionView = self.collectionView {
             collectionView.dataSource = self
             //collectionView.delegate = self
         }
+        if let  _ = self.smilesView {
+             longGuesture = UILongPressGestureRecognizer.init(target: self, action: #selector(handleLongPress))
+            self.addGestureRecognizer(longGuesture!)
+           tapGuesture = UITapGestureRecognizer.init(target: self, action: #selector(handleTap))
+            self.addGestureRecognizer(tapGuesture!)
+        }
         // Initialization code
     }
-
+    
+    func handleLongPress() {
+        smilesView.isHidden = false
+        tapGuesture?.isEnabled = true
+    }
+    
+    func handleTap() {
+        smilesView.isHidden = true
+        tapGuesture?.isEnabled = false
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -147,15 +125,45 @@ extension CustomTableViewCell : UICollectionViewDataSource {
     }
 }
 
-//extension CustomTableViewCell : UICollectionViewDelegateFlowLayout,UICollectionViewDelegate  {
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let itemsPerRow:CGFloat = 4
-//        let hardCodedPadding:CGFloat = 5
-//        let itemWidth = (collectionView.bounds.width / itemsPerRow) - hardCodedPadding
-//        let itemHeight = collectionView.bounds.height - (2 * hardCodedPadding)
-//        self.collectionView.contentSize = CGSize(width: collectionView.contentSize.width+200, height: collectionView.contentSize.height)
-//        return CGSize(width: itemWidth, height: itemHeight)
-//    }
-//}
+extension CustomTableViewCell {
+    @IBAction func likeBtnAction(_ sender: UIButton) {
+       
+        
+        if self.lovesStatus == "0"  {
+            insertLoves( selectedEmoji: 2)
+            
+            self.likeButton.setImage(UIImage(named:"emoji2"), for: .normal)
+        }
+            
+        else if self.smilesView.isHidden{
+            //TODO add label like android toast message
+//            Utility.showAlert(title: "MunchPic", message: "please hold for update", controller: self.superview?.superview, completion: nil)
+        }
+    }
+    
+    @IBAction func addloves(_ sender: UIButton) {
+        insertLoves( selectedEmoji: sender.tag)
+    }
+    
+    func insertLoves (selectedEmoji:Int) {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(self.postId)" +
+            "&loveId=\(selectedEmoji)"
+            self.smilesView.isHidden = true
+
+            ServiceLayer.insertLoves(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status && (msg == "Loved" || msg == "Expression updated") {
+                    DispatchQueue.main.async(execute: {
+//                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
+                    })
+                    
+                }
+            }
+        }
+        
+        
+    }
+}
 

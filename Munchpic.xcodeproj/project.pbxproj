@@ -42,6 +42,7 @@
 		7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */; };
 		7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF91F0F8AEC00404220 /* PostCell.swift */; };
 		7B95BAFC1F0FCBC300404220 /* SearchFilterListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */; };
+		7BAF12EB1F2A559A00F8BA63 /* SmilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */; };
 		7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */; };
 		7BB9F0941F26592B004E78AA /* UserCollectionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */; };
 		7BD1D3011EDB3E3F003CE82F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD1D3001EDB3E3F003CE82F /* Constants.swift */; };
@@ -140,6 +141,7 @@
 		7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostsController.swift; sourceTree = "<group>"; };
 		7B95BAF91F0F8AEC00404220 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCell.swift; path = CustomTableViewCells/PostCell.swift; sourceTree = "<group>"; };
 		7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterListController.swift; sourceTree = "<group>"; };
+		7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmilesViewController.swift; sourceTree = "<group>"; };
 		7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFileterCell.swift; path = CustomTableViewCells/SearchFileterCell.swift; sourceTree = "<group>"; };
 		7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionListController.swift; sourceTree = "<group>"; };
 		7BD1D3001EDB3E3F003CE82F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				87AC68FC1F188EF0008F2CA9 /* NewPostViewController.swift */,
 				7B3715081F1E410700D4A406 /* AddIngredinentsController.swift */,
 				7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */,
+				7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */,
 				C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */,
 				7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */,
+				7BAF12EB1F2A559A00F8BA63 /* SmilesViewController.swift in Sources */,
 				7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */,
 				7B3576541ED9AA8500FF610A /* ViewController.swift in Sources */,
 				7B1147B41F0258A400CA48D6 /* ProfilkeLovesModel.swift in Sources */,

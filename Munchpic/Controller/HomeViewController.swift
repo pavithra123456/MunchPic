@@ -63,14 +63,14 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     override func viewDidLoad() {
         
         
-      
+        
         
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
-
+        
         
         self.Hometableview.estimatedRowHeight = 300
         self.Hometableview.delegate = self
@@ -88,42 +88,25 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         //TODO: - Need Add nill check
-        ServiceLayer.getPosts( relativeUrl:url) { (response, true, message) in
-            MBProgressHUD.hide(for: self.view, animated: true)
-
-            let response1 = response as! [String:AnyObject]
-            if let array = response1["result"] as? Array<Any> {
-                for post in array {
-                    let postobject = post  as! [String:AnyObject]
-                    let model = PostModel()
-                    model.postId = Int(postobject["postId"] as? String ?? "0")!
-                    model.userName = postobject["userName"] as? String ?? ""
-                    model.description1 = postobject["description1"] as? String ?? ""
-                    model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
-                    if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
-                        model.loves = loveCount
-                    }
-                    
-                    model.comments = Int(postobject["comments"] as? String ?? "0")!
-                    model.userId = Int(postobject["userId"] as! String )!
-                    model.noOfCollection = Int(postobject["collections"] as? String ?? "0")!
-                    model.comments = Int(postobject["comments"] as? String ?? "0")!
-
-                    model.efforts = postobject["difficulty"] as? String ?? ""
-                    
-                    self.postArray.append(model)
+        ServiceLayer.getPosts { (postArry, status, msg) in
+            
+            DispatchQueue.main.async(execute: {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                if let allPostArray = postArry {
+                    self.postArray = allPostArray
+                    self.Hometableview.reloadData()
                 }
-            }
-            self.Hometableview.reloadData()
+            })
         }
+        
         
         commentsContainerView.layer.cornerRadius = 8.0
         commentsContainerView.layer.borderWidth = 1
         
         commentsContainerView.layer.masksToBounds = true;
         commentsContainerView.layer.borderColor = UIColor(red: 230.0/255, green: 120/255, blue: 65/255, alpha: 1).cgColor
-            
-            //UIColor.red.cgColor
+        
+        //UIColor.red.cgColor
         addGuestures()
     }
     
@@ -133,9 +116,9 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     //MARK: - Guestures
-
+    
     func addGuestures() {
-         tapguesture = UITapGestureRecognizer.init(target: self, action: #selector(hidePopUps))
+        tapguesture = UITapGestureRecognizer.init(target: self, action: #selector(hidePopUps))
         tapguesture?.isEnabled = false
         self.view.addGestureRecognizer(tapguesture!)
         
@@ -145,7 +128,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         self.commentsView.isHidden = true
         self.collectionlistContainerView.isHidden = true
         self.tapguesture?.isEnabled = false
-
+        
     }
     
     //MARK: - Radio Button Actions
@@ -161,7 +144,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         else {
             sender.isSelected = true
         }
-
+        
     }
     
     @IBAction func showCollections(_ sender: Any) {
@@ -171,17 +154,17 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     @IBAction func collectionOkAction(_ sender: Any) {
-         collectionlistContainerView.isHidden = true
+        collectionlistContainerView.isHidden = true
         tapguesture?.isEnabled = false
     }
     
     
     @IBAction func collectionCancelAction(_ sender: Any) {
-         collectionlistContainerView.isHidden = true
-         tapguesture?.isEnabled = false
+        collectionlistContainerView.isHidden = true
+        tapguesture?.isEnabled = false
     }
     
-   
+    
     
     //MARK: - Pagecontroller
     @IBAction func Pagecontroller_Action(_ sender: Any) {
@@ -191,7 +174,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         mPosition = pagecontroller.currentPage
     }
     
-       //Left gesture
+    //Left gesture
     func handleSwipeLeft(gesture: UISwipeGestureRecognizer){
         
         if pagecontroller.currentPage < slidearrayData.count-1 {
@@ -260,14 +243,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                         }
                     })
                     }.resume()
-
+                
             }
             
-
+            
             return cell
-
+            
         }
-        
         else {
             var cell : CustomTableViewCell! = Hometableview.dequeueReusableCell(withIdentifier: "Hcell") as! CustomTableViewCell
             if(cell == nil)
@@ -281,19 +263,27 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             //cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
             cell.useId = postArray[indexPath.row].userId
             cell.efforts  = postArray[indexPath.row].efforts
-            cell.emojiImage.tag = indexPath.row
+            cell.likeButton.tag = indexPath.row
             cell.commentBtn.tag = indexPath.row
+            cell.ShowSmilyBtn.tag = indexPath.row
+            cell.postId = postArray[indexPath.row].postId
+            
+            if postArray[indexPath.row].lovesStatus != "0" {
+                let imageStr = "emoji\(postArray[indexPath.row].lovesStatus)"
+                cell.likeButton.setImage(UIImage(named:imageStr), for: .normal)
+                
+            }
             
             let mainImgUrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(postArray[indexPath.row].userId)/\(postArray[indexPath.row].postId)_post1.jpg"
-
             
-                URLSession.shared.dataTask(with: URL(string:mainImgUrl)!) { (data1, response, error) in
-                    DispatchQueue.main.async(execute: {
-                        if let imageData = data1 {
-                            cell.foodrecipeImage.image = UIImage(data: imageData)
-                        }
-                    })
-                    }.resume()
+            
+            URLSession.shared.dataTask(with: URL(string:mainImgUrl)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let imageData = data1 {
+                        cell.foodrecipeImage.image = UIImage(data: imageData)
+                    }
+                })
+                }.resume()
             
             
             
@@ -317,9 +307,9 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             
             
             return cell
-
+            
         }
-
+        
         return UITableViewCell()
         
     }
@@ -328,7 +318,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         selectedPostId = postArray[indexPath.row].postId
         self.performSegue(withIdentifier: "showDetail1", sender: nil)
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
         
@@ -336,77 +326,37 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     //MARK: - Custom cell Actions
     
+    
+    
+    
+    @IBAction func shareButtonAction(_ sender: Any) {
+        let activityViewController = UIActivityViewController(activityItems: ["" as NSString], applicationActivities: nil)
+        self.present(activityViewController, animated: true, completion: {})
+    }
+    
+    //MARK: - EMojis Actions
+   
+    
+    //MARK: - Comments Actions
+    
     @IBAction func addComment(_ sender: Any) {
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let param = "userId=\(userId)" +
                 "&postId=\(selectedPostId)" +
-                "&comments=\(self.commentsTextView.text ?? "")"
-
+            "&comments=\(self.commentsTextView.text ?? "")"
+            
             ServiceLayer.insertComments(parameter: param) { (response, status, msg) in
                 print(msg)
                 if status && msg == "Commented" {
                     DispatchQueue.main.async(execute: {
                         self.commentsView.isHidden = true
                         Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
-
-                    })
-
-                }
-            }
-        }
-    }
-
-    
-    @IBAction func shareButtonAction(_ sender: Any) {
-        let activityViewController = UIActivityViewController(activityItems: ["" as NSString], applicationActivities: nil)
-        self.present(activityViewController, animated: true, completion: {})
-    }
-
-    @IBAction func emojisBtnAction(_ sender: Any) {
-        selectedEmojiIndex = (sender as! UIButton).tag
-        selectedPostId = postArray[selectedEmojiIndex].postId
-        
-        let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
-        cell.smilesView .isHidden = !cell.smilesView.isHidden
-        
-    }
-    
-    @IBAction func addloves(_ sender: UIButton) {
-        if let userId =  UserDefaults.standard.value(forKey: "userId") {
-            let param = "userId=\(userId)" +
-                "&postId=\(selectedPostId)" +
-            "&loveId=\(sender.tag)"
-            
-            ServiceLayer.insertLoves(parameter: param) { (response, status, msg) in
-                print(msg)
-                if status && (msg == "Loved" || msg == "Expression updated") {
-                    DispatchQueue.main.async(execute: {
-                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
-                        let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
-                        cell.smilesView .isHidden = !cell.smilesView.isHidden
+                        
                     })
                     
                 }
             }
         }
-    }
-    
-
-    
-    @IBAction func updateEmoi(_ sender: Any) {
-        let index = (sender as! UIButton).tag
-
-        UIView.animate(withDuration: 0.2, delay: 0.2, options: [.repeat, .curveEaseInOut], animations: {}, completion:{ (status) -> Void in
-            self.emojisView.isHidden = true
-            self.emojiViewHeight.constant = -45
-            
-            let cell = self.Hometableview.cellForRow(at: IndexPath(item: self.selectedEmojiIndex, section: 0)) as! CustomTableViewCell
-            let image = UIImage(named: "emoji\(index).png")
-            cell.emojiImage.setImage(image, for: .normal)
-            
-        })
-
-    
     }
     
     @IBAction func commentButtonAction(_ sender: Any) {
@@ -417,13 +367,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         ServiceLayer.GetComments(forPostId:selectedPostId) { (response, status, mess) in
             
             DispatchQueue.main.async(execute: {
-
+                
                 MBProgressHUD.hide(for: self.view, animated: true)
             })
-
+            
             if let resCommentsArray = response {
                 self.commentsArray = resCommentsArray
-               
+                
             }
             
             DispatchQueue.main.async(execute: {
@@ -457,28 +407,28 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         commentsViewCahtImage.image = UIImage(named: "iconright")
         textView.text = ""
     }
-
-      func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
-      {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
         if textView.text == "Add Comment" && text != ""{
             textView.text = ""
             textView.textColor = UIColor.black
             commentsViewCahtImage.image = UIImage(named: "iconright")
-
-
+            
+            
         }
         if textView.text == "Add Comment" && text == ""{
-           return  false
+            return  false
         }
         return  true
     }
     
     //MARK: - Other
-
+    
     @IBAction func cameraAction(_ sender: Any) {
         
         self.parent?.performSegue(withIdentifier: "showNewPost", sender: nil)
-
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -493,6 +443,16 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             detaILVC.postId = selectedPostId
             selectedPostId = 0
         }
+        if segue.identifier == "ShowSmilyView" {
+            let detaILVC = segue.destination as! SmilesViewController
+            
+            if let _ = sender {
+                let button = sender as! UIButton
+                detaILVC.postDetail = postArray[button.tag]
+            }
+            
+        }
+        
     }
     
 }
