@@ -27,7 +27,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     @IBOutlet weak var collectionListView: UIView!
     
     var postId = 0
-    var postDetails :[String:AnyObject]?
+    var postDetails :PostModel?
     var isShowingDescription = true
     
     
@@ -67,22 +67,8 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         tableView.estimatedRowHeight = 15
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        ServiceLayer.getPostDetails(forPostId: postId) { (responseArray , status, msg) in
-            
-            DispatchQueue.main.async(execute: {
-                MBProgressHUD.hide(for: self.view, animated: true)
-                 })
-
-            if status == true && (responseArray?.count)! > 0 {
-                self.postDetails = responseArray?[0]
-                DispatchQueue.main.async(execute: {
+        
                     self.tableView.reloadData()
-                    self.UpdateUI()
-                })
-            }
-           
-        }
         
         commentsTableView.dataSource = self
     
@@ -91,6 +77,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         addBorderToCommentsView()
         
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
+        self.UpdateUI()
 
         
         // Do any additional setup after loading the view.
@@ -325,12 +312,12 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let detail = postDetails {
             if isShowingDescription {
                 let key = "description\(indexPath.row+1)"
-                label.text = "step\(indexPath.row+1):" + ( detail[key] as? String)!
+                label.text = "step\(indexPath.row+1):" + (postDetails?.descriptionArray[indexPath.row])!   //( detail[key] as? String)!
 
             }
             else {
                 let key = "ingradients\(indexPath.row+1)"
-                label.text = "\(indexPath.row+1)." + ( detail[key] as? String)!
+                label.text = "\(indexPath.row+1)." + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
 
             }
         }
@@ -340,15 +327,13 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     func getRowCountForIngredients(coloumnKey:String)->Int {
         
+        
         var lenghth = 0
-        for i in 1...16 {
-            let key = "\(coloumnKey)\(i)"
-            if let value =  postDetails?[key]  as? String{
-                if value == "" {
-                    continue
-                }
-                lenghth = i
-            }
+        if coloumnKey == "" {
+            lenghth = (postDetails?.descriptionArray.count)!
+        }
+        else {
+            lenghth = (postDetails?.ingredientsArray.count)!
         }
         
         return lenghth
@@ -356,22 +341,21 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     //MARK: - Update UI
     func UpdateUI() {
-        self.userName.text = postDetails?["userName"] as? String
-        self.postName.text = postDetails?["dishName"] as? String
+        self.userName.text = postDetails?.userName //["userName"] as? String
+        self.postName.text = postDetails?.dishName //["dishName"] as? String
         
-        self.noOfSmilesLabel.text = postDetails?["loves"] as? String
-        self.timeToCookLabel.text = postDetails?["effort"] as? String
-        self.caloriesLabel.text = postDetails?["calories"] as? String
-        noOfCollectionLabel.text = postDetails?["collections"] as? String
-       // noOfCommentsLabel.text = postDetails?["comments"] as? String
-        if let name = postDetails?["dishName"] {
-            headingLabel.text = "How to prepare \(name))"
-
-        }
-
-
+        self.noOfSmilesLabel.text = "\(String(describing: postDetails?.loves))" //["loves"] as? String
+        self.timeToCookLabel.text = postDetails?.efforts
         
-        let  userId  = Int(postDetails?["userId"] as! String)!
+        self.caloriesLabel.text =  "100 mules"
+        
+        noOfCollectionLabel.text = "\(String(describing: postDetails?.noOfCollection))" //["collections"] as? String
+            headingLabel.text = "How to prepare \(postDetails?.dishName))"
+        
+        
+        let  userId  = "30"
+    
+    
 
         let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(userId)/user.jpg"
 
@@ -384,7 +368,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             }.resume()
 
         
-        URLSession.shared.dataTask(with: URL(string:postDetails?["ImagePath1"] as! String)!) { (data1, response, error) in
+        URLSession.shared.dataTask(with: URL(string:(postDetails?.ImagePath1)!)!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {
                 if let imageData = data1 {
                     self.mainImageview.image = UIImage(data: imageData)
@@ -392,9 +376,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             })
             }.resume()
         
-        
+
     }
-    
+
     //MARK: - Button IBAction
     
     @IBAction func backBtnAction(_ sender: Any) {
@@ -420,22 +404,16 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBAction func showIngredients(_ sender: Any) {
         isShowingDescription = false
-        if let name = postDetails?["dishName"] {
-            headingLabel.text = "\(name) Ingredients:"
-
-            
-        }
+            headingLabel.text = "\(postDetails?.dishName) Ingredients:"
 
         self.tableView.reloadData()
     }
 
     @IBAction func showDescription(_ sender: Any) {
         isShowingDescription = true
-        if let name = postDetails?["dishName"]
-        {
-            headingLabel.text = "How to prepare \(name):"
-            
-        }
+        
+            headingLabel.text = "How to prepare \(postDetails? .dishName ):"
+        
         self.tableView.reloadData()
     }
     
@@ -443,16 +421,6 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        self.navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        if segue.identifier == "showUserPosts" {
-            let userPostVc = (segue.destination as! UINavigationController).viewControllers[0] as! UserPostsController
-            //userPostVc.viewControllers[0]
-            userPostVc.selectedUSerID = Int(postDetails?["userId"] as! String)!
-
-        }
     }
  
 

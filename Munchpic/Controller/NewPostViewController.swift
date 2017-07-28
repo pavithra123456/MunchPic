@@ -581,17 +581,18 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             
             let post = PostModel()
             post.dishName = dishName
-            post.description1 = description1
-            post.description2 = description2
-            post.description3 = description3
-            post.description4 = description4
-            post.description5 = description5
-            post.description6 = description6
-            post.description7 = description7
-            post.description8 = description8
-            post.description9 = description9
-            post.description10 = description10
           
+            post.descriptionArray.append(description1)
+            post.descriptionArray.append(description2)
+            post.descriptionArray.append(description3)
+            post.descriptionArray.append(description4)
+            post.descriptionArray.append(description5)
+            post.descriptionArray.append(description6)
+            post.descriptionArray.append(description7)
+            post.descriptionArray.append(description8)
+            post.descriptionArray.append(description9)
+            post.descriptionArray.append(description10)
+
             
             post.category = category
             post.subCategory = subCategory

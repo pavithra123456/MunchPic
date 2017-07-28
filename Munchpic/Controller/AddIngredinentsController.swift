@@ -71,16 +71,13 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
 
             multipartFormData.append((self.postModel?.dishName.data(using: String.Encoding.utf8)!)!, withName: "dishName")
             
-            multipartFormData.append((self.postModel?.description1.data(using: String.Encoding.utf8)!)!, withName: "description1")
-            multipartFormData.append((self.postModel?.description2.data(using: String.Encoding.utf8)!)!, withName: "description2")
-            multipartFormData.append((self.postModel?.description3.data(using: String.Encoding.utf8)!)!, withName: "description3")
-            multipartFormData.append((self.postModel?.description4.data(using: String.Encoding.utf8)!)!, withName: "description4")
-            multipartFormData.append((self.postModel?.description5.data(using: String.Encoding.utf8)!)!, withName: "description5")
-            multipartFormData.append((self.postModel?.description6.data(using: String.Encoding.utf8)!)!, withName: "description6")
-            multipartFormData.append((self.postModel?.description7.data(using: String.Encoding.utf8)!)!, withName: "description7")
-            multipartFormData.append((self.postModel?.description8.data(using: String.Encoding.utf8)!)!, withName: "description8")
-            multipartFormData.append((self.postModel?.description9.data(using: String.Encoding.utf8)!)!, withName: "description9")
-            multipartFormData.append((self.postModel?.description10.data(using: String.Encoding.utf8)!)!, withName: "description10")
+            for i in 1...(self.postModel?.descriptionArray.count)!{
+                let ingredientsKay = "ingradients\(i)"
+
+                multipartFormData.append((self.postModel?.descriptionArray[i].data(using: String.Encoding.utf8)!)!, withName: ingredientsKay)
+
+            }
+           
 
             multipartFormData.append((self.ingredients1.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients1")
             multipartFormData.append((self.ingredients2.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients2")

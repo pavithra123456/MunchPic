@@ -45,7 +45,19 @@ class ServiceLayer: NSObject {
                         let model = PostModel()
                         model.postId = Int(postobject["postId"] as? String ?? "0")!
                         model.userName = postobject["userName"] as? String ?? ""
-                        model.description1 = postobject["description1"] as? String ?? ""
+                        
+                        model.descriptionArray.append(postobject["description1"] as? String ?? "")
+                        let coloumnKey = "description"
+                        for i in 1...16 {
+                            let key = "\(coloumnKey)\(i)"
+                            if let value =  postobject[key]  as? String{
+                                if value == "" {
+                                    continue
+                                }
+                                model.descriptionArray.append(value)
+                            }
+                        }
+                            
                         model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
                         if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
                             model.loves = loveCount
