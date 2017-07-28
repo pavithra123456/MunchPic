@@ -8,38 +8,45 @@
 
 import UIKit
 import Alamofire
-class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
+class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollViewDelegate{
 
     @IBOutlet weak var ingredients1: UITextField!
     @IBOutlet weak var ingredients2: UITextField!
-    
     @IBOutlet weak var ingredients3: UITextField!
-    
     @IBOutlet weak var ingredients4: UITextField!
-    
     @IBOutlet weak var ingredients5: UITextField!
-    
     @IBOutlet weak var ingredients6: UITextField!
-    
     @IBOutlet weak var ingredients7: UITextField!
-    
     @IBOutlet weak var ingredients8: UITextField!
-    
     @IBOutlet weak var ingredients9: UITextField!
-    
-    @IBOutlet weak var ingredients110: UITextField!
-    
+    @IBOutlet weak var ingredients10: UITextField!
     @IBOutlet weak var ingredients11: UITextField!
-    
     @IBOutlet weak var ingredients12: UITextField!
-    
     @IBOutlet weak var ingredients13: UITextField!
-    
     @IBOutlet weak var ingredients14: UITextField!
-    
     @IBOutlet weak var ingredients15: UITextField!
     
+    @IBOutlet weak var sv6: UIView!
+    
+    @IBOutlet weak var sv14: UIView!
+    @IBOutlet weak var sv13: UIView!
+    @IBOutlet weak var sv12: UIView!
+    @IBOutlet weak var sv11: UIView!
+    @IBOutlet weak var sv10: UIView!
+    @IBOutlet weak var sv9: UIView!
+    @IBOutlet weak var sv8: UIView!
+    @IBOutlet weak var sv7: UIView!
+    @IBOutlet weak var sv15: UIView!
+    
+    @IBOutlet weak var heightconstraint: NSLayoutConstraint!
+    var downint : Int = 6
+    var hconstant :Int = 10
+    
+    @IBOutlet weak var addview: UIView!
     var postModel : PostModel?
+    
+
+
     
     @IBOutlet weak var scrollview: UIScrollView!
     
@@ -47,14 +54,85 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 2200)
+        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
+//        mainstackview.contentMode = UIViewContentMode(rawValue: Int(scrollview.contentSize.height))!
     }
+    
     override func viewDidLayoutSubviews() {
         scrollview.isScrollEnabled = true
         scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
+        
+    }
+    
+    @IBAction func add_Action(_ sender: Any) {
+        
+        
+        
+        if(downint>15){
+            
+            Utility.showAlert(title: "Alert", message: "Maximum 15 Ingredients ", controller: self,completion:nil)
+            
+        }else{
+            
+            hconstant = hconstant + 60
+            heightconstraint.constant = CGFloat(hconstant)
+            
+            if(downint == 6){
+                sv6.isHidden = false
+            }else if(downint == 7){
+                sv7.isHidden = false
+                
+            }else if(downint == 8){
+                sv8.isHidden = false
+                
+            }else if(downint == 9){
+                sv9.isHidden = false
+                
+            }else if(downint == 10){
+                sv10.isHidden = false
+                
+            }else if(downint == 11){
+                sv11.isHidden = false
+                
+            }else if(downint == 12){
+                sv12.isHidden = false
+                
+            }else if(downint == 13){
+                sv13.isHidden = false
+                
+            }else if(downint == 14){
+                sv14.isHidden = false
+                
+            }else if(downint == 15){
+                sv15.isHidden = false
+                
+            }else{
+                
+            }
+            downint = downint+1
+        }
+        
+        
+        
+        
     }
 
     @IBAction func uploadBtnAction(_ sender: Any) {
+        let textfeildscount = 0
+        
+//        for i in 1...15 {
+//            
+//            let addedtext = "ingredients\(i)".text? as String
+//            
+//            if(addedtext.text? == ""){
+//                
+//            }else{
+//                textfeildscount = textfeildscount + 1
+//            }
+//            
+//        }
+        
+        
     
         var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.kInsertPost)!)
         url.httpMethod = "POST"
@@ -127,6 +205,8 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate{
 
         
     }
+    
+    
     
    
     override func didReceiveMemoryWarning() {

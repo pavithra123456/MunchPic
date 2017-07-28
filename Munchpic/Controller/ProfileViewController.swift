@@ -206,7 +206,7 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
         
         tableviewheight.constant = lovesTableView.contentSize.height
         mscrollview.contentSize.height = lovesTableView.contentSize.height + 300
-        collectionviewheight.constant = lovesTableView.contentSize.height
+        collectionviewheight.constant = collectionView.contentSize.height
         
         return cell
     }
