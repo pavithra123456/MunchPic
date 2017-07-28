@@ -16,16 +16,20 @@ class PostModel: NSObject {
     var subCategory = ""
     var cuisine = ""
     
-    var description1 = ""
-    var description2 = ""
-    var description3 = ""
-    var description4 = ""
-    var description5 = ""
-    var description6 = ""
-    var description7 = ""
-    var description8 = ""
-    var description9 = ""
-    var description10 = ""
+//    var description1 = ""
+//    var description2 = ""
+//    var description3 = ""
+//    var description4 = ""
+//    var description5 = ""
+//    var description6 = ""
+//    var description7 = ""
+//    var description8 = ""
+//    var description9 = ""
+//    var description10 = ""
+    
+    var descriptionArray = [String]()
+    var ingredientsArray = [String]()
+
     
     var noOfCollection = 0
     var comments = 0

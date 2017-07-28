@@ -258,7 +258,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             }
             
             cell.userName.text = postArray[indexPath.row].userName
-            cell.description1.text = postArray[indexPath.row].description1
+            cell.description1.text = postArray[indexPath.row].descriptionArray[0]
             cell.loves.text = "\(postArray[indexPath.row].loves)"
             //cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
             cell.useId = postArray[indexPath.row].userId
@@ -316,7 +316,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPostId = postArray[indexPath.row].postId
-        self.performSegue(withIdentifier: "showDetail1", sender: nil)
+        self.performSegue(withIdentifier: "showDetail1", sender: postArray[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -441,6 +441,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             appdelegate.isForWindowDetailView = true
             let detaILVC = segue.destination as! DetailViewController
             detaILVC.postId = selectedPostId
+            detaILVC.postDetails = sender as! PostModel
             selectedPostId = 0
         }
         if segue.identifier == "ShowSmilyView" {
