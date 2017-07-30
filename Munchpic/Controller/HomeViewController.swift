@@ -84,14 +84,14 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
         slidetimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector:#selector(HomeViewController.handleSwipeLeft(gesture:)), userInfo: nil, repeats: true)
-        let url = Constants.kBaseUrl + Constants.kGetPost + "userId=\(38)"
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
         //TODO: - Need Add nill check
         ServiceLayer.getPosts { (postArry, status, msg) in
-            
-            DispatchQueue.main.async(execute: {
+            DispatchQueue.main.async(execute: { 
                 MBProgressHUD.hide(for: self.view, animated: true)
+            })
+            DispatchQueue.main.async(execute: {
                 if let allPostArray = postArry {
                     self.postArray = allPostArray
                     self.Hometableview.reloadData()
@@ -316,7 +316,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedPostId = postArray[indexPath.row].postId
-        self.performSegue(withIdentifier: "showDetail1", sender: postArray[indexPath.row])
+        let detailVc = self.storyboard?.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
+        detailVc.postDetails = postArray[indexPath.row]
+        detailVc.postId = selectedPostId
+        self.navigationController?.pushViewController(detailVc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -437,8 +440,6 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail1" {
-            let appdelegate =  (UIApplication.shared.delegate as! AppDelegate)
-            appdelegate.isForWindowDetailView = true
             let detaILVC = segue.destination as! DetailViewController
             detaILVC.postId = selectedPostId
             detaILVC.postDetails = sender as! PostModel

@@ -95,6 +95,55 @@ class ProfileViewController: UIViewController{
                     model.ImagePath1 = postobject["ImagePath1"] as! String
                     model.dishName = postobject["dishName"] as! String
                     
+                    model.postId = Int(postobject["postId"] as? String ?? "0")!
+                    model.userName = postobject["userName"] as? String ?? ""
+                    model.dishName = postobject["dishName"] as? String ?? ""
+                    
+                    
+                    model.descriptionArray.append(postobject["description1"] as? String ?? "")
+                    var coloumnKey = "description"
+                    for i in 1...10 {
+                        let key = "\(coloumnKey)\(i)"
+                        if let value =  postobject[key]  as? String{
+                            if value == "" {
+                                continue
+                            }
+                            model.descriptionArray.append(value)
+                        }
+                    }
+                    
+                    coloumnKey = "ingradients"
+                    for i in 1...16 {
+                        let key = "\(coloumnKey)\(i)"
+                        if let value =  postobject[key]  as? String{
+                            if value == "" {
+                                continue
+                            }
+                            model.ingredientsArray.append(value)
+                        }
+                    }
+                    
+                    
+                    model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
+                    if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
+                        model.loves = loveCount
+                    }
+                    
+                    model.comments = Int(postobject["comments"] as? String ?? "0")!
+                    model.userId = Int(postobject["userId"] as! String )!
+                    model.noOfCollection = Int(postobject["collections"] as? String ?? "0")!
+                    model.comments = Int(postobject["comments"] as? String ?? "0")!
+                    
+                    model.efforts = postobject["difficulty"] as? String ?? ""
+                    model.difficulty = postobject["difficulty"] as? String ?? ""
+                    
+                    model.love1 = postobject["love1"] as? String ?? ""
+                    model.love2 = postobject["love2"] as? String ?? ""
+                    model.love3 = postobject["love3"] as? String ?? ""
+                    model.love4 = postobject["love4"] as? String ?? ""
+                    model.love5 = postobject["love5"] as? String ?? ""
+                    model.love6 = postobject["love6"] as? String ?? ""
+                    model.lovesStatus = postobject["lovesStatus"] as? String ?? ""
                     self.userPostsArray.append(model)
                 }
                 DispatchQueue.main.async {
@@ -215,11 +264,18 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
 //       let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
 //        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
 //        self.navigationController?.pushViewController(detailVc, animated: true)
-        let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
-        let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
-        postVc.postId = Int(lovesArray[indexPath.row].postId)!
-        print("needed array is = \(lovesArray[indexPath.row])")
-        self.navigationController?.pushViewController(postVc, animated: true)
+//        let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+//        let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
+//        postVc.postId = Int(lovesArray[indexPath.row].postId)!
+//        print("needed array is = \(lovesArray[indexPath.row])")
+//        self.navigationController?.pushViewController(postVc, animated: true)
+        
+        let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
+        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
+        detailVc.isDetaiLForLovedPost = true
+        self.navigationController?.pushViewController(detailVc, animated: true)
+
     }
 }
 
@@ -256,7 +312,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                     }
                 })
                 }.resume()
-            cell.nameLabel.text = userPostsArray[indexPath.row].dishName
+            cell.nameLabel.text = "" //userPostsArray[indexPath.row].dishName
         }
             
         else {
@@ -271,7 +327,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             URLSession.shared.dataTask(with: URL(string:obj["categoryImage"]!)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let imageData = data1 {
-                        cell.menuImage.image = UIImage(data: data1!)
+                        cell.menuImage.image = UIImage(data: imageData)
                         cell.nameLabel.backgroundColor = UIColor.clear
                         cell.labelTopHeight.constant = cell.frame.size.height/2 - 20
                     }
@@ -310,11 +366,19 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                 obj = userPostsArray[1 + section]
             }
             
-            let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
-            let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
-            postVc.postId = obj.postId //Int(lovesArray[indexPath.row].postId)!
-            print("needed array is = \(lovesArray[indexPath.row])")
-            self.navigationController?.pushViewController(postVc, animated: true)
+//            let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
+//            let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
+//            postVc.postId = obj.postId //Int(lovesArray[indexPath.row].postId)!
+//            print("needed array is = \(lovesArray[indexPath.row])")
+//            self.navigationController?.pushViewController(postVc, animated: true)
+            
+            
+            let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
+            detailVc.postDetails = obj
+            detailVc.postId = obj.postId // lovesArray[indexPath.row].postId
+            detailVc.isPostEditable = true
+            self.navigationController?.pushViewController(detailVc, animated: true)
             return
         }
         

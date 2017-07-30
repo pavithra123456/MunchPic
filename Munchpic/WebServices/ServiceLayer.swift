@@ -45,10 +45,12 @@ class ServiceLayer: NSObject {
                         let model = PostModel()
                         model.postId = Int(postobject["postId"] as? String ?? "0")!
                         model.userName = postobject["userName"] as? String ?? ""
+                        model.dishName = postobject["dishName"] as? String ?? ""
+
                         
                         model.descriptionArray.append(postobject["description1"] as? String ?? "")
-                        let coloumnKey = "description"
-                        for i in 1...16 {
+                        var coloumnKey = "description"
+                        for i in 1...10 {
                             let key = "\(coloumnKey)\(i)"
                             if let value =  postobject[key]  as? String{
                                 if value == "" {
@@ -57,7 +59,19 @@ class ServiceLayer: NSObject {
                                 model.descriptionArray.append(value)
                             }
                         }
-                            
+                        
+                        coloumnKey = "ingradients"
+                        for i in 1...16 {
+                            let key = "\(coloumnKey)\(i)"
+                            if let value =  postobject[key]  as? String{
+                                if value == "" {
+                                    continue
+                                }
+                                model.ingredientsArray.append(value)
+                            }
+                        }
+                        
+
                         model.ImagePath1 = postobject["ImagePath1"] as? String ?? ""
                         if let loveCount =  Int(postobject["loves"] as? String ?? "0") {
                             model.loves = loveCount
@@ -69,6 +83,8 @@ class ServiceLayer: NSObject {
                         model.comments = Int(postobject["comments"] as? String ?? "0")!
                         
                         model.efforts = postobject["difficulty"] as? String ?? ""
+                        model.difficulty = postobject["difficulty"] as? String ?? ""
+
                         model.love1 = postobject["love1"] as? String ?? ""
                         model.love2 = postobject["love2"] as? String ?? ""
                         model.love3 = postobject["love3"] as? String ?? ""
@@ -398,7 +414,7 @@ class ServiceLayer: NSObject {
             print("responseString = \(String(describing: responseString))")
             do {
                 let repsonseJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-                print(repsonseJson["result"])
+               // print(repsonseJson["result"])
                 completion(repsonseJson["result"] as? [[String : AnyObject]] as AnyObject, true, "Success")
             }
             catch {

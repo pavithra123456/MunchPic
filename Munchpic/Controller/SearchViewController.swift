@@ -129,8 +129,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         vc.cuisine = ""
         vc.subCategory = subCategory.rawValue
         
-        self.navigationController?.present(vc, animated: true, completion: nil)
-        //pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
 

@@ -26,8 +26,6 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appdelegate =  (UIApplication.shared.delegate as! AppDelegate)
-        if appdelegate .isForWindowDetailView == false {
             MBProgressHUD.showAdded(to: self.view, animated: true)
             
             ServiceLayer.getCornivals { (response, status, message) in
@@ -48,13 +46,7 @@ class WindowViewController: UIViewController,UICollectionViewDelegate,UICollecti
                     self.menucollectionview.reloadData()
                 }
             }
-        }
-            
-        else {
-            exploreByThemeView.frame =  CGRect(x: exploreByThemeView.frame.origin.x, y: exploreByThemeView.frame.origin.y, width: exploreByThemeView.frame.width, height: 40)// .width = 10
-            self.menucollectionview.isHidden = true
-            self.exploreBythemeLabel.isHidden = true
-        }
+        
 
         
         // Do any additional setup after loading the view.

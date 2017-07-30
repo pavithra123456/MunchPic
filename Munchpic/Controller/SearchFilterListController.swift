@@ -51,7 +51,10 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
+        
+        let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+              let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
+        detailVc.postDetails = fileteredArray[indexPath.row]
         detailVc.postId = fileteredArray[indexPath.row].postId
         self.navigationController?.pushViewController(detailVc, animated: true)
     }

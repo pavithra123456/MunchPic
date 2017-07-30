@@ -32,6 +32,7 @@
 		7B3715091F1E410700D4A406 /* AddIngredinentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3715081F1E410700D4A406 /* AddIngredinentsController.swift */; };
 		7B4182931EF64BCF003C6C3A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4182921EF64BCF003C6C3A /* Utility.swift */; };
 		7B444B011F05051D004FD557 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B444B001F05051D004FD557 /* User.swift */; };
+		7B5423571F2C9E3700109A10 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5423561F2C9E3700109A10 /* SplashScreenController.swift */; };
 		7B5A6EE51EE7BFDF00197241 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A6EE31EE7BFDF00197241 /* CustomCollectionViewCell.swift */; };
 		7B5A6EE61EE7BFDF00197241 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A6EE41EE7BFDF00197241 /* CustomTableViewCell.swift */; };
 		7B5A6EE81EE7C35400197241 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5A6EE71EE7C35400197241 /* DashboardViewController.swift */; };
@@ -131,6 +132,7 @@
 		7B3715081F1E410700D4A406 /* AddIngredinentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddIngredinentsController.swift; sourceTree = "<group>"; };
 		7B4182921EF64BCF003C6C3A /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		7B444B001F05051D004FD557 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7B5423561F2C9E3700109A10 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
 		7B5A6EE31EE7BFDF00197241 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		7B5A6EE41EE7BFDF00197241 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		7B5A6EE71EE7C35400197241 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				7B3715081F1E410700D4A406 /* AddIngredinentsController.swift */,
 				7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */,
 				7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */,
+				7B5423561F2C9E3700109A10 /* SplashScreenController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */,
 				7B24DF931EFFC08F00AD85EA /* SearchHeaderView.swift in Sources */,
 				7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */,
+				7B5423571F2C9E3700109A10 /* SplashScreenController.swift in Sources */,
 				C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */,
 				7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */,
 				7BAF12EB1F2A559A00F8BA63 /* SmilesViewController.swift in Sources */,

@@ -12,16 +12,19 @@ let offset_HeaderStop:CGFloat = 40.0 // At this offset the Header stops its tran
 let offset_B_LabelHeader:CGFloat = 95.0 // At this offset the Black label reaches the Header
 let distance_W_LabelHeader:CGFloat = 35.0 // The distance between the bottom of the Header and the top of the White Label
 
-class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate{
+class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UITextViewDelegate {
 
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var collectionLabel: UILabel!
+    @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var mainImageview: UIImageView!
     @IBOutlet weak var postName: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userPic: UIImageView!
     
+    @IBOutlet weak var commentsViewChatImage: UIImageView!
     
     @IBOutlet weak var commentsview: UIView!
     @IBOutlet weak var collectionListView: UIView!
@@ -52,7 +55,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     @IBOutlet weak var radioBtn5: RadioButton!
     @IBOutlet weak var radioBtn6: RadioButton!
     
-    @IBOutlet weak var noOfCollectionLabel: UILabel!
+    @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var noOfCommentsLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!
     @IBOutlet weak var noOfSmilesLabel: UILabel!
@@ -62,37 +65,96 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBOutlet weak var headerView: UIView!
     
+    @IBOutlet weak var DifficultyView: UIView!
+
+    @IBOutlet weak var difficultyImage: UIImageView!
+    //MAR: - Edit btn
+    @IBOutlet weak var editPostsBtn: UIButton!
+    var isPostEditable = false
+    var isDetaiLForLovedPost = false
+
+    
+    //MARK: - BottomView 
+    @IBOutlet weak var stackview: UIStackView!
+    @IBOutlet weak var addcommentView: BorderedView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         tableView.estimatedRowHeight = 15
         
-                    self.tableView.reloadData()
         
         commentsTableView.dataSource = self
     
         addGuestures()
         getcooments()
         addBorderToCommentsView()
-        
+        navigationController?.setNavigationBarHidden(true, animated: true)
+
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
+        
+          self.editPostsBtn.isHidden = true
+               self.navigationController?.navigationBar.isHidden = true
+        if isPostEditable  || isDetaiLForLovedPost{
+            stackview.isHidden = true
+            addcommentView.isHidden = true
+        }
+      
+        if isPostEditable{
+            self.editPostsBtn.isHidden = false
+        }
+        
+        if postDetails == nil {
+            getPostDetails()
+            return
+        }
+        
+                if let img = postDetails?.difficulty {
+            let imageName = "Easy\(img)"
+            difficultyImage.image = UIImage(named: imageName)
+        }
+        
         self.UpdateUI()
 
-        
+
         // Do any additional setup after loading the view.
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
+    
+    func getPostDetails () {
+        ServiceLayer.getPostDetails(forPostId: postId) { (responseArray , status, msg) in
+            
+            DispatchQueue.main.async(execute: {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            })
+            
+            if status == true && (responseArray?.count)! > 0 {
+                self.postDetails = PostModel.getmodel(postobject: (responseArray?[0])!)
+                
+                DispatchQueue.main.async(execute: {
+                    self.UpdateUI()
+//                    self.ingrediantstable.estimatedRowHeight = 80;
+//                    self.ingrediantstable.rowHeight = UITableViewAutomaticDimension;
+//                    self.ingrediantordicrstr = "Ingrediantsneeded"
+//                    self.loadingrediantsTabledata()
+                   self.tableView.reloadData()
+//                    
+                    
+                })
+            }
+            
+        }
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func addBorderToCommentsView() {
-        commentsTextviewContainer.layer.cornerRadius = 8.0
-        commentsTextviewContainer.layer.borderWidth = 1
-        
-        commentsTextviewContainer.layer.masksToBounds = true;
-        commentsTextviewContainer.layer.borderColor = UIColor.red.cgColor
+//        commentsTextviewContainer.layer.cornerRadius = 8.0
+//        commentsTextviewContainer.layer.borderWidth = 1
+//        
+//        commentsTextviewContainer.layer.masksToBounds = true;
+//        commentsTextviewContainer.layer.borderColor = UIColor.red.cgColor
     }
     
     func getcooments() {
@@ -104,16 +166,16 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             
             DispatchQueue.main.async(execute: {
                 //self.commentsview.isHidden = false
-                if self.commentsArray.count == 0 {
-                    self.commentsTableViewHeight.constant = 0
-                    self.commentsContainerHeight.constant = 90
-                    self.commentsview.layoutIfNeeded()
-                }
-                else {
-                    self.commentsTableViewHeight.constant = 168
-                    self.commentsContainerHeight.constant = 252
-                    self.commentsview.layoutIfNeeded()
-                }
+//                if self.commentsArray.count == 0 {
+//                    self.commentsTableViewHeight.constant = 0
+//                    self.commentsContainerHeight.constant = 90
+//                    self.commentsview.layoutIfNeeded()
+//                }
+//                else {
+//                    self.commentsTableViewHeight.constant = 168
+//                    self.commentsContainerHeight.constant = 252
+//                    self.commentsview.layoutIfNeeded()
+//                }
                 self.commentsTableView.reloadData()
                 self.commentsTableView.tableFooterView = UIView()
             })
@@ -142,7 +204,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         self.commentsview.isHidden = true
         self.collectionListView.isHidden = true
         self.tapguesture?.isEnabled = false
-        
+        self.DifficultyView.isHidden = true
     }
 
     @IBAction func addLoves(_ sender: UIButton) {
@@ -312,12 +374,12 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let detail = postDetails {
             if isShowingDescription {
                 let key = "description\(indexPath.row+1)"
-                label.text = "step\(indexPath.row+1):" + (postDetails?.descriptionArray[indexPath.row])!   //( detail[key] as? String)!
+                label.text = "step\(indexPath.row+1) : " + (postDetails?.descriptionArray[indexPath.row])!   //( detail[key] as? String)!
 
             }
             else {
                 let key = "ingradients\(indexPath.row+1)"
-                label.text = "\(indexPath.row+1)." + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
+                label.text = "\(indexPath.row+1). " + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
 
             }
         }
@@ -329,12 +391,15 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         var lenghth = 0
-        if coloumnKey == "" {
-            lenghth = (postDetails?.descriptionArray.count)!
+        if let _ = self.postDetails {
+            if coloumnKey == "description" {
+                lenghth = (postDetails?.descriptionArray.count)!
+            }
+            else {
+                lenghth = (postDetails?.ingredientsArray.count)!
+            }
         }
-        else {
-            lenghth = (postDetails?.ingredientsArray.count)!
-        }
+        
         
         return lenghth
     }
@@ -343,14 +408,20 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     func UpdateUI() {
         self.userName.text = postDetails?.userName //["userName"] as? String
         self.postName.text = postDetails?.dishName //["dishName"] as? String
-        
-        self.noOfSmilesLabel.text = "\(String(describing: postDetails?.loves))" //["loves"] as? String
+        if let loveCount = self.postDetails?.loves {
+            self.noOfSmilesLabel.text = "\(loveCount)" //["loves"] as? String
+        }
+        if let collectionCount = self.postDetails?.difficulty {
+            self.difficultyLabel.text = "\(collectionCount)" //["loves"] as? String
+        }
+        if let dishName = postDetails?.dishName {
+            self.postName.text = dishName //["dishName"] as? String
+            headingLabel.text = "How to prepare \(dishName)"
+        }
+
         self.timeToCookLabel.text = postDetails?.efforts
         
         self.caloriesLabel.text =  "100 mules"
-        
-        noOfCollectionLabel.text = "\(String(describing: postDetails?.noOfCollection))" //["collections"] as? String
-            headingLabel.text = "How to prepare \(postDetails?.dishName))"
         
         
         let  userId  = "30"
@@ -382,39 +453,83 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     //MARK: - Button IBAction
     
     @IBAction func backBtnAction(_ sender: Any) {
-        let appdelegate =  (UIApplication.shared.delegate as! AppDelegate)
-
-        appdelegate.isForWindowDetailView = false
         self.navigationController?.navigationBar.isHidden = false
         navigationController?.setNavigationBarHidden(false, animated: true)
 
         let _ = self.navigationController?.popViewController(animated: true)
         
+//        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showCommwntsView(_ sender: Any) {
         commentsview.isHidden = false
         tapguesture?.isEnabled = true
+        self.collectionLabel.textColor = UIColor.black
+        self.commentsLabel.textColor = UIColor.white
+        self.commentsview.isHidden = false
+        if commentsArray.count == 0 {
+            self.commentsview.isHidden = true
+            tapguesture?.isEnabled = false
+            Utility.showAlert(title: "MunchPic", message: "No comments", controller: self, completion: nil)
+        }
+
     }
     
     @IBAction func showCollectioList(_ sender: Any) {
         collectionListView.isHidden = false
         tapguesture?.isEnabled = true
+        self.collectionLabel.textColor = UIColor.white
+        self.commentsLabel.textColor = UIColor.black
     }
     
     @IBAction func showIngredients(_ sender: Any) {
         isShowingDescription = false
-            headingLabel.text = "\(postDetails?.dishName) Ingredients:"
+            headingLabel.text = "\(String(describing: postDetails?.dishName)) Ingredients:"
 
         self.tableView.reloadData()
     }
 
+    @IBAction func showDifficultyView(_ sender: Any) {
+        self.DifficultyView.isHidden = false
+        tapguesture?.isEnabled = true
+
+    }
+    
     @IBAction func showDescription(_ sender: Any) {
         isShowingDescription = true
         
-            headingLabel.text = "How to prepare \(postDetails? .dishName ):"
+            headingLabel.text = "How to prepare \(String(describing: postDetails? .dishName )):"
         
         self.tableView.reloadData()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView.text == "" {
+            textView.text = "Add Comment"
+            textView.textColor = UIColor.lightGray
+            commentsViewChatImage.image = UIImage(named: "commentnew")
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        commentsViewChatImage.image = UIImage(named: "iconright")
+        textView.text = ""
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
+    {
+        if textView.text == "Add Comment" && text != ""{
+            textView.text = ""
+            textView.textColor = UIColor.black
+            commentsViewChatImage.image = UIImage(named: "iconright")
+            
+            
+        }
+        if textView.text == "Add Comment" && text == ""{
+            return  false
+        }
+        return  true
     }
     
     // MARK: - Navigation

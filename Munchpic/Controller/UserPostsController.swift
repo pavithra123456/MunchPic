@@ -103,9 +103,6 @@ class UserPostsController: UIViewController,UITableViewDataSource,UITableViewDel
         // Pass the selected object to the new view controller.
         let detaILVC = segue.destination as! DetailViewController
         detaILVC.postId = selectedPostId
-        let appdelegate =  (UIApplication.shared.delegate as! AppDelegate)
-
-        appdelegate.isForWindowDetailView = true
     }
  
 
