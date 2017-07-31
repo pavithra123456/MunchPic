@@ -94,12 +94,10 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         addGuestures()
         getcooments()
         addBorderToCommentsView()
-        //navigationController?.setNavigationBarHidden(true, animated: true)
 
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
         
           self.editPostsBtn.isHidden = true
-               self.navigationController?.navigationBar.isHidden = true
         if isPostEditable  || isDetaiLForLovedPost{
             stackview.isHidden = true
             addcommentView.isHidden = true
