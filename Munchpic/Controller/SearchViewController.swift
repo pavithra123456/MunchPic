@@ -96,7 +96,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         vc.cuisine = cuisineArray[indexPath.row].rawValue
         vc.subCategory = ""
         
-        self.navigationController?.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
 
     }
     /*
@@ -128,7 +128,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         vc.category = category
         vc.cuisine = ""
         vc.subCategory = subCategory.rawValue
-        self.navigationController?.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func vegBtnAction(_ sender: UIButton) {

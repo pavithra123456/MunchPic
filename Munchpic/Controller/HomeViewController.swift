@@ -281,6 +281,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 DispatchQueue.main.async(execute: {
                     if let imageData = data1 {
                         cell.foodrecipeImage.image = UIImage(data: imageData)
+                        cell.foodrecipeImage.backgroundColor = UIColor.clear
                     }
                 })
                 }.resume()

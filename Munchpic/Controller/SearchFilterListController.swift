@@ -23,10 +23,10 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
         super.viewDidLoad()
         
         if subCategory == "" {
-            navigationTitleLabel.text = "\(category)/\(cuisine)"
+            self.navigationItem.title = "\(category)/\(cuisine)"
         }
         else {
-            navigationTitleLabel.text = "\(category)/\(subCategory)"
+             self.navigationItem.title = "\(category)/\(subCategory)"
         }
         filter()
         // Do any additional setup after loading the view.
