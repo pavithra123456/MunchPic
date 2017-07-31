@@ -8,7 +8,7 @@
 
 import UIKit
 enum CollectionCategory :String {
-    case FastFood 
+    case FastFood
     case Sweets
     case Gravy
     case Deserts
@@ -18,7 +18,7 @@ enum CollectionCategory :String {
 
 class ProfileViewController: UIViewController{
     @IBOutlet weak var profilePic: UIImageView!
-
+    
     @IBOutlet weak var mscrollview: UIScrollView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var lovesTableView: UITableView!
@@ -31,7 +31,7 @@ class ProfileViewController: UIViewController{
     var lovesArray = [ProfilkeLovesModel]()
     var userPostsArray = [PostModel]()
     var collectionViewDataValue = "posts"
-
+    
     @IBOutlet weak var tableviewheight: NSLayoutConstraint!
     @IBOutlet weak var collectionviewheight: NSLayoutConstraint!
     
@@ -40,10 +40,9 @@ class ProfileViewController: UIViewController{
         collectionView.dataSource = self
         collectionView.delegate = self
         lovesTableView.delegate = self
-        self.collectionView.isHidden = false
-        self.collectionView.reloadData()
-//        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
-//        self.collectionview.reloadData()
+        
+        //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
+        //        self.collectionview.reloadData()
         
         // Do any additional setup after loading the view.
         
@@ -59,25 +58,34 @@ class ProfileViewController: UIViewController{
                     }
                 })
                 }.resume()
-
+            
             
         }
+        getUserPosts()
+
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        mscrollview.contentSize.height = self.view.frame.size.height
-        self.lovesTableView.isHidden = true
-        self.collectionView.isHidden = false
-        collectionView.reloadData()
-
+    override func viewDidLayoutSubviews() {
+        collectionviewheight.constant = collectionView.contentSize.height
+        collectionView.isHidden = false
+        self.cameraButtonAction(nil)
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        getUserPosts()
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.getCollectioncategories()
         getLoves()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+
+        mscrollview.contentSize.height = self.view.frame.size.height
+        
+        collectionView.reloadData()
+        if lovesTableView.isHidden {
+            self.collectionView.isHidden = false
+        }
+        
     }
     
     
@@ -147,13 +155,16 @@ class ProfileViewController: UIViewController{
                     self.userPostsArray.append(model)
                 }
                 DispatchQueue.main.async {
+                    self.collectionView.isHidden = false
+                    self.collectionviewheight.constant = self.collectionView.contentSize.height
+                    
                     self.collectionView.reloadData()
                     
                 }
                 
             }
         }
-
+        
     }
     
     func getCollectioncategories() {
@@ -170,27 +181,29 @@ class ProfileViewController: UIViewController{
             self.lovesArray = lovesArray!
             DispatchQueue.main.async(execute: {
                 self.lovesTableView.reloadData()
-                
             })
         }
     }
     
     //MARK: - ButtonActions
     
-    @IBAction func collectionButtonAction(_ sender: Any) {
+    @IBAction func collectionButtonAction(_ sender: Any?) {
         mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "collection"
+        collectionviewheight.constant = collectionView.contentSize.height
+        
         collectionView.reloadData()
     }
     
-    @IBAction func cameraButtonAction(_ sender: Any) {
+    @IBAction func cameraButtonAction(_ sender: Any?) {
+        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "posts"
+        collectionviewheight.constant = collectionView.contentSize.height
         self.collectionView.reloadData()
-        
     }
     
     @IBAction func lovesButtonAction(_ sender: Any) {
@@ -215,18 +228,18 @@ class ProfileViewController: UIViewController{
     }
     
     
-   
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
@@ -237,10 +250,10 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         if cell is LovesTableViewCell {
-           let loveCell =  cell as! LovesTableViewCell
+            let loveCell =  cell as! LovesTableViewCell
             loveCell.postName.text = lovesArray[indexPath.row].dishName
             loveCell.creationDateLabel.text = lovesArray[indexPath.row].dateSaved
-           
+            
             
             
             let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(lovesArray[indexPath.row].postedUserId)/\(lovesArray[indexPath.row].postId)_post1.jpg"
@@ -261,22 +274,13 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//       let detailVc =  self.storyboard?.instantiateViewController(withIdentifier: "PostDetailCntrl") as! DetailViewController
-//        detailVc.postId = Int(lovesArray[indexPath.row].postId)!
-//        self.navigationController?.pushViewController(detailVc, animated: true)
-//        let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
-//        let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
-//        postVc.postId = Int(lovesArray[indexPath.row].postId)!
-//        print("needed array is = \(lovesArray[indexPath.row])")
-//        self.navigationController?.pushViewController(postVc, animated: true)
-        
-        let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+                let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
         let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
         detailVc.postId = Int(lovesArray[indexPath.row].postId)!
         detailVc.isDetaiLForLovedPost = true
         UserDefaults.standard.set(false, forKey: "editvisible")
         self.navigationController?.pushViewController(detailVc, animated: true)
-
+        
     }
 }
 
@@ -306,6 +310,31 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                 obj = userPostsArray[1 + section]
             }
             
+            if indexPath.section % 2 == 0 {
+                
+                if indexPath.row == 0 {
+                    cell.menuImage.backgroundColor = UIColor(red: 125, green: 138, blue: 50)
+                }
+                else {
+                    cell.menuImage.backgroundColor = UIColor(red: 158, green: 107, blue: 58)
+                }
+                
+                
+            }
+            else {
+                
+                
+                if indexPath.row == 0 {
+                    
+                    cell.menuImage.backgroundColor = UIColor(red: 158, green: 107, blue: 58)
+                }
+                else {
+                    cell.menuImage.backgroundColor = UIColor(red: 125, green: 138, blue: 50)
+                }
+                
+            }
+            
+            
             URLSession.shared.dataTask(with: URL(string:obj.ImagePath1)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let imageData = data1 {
@@ -313,6 +342,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                     }
                 })
                 }.resume()
+            
             cell.nameLabel.text = "" //userPostsArray[indexPath.row].dishName
         }
             
@@ -320,7 +350,30 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             var obj = collectionArray[indexPath.row]
             if indexPath.row == 0 {
                 obj = collectionArray[ section]
-                cell.nameLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0)
+                //cell.nameLabel.backgroundColor =
+                if indexPath.section % 2 == 0 {
+                   
+                    if indexPath.row == 0 {
+                        cell.nameLabel.backgroundColor = UIColor(red: 125, green: 138, blue: 50)
+                    }
+                    else {
+                        cell.nameLabel.backgroundColor = UIColor(red: 158, green: 107, blue: 58)
+                    }
+
+                    
+                }
+                else {
+                    
+                    
+                    if indexPath.row == 0 {
+                        
+                        cell.nameLabel.backgroundColor = UIColor(red: 158, green: 107, blue: 58)
+                    }
+                    else {
+                       cell.nameLabel.backgroundColor = UIColor(red: 125, green: 138, blue: 50)
+                    }
+
+                }
             }
             else {
                 obj = collectionArray[1 + section]
@@ -343,7 +396,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         collectionviewheight.constant = collectionView.contentSize.height
         mscrollview.contentSize.height = collectionView.contentSize.height + 300
         
-
+        
         return cell
         
     }
@@ -366,13 +419,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             else {
                 obj = userPostsArray[1 + section]
             }
-            
-//            let storyboard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
-//            let postVc =  storyboard.instantiateViewController(withIdentifier: "showpostdetails") as! GetPostDetailsViewController
-//            postVc.postId = obj.postId //Int(lovesArray[indexPath.row].postId)!
-//            print("needed array is = \(lovesArray[indexPath.row])")
-//            self.navigationController?.pushViewController(postVc, animated: true)
-            
             
             let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
             let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
@@ -404,15 +450,15 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
     }
     
 }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 

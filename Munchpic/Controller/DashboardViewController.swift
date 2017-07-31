@@ -55,6 +55,7 @@ class DashboardViewController: UIViewController {
         
         searchContainer.isHidden = true
         searchBorder?.isHidden = true
+        self.navigationItem.title = "UserPOSTS"
     }
 
     @IBAction func serachBtnAction(_ sender: Any) {

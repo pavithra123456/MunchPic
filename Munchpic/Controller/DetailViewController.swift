@@ -84,18 +84,18 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         tableView.estimatedRowHeight = 15
-<<<<<<< HEAD
         editPostsBtn.isHidden = true
-=======
         tableView.isUserInteractionEnabled = true
         tableView.isScrollEnabled = true
 
->>>>>>> 7af74898d1806b77b8513a92b8c1f703c72d0abc
+
         
         if(UserDefaults.standard.bool(forKey: "editvisible") == true){
             
             editPostsBtn.isHidden = false
         }
+        scrollview.delegate = nil
+        tableView.delegate = self
         
         commentsTableView.dataSource = self
     
@@ -317,12 +317,12 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 //            //headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
 //            
 //            headerView.layer.transform = headerTransform
-            headerView.alpha = 0
+           // headerView.alpha = 0
         }
             
         else if (offset > 730) && (offset < 800) {
-            headerView.frame .origin = CGPoint(x: headerView.frame.origin.x, y: headerView.frame.origin.y-1)
-//            headerTransform = CATransform3DTranslate(headerTransform, 0,headerView.frame.origin.y+1 , 0)
+//            headerView.frame .origin = CGPoint(x: headerView.frame.origin.x, y: headerView.frame.origin.y-1)
+////            headerTransform = CATransform3DTranslate(headerTransform, 0,headerView.frame.origin.y+1 , 0)
             headerView.alpha = 1
             
         }
@@ -561,10 +561,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
     
-<<<<<<< HEAD
-    
- 
-=======
+
     //MARK: - Comments actions
     func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
@@ -593,6 +590,5 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             }
         }
     }
->>>>>>> 7af74898d1806b77b8513a92b8c1f703c72d0abc
 
 }
