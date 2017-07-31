@@ -64,6 +64,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
               let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
         detailVc.postDetails = fileteredArray[indexPath.row]
         detailVc.postId = fileteredArray[indexPath.row].postId
+        UserDefaults.standard.set(false, forKey: "editvisible")
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
     

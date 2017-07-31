@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import MBProgressHUD
 
 class NewPostViewController: UIViewController,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate,UITextFieldDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
     
@@ -29,6 +30,10 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     var index = 0
     let swipeGestureLeft = UISwipeGestureRecognizer()
     let swipeGestureRight = UISwipeGestureRecognizer()
+    var postIdis = Int()
+    var postDetails :[String:AnyObject]?
+    
+    
     @IBOutlet var mscrollview: UIScrollView!
     
     @IBOutlet var selectCategory: UITextField!
@@ -99,11 +104,57 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         cuisinearray = ["Select Cuisine","North Indian","Rajasthani","Chinese","South Indian","North_East Indian"]
         
         categorytable.isHidden = true
+        
+        if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            ServiceLayer.getPostDetails(forPostId: postIdis) { (responseArray , status, msg) in
+                
+                DispatchQueue.main.async(execute: {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                })
+                
+                if status == true && (responseArray?.count)! > 0 {
+                    self.postDetails = responseArray?[0]
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.UpdateUI()
+                        
+                        
+                    })
+                }
+                
+            }
+
+        }
+        
     }
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
         mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+350)
+    }
+    
+    func UpdateUI(){
+        
+        titileTextField.text = postDetails?["dishName"] as? String
+        selectCategory.text = postDetails?["subCategory"] as? String
+        selectcuisine.text = postDetails?["cuisine"] as? String
+        step1.text = postDetails?["description1"] as? String
+        step2.text = postDetails?["description2"] as? String
+        setp3.text = postDetails?["description3"] as? String
+        step4.text = postDetails?["description4"] as? String
+        step5.text = postDetails?["description5"] as? String
+        step6.text = postDetails?["description6"] as? String
+        step7.text = postDetails?["description7"] as? String
+        step8.text = postDetails?["description8"] as? String
+        step9.text = postDetails?["description9"] as? String
+        step10.text = postDetails?["description10"] as? String
+        timelabel.text = postDetails?["duration"] as? String
+        veglabel.text = postDetails?["category"] as? String
+        
+        
+        
     }
     
     //Left gesture
@@ -605,14 +656,17 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             post.difficulty = "\(difficulty)"
             post.efforts = self.timelabel.text!
             
+           
+            
+            
+            
             self.performSegue(withIdentifier: "AddIngredients", sender: post)
             
         }
         
     }
     
-    
-    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -630,6 +684,14 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             let vc =  segue.destination as! AddIngredinentsController
             
             vc .postModel = sender as? PostModel
+            
+            
+            if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+                
+                vc.postIdis = postIdis
+                
+            }
+            
             
         }
     }

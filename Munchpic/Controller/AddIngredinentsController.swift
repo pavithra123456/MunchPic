@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import MBProgressHUD
+
 class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollViewDelegate{
 
     @IBOutlet weak var ingredients1: UITextField!
@@ -44,6 +46,8 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
     
     @IBOutlet weak var addview: UIView!
     var postModel : PostModel?
+    var postDetails :[String:AnyObject]?
+    var postIdis = Int()
     
 
 
@@ -56,11 +60,59 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
         // Do any additional setup after loading the view.
         scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
 //        mainstackview.contentMode = UIViewContentMode(rawValue: Int(scrollview.contentSize.height))!
+        
+        
+        if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            ServiceLayer.getPostDetails(forPostId: postIdis) { (responseArray , status, msg) in
+                
+                DispatchQueue.main.async(execute: {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                })
+                
+                if status == true && (responseArray?.count)! > 0 {
+                    self.postDetails = responseArray?[0]
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.UpdateUI()
+                        
+                        
+                    })
+                }
+                
+            }
+            
+        }
+
     }
     
     override func viewDidLayoutSubviews() {
         scrollview.isScrollEnabled = true
         scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
+        
+    }
+    
+    func UpdateUI(){
+        
+       
+        ingredients1.text = postDetails?["ingradients1"] as? String
+        ingredients2.text = postDetails?["ingradients2"] as? String
+        ingredients3.text = postDetails?["ingradients3"] as? String
+        ingredients4.text = postDetails?["ingradients4"] as? String
+        ingredients5.text = postDetails?["ingradients5"] as? String
+        ingredients6.text = postDetails?["ingradients6"] as? String
+        ingredients7.text = postDetails?["ingradients7"] as? String
+        ingredients8.text = postDetails?["ingradients8"] as? String
+        ingredients9.text = postDetails?["ingradients9"] as? String
+        ingredients10.text = postDetails?["ingradients10"] as? String
+        ingredients11.text = postDetails?["ingradients11"] as? String
+        ingredients12.text = postDetails?["ingradients12"] as? String
+        ingredients13.text = postDetails?["ingradients13"] as? String
+        ingredients14.text = postDetails?["ingradients14"] as? String
+        ingredients15.text = postDetails?["ingradients15"] as? String
+        
+
         
     }
     
@@ -116,6 +168,8 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
         
         
     }
+    
+    
 
     @IBAction func uploadBtnAction(_ sender: Any) {
         let textfeildscount = 0
@@ -132,9 +186,22 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
 //            
 //        }
         
+        let mystr : String
         
+        if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+            
+             mystr = (Constants.kBaseUrl + Constants.KUpdateUserPost)
+            
+            
+        }else{
+            
+            mystr  = (Constants.kBaseUrl + Constants.kInsertPost)
+        }
+
+        var url = URLRequest(url: URL(string: mystr)!)
+
     
-        var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.kInsertPost)!)
+        
         url.httpMethod = "POST"
         Alamofire.upload(multipartFormData: { (multipartFormData) in
         
@@ -149,13 +216,21 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
 
             multipartFormData.append((self.postModel?.dishName.data(using: String.Encoding.utf8)!)!, withName: "dishName")
             
+//            for i in 1...(self.postModel?.descriptionArray.count)!{
+//                let ingredientsKay = "ingradients\(i)"
+//
+//                multipartFormData.append((self.postModel?.descriptionArray[i].data(using: String.Encoding.utf8)!)!, withName: ingredientsKay)
+//
+//            }
+            
             for i in 1...(self.postModel?.descriptionArray.count)!{
-                let ingredientsKay = "ingradients\(i)"
-
-                multipartFormData.append((self.postModel?.descriptionArray[i].data(using: String.Encoding.utf8)!)!, withName: ingredientsKay)
-
+                
+                let ingredientsKay = "description\(i)"
+                let j = i - 1
+                
+                multipartFormData.append((self.postModel?.descriptionArray[j].data(using: String.Encoding.utf8)!)!, withName: ingredientsKay)
+                
             }
-           
 
             multipartFormData.append((self.ingredients1.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients1")
             multipartFormData.append((self.ingredients2.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients2")
@@ -164,16 +239,22 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
             multipartFormData.append((self.ingredients5.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients5")
             multipartFormData.append((self.ingredients6.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients6")
             multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients7")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients8")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients9")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients10")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients11")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients12")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients13")
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients14")
-
-            multipartFormData.append((self.ingredients7.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients15")
-
+            multipartFormData.append((self.ingredients8.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients8")
+            multipartFormData.append((self.ingredients9.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients9")
+            multipartFormData.append((self.ingredients10.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients10")
+            multipartFormData.append((self.ingredients11.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients11")
+            multipartFormData.append((self.ingredients12.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients12")
+            multipartFormData.append((self.ingredients13.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients13")
+            multipartFormData.append((self.ingredients14.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients14")
+            multipartFormData.append((self.ingredients15.text?.data(using: String.Encoding.utf8)!)!, withName: "ingradients15")
+           
+            if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+                
+            let xString : String =  "\(self.postIdis)"
+            multipartFormData.append((xString.data(using: String.Encoding.utf8)!), withName: "postId")
+                
+            }
+            
 
 
             multipartFormData.append((self.postModel?.cuisine.data(using: String.Encoding.utf8)!)!, withName: "cuisine")
@@ -190,7 +271,13 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
                     DispatchQueue.main.async {
                         
                         Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:{(action) in
-                            self.navigationController?.popViewController(animated: true)
+//                            if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+//                                
+//                            }else{
+                            
+                                self.navigationController?.popViewController(animated: true)
+//                            }
+                            
                         })
                     }
                 })

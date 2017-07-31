@@ -319,6 +319,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         let detailVc = self.storyboard?.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
         detailVc.postDetails = postArray[indexPath.row]
         detailVc.postId = selectedPostId
+        UserDefaults.standard.set(false, forKey: "editvisible")
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
     

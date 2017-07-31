@@ -35,6 +35,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     @IBOutlet weak var itemname: UILabel!
     @IBOutlet weak var tableheightconstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var editbtn: UIButton!
     @IBOutlet weak var effortview: UIView!
     @IBOutlet weak var effortlevelimage: UIImageView!
     
@@ -45,7 +46,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
     var postId = Int()
     var postDetails :[String:AnyObject]?
     var ingrediantordicrstr = NSString()
-    
+    var isPostEditable = Bool()
     var ingrediantsarray = NSMutableArray()
     
     override func viewDidLoad() {
@@ -54,6 +55,7 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         emojis_view.isHidden = true
         commentsview.isHidden = true
         effortview.isHidden = true
+        editbtn.isHidden = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GetPostDetailsViewController.closeview))
         self.view.addGestureRecognizer(tapGesture)
@@ -90,6 +92,11 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
                 })
             }
             
+        }
+        
+        if(isPostEditable == true){
+            
+            editbtn.isHidden = false
         }
 
     }
@@ -265,6 +272,13 @@ class GetPostDetailsViewController: UIViewController,UITableViewDelegate,UITable
         self.ingrediantstable.reloadData()
        
     }
+    
+    @IBAction func editpost_Action(_ sender: Any) {
+        
+        
+        
+    }
+    
     
 
     func numberOfSections(in tableView: UITableView) -> Int {

@@ -83,7 +83,12 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         tableView.estimatedRowHeight = 15
+        editPostsBtn.isHidden = true
         
+        if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+            
+            editPostsBtn.isHidden = false
+        }
         
         commentsTableView.dataSource = self
     
@@ -533,11 +538,25 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         return  true
     }
     
+    @IBAction func editpostaction(_ sender: Any) {
+        
+        
+        
+        let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let editpostvc = storyboad.instantiateViewController(withIdentifier: "editpostid") as! NewPostViewController
+        editpostvc.postIdis = postId
+        
+        self.navigationController?.pushViewController(editpostvc, animated: true)
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
+    
+    
  
 
 }

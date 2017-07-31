@@ -9,6 +9,7 @@
 import UIKit
 
 class PostModel: NSObject {
+    
     var postId :Int = 0
     var userName = ""
     var dishName = ""
@@ -26,6 +27,9 @@ class PostModel: NSObject {
 //    var description8 = ""
 //    var description9 = ""
 //    var description10 = ""
+    
+    
+    
     
     var descriptionArray = [String]()
     var ingredientsArray = [String]()
