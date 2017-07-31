@@ -84,10 +84,18 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         
         tableView.estimatedRowHeight = 15
+<<<<<<< HEAD
+        editPostsBtn.isHidden = true
+=======
         tableView.isUserInteractionEnabled = true
         tableView.isScrollEnabled = true
 
+>>>>>>> 7af74898d1806b77b8513a92b8c1f703c72d0abc
         
+        if(UserDefaults.standard.bool(forKey: "editvisible") == true){
+            
+            editPostsBtn.isHidden = false
+        }
         
         commentsTableView.dataSource = self
     
@@ -535,12 +543,28 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         return  true
     }
     
+    @IBAction func editpostaction(_ sender: Any) {
+        
+        
+        
+        let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let editpostvc = storyboad.instantiateViewController(withIdentifier: "editpostid") as! NewPostViewController
+        editpostvc.postIdis = postId
+        
+        self.navigationController?.pushViewController(editpostvc, animated: true)
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
     
+<<<<<<< HEAD
+    
+ 
+=======
     //MARK: - Comments actions
     func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
@@ -569,5 +593,6 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             }
         }
     }
+>>>>>>> 7af74898d1806b77b8513a92b8c1f703c72d0abc
 
 }

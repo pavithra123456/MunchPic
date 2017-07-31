@@ -274,6 +274,7 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
         let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
         detailVc.postId = Int(lovesArray[indexPath.row].postId)!
         detailVc.isDetaiLForLovedPost = true
+        UserDefaults.standard.set(false, forKey: "editvisible")
         self.navigationController?.pushViewController(detailVc, animated: true)
 
     }
@@ -378,8 +379,11 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             detailVc.postDetails = obj
             detailVc.postId = obj.postId // lovesArray[indexPath.row].postId
             detailVc.isPostEditable = true
+            UserDefaults.standard.set(true, forKey: "editvisible")
             self.navigationController?.pushViewController(detailVc, animated: true)
             return
+            
+            
         }
         
         let storyBoard = UIStoryboard(name: "UserPosts", bundle: Bundle.main)
