@@ -41,6 +41,7 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func profileBtnAction(_ sender: Any) {
+        homeBtn.tintColor = UIColor.yellow
         profileBorder = profileBtn.addBorder(borderPostion: .bottom)
 
         profileContainer.isHidden = false

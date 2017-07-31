@@ -320,8 +320,8 @@
 				7B3576941ED9AC7B00FF610A /* Receipe.swift */,
 				7BE1C8E31EFE269E001570BD /* PostModel.swift */,
 				7BE1C8E51EFE8267001570BD /* TrendsModel.swift */,
-				7B1147B31F0258A400CA48D6 /* ProfilkeLovesModel.swift */,
 				7B1147B11F0253E500CA48D6 /* LovesTableViewCell.swift */,
+				7B1147B31F0258A400CA48D6 /* ProfilkeLovesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

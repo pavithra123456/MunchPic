@@ -112,16 +112,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V28-7Z-U4Y">
-                                        <rect key="frame" x="17" y="16" width="31" height="30"/>
-                                        <state key="normal" image="back1"/>
+                                        <rect key="frame" x="10" y="16" width="25" height="30"/>
+                                        <state key="normal" image="lefticon"/>
                                         <connections>
                                             <action selector="backAction:" destination="dLM-6W-h5g" eventType="touchUpInside" id="p8o-9V-6uC"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Veg/Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XE6-DN-3L7">
-                                        <rect key="frame" x="65" y="21" width="183" height="21"/>
+                                        <rect key="frame" x="43" y="21" width="183" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="183" id="5Bw-zv-sml"/>
+                                            <constraint firstAttribute="width" constant="183" id="kiv-kf-buJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -131,10 +131,11 @@
                                 <color key="backgroundColor" red="0.80790102480000003" green="0.3356257379" blue="0.24319101870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="V28-7Z-U4Y" secondAttribute="bottom" constant="16" id="44O-7N-lfs"/>
-                                    <constraint firstItem="XE6-DN-3L7" firstAttribute="centerY" secondItem="mtK-v6-Y5R" secondAttribute="centerY" id="CYM-BX-7O8"/>
-                                    <constraint firstItem="XE6-DN-3L7" firstAttribute="leading" secondItem="V28-7Z-U4Y" secondAttribute="trailing" constant="17" id="CYM-Fi-vXj"/>
+                                    <constraint firstItem="XE6-DN-3L7" firstAttribute="leading" secondItem="V28-7Z-U4Y" secondAttribute="trailing" constant="8" id="Ch8-q3-c9N"/>
                                     <constraint firstItem="V28-7Z-U4Y" firstAttribute="top" secondItem="mtK-v6-Y5R" secondAttribute="top" constant="16" id="Ygf-UG-m9k"/>
-                                    <constraint firstItem="V28-7Z-U4Y" firstAttribute="leading" secondItem="mtK-v6-Y5R" secondAttribute="leading" constant="17" id="wBJ-jW-JLs"/>
+                                    <constraint firstItem="V28-7Z-U4Y" firstAttribute="leading" secondItem="mtK-v6-Y5R" secondAttribute="leading" constant="10" id="wBJ-jW-JLs"/>
+                                    <constraint firstItem="XE6-DN-3L7" firstAttribute="centerY" secondItem="V28-7Z-U4Y" secondAttribute="centerY" id="wUO-4R-LgB"/>
+                                    <constraint firstItem="XE6-DN-3L7" firstAttribute="leading" secondItem="mtK-v6-Y5R" secondAttribute="leading" constant="43" id="zRa-nN-Wt4"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -151,6 +152,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navigationTitleLabel" destination="XE6-DN-3L7" id="sPd-IG-I32"/>
                         <outlet property="tableview" destination="2Af-PC-JGP" id="flJ-zU-td5"/>
                     </connections>
                 </viewController>
@@ -1808,7 +1810,6 @@
     </scenes>
     <resources>
         <image name="Time" width="83" height="83"/>
-        <image name="back1" width="31" height="31"/>
         <image name="breakfast" width="166" height="209"/>
         <image name="button:3IL-H0-g20:image" width="250" height="250">
             <mutableData key="keyedArchiveRepresentation">

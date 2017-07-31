@@ -443,6 +443,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             DispatchQueue.main.async(execute: {
                 if let imageData = data1 {
                     self.mainImageview.image = UIImage(data: imageData)
+                    self.mainImageview.backgroundColor = UIColor.clear
                 }
             })
             }.resume()

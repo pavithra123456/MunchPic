@@ -17,9 +17,17 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
     var subCategory = ""
     var searchBar = ""
     
+    @IBOutlet weak var navigationTitleLabel: UILabel!
     var fileteredArray = [PostModel]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if subCategory == "" {
+            navigationTitleLabel.text = "\(category)/\(cuisine)"
+        }
+        else {
+            navigationTitleLabel.text = "\(category)/\(subCategory)"
+        }
         filter()
         // Do any additional setup after loading the view.
     }
