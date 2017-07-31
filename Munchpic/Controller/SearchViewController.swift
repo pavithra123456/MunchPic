@@ -109,17 +109,20 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     }
     */
     @IBAction func showFilterList(_ sender: UIButton) {
-        var subCategory =  SubCategory.Breakfast
+        var subCategory:SubCategory?
 
         switch sender.tag {
+        case 1:
+            subCategory =  SubCategory.Breakfast
         case 2:
             subCategory =  SubCategory.Lunch
         case 3:
             subCategory =  SubCategory.Dinner
-            
-        default:
-            subCategory =  SubCategory.Desserts
+        case 3:             subCategory =  SubCategory.Desserts
 
+        default:
+            break
+            
         }
         
         
@@ -127,7 +130,9 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
         vc.category = category
         vc.cuisine = ""
-        vc.subCategory = subCategory.rawValue
+        if let value = (subCategory?.rawValue) {
+            vc.subCategory = value
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

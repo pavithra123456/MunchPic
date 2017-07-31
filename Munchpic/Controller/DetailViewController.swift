@@ -78,11 +78,15 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     @IBOutlet weak var stackview: UIStackView!
     @IBOutlet weak var addcommentView: BorderedView!
     
+    @IBOutlet weak var commentsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         tableView.estimatedRowHeight = 15
+        tableView.isUserInteractionEnabled = true
+        tableView.isScrollEnabled = true
+
         
         
         commentsTableView.dataSource = self
@@ -90,7 +94,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         addGuestures()
         getcooments()
         addBorderToCommentsView()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        //navigationController?.setNavigationBarHidden(true, animated: true)
 
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
         
@@ -116,7 +120,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         }
         
         self.UpdateUI()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 
         // Do any additional setup after loading the view.
     }
@@ -188,8 +192,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     }
     
     override func viewDidLayoutSubviews() {
-        scrollview.contentSize = CGSize(width: self.view.frame.width, height: 1500)
-
+        scrollview.contentSize = CGSize(width: self.view.frame.width, height: (addcommentView.frame.origin.y + addcommentView.frame.size.height + 30))
     }
     
     
@@ -197,7 +200,6 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         tapguesture = UITapGestureRecognizer.init(target: self, action: #selector(hidePopUps))
         tapguesture?.isEnabled = false
         self.view.addGestureRecognizer(tapguesture!)
-        
     }
     
     func hidePopUps() {
@@ -205,6 +207,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         self.collectionListView.isHidden = true
         self.tapguesture?.isEnabled = false
         self.DifficultyView.isHidden = true
+        
     }
 
     @IBAction func addLoves(_ sender: UIButton) {
@@ -373,12 +376,10 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 
         if let detail = postDetails {
             if isShowingDescription {
-                let key = "description\(indexPath.row+1)"
-                label.text = "step\(indexPath.row+1) : " + (postDetails?.descriptionArray[indexPath.row])!   //( detail[key] as? String)!
+                label.text = "step\(indexPath.row+1) : " + (detail.descriptionArray[indexPath.row])   //( detail[key] as? String)!
 
             }
             else {
-                let key = "ingradients\(indexPath.row+1)"
                 label.text = "\(indexPath.row+1). " + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
 
             }
@@ -421,22 +422,24 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 
         self.timeToCookLabel.text = postDetails?.efforts
         
-        self.caloriesLabel.text =  "100 mules"
+        self.caloriesLabel.text = ""
         
-        
-        let  userId  = "30"
-    
-    
+        if let id = postDetails?.userId {
+            let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(id)/user.jpg"
+            
+            URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+                DispatchQueue.main.async(execute: {
+                    if let data =  data1 {
+                        self.userPic.image = UIImage(data: data)
+                         self.userPic.layer.cornerRadius =  self.userPic.frame.size.width/2
+                         self.userPic.layer.masksToBounds = true
+                    }
+                })
+                }.resume()
+            
 
-        let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(userId)/user.jpg"
-
-        URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
-            DispatchQueue.main.async(execute: {
-                if let data =  data1 {
-                    self.userPic.image = UIImage(data: data)
-                }
-            })
-            }.resume()
+        }
+    
 
         
         URLSession.shared.dataTask(with: URL(string:(postDetails?.ImagePath1)!)!) { (data1, response, error) in
@@ -454,12 +457,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     //MARK: - Button IBAction
     
     @IBAction func backBtnAction(_ sender: Any) {
-        self.navigationController?.navigationBar.isHidden = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
 
         let _ = self.navigationController?.popViewController(animated: true)
         
-//        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func showCommwntsView(_ sender: Any) {
@@ -485,7 +485,10 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBAction func showIngredients(_ sender: Any) {
         isShowingDescription = false
-            headingLabel.text = "\(String(describing: postDetails?.dishName)) Ingredients:"
+        if let dishName = postDetails?.dishName {
+            headingLabel.text = "\(dishName) Ingredients:"
+        }
+        
 
         self.tableView.reloadData()
     }
@@ -498,8 +501,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     @IBAction func showDescription(_ sender: Any) {
         isShowingDescription = true
-        
-            headingLabel.text = "How to prepare \(String(describing: postDetails? .dishName )):"
+        if let dishName = postDetails?.dishName {
+            headingLabel.text = "How to prepare \(dishName)"
+        }
         
         self.tableView.reloadData()
     }
@@ -538,6 +542,34 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
- 
+    
+    //MARK: - Comments actions
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+           // keyboardHeight = keyboardRectangle.height
+            self.view.frame.origin.y =  -keyboardRectangle.height
+        }
+    }
+    
+    @IBAction func addComment(_ sender: Any) {
+        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            let param = "userId=\(userId)" +
+                "&postId=\(self.postDetails)" +
+            "&comments=\(self.commentsTextView.text ?? "")"
+            
+            ServiceLayer.insertComments(parameter: param) { (response, status, msg) in
+                print(msg)
+                if status && msg == "Commented" {
+                    DispatchQueue.main.async(execute: {
+                        self.commentsview.isHidden = true
+                        Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
+                        
+                    })
+                    
+                }
+            }
+        }
+    }
 
 }
