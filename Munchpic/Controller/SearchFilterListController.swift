@@ -22,12 +22,20 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if subCategory == "" {
-            navigationTitleLabel.text = "\(category)/\(cuisine)"
+        if subCategory != "" {
+            self.navigationItem.title = "\(category)/\(subCategory)"
+        }
+        else if searchBar != "" {
+            self.navigationItem.title = "\(category)/\(searchBar)"
+        }
+
+         else if cuisine != "" {
+             self.navigationItem.title = "\(category)/\(cuisine)"
         }
         else {
-            navigationTitleLabel.text = "\(category)/\(subCategory)"
+            self.navigationItem.title = "Searching"
         }
+        
         filter()
         // Do any additional setup after loading the view.
     }
@@ -69,7 +77,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
     }
     
     @IBAction func backAction(_ sender: Any) {
-    self.dismiss(animated: true, completion: nil)
+        let _ =  self.navigationController?.popViewController(animated: true)
     }
     
     func filter() {

@@ -274,13 +274,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 
             }
             
-            let mainImgUrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(postArray[indexPath.row].userId)/\(postArray[indexPath.row].postId)_post1.jpg"
+//            let mainImgUrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(postArray[indexPath.row].userId)/\(postArray[indexPath.row].postId)_post1.jpg"
             
-            
-            URLSession.shared.dataTask(with: URL(string:mainImgUrl)!) { (data1, response, error) in
+            URLSession.shared.dataTask(with: URL(string:postArray[indexPath.row].ImagePath1)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let imageData = data1 {
                         cell.foodrecipeImage.image = UIImage(data: imageData)
+                        //cell.foodrecipeImage.backgroundColor = UIColor.clear
                     }
                 })
                 }.resume()
