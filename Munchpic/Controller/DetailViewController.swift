@@ -221,6 +221,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         self.collectionListView.isHidden = true
         self.tapguesture?.isEnabled = false
         self.DifficultyView.isHidden = true
+        self.commentsTextView.resignFirstResponder()
         
     }
 
@@ -597,13 +598,18 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             // keyboardHeight = keyboardRectangle.height
-            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
+            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y - keyboardRectangle.height
         }
     }
     
     
     @IBAction func addComment(_ sender: Any) {
+        if self.commentsTextView.text == "Add Comment" {
+            Utility.showAlert(title: "MunchPic", message: "Please add comment", controller: self, completion: nil)
+            return
+        }
         self.commentsTextView.resignFirstResponder()
+
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let param = "userId=\(userId)" +
                 "&postId=\(self.postDetails)" +

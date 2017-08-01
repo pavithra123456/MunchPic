@@ -128,6 +128,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         self.commentsView.isHidden = true
         self.collectionlistContainerView.isHidden = true
         self.tapguesture?.isEnabled = false
+        self.commentsTextView.resignFirstResponder()
+
         
     }
     
@@ -344,6 +346,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     //MARK: - Comments Actions
     
     @IBAction func addComment(_ sender: Any) {
+        if self.commentsTextView.text == "Add Comment" {
+            Utility.showAlert(title: "MunchPic", message: "Please add comment", controller: self, completion: nil)
+            return
+        }
         self.commentsTextView.resignFirstResponder()
 
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
