@@ -381,13 +381,19 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emoji1" translatesAutoresizingMaskIntoConstraints="NO" id="pTO-8i-El3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact" translatesAutoresizingMaskIntoConstraints="NO" id="pTO-8i-El3">
                                         <rect key="frame" x="8" y="9" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Ir3-tK-v36"/>
                                             <constraint firstAttribute="width" constant="40" id="nco-Wr-PmU"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elw-qG-oPa">
+                                        <rect key="frame" x="8" y="9" width="46" height="37"/>
+                                        <connections>
+                                            <action selector="profilePicBtnAction:" destination="vBA-5J-hRt" eventType="touchUpInside" id="ODI-1J-Moh"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZI-CU-9qI">
                                         <rect key="frame" x="321" y="16" width="25" height="25"/>
                                         <constraints>
@@ -402,6 +408,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.80790102480000003" green="0.3356257379" blue="0.24319101870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstItem="elw-qG-oPa" firstAttribute="top" secondItem="pTO-8i-El3" secondAttribute="top" id="8Li-eN-9WR"/>
                                     <constraint firstItem="uZI-CU-9qI" firstAttribute="centerY" secondItem="27r-qd-1gy" secondAttribute="centerY" id="Fbf-Bv-VVu"/>
                                     <constraint firstAttribute="height" constant="57" id="FlK-7m-yxJ"/>
                                     <constraint firstItem="pTO-8i-El3" firstAttribute="centerY" secondItem="27r-qd-1gy" secondAttribute="centerY" id="JjD-VD-KDk"/>
@@ -409,7 +416,10 @@
                                     <constraint firstItem="gFr-rJ-uzl" firstAttribute="top" secondItem="27r-qd-1gy" secondAttribute="top" constant="18" id="RPz-98-2tl"/>
                                     <constraint firstItem="gFr-rJ-uzl" firstAttribute="centerX" secondItem="27r-qd-1gy" secondAttribute="centerX" id="TuG-KE-K1Z"/>
                                     <constraint firstItem="pTO-8i-El3" firstAttribute="leading" secondItem="27r-qd-1gy" secondAttribute="leading" constant="8" id="c2Z-UO-p20"/>
+                                    <constraint firstItem="elw-qG-oPa" firstAttribute="leading" secondItem="pTO-8i-El3" secondAttribute="leading" id="el6-N1-Q3C"/>
                                     <constraint firstAttribute="trailing" secondItem="uZI-CU-9qI" secondAttribute="trailing" constant="29" id="hjI-PF-IXJ"/>
+                                    <constraint firstItem="elw-qG-oPa" firstAttribute="trailing" secondItem="pTO-8i-El3" secondAttribute="trailing" constant="6" id="two-HV-NiT"/>
+                                    <constraint firstItem="elw-qG-oPa" firstAttribute="bottom" secondItem="pTO-8i-El3" secondAttribute="bottom" constant="-3" id="uUO-3f-opG"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rt-18-sKl">
@@ -864,6 +874,7 @@
                         <outlet property="malebtn" destination="wAf-hy-ip9" id="q70-8k-6Oo"/>
                         <outlet property="nameTxtField" destination="OuX-QO-xG3" id="PgY-Ju-2Zb"/>
                         <outlet property="phoneNoTxtField" destination="XxH-rc-6t6" id="9Ag-Fk-anN"/>
+                        <outlet property="profilePicBtn" destination="elw-qG-oPa" id="0Ni-J2-9uf"/>
                         <outlet property="stateTxtField" destination="OJX-NH-pnO" id="nXX-dL-Wb5"/>
                         <outlet property="userPic" destination="pTO-8i-El3" id="d1M-tA-4Qf"/>
                     </connections>
@@ -7774,6 +7785,7 @@
         <image name="close" width="32" height="32"/>
         <image name="commentnew" width="83" height="83"/>
         <image name="comments" width="25" height="25"/>
+        <image name="contact" width="236" height="236"/>
         <image name="desserts" width="275" height="275"/>
         <image name="dinner" width="600" height="450"/>
         <image name="emoji1" width="286" height="286"/>

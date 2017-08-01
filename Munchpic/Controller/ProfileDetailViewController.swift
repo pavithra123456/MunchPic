@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
+
+class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate{
 
     @IBOutlet weak var nameTxtField: UITextField!
     @IBOutlet weak var aboutTxtField: UITextField!
@@ -23,6 +25,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
     @IBOutlet var femalebtn: UIButton!
     @IBOutlet weak var userPic: UIImageView!
     
+    
+    @IBOutlet weak var profilePicBtn: UIButton!
     
     var genderstring = NSString()
     
@@ -47,7 +51,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
                     }
                 })
                 }.resume()
-            
             
         }
         
@@ -95,6 +98,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
             cityTxtField.isUserInteractionEnabled = true
             phoneNoTxtField.isUserInteractionEnabled = true
             emailTxtField.isUserInteractionEnabled = true
+            profilePicBtn.isUserInteractionEnabled = true
+            
 
         }
             
@@ -178,12 +183,100 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate{
        
     }
     
+    //MARK: -  Iamge Picker
+    @IBAction func profilePicBtnAction(_ sender: Any) {
+    let actionSheetController = UIAlertController(title: "Uplaod your photo", message: "", preferredStyle: .actionSheet)
+    
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
+        // Just dismiss the action sheet
+    }
+    actionSheetController.addAction(cancelAction)
+    
+    // From gallery
+    let takePicturefromgallert = UIAlertAction(title: "Gallery", style: .default) { action -> Void in
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.savedPhotosAlbum) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType =
+                UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            
+            DispatchQueue.main.async( execute: {
+                
+                self.present(imagePicker, animated: false,completion: nil)
+                
+                
+            })
+        }
+        
+    }
+    actionSheetController.addAction(takePicturefromgallert)
+    
+    // From cam
+    let takePicturefromcam = UIAlertAction(title: "Camera", style: .default) { action -> Void in
+        
+        if UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.camera) {
+            
+            let imagePicker = UIImagePickerController()
+            
+            imagePicker.delegate = self
+            imagePicker.sourceType =
+                UIImagePickerControllerSourceType.camera
+            
+            imagePicker.mediaTypes = [kUTTypeImage as String]
+            imagePicker.allowsEditing = false
+            
+            DispatchQueue.main.async( execute: {
+                
+                self.present(imagePicker, animated: false,completion: nil)
+                
+                
+            })
+            
+            
+        }
+        
+    }
+    actionSheetController.addAction(takePicturefromcam)
+    
+    actionSheetController.popoverPresentationController?.sourceView = sender as? UIView
+    
+    DispatchQueue.main.async( execute: {
+    
+    self.present(actionSheetController, animated: true, completion: nil)
+    
+    })
+    
+}
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
+        
+        [String : AnyObject]) {
+        
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        if mediaType.isEqual(kUTTypeImage as NSString) {
+            let image = info[UIImagePickerControllerOriginalImage]as! UIImage
+            // profilepic.image = image
+            
+            self.userPic.image = image
+            //  imagesarray.insert(image, at: indexval)
+            
+        }
+        
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }
 
-    
+
     //MARK: - Textfielkd Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         
