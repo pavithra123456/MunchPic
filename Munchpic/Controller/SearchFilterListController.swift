@@ -70,7 +70,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
         
         let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
               let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
-        detailVc.postDetails = fileteredArray[indexPath.row]
+       // detailVc.postDetails = fileteredArray[indexPath.row]
         detailVc.postId = fileteredArray[indexPath.row].postId
         detailVc.isDetaiLForLovedPost = true
         UserDefaults.standard.set(false, forKey: "editvisible")
