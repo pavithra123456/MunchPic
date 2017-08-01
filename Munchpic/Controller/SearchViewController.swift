@@ -142,7 +142,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
 
     @IBAction func vegBtnAction(_ sender: UIButton) {
         if category == "veg" {
-            category = "Non-Veg"
+            category = "NonVeg"
             sender.setImage(UIImage(named:"nonveg"), for: .normal)
             
         }

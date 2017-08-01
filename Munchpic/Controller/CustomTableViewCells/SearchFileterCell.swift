@@ -10,6 +10,7 @@ import UIKit
 
 class SearchFileterCell: UITableViewCell {
 
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var dishName: UILabel!
     @IBOutlet weak var loveImage: UIImageView!
     @IBOutlet weak var cuisineLAbel: UILabel!

@@ -95,6 +95,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="categoryImage" destination="nmf-Qd-Rv6" id="LBm-f5-8Ep"/>
                                             <outlet property="cuisineLAbel" destination="xxc-5g-2LO" id="k5X-bw-qgJ"/>
                                             <outlet property="dishName" destination="Y9g-94-9kW" id="dIb-Xg-0ZX"/>
                                             <outlet property="loveImage" destination="19g-XF-Xw4" id="Pmz-G9-O8S"/>

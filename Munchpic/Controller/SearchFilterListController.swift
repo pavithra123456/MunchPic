@@ -22,15 +22,20 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var categoryStr = "Veg"
+        if category != "veg" {
+            categoryStr = "Non-Veg"
+        }
         if subCategory != "" {
-            self.navigationItem.title = "\(category)/\(subCategory)"
+            self.navigationItem.title = "\(categoryStr)/\(subCategory)"
         }
         else if searchBar != "" {
-            self.navigationItem.title = "\(category)/\(searchBar)"
+            self.navigationItem.title = "\(categoryStr)/\(searchBar)"
         }
 
          else if cuisine != "" {
-             self.navigationItem.title = "\(category)/\(cuisine)"
+            
+             self.navigationItem.title = "\(categoryStr)/\(cuisine)"
         }
         else {
             self.navigationItem.title = "Searching"
@@ -55,6 +60,10 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
         
         cell.dishName .text = fileteredArray[indexPath.row].dishName
         cell.cuisineLAbel.text = fileteredArray[indexPath.row].cuisine
+        if fileteredArray[indexPath.row].category != "veg" {
+            cell.categoryImage.image = UIImage(named: "nonveg")
+
+        }
         URLSession.shared.dataTask(with: URL(string:fileteredArray[indexPath.row].ImagePath1)!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {
                 if let data =  data1 {
@@ -92,8 +101,11 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
             "&cuisine=\(cuisine)"
             
             ServiceLayer.filter(param: param, completion: { (reponseArray, status, msg) in
-                print(msg,reponseArray)
-                
+//                print(msg,reponseArray)
+                if status == false {
+                    Utility.showAlert(title: "MunchPic", message: "msg", controller: self, completion: nil)
+                    return
+                }
                 for postobject in reponseArray! {
 //                    let model = PostModel()
 //                    model.userId = Int(postobject["userId"] as? String ?? "0")!
@@ -112,6 +124,10 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
 
                 }
                 DispatchQueue.main.async {
+                    if self.fileteredArray.count == 0 {
+                        Utility.showAlert(title: "MunchPic", message: "msg", controller: self, completion: nil)
+
+                    }
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.tableview.reloadData()
                 }
