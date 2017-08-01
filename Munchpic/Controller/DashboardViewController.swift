@@ -55,7 +55,7 @@ class DashboardViewController: UIViewController {
         
         searchContainer.isHidden = true
         searchBorder?.isHidden = true
-        self.navigationItem.title = "UserPOSTS"
+        self.navigationItem.title = "UserPosts"
     }
 
     @IBAction func serachBtnAction(_ sender: Any) {
@@ -72,6 +72,8 @@ class DashboardViewController: UIViewController {
         
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
+        self.navigationItem.title = "Search"
+
         
     }
     
@@ -89,6 +91,8 @@ class DashboardViewController: UIViewController {
         
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
+        self.navigationItem.title = "Comapaigns"
+
     }
     
     @IBAction func homeBtnAction(_ sender: Any) {
@@ -105,7 +109,8 @@ class DashboardViewController: UIViewController {
         
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
-        
+        self.navigationItem.title = "Home"
+
         
     }
     /*

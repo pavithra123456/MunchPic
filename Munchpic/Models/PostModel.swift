@@ -63,11 +63,12 @@ class PostModel: NSObject {
         model.postId = Int(postobject["postId"] as? String ?? "0")!
         model.userName = postobject["userName"] as? String ?? ""
         model.dishName = postobject["dishName"] as? String ?? ""
-        
+        model.cuisine = postobject["cuisine"] as? String ?? ""
+
         
         model.descriptionArray.append(postobject["description1"] as? String ?? "")
         var coloumnKey = "description"
-        for i in 1...10 {
+        for i in 2...10 {
             let key = "\(coloumnKey)\(i)"
             if let value =  postobject[key]  as? String{
                 if value == "" {

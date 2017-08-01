@@ -72,6 +72,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
               let detailVc = storyboad.instantiateViewController(withIdentifier: "DetailView") as! DetailViewController
         detailVc.postDetails = fileteredArray[indexPath.row]
         detailVc.postId = fileteredArray[indexPath.row].postId
+        detailVc.isDetaiLForLovedPost = true
         UserDefaults.standard.set(false, forKey: "editvisible")
         self.navigationController?.pushViewController(detailVc, animated: true)
     }
@@ -94,17 +95,18 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
                 print(msg,reponseArray)
                 
                 for postobject in reponseArray! {
-                    let model = PostModel()
-                    model.userId = Int(postobject["userId"] as? String ?? "0")!
-                    model.postId = Int(postobject["postId"] as? String ?? "0")!
-                    model.userId = Int(postobject["userId"] as? String ?? "0")!
-                    model.userName = postobject["userName"] as? String ?? ""
-                    model.dishName = postobject["dishName"] as? String ?? ""
-                    model.loves = Int(postobject["loves"] as? String ?? "0")!
-                    model.cuisine = postobject["cuisine"] as? String ?? ""
-                    
-                    let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(model.userId)/\(model.postId)_post1.jpg"
-                    
+//                    let model = PostModel()
+//                    model.userId = Int(postobject["userId"] as? String ?? "0")!
+//                    model.postId = Int(postobject["postId"] as? String ?? "0")!
+//                    model.userId = Int(postobject["userId"] as? String ?? "0")!
+//                    model.userName = postobject["userName"] as? String ?? ""
+//                    model.dishName = postobject["dishName"] as? String ?? ""
+//                    model.loves = Int(postobject["loves"] as? String ?? "0")!
+//                    model.cuisine = postobject["cuisine"] as? String ?? ""
+//                    
+                   
+                   let model =  PostModel.getmodel(postobject: postobject)
+                     let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(model.userId)/\(model.postId)_post1.jpg"
                     model.ImagePath1 = imgrl
                     self.fileteredArray.append(model)
 

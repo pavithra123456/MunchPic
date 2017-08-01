@@ -74,10 +74,12 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     var isDetaiLForLovedPost = false
 
     
+    @IBOutlet weak var leftSideIProfilePic: UIImageView!
     //MARK: - BottomView 
     @IBOutlet weak var stackview: UIStackView!
     @IBOutlet weak var addcommentView: BorderedView!
     
+    @IBOutlet weak var leftsideUserName: UILabel!
     @IBOutlet weak var commentsTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,10 +108,15 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
         
           self.editPostsBtn.isHidden = true
-        if isPostEditable  || isDetaiLForLovedPost{
+        if isPostEditable  || isDetaiLForLovedPost {
             stackview.isHidden = true
             addcommentView.isHidden = true
+            userPic.isHidden = true
+            userName.isHidden = true
+            leftSideIProfilePic.isHidden = false
+            leftsideUserName.isHidden = false
         }
+      
       
         if isPostEditable{
             self.editPostsBtn.isHidden = false
@@ -127,6 +134,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         self.UpdateUI()
         NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         // Do any additional setup after loading the view.
     }
@@ -382,7 +390,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 
         if let detail = postDetails {
             if isShowingDescription {
-                label.text = "step\(indexPath.row+1) : " + (detail.descriptionArray[indexPath.row])   //( detail[key] as? String)!
+                label.text = "step \(indexPath.row+1) : " + (detail.descriptionArray[indexPath.row])   //( detail[key] as? String)!
 
             }
             else {
@@ -414,6 +422,8 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     //MARK: - Update UI
     func UpdateUI() {
         self.userName.text = postDetails?.userName //["userName"] as? String
+        self.leftsideUserName.text = postDetails?.userName //["userName"] as? String
+
         self.postName.text = postDetails?.dishName //["dishName"] as? String
         if let loveCount = self.postDetails?.loves {
             self.noOfSmilesLabel.text = "\(loveCount)" //["loves"] as? String
@@ -439,6 +449,11 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
                         self.userPic.image = UIImage(data: data)
                          self.userPic.layer.cornerRadius =  self.userPic.frame.size.width/2
                          self.userPic.layer.masksToBounds = true
+                        
+                        self.leftSideIProfilePic.image = UIImage(data: data)
+                        self.leftSideIProfilePic.layer.cornerRadius =  self.userPic.frame.size.width/2
+                        self.leftSideIProfilePic.layer.masksToBounds = true
+                        
                     }
                 })
                 }.resume()
@@ -540,8 +555,14 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if textView.text == "Add Comment" && text == ""{
             return  false
         }
+        
+        if text == "\n" {
+            textView.resignFirstResponder
+            return  false
+        }
         return  true
     }
+    
     
     @IBAction func editpostaction(_ sender: Any) {
         
@@ -567,11 +588,22 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
            // keyboardHeight = keyboardRectangle.height
-            self.view.frame.origin.y =  -keyboardRectangle.height
+            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
         }
     }
     
+    func keyboardWillHide(_ notification: Notification) {
+       
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            // keyboardHeight = keyboardRectangle.height
+            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
+        }
+    }
+    
+    
     @IBAction func addComment(_ sender: Any) {
+        self.commentsTextView.resignFirstResponder()
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let param = "userId=\(userId)" +
                 "&postId=\(self.postDetails)" +

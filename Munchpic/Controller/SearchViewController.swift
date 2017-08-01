@@ -32,6 +32,8 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var searchbar: UISearchBar!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.collectionView.delegate = self
@@ -109,6 +111,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     }
     */
     @IBAction func showFilterList(_ sender: UIButton) {
+        self.searchbar.resignFirstResponder()
         var subCategory:SubCategory?
 
         switch sender.tag {
@@ -130,6 +133,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
         vc.category = category
         vc.cuisine = ""
+        vc.searchBar = searchbar.text!
         if let value = (subCategory?.rawValue) {
             vc.subCategory = value
         }

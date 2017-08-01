@@ -344,6 +344,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     //MARK: - Comments Actions
     
     @IBAction func addComment(_ sender: Any) {
+        self.commentsTextView.resignFirstResponder()
+
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let param = "userId=\(userId)" +
                 "&postId=\(selectedPostId)" +
