@@ -152,3 +152,114 @@ extension UIColor {
     
 }
 
+@IBDesignable
+class Toast : UIView {
+    var label :UILabel?
+    
+    class func showToast(text:String,toView:UIView) {
+        
+        
+        let view = Toast.init(labeltext: text,frame:CGRect(x: toView.frame.size.width/2 - 75 , y: toView.frame.size.height - 150, width: 150, height: 50))
+        view.labeltext = text
+        view.bordercolor = UIColor.darkGray
+        view.cornerRadius = 25
+        view.isRounded = true
+        
+        toView.addSubview(view)
+        
+    }
+    
+    convenience  init (labeltext:String,frame:CGRect) {
+        self.init(frame: frame ) //CGRect(x: 100, y: 200, width: 200, height: 60))
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        //fatalError("init(coder:) has not bee0 0   n implemented")
+    }
+    
+    //    required init?(coder aDecoder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
+    
+    @IBInspectable
+    var borderWidth:CGFloat = 0.0 {
+        didSet {
+            
+        }
+    }
+    
+    @IBInspectable
+    var bordercolor:UIColor = UIColor.darkGray {
+        didSet {
+            self.layer.backgroundColor = bordercolor.cgColor
+        }
+    }
+    
+    @IBInspectable
+    var isRounded:Bool = true
+    {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = true
+        }
+    }
+    
+    @IBInspectable
+    var cornerRadius:CGFloat = 0.0 {
+        
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+            self.layer.masksToBounds = true
+        }
+    }
+    
+    @IBInspectable
+    var labeltext:String = "No resulkt found " {
+        
+        didSet {
+            if label == nil {
+                self.label = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height/2))
+                label?.translatesAutoresizingMaskIntoConstraints = false
+                self.contentScaleFactor = 0.2
+                self.label?.font = UIFont(name: "Arial", size: 13)
+                
+                
+                // self.fadeOut()
+                self.addSubview(label!)
+                
+                self.perform(#selector(Toast.fadeOut), with: self, afterDelay:1)
+                
+                
+                
+                label?.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+                label?.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            }
+            
+            label?.text = labeltext
+            self.label?.textColor = UIColor.white
+        }
+    }
+    
+    func fadeIn() {
+        // Move our fade out code from earlier
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.alpha = 1.0 // Instead of a specific instance of, say, birdTypeLabel, we simply set [thisInstance] (ie, self)'s alpha
+        }, completion: nil)
+    }
+    
+    func fadeOut() {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+            self.alpha = 0.0
+        }, completion: { (action)  in
+            self.removeFromSuperview()
+        })
+    }
+}
+

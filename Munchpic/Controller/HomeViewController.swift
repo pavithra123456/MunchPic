@@ -108,6 +108,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         
         //UIColor.red.cgColor
         addGuestures()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -129,7 +133,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         self.collectionlistContainerView.isHidden = true
         self.tapguesture?.isEnabled = false
         self.commentsTextView.resignFirstResponder()
-
+       // self.commentsTableContainerView.frame.origin.y = self.commentsView.frame.height/2 - 100
         
     }
     
@@ -334,7 +338,6 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     
     
-    
     @IBAction func shareButtonAction(_ sender: Any) {
         let activityViewController = UIActivityViewController(activityItems: ["" as NSString], applicationActivities: nil)
         self.present(activityViewController, animated: true, completion: {})
@@ -372,6 +375,10 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     @IBAction func commentButtonAction(_ sender: Any) {
+        commentsTextView.text = "Add Comment"
+        commentsTextView.textColor = UIColor.lightGray
+        commentsViewCahtImage.image = UIImage(named: "commentnew")
+        
         self.tapguesture?.isEnabled = true
         let index = (sender as! UIButton).tag
         selectedPostId = postArray[index].postId
@@ -394,6 +401,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                     self.commentsTableViewHeight.constant = 0
                     self.commentsContainerHeight.constant = 80
                     self.commentsView.layoutIfNeeded()
+                    Toast.showToast(text: "No Comments", toView: self.view)
+
                 }
                 else {
                     self.commentsTableViewHeight.constant = 168
@@ -418,6 +427,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     func textViewDidBeginEditing(_ textView: UITextView) {
         commentsViewCahtImage.image = UIImage(named: "iconright")
         textView.text = ""
+        self.commentsTableContainerView.frame.origin.y = self.commentsTableContainerView.frame.origin.y
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool
@@ -464,6 +475,25 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             
         }
         
+    }
+    
+    //MARK: - Comments actions
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            self.commentsTableContainerView.frame.origin.y = self.commentsTableContainerView.frame.origin.y - (keyboardRectangle.height - commentsTableContainerView.frame.origin.y)
+            print(keyboardRectangle.height - commentsTableContainerView.frame.origin.y)
+            //print((commentsTableContainerView.frame.origin.y))
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            self.commentsTableContainerView.frame.origin.y = self.commentsView.frame.height/2 - 50
+
+        }
     }
     
 }
