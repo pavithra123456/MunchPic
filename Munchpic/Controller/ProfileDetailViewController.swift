@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import Alamofire
 
 
 class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate{
@@ -178,6 +179,42 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
            
         })
 
+        var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KUpdateUserInfo)!)
+        url.httpMethod = "POST"
+
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            
+            multipartFormData.append(UIImagePNGRepresentation(self.userPic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+            multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
+            multipartFormData.append((name.data(using: String.Encoding.utf8)!), withName: "name")
+            multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
+            multipartFormData.append((country.data(using: String.Encoding.utf8)!), withName: "country")
+            multipartFormData.append((state.data(using: String.Encoding.utf8)!), withName: "state")
+            multipartFormData.append((city.data(using: String.Encoding.utf8)!), withName: "city")
+            multipartFormData.append((mobile.data(using: String.Encoding.utf8)!), withName: "mobile")
+            multipartFormData.append((about.data(using: String.Encoding.utf8)!), withName: "about")
+            
+        }, with: url, encodingCompletion: { (encodingResult) in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseString(completionHandler: { (responseString) in
+                    print(responseString.description)
+                    if responseString.description == "Registered Successfully!, Please check your mail for activation!"{
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
+                    }
+                })
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+            
+        });
         
         self.getProfileDetails()
        
