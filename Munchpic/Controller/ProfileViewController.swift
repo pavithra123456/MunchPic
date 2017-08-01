@@ -75,7 +75,9 @@ class ProfileViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         self.getCollectioncategories()
         getLoves()
-        self.getUserPosts()
+        getUserPosts()
+        collectionView.isHidden = false
+        lovesTableView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -189,16 +191,17 @@ class ProfileViewController: UIViewController{
     //MARK: - ButtonActions
     
     @IBAction func collectionButtonAction(_ sender: Any?) {
+        
         mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "collection"
         collectionviewheight.constant = collectionView.contentSize.height
-        
         collectionView.reloadData()
     }
     
     @IBAction func cameraButtonAction(_ sender: Any?) {
+        getUserPosts()
         mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false

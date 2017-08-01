@@ -37,8 +37,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         // Do any additional setup after loading the view.
         getProfileDetails()
         self.nameTxtField.delegate = self
-
-        
         
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(String(describing: userId))/user.jpg"
@@ -132,6 +130,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     self.phoneNoTxtField.text = respose?[0]["mobile"] as? String
                     self.emailTxtField.text = respose?[0]["email"] as? String
                     self.genderstring = (respose?[0]["gender"])! as! NSString
+                    
                 }
 
 
@@ -159,7 +158,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         let about = aboutTxtField.text! as String
         
             
-         parametersstring = "userId=\(uId)" + "&name=\(name)" + "&dob=\(dob)" + "&gender=\(genderstring)"  + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "email=\(email)" + "&mobile=\(mobile)" + "&about=\(about)"
+         parametersstring = "userId=\(uId)" + "&name=\(name)" + "&dob=\(dob)" + "&gender=\(genderstring)"  + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&email=\(email)" + "&mobile=\(mobile)" + "&about=\(about)"
             
         LoginServiceLayer().updateUserInfo(parameter:parametersstring  ,completion: { (response, status, message) in
             

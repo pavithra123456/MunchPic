@@ -400,8 +400,8 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             }
         }
         
-        tableheightconstraint.constant = tableView.contentSize.height
-        scrollview.contentSize = CGSize(width: self.view.frame.size.width, height:scrollview.frame.size.width+tableView.contentSize.height+200)
+        tableheightconstraint.constant = tableView.contentSize.height + 100
+        scrollview.contentSize = CGSize(width: self.view.frame.size.width, height:scrollview.frame.size.width+tableView.contentSize.height+300)
         return cell!
     }
 

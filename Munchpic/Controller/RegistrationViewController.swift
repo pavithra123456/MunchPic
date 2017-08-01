@@ -241,12 +241,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         if(checkmarkbool == false){
             
-            remembermebtn.setImage(UIImage(named: "checkbox@3.png"), for: UIControlState.normal)
+            remembermebtn.setImage(UIImage(named: "uncheckbox@3.png"), for: UIControlState.normal)
             checkmarkbool = true
             
         }else{
+             remembermebtn.setImage(UIImage(named: "checkbox@3.png"), for: UIControlState.normal)
             
-            remembermebtn.setImage(UIImage(named: "uncheckbox@3.png"), for: UIControlState.normal)
             checkmarkbool = false
         }
         
