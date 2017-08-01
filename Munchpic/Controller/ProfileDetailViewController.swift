@@ -131,6 +131,22 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     self.emailTxtField.text = respose?[0]["email"] as? String
                     self.genderstring = (respose?[0]["gender"])! as! NSString
                     
+                    if(self.genderstring == "male"){
+                        
+                        self.malebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
+                        self.femalebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+                        
+                    }else if(self.genderstring == "female"){
+                        
+                        self.malebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+                        self.femalebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
+                        
+                    }else{
+                        
+                        self.malebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+                        self.femalebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
+                    }
+                    
                 }
 
 
@@ -184,7 +200,16 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
-            multipartFormData.append(UIImagePNGRepresentation(self.userPic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+            if(self.userPic.image == nil){
+                
+                print("pic is nil")
+                
+            }else{
+                
+                 multipartFormData.append(UIImagePNGRepresentation(self.userPic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
+            }
+            
+           
             multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
             multipartFormData.append((name.data(using: String.Encoding.utf8)!), withName: "name")
             multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
@@ -207,6 +232,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     
                     DispatchQueue.main.async {
                         Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
+                        self.getProfileDetails()
                     }
                 })
             case .failure(let encodingError):
@@ -215,7 +241,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             
         });
         
-        self.getProfileDetails()
+        
        
     }
     

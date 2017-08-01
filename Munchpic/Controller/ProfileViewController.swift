@@ -223,6 +223,9 @@ class ProfileViewController: UIViewController{
     
     @IBAction func cameraAction(_ sender: Any) {
         
+        UserDefaults.standard.set(false, forKey: "editvisible")
+        
+        //UserDefaults.standard.bool(forKey: "editvisible") == true
         self.parent?.performSegue(withIdentifier: "addNewPost", sender: nil)
     }
     
