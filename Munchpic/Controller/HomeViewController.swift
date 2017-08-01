@@ -273,6 +273,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             cell.commentBtn.tag = indexPath.row
             cell.ShowSmilyBtn.tag = indexPath.row
             cell.postId = postArray[indexPath.row].postId
+            cell.lovesStatus = postArray[indexPath.row].lovesStatus
             
             if postArray[indexPath.row].lovesStatus != "0" {
                 let imageStr = "emoji\(postArray[indexPath.row].lovesStatus)"
@@ -365,7 +366,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 if status && msg == "Commented" {
                     DispatchQueue.main.async(execute: {
                         self.commentsView.isHidden = true
-                        Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
+                        Toast.showToast(text: "Commented", toView: self.view)
+                        //Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
                         
                     })
                     

@@ -125,8 +125,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
                 }
                 DispatchQueue.main.async {
                     if self.fileteredArray.count == 0 {
-                        Utility.showAlert(title: "MunchPic", message: "msg", controller: self, completion: nil)
-
+                        Toast.showToast(text: "No result found", toView: self.view)
                     }
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self.tableview.reloadData()
