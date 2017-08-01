@@ -184,7 +184,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             
             DispatchQueue.main.async(execute: {
                 //self.commentsview.isHidden = false
-//                if self.commentsArray.count == 0 {
+                if self.commentsArray.count == 0 {
+                    Toast.showToast(text: "No Comments", toView: self.view)
+                }
 //                    self.commentsTableViewHeight.constant = 0
 //                    self.commentsContainerHeight.constant = 90
 //                    self.commentsview.layoutIfNeeded()

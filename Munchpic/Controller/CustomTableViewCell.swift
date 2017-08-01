@@ -129,13 +129,15 @@ extension CustomTableViewCell {
     @IBAction func likeBtnAction(_ sender: UIButton) {
        
         
-        if self.lovesStatus == "0"  {
+        if self.lovesStatus == "0"  || self.lovesStatus == "" {
             insertLoves( selectedEmoji: 2)
             
             self.likeButton.setImage(UIImage(named:"emoji2"), for: .normal)
         }
             
-        else if self.smilesView.isHidden{
+        else if self.smilesView.isHidden {
+            Toast.showToast(text: "please hold for update ", toView: (self.superview?.superview?.superview?.superview!)!)
+
             //TODO add label like android toast message
 //            Utility.showAlert(title: "MunchPic", message: "please hold for update", controller: self.superview?.superview, completion: nil)
         }
@@ -156,6 +158,9 @@ extension CustomTableViewCell {
                 print(msg)
                 if status && (msg == "Loved" || msg == "Expression updated") {
                     DispatchQueue.main.async(execute: {
+                        self.likeButton.setImage(UIImage(named:"emoji\(selectedEmoji)"), for: .normal)
+                        Toast.showToast(text: msg, toView: (self.superview?.superview?.superview?.superview!)!)
+
 //                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
                     })
                     

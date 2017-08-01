@@ -231,10 +231,12 @@ class Toast : UIView {
                 self.label?.font = UIFont(name: "Arial", size: 13)
                 
                 
-                // self.fadeOut()
+                self.alpha = 0.0
+                
+                self.fadeIn()
                 self.addSubview(label!)
                 
-                self.perform(#selector(Toast.fadeOut), with: self, afterDelay:1)
+                self.perform(#selector(Toast.fadeOut), with: self, afterDelay:2)
                 
                 
                 
