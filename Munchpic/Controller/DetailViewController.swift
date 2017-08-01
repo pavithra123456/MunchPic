@@ -237,7 +237,8 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
                 print(msg)
                 if status && (msg == "Loved" || msg == "Expression updated") {
                     DispatchQueue.main.async(execute: {
-                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
+                        Toast.showToast(text: msg, toView: self.view)
+                        //Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
                         self.smiliesView .isHidden = true
                     })
                     
@@ -285,7 +286,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
                 if status == false && (msg == "Added to your collections list"  || msg == "Updated your collections list!"){
                     DispatchQueue.main.async(execute: {
                         self.collectionListView.isHidden = true
-                        Utility.showAlert(title: "Muchpic", message:msg, controller: self,completion:nil)
+                        Toast.showToast(text: msg, toView: self.view)
+
+                        //Utility.showAlert(title: "Muchpic", message:msg, controller: self,completion:nil)
                     })
                 }
             }
@@ -625,7 +628,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
                 if status && msg == "Commented" {
                     DispatchQueue.main.async(execute: {
                         self.commentsview.isHidden = true
-                        Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
+                        Toast.showToast(text: msg, toView: self.view)
+
+                        //Utility.showAlert(title: "Muchpic", message:"Commented", controller: self,completion:nil)
                         
                     })
                     
