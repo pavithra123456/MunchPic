@@ -33,7 +33,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     var postDetails :PostModel?
     var isShowingDescription = true
     
-    
+     @IBOutlet weak var tableheightconstraint: NSLayoutConstraint!
     var tapguesture : UITapGestureRecognizer?
     var commentsArray = [[String:AnyObject]] ()
 
@@ -399,6 +399,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 
             }
         }
+        
+        tableheightconstraint.constant = tableView.contentSize.height
+        scrollview.contentSize = CGSize(width: self.view.frame.size.width, height:scrollview.frame.size.width+tableView.contentSize.height+200)
         return cell!
     }
 
@@ -558,7 +561,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         }
         
         if text == "\n" {
-            textView.resignFirstResponder
+            textView.resignFirstResponder()
             return  false
         }
         return  true

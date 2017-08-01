@@ -75,6 +75,7 @@ class ProfileViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         self.getCollectioncategories()
         getLoves()
+        self.getUserPosts()
     }
     
     override func viewDidAppear(_ animated: Bool) {
