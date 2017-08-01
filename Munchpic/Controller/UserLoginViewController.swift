@@ -310,50 +310,8 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
             
         }
         MBProgressHUD.showAdded(to: self.view, animated: true)
-
         
-        LoginServiceLayer.register(relativeUrl: string, completion: { (response, status, msg) in
-            DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }
-            if status == true {
-                let responseArray = response as![ [String:AnyObject]]
-                let responsedict = responseArray[0]
-                
-                if let result = responsedict["userId"] {
-                    UserDefaults.standard.set(result, forKey: "userId")
-                    
-                    User.sharedUserInstance.usertId = Int(result as! String)!
-                    
-                }
-                
-                
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                }
-            }
-            else {
-                if msg == "Registered Successfully!, Please check your mail for activation!"{
-                    DispatchQueue.main.async {
-                        
-                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                    }
-                }
-                
-                if msg == "This Mail ID already exists!!"{
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
-                    }
-                }
-                
-                
-                DispatchQueue.main.async {
-                    
-                    Utility.showAlert(title: "Error", message: msg, controller: self,completion:nil)
-                }
-            }
-        })
-        //self.registerUser(userDict: userDict, platform: "googleplus")
+        self.socialLogin(email: user.profile.email)
         
     }
     

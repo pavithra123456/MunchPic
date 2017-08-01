@@ -158,6 +158,7 @@ extension CustomTableViewCell {
                 print(msg)
                 if status && (msg == "Loved" || msg == "Expression updated") {
                     DispatchQueue.main.async(execute: {
+                        self.lovesStatus = "\(selectedEmoji)"
                         self.likeButton.setImage(UIImage(named:"emoji\(selectedEmoji)"), for: .normal)
                         Toast.showToast(text: msg, toView: (self.superview?.superview?.superview?.superview!)!)
 
