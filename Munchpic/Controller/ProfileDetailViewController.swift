@@ -43,10 +43,14 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let data =  data1 {
-                        self.userPic.image = UIImage(data: data)
-                        self.userPic.layoutIfNeeded()
-                        self.userPic.layer.cornerRadius = self.userPic.frame.size.width/2
-                        self.userPic.layer.masksToBounds = true
+                        if let img = UIImage(data: data) {
+                             self.userPic.image =  img
+                            self.userPic.image = UIImage(data: data)
+                            self.userPic.layoutIfNeeded()
+                            self.userPic.layer.cornerRadius = self.userPic.frame.size.width/2
+                            self.userPic.layer.masksToBounds = true
+                        }
+                        
                     }
                 })
                 }.resume()

@@ -51,10 +51,16 @@ class ProfileViewController: UIViewController{
             URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let data =  data1 {
-                        self.profilePic.image = UIImage(data: data)
+                        if let img = UIImage(data: data) {
+                            self.profilePic.image =  img //UIImage(data: data)
+                           
+                        }
                         self.profilePic.layoutIfNeeded()
                         self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2
                         self.profilePic.layer.masksToBounds = true
+                        self.profilePic.layer.borderColor = UIColor.white.cgColor
+                         self.profilePic.layer.borderWidth = 1.0
+                        
                     }
                 })
                 }.resume()
@@ -264,6 +270,7 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
             
             
             let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(lovesArray[indexPath.row].postedUserId)/\(lovesArray[indexPath.row].postId)_post1.jpg"
+            
             URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
                 DispatchQueue.main.async(execute: {
                     if let data =  data1 {
