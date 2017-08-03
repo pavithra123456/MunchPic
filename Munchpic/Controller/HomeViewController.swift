@@ -354,6 +354,14 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
             Utility.showAlert(title: "MunchPic", message: "Please add comment", controller: self, completion: nil)
             return
         }
+        
+        if(self.commentsTextView.text.characters.count == 0){
+            
+            Utility.showAlert(title: "MunchPic", message: "Please add comment", controller: self, completion: nil)
+            return
+            
+        }
+        
         self.commentsTextView.resignFirstResponder()
 
         if let userId =  UserDefaults.standard.value(forKey: "userId") {

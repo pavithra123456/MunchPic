@@ -13,6 +13,7 @@ import Alamofire
 
 class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate{
 
+    @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var nameTxtField: UITextField!
     @IBOutlet weak var aboutTxtField: UITextField!
     @IBOutlet weak var dobTxtField: UITextField!
@@ -65,13 +66,20 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         cityTxtField.isUserInteractionEnabled = false
         phoneNoTxtField.isUserInteractionEnabled = false
         emailTxtField.isUserInteractionEnabled = false
-        
+        malebtn.isUserInteractionEnabled = false
+        femalebtn.isUserInteractionEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidLayoutSubviews() {
+        scrollview.isScrollEnabled = true
+        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height)
+    }
+
     
     // MARK: - mail button selected
     @IBAction func malebtn_Action(_ sender: Any) {
@@ -102,8 +110,10 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             phoneNoTxtField.isUserInteractionEnabled = true
             emailTxtField.isUserInteractionEnabled = true
             profilePicBtn.isUserInteractionEnabled = true
-            
+            malebtn.isUserInteractionEnabled = true
+            femalebtn.isUserInteractionEnabled = true
 
+             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+200)
         }
             
         else {
@@ -339,6 +349,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
         return true
     }
 
@@ -347,6 +359,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     func textFieldDidEndEditing(_ textField: UITextField) {
         
     }
+    
+    
     /*
     // MARK: - Navigation
 

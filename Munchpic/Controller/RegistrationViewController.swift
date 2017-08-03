@@ -46,6 +46,8 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         mscrollview.delegate = self
         countriestable.isHidden = true
+        countriestable.layer.borderColor = UIColor.gray.cgColor
+        countriestable.layer.borderWidth = 1.0
         
         // add default country arrays
         
@@ -110,7 +112,6 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        
         if(textField == country){
             
             countrystr = "country"
@@ -132,7 +133,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             countriestable.isHidden = false
             
             
-        }else if( textField == DOB){
+        }else if(textField == DOB){
             
             textField.resignFirstResponder()
             self.selectdobpicker()
@@ -145,6 +146,22 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
         
         
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        textField.resignFirstResponder()
+        
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if(textField == DOB){
+            
+            self.hideKeyboard()
+        
+        }
+        
+        return true
     }
     
     // MARK: - Takepic action
@@ -482,11 +499,13 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
     }
     
+   
     
     // selecteing dateofbirth
     
     func selectdobpicker(){
         
+       
         mscrollview.isScrollEnabled = false
         pickerView.removeFromSuperview()
         

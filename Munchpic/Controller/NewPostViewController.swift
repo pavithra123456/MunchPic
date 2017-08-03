@@ -97,12 +97,14 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         //        self.navigationController?.navigationItem .leftBarButtonItems?.append(UIBarButtonItem(image:  UIImage(named: "btn_hamburger"), style: .plain, target: self, action: nil))
         
         //self.navigationItem.leftBarButtonItem.
-        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: scrollView.contentSize.height+1350)
-        
+  
         
         catagoriesarray = ["Select SubCategory","Break Fast","Lunch","Dinner","Dessert"]
         cuisinearray = ["Select Cuisine","North Indian","Rajasthani","Chinese","South Indian","North_East Indian"]
         
+        
+        categorytable.layer.borderColor = UIColor.gray.cgColor
+        categorytable.layer.borderWidth = 1.0
         categorytable.isHidden = true
         
         if(UserDefaults.standard.bool(forKey: "editvisible") == true){
@@ -337,11 +339,13 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             
         }else if(textField == selectCategory){
             
+            textField.resignFirstResponder()
             selectcuisine.becomeFirstResponder()
             
         }else if( textField == selectcuisine){
             
-            step1.becomeFirstResponder()
+            textField.resignFirstResponder()
+            timelabel.becomeFirstResponder()
             
         }else{
             
@@ -353,9 +357,10 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         let pos = self.view.convert(textField.frame.origin, to: self.view)
         print(pos)
-        
+       
         if(textField == selectCategory){
             
             titileTextField.resignFirstResponder()
@@ -378,9 +383,12 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             categorytable.isHidden = false
             
             
+        }else if( textField == step7){
+            
+            
         }else{
             
-            categorytable.isHidden = true
+            
         }
         
         
@@ -486,6 +494,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
                 BV6.isHidden = false
             }else if(downint == 7){
                 BV7.isHidden = false
+            mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+200)
                 
             }else if(downint == 8){
                 BV8.isHidden = false
@@ -500,6 +509,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
                 
             }
             downint = downint+1
+            
+           
         }
         
 
@@ -741,9 +752,10 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         }else if(categorystr == "selectcuisine"){
             
             selectcuisine.text = self.cuisinearray[indexPath.row] as? String
-            // countryview.isHidden = true
+             //countryview.isHidden = true
             selectcuisine.resignFirstResponder()
-            step1.becomeFirstResponder()
+            timelabel.becomeFirstResponder()
+            categorytable.isHidden = true
         }
         
         
