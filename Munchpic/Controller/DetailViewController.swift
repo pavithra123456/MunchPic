@@ -102,7 +102,6 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         commentsTableView.dataSource = self
     
         addGuestures()
-        getcooments()
         addBorderToCommentsView()
 
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
@@ -120,6 +119,8 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
       
         if isPostEditable{
             self.editPostsBtn.isHidden = false
+            getcooments()
+
         }
         
         if postDetails == nil {
@@ -155,7 +156,11 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 //                    self.ingrediantstable.rowHeight = UITableViewAutomaticDimension;
 //                    self.ingrediantordicrstr = "Ingrediantsneeded"
 //                    self.loadingrediantsTabledata()
-                   self.tableView.reloadData()
+                    self.tableView.reloadData()
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+
 //                    
                     
                 })
@@ -197,6 +202,10 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
 //                    self.commentsview.layoutIfNeeded()
 //                }
                 self.commentsTableView.reloadData()
+                
+                self.commentsTableView.beginUpdates()
+                self.commentsTableView.endUpdates()
+
                 self.commentsTableView.tableFooterView = UIView()
             })
         }
@@ -521,6 +530,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
 
         self.tableView.reloadData()
+        
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
     }
 
     @IBAction func showDifficultyView(_ sender: Any) {
@@ -536,6 +548,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         }
         
         self.tableView.reloadData()
+        
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
     }
     
     func textViewDidChange(_ textView: UITextView) {

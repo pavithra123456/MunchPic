@@ -95,6 +95,9 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 if let allPostArray = postArry {
                     self.postArray = allPostArray
                     self.Hometableview.reloadData()
+
+                    self.Hometableview.beginUpdates()
+                    self.Hometableview.endUpdates()
                 }
             })
         }

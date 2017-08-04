@@ -24,7 +24,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     @IBOutlet var verudifficultBtn: UIButton!
     var verornonvegbool = Bool()
     var indexval = Int()
-    var imagesarray = NSMutableArray()
+    var imagesarray = [AnyObject]()
     var mPosition:Int = Int()
     var myint = Int()
     var index = 0
@@ -90,7 +90,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         //mscrollview.addGestureRecognizer(self.swipeGestureRight)
         
         // imagesarray = ["Noimage.png","Noimage.png","Noimage.png"]
-        imagesarray = [UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost"),UIImage(named: "camera_newpost")]
+        imagesarray = [UIImage(named: "camera_newpost")!,UIImage(named: "camera_newpost")!,UIImage(named: "camera_newpost")!]
         collectionView.reloadData()
         
         // self.navigationItem.leftBarButtonItems = []
@@ -109,6 +109,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         if(UserDefaults.standard.bool(forKey: "editvisible") == true){
             
+            self.navigationItem.title = "Edit Post"
             MBProgressHUD.showAdded(to: self.view, animated: true)
             ServiceLayer.getPostDetails(forPostId: postIdis) { (responseArray , status, msg) in
                 
@@ -121,16 +122,35 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
                     
                     DispatchQueue.main.async(execute: {
                         self.UpdateUI()
-                        
-                        
                     })
                 }
-                
             }
-
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
+    
+    func keyboardWillShow(_ notification: Notification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            // keyboardHeight = keyboardRectangle.height
+            self.mscrollview.contentOffset.y =  0
+            self.mscrollview.contentOffset.y =  self.mscrollview.contentOffset.y + keyboardRectangle.height
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            // keyboardHeight = keyboardRectangle.height
+            self.mscrollview.contentOffset.y =  self.mscrollview.contentOffset.y - keyboardRectangle.height
+        }
+    }
+    
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
@@ -156,6 +176,44 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         veglabel.text = postDetails?["category"] as? String
         
         
+        var imgrl = postDetails?["ImagePath1"] as! String
+        
+        URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+            DispatchQueue.main.async(execute: {
+                if let data =  data1 {
+                    if  let img = UIImage(data: data) {
+                        self.imagesarray[0] = img
+                    }
+                }
+            })
+            }.resume()
+        
+         imgrl = postDetails?["ImagePath2"] as! String
+
+        URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+            DispatchQueue.main.async(execute: {
+                if let data =  data1 {
+                   if  let img = UIImage(data: data) {
+                         self.imagesarray[1] = img
+                    }
+                }
+            })
+            }.resume()
+        
+        imgrl = postDetails?["ImagePath3"] as! String
+
+        URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
+            DispatchQueue.main.async(execute: {
+                if let data =  data1 {
+                    if  let img = UIImage(data: data) {
+                         self.imagesarray[2] = img
+                    }
+                }
+            })
+            }.resume()
+        
+       
+        collectionView.reloadData()
         
     }
     
@@ -322,7 +380,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             
             pageimage.image = image
             //  imagesarray.insert(image, at: indexval)
-            imagesarray.replaceObject(at: indexval, with: image)
+            imagesarray[indexval] =  image
             print("imageinsert at \(imagesarray) at indexof \(indexval)")
             pagecontroller.currentPage = indexval
             self.collectionView.reloadData()

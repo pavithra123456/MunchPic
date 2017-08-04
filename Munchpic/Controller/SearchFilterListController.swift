@@ -102,32 +102,27 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
             
             ServiceLayer.filter(param: param, completion: { (reponseArray, status, msg) in
 //                print(msg,reponseArray)
-                if status == false {
-                    Utility.showAlert(title: "MunchPic", message: "msg", controller: self, completion: nil)
-                    return
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    if status == false {
+                        Toast.showToast(text: "No result found", toView: self.view)
+                        return
+                    }
+                    for postobject in reponseArray! {
+                        
+                        let model =  PostModel.getmodel(postobject: postobject)
+                        let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(model.userId)/\(model.postId)_post1.jpg"
+                        model.ImagePath1 = imgrl
+                        self.fileteredArray.append(model)
+                        
+                    }
                 }
-                for postobject in reponseArray! {
-//                    let model = PostModel()
-//                    model.userId = Int(postobject["userId"] as? String ?? "0")!
-//                    model.postId = Int(postobject["postId"] as? String ?? "0")!
-//                    model.userId = Int(postobject["userId"] as? String ?? "0")!
-//                    model.userName = postobject["userName"] as? String ?? ""
-//                    model.dishName = postobject["dishName"] as? String ?? ""
-//                    model.loves = Int(postobject["loves"] as? String ?? "0")!
-//                    model.cuisine = postobject["cuisine"] as? String ?? ""
-//                    
-                   
-                   let model =  PostModel.getmodel(postobject: postobject)
-                     let imgrl =  "http://www.ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(model.userId)/\(model.postId)_post1.jpg"
-                    model.ImagePath1 = imgrl
-                    self.fileteredArray.append(model)
-
-                }
+                
+                
                 DispatchQueue.main.async {
                     if self.fileteredArray.count == 0 {
                         Toast.showToast(text: "No result found", toView: self.view)
                     }
-                    MBProgressHUD.hide(for: self.view, animated: true)
                     self.tableview.reloadData()
                 }
 
