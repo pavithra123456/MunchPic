@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import Alamofire
+import MBProgressHUD
 
 
 class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate{
@@ -26,8 +27,10 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     @IBOutlet var malebtn: UIButton!
     @IBOutlet var femalebtn: UIButton!
     @IBOutlet weak var userPic: UIImageView!
+    let countriesarray = ["India","Pakisthan","Srilanka","Bangladesh","Nepal","Tibet","China","Afghanisthan","Australia","Russia","UK","USA","Africa","France"]
+
     
-    
+    @IBOutlet weak var countryTableview: UITableView!
     @IBOutlet weak var profilePicBtn: UIButton!
     
     var genderstring = NSString()
@@ -39,6 +42,9 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         getProfileDetails()
         self.nameTxtField.delegate = self
         
+        self.userPic.layoutIfNeeded()
+        self.userPic.layer.cornerRadius = self.userPic.frame.size.width/2
+        self.userPic.layer.masksToBounds = true
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
             let imgrl = "http://ekalavyatech.com/munchpic.com/munchpicPHP/upload/\(String(describing: userId))/user.jpg"
             URLSession.shared.dataTask(with: URL(string:imgrl)!) { (data1, response, error) in
@@ -47,9 +53,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                         if let img = UIImage(data: data) {
                              self.userPic.image =  img
                             self.userPic.image = UIImage(data: data)
-                            self.userPic.layoutIfNeeded()
-                            self.userPic.layer.cornerRadius = self.userPic.frame.size.width/2
-                            self.userPic.layer.masksToBounds = true
+                            
                         }
                         
                     }
@@ -68,8 +72,33 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         emailTxtField.isUserInteractionEnabled = false
         malebtn.isUserInteractionEnabled = false
         femalebtn.isUserInteractionEnabled = false
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        
     }
 
+   
+   
+    
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            // keyboardHeight = keyboardRectangle.height
+            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
+        }
+    }
+    
+    func keyboardWillHide(_ notification: Notification) {
+        
+        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            // keyboardHeight = keyboardRectangle.height
+            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y - keyboardRectangle.height
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,8 +159,17 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     
     func getProfileDetails() {
         
+        
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            //MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+           
             ServiceLayer.getusetInfo(forUserID: userId as! String , completion: { (respose, status, msg) in
+                DispatchQueue.main.async(execute: {
+                    
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                })
+                
                 DispatchQueue.main.async {
                     self.nameTxtField.text = respose?[0]["name"] as? String
                     self.aboutTxtField.text = respose?[0]["about"] as? String
@@ -144,7 +182,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     self.phoneNoTxtField.text = respose?[0]["mobile"] as? String
                     self.emailTxtField.text = respose?[0]["email"] as? String
                     self.genderstring = (respose?[0]["gender"])! as! NSString
-                    
+                    self.countryTableview.reloadData()
                     if(self.genderstring == "male"){
                         
                         self.malebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
@@ -172,7 +210,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     
     func Updateuserprofile(){
         
-        
          let userId =  UserDefaults.standard.value(forKey: "userId")
             
         var parametersstring = " "
@@ -189,24 +226,24 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         
             
          parametersstring = "userId=\(uId)" + "&name=\(name)" + "&dob=\(dob)" + "&gender=\(genderstring)"  + "&country=\(country)" + "&state=\(state)" + "&city=\(city)" + "&email=\(email)" + "&mobile=\(mobile)" + "&about=\(about)"
-            
-        LoginServiceLayer().updateUserInfo(parameter:parametersstring  ,completion: { (response, status, message) in
-            
-            if status {
-                
-                let responseArray = response as![ [String:AnyObject]]
-                let responsedict = responseArray[0]
-                
-            }
-            else  {
-                DispatchQueue.main.async {
-                    
-            Utility.showAlert(title: "Alert!", message: message, controller: self,completion:nil)
-             
-                }
-            }
-           
-        })
+//            
+//        LoginServiceLayer().updateUserInfo(parameter:parametersstring  ,completion: { (response, status, message) in
+//            
+//            if status {
+//                
+//                let responseArray = response as![ [String:AnyObject]]
+//                let responsedict = responseArray[0]
+//                
+//            }
+//            else  {
+//                DispatchQueue.main.async {
+//                    
+//            Utility.showAlert(title: "Alert!", message: message, controller: self,completion:nil)
+//             
+//                }
+//            }
+//           
+//        })
 
         var url = URLRequest(url: URL(string: Constants.kBaseUrl + Constants.KUpdateUserInfo)!)
         url.httpMethod = "POST"
@@ -223,7 +260,12 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                  multipartFormData.append(UIImagePNGRepresentation(self.userPic.image!)!, withName: "image", fileName: "imageFileName.jpg", mimeType: "image/jpeg")
             }
             
-           
+            if let userId =  UserDefaults.standard.value(forKey: "userId") {
+                multipartFormData.append(("\(userId)".data(using: String.Encoding.utf8)!), withName: "userId")
+            }
+            
+        
+            
             multipartFormData.append((email.data(using: String.Encoding.utf8)!), withName: "email")
             multipartFormData.append((name.data(using: String.Encoding.utf8)!), withName: "name")
             multipartFormData.append((dob.data(using: String.Encoding.utf8)!), withName: "dob")
@@ -238,16 +280,14 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             case .success(let upload, _, _):
                 upload.responseString(completionHandler: { (responseString) in
                     print(responseString.description)
-                    if responseString.description == "Registered Successfully!, Please check your mail for activation!"{
+                    if responseString.description == "SUCCESS: Success!"{
                         DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
+                            Utility.showAlert(title: "Sucess", message: "User info updated.", controller: self, completion: {(action) in
+                            self.dismiss(animated: true, completion: nil)
+                            })
                         }
                     }
-                    
-                    DispatchQueue.main.async {
-                        Utility.showAlert(title: "MunchPic", message: responseString.description as String, controller: self,completion:nil)
-                        self.getProfileDetails()
-                    }
+
                 })
             case .failure(let encodingError):
                 print(encodingError)
@@ -283,6 +323,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             DispatchQueue.main.async( execute: {
                 
                 self.present(imagePicker, animated: false,completion: nil)
+                
                 
                 
             })
@@ -349,7 +390,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
     }
@@ -357,9 +397,21 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
 
     //MARK: - Textfielkd Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollview.contentOffset.y = 0
+        if textField == countryTxtField {
+            self.countryTableview.isHidden = true
+            countryTableview.reloadData()
+        }
+        textField.resignFirstResponder()
         
     }
-    
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == countryTxtField{
+            self.countryTableview.isHidden = false
+//            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
+        }
+    }
     
     /*
     // MARK: - Navigation
@@ -370,5 +422,39 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+extension ProfileDetailViewController:UITableViewDataSource,UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+            return countriesarray.count
+        
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        self.countryTableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
+
+        cell.textLabel?.text = self.countriesarray[indexPath.row] as? String
+        
+        
+        cell.textLabel?.textColor = UIColor.black
+        cell.backgroundColor = UIColor.white
+
+        if countryTxtField.text == cell.textLabel?.text  {
+            cell.backgroundColor = UIColor.red
+        }
+        
+        return cell
+        
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+            countryTxtField.text = self.countriesarray[indexPath.row] as? String
+            countryTxtField.resignFirstResponder()
+    }
 
 }

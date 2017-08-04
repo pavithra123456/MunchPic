@@ -51,7 +51,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         // add default country arrays
         
-        countriesarray = ["India","UK","USA","China","Africa","France"]
+        countriesarray = ["India","Pakisthan","Srilanka","Bangladesh","Nepal","Tibet","China","Afghanisthan","Australia","Russia","UK","USA","Africa","France"]
         statesarray = ["Select State","Andhra pradesh","Karnataka","Goa","Thamil Nadu","Kerala","UP"]
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.hideKeyboard))

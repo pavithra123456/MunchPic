@@ -395,7 +395,7 @@ class ServiceLayer: NSObject {
         var req =  URLRequest(url: url!)
         req.httpMethod = "POST"
         req.httpBody = postbody.data(using: String.Encoding.utf8)
-        
+        URLSession.shared.configuration.timeoutIntervalForRequest = 5
         URLSession.shared.dataTask(with: req) { (data, resposne, error) in
             print(Data())
             guard let data = data, error == nil else {                                                 // check for fundamental networking error
@@ -406,7 +406,7 @@ class ServiceLayer: NSObject {
             
             if let httpStatus = resposne as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                completion(nil, false, (error?.localizedDescription)!)
+                //completion(nil, false, (error?.localizedDescription)!)
 
             }
             
