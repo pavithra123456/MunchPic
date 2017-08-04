@@ -77,6 +77,9 @@
 		C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */; };
 		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
 		C1A560701F2761E000738E4B /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */; };
+		C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */; };
+		C1B3F0FD1F3448C6002572DD /* Proxima Nova Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */; };
+		C1B3F0FE1F3448C6002572DD /* Proxima Nova Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0FB1F3448C6002572DD /* Proxima Nova Semibold.otf */; };
 		DC27A2D94EC41819E2069395 /* Pods_MunchpicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */; };
 		DD6961A5045E66814DC7CF7C /* Pods_MunchpicUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */; };
 /* End PBXBuildFile section */
@@ -182,6 +185,9 @@
 		C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camaraicon.jpg; sourceTree = "<group>"; };
 		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPostDetailsViewController.swift; sourceTree = "<group>"; };
+		C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Light.otf"; path = "../Proxima Nova Light.otf"; sourceTree = "<group>"; };
+		C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Regular.otf"; path = "../Proxima Nova Regular.otf"; sourceTree = "<group>"; };
+		C1B3F0FB1F3448C6002572DD /* Proxima Nova Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Semibold.otf"; path = "../Proxima Nova Semibold.otf"; sourceTree = "<group>"; };
 		D97D6F6D3DC9587022628620 /* Pods-MunchpicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -250,6 +256,7 @@
 		7B3576501ED9AA8500FF610A /* Munchpic */ = {
 			isa = PBXGroup;
 			children = (
+				C1B3F0F81F34489B002572DD /* Fonts */,
 				87B1E6CA1EDC4AE700A331C0 /* Images */,
 				7B3576511ED9AA8500FF610A /* AppDelegate.swift */,
 				7B3576531ED9AA8500FF610A /* ViewController.swift */,
@@ -417,6 +424,16 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C1B3F0F81F34489B002572DD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */,
+				C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */,
+				C1B3F0FB1F3448C6002572DD /* Proxima Nova Semibold.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,6 +552,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */,
+				C1B3F0FD1F3448C6002572DD /* Proxima Nova Regular.otf in Resources */,
+				C1B3F0FE1F3448C6002572DD /* Proxima Nova Semibold.otf in Resources */,
 				7B24DF941EFFC08F00AD85EA /* SearchHeaderView.xib in Resources */,
 				87B1E6DC1EDC4B8B00A331C0 /* 144_app_icon.png in Resources */,
 				87B1E6D91EDC4B5600A331C0 /* rd1.png in Resources */,
