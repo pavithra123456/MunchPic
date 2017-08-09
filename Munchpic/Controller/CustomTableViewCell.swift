@@ -137,9 +137,6 @@ extension CustomTableViewCell {
             
         else if self.smilesView.isHidden {
             Toast.showToast(text: "please hold for update ", toView: (self.superview?.superview?.superview?.superview!)!)
-
-            //TODO add label like android toast message
-//            Utility.showAlert(title: "MunchPic", message: "please hold for update", controller: self.superview?.superview, completion: nil)
         }
     }
     
@@ -161,15 +158,27 @@ extension CustomTableViewCell {
                         self.lovesStatus = "\(selectedEmoji)"
                         self.likeButton.setImage(UIImage(named:"emoji\(selectedEmoji)"), for: .normal)
                         Toast.showToast(text: msg, toView: (self.superview?.superview?.superview?.superview!)!)
-
-//                        Utility.showAlert(title: "Muchpic", message:"Loved", controller: self,completion:nil)
                     })
-                    
                 }
             }
         }
-        
-        
+    }
+}
+
+extension CustomTableViewCell {
+    func configureCell (model: PostModel) {
+        self.userName.text = model.userName
+        self.description1.text = model.descriptionArray[0]
+        self.loves.text = "\(model.loves)"
+        self.useId = model.userId
+        self.efforts  = model.efforts
+        self.postId = model.postId
+        self.lovesStatus = model.lovesStatus
+
+        if model.lovesStatus != "0" {
+            let imageStr = "emoji\(model.lovesStatus)"
+            self.likeButton.setImage(UIImage(named:imageStr), for: .normal)
+        }
     }
 }
 

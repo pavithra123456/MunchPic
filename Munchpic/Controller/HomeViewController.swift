@@ -266,17 +266,11 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 cell = Bundle.main.loadNibNamed("Hcell", owner: self, options: nil)?[0] as! CustomTableViewCell;
             }
             
-            cell.userName.text = postArray[indexPath.row].userName
-            cell.description1.text = postArray[indexPath.row].descriptionArray[0]
-            cell.loves.text = "\(postArray[indexPath.row].loves)"
-            //cell.collectionCount.text = "\(postArray[indexPath.row].noOfCollection)"
-            cell.useId = postArray[indexPath.row].userId
-            cell.efforts  = postArray[indexPath.row].efforts
+            cell.configureCell(model: postArray[indexPath.row])
+            
             cell.likeButton.tag = indexPath.row
             cell.commentBtn.tag = indexPath.row
             cell.ShowSmilyBtn.tag = indexPath.row
-            cell.postId = postArray[indexPath.row].postId
-            cell.lovesStatus = postArray[indexPath.row].lovesStatus
             
             if postArray[indexPath.row].lovesStatus != "0" {
                 let imageStr = "emoji\(postArray[indexPath.row].lovesStatus)"

@@ -43,6 +43,7 @@
 		7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */; };
 		7B95BAFA1F0F8AEC00404220 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAF91F0F8AEC00404220 /* PostCell.swift */; };
 		7B95BAFC1F0FCBC300404220 /* SearchFilterListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */; };
+		7B99F5921F38604E001D3AEB /* Shutter.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7B99F5911F38604E001D3AEB /* Shutter.gif */; };
 		7BAF12EB1F2A559A00F8BA63 /* SmilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */; };
 		7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */; };
 		7BB9F0941F26592B004E78AA /* UserCollectionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */; };
@@ -62,7 +63,6 @@
 		87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CF81EE57B9800EEC7A3 /* homeicon.png */; };
 		87AF5CFB1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */; };
 		87AF5CFD1EE57C6C00EEC7A3 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CFC1EE57C6C00EEC7A3 /* about.png */; };
-		87AF5CFF1EE57C8800EEC7A3 /* menu12.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CFE1EE57C8800EEC7A3 /* menu12.png */; };
 		87B1E6CC1EDC4B0300A331C0 /* userimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6CB1EDC4B0300A331C0 /* userimage.png */; };
 		87B1E6CE1EDC4B0D00A331C0 /* bottom_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */; };
 		87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D11EDC4B1800A331C0 /* txtbg.png */; };
@@ -146,6 +146,7 @@
 		7B95BAF71F0F8A0F00404220 /* UserPostsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostsController.swift; sourceTree = "<group>"; };
 		7B95BAF91F0F8AEC00404220 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostCell.swift; path = CustomTableViewCells/PostCell.swift; sourceTree = "<group>"; };
 		7B95BAFB1F0FCBC300404220 /* SearchFilterListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFilterListController.swift; sourceTree = "<group>"; };
+		7B99F5911F38604E001D3AEB /* Shutter.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Shutter.gif; sourceTree = "<group>"; };
 		7BAF12EA1F2A559A00F8BA63 /* SmilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmilesViewController.swift; sourceTree = "<group>"; };
 		7BB9F0911F25F87A004E78AA /* SearchFileterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchFileterCell.swift; path = CustomTableViewCells/SearchFileterCell.swift; sourceTree = "<group>"; };
 		7BB9F0931F26592B004E78AA /* UserCollectionListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionListController.swift; sourceTree = "<group>"; };
@@ -165,7 +166,6 @@
 		87AF5CF81EE57B9800EEC7A3 /* homeicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeicon.png; sourceTree = "<group>"; };
 		87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onlineresearchfeedbackicon.png; sourceTree = "<group>"; };
 		87AF5CFC1EE57C6C00EEC7A3 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
-		87AF5CFE1EE57C8800EEC7A3 /* menu12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu12.png; sourceTree = "<group>"; };
 		87B1E6CB1EDC4B0300A331C0 /* userimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userimage.png; sourceTree = "<group>"; };
 		87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bottom_bg.png; sourceTree = "<group>"; };
 		87B1E6D11EDC4B1800A331C0 /* txtbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = txtbg.png; sourceTree = "<group>"; };
@@ -376,11 +376,11 @@
 		87B1E6CA1EDC4AE700A331C0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7B99F5911F38604E001D3AEB /* Shutter.gif */,
 				87748A8D1EE58AE8007064D1 /* 1.png */,
 				87748A8E1EE58AE8007064D1 /* 2.png */,
 				87748A8F1EE58AE8007064D1 /* 3.png */,
 				87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */,
-				87AF5CFE1EE57C8800EEC7A3 /* menu12.png */,
 				87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */,
 				87AF5CFC1EE57C6C00EEC7A3 /* about.png */,
 				87AF5CF81EE57B9800EEC7A3 /* homeicon.png */,
@@ -561,7 +561,6 @@
 				7BE1C8EA1EFEDBC9001570BD /* ProfileHeaderView.xib in Resources */,
 				87B1E6CE1EDC4B0D00A331C0 /* bottom_bg.png in Resources */,
 				7B35765C1ED9AA8500FF610A /* LaunchScreen.storyboard in Resources */,
-				87AF5CFF1EE57C8800EEC7A3 /* menu12.png in Resources */,
 				C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */,
 				87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */,
 				87AF5CFB1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png in Resources */,
@@ -580,6 +579,7 @@
 				87AC69061F188F4D008F2CA9 /* Nonveg.png in Resources */,
 				87748A911EE58AE8007064D1 /* 2.png in Resources */,
 				87AC69071F188F4D008F2CA9 /* veg.png in Resources */,
+				7B99F5921F38604E001D3AEB /* Shutter.gif in Resources */,
 				7B3576571ED9AA8500FF610A /* Main.storyboard in Resources */,
 				87AC69051F188F4D008F2CA9 /* cam.png in Resources */,
 				87B1E6DA1EDC4B5600A331C0 /* rd2.png in Resources */,
@@ -972,8 +972,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3306d846-3bba-4cd2-81e7-25be12ed0eae";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.lineology.app";
+				PROVISIONING_PROFILE = "a0ed87de-7a6e-433d-983f-f86ce239bf4c";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.lineology.app";
 				SWIFT_OBJC_BRIDGING_HEADER = "Munchpic/Munchpic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
