@@ -61,6 +61,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.10):
     - GTMSessionFetcher/Core (= 1.1.10)
   - MBProgressHUD (1.0.0)
+  - SwiftGifOrigin (1.6.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - FacebookShare
   - Google/SignIn
   - MBProgressHUD (= 1.0.0)
+  - SwiftGifOrigin (~> 1.6.1)
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -88,7 +90,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
 
-PODFILE CHECKSUM: 882c4afe87e7cbe9166c27680300695b3b92aedc
+PODFILE CHECKSUM: 849aa18bcbbfb2aeac4ac7b183643dd6fc514aa4
 
 COCOAPODS: 1.2.1

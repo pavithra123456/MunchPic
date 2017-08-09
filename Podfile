@@ -17,6 +17,9 @@ target 'Munchpic' do
     pod 'FacebookCore'
     pod 'FacebookLogin'
     pod 'FacebookShare'
+    
+    #pods for gif
+    pod 'SwiftGifOrigin', '~> 1.6.1'
 
   target 'MunchpicTests' do
     inherit! :search_paths
