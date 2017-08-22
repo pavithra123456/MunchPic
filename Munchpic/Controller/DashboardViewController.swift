@@ -24,19 +24,48 @@ class DashboardViewController: UIViewController {
     var windowBorder: UIView?
     var searchBorder: UIView?
     var profileBorder: UIView?
-    
-    
+
+    var gifimageview = UIImageView()
+    var boolforgif = Bool()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeBorder = homeBtn.addBorder(borderPostion: .bottom)
+        
+        boolforgif = UserDefaults.standard.bool(forKey: "afterlogin")
+        
+        if(boolforgif == true){
+            
+            gifimageview.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+            UIApplication.shared.keyWindow?.addSubview(gifimageview)
+            gifimageview.image = UIImage.gif(name: "Shutter")
+            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(gifDidStop(sender:)), userInfo: nil, repeats: false)
+            
+        }else{
+            
+             UserDefaults.standard.set(false, forKey: "afterlogin")
+
+        }
+        
+               homeBorder = homeBtn.addBorder(borderPostion: .bottom)
 
         // Do any additional setup after loading the view.
     }
 
+    
+    func gifDidStop(sender: UIImageView) {
+        print("gifDidStop")
+        gifimageview.isHidden = true
+        
+    }
+
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+   
     
     @IBAction func profileBtnAction(_ sender: Any) {
         homeBtn.tintColor = UIColor.yellow

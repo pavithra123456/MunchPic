@@ -60,14 +60,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
     
     
     @IBOutlet weak var emojiViewHeight: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
-        
-        
-        
-        
-        
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+      
         
         radioButtonArray = [radioBtn1,radioBtn2,radioBtn3,radioBtn4,radioBtn5,radioBtn6]
         
@@ -88,7 +87,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         MBProgressHUD.showAdded(to: self.view, animated: true)
         //TODO: - Need Add nill check
         ServiceLayer.getPosts { (postArry, status, msg) in
-            DispatchQueue.main.async(execute: { 
+            DispatchQueue.main.async(execute: {
+              
                 MBProgressHUD.hide(for: self.view, animated: true)
             })
             DispatchQueue.main.async(execute: {
@@ -121,6 +121,8 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         mscrollview.isScrollEnabled = true
         mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: Hometableview.contentSize.height+250)
     }
+    
+ 
     
     //MARK: - Guestures
     

@@ -11,19 +11,42 @@ import FacebookLogin
 import FacebookCore
 import Google
 import  MBProgressHUD
+import SwiftGifOrigin
 
 class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDelegate,GIDSignInUIDelegate {
     
     
     @IBOutlet var password: UITextField!
     @IBOutlet var emailid: UITextField!
+    var gifimageview = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(UserLoginViewController.methodOfReceivedNotification(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
+        
         password.delegate = self
         emailid.delegate = self
 
     }
+    
+    func methodOfReceivedNotification(notification: Notification){
+        
+        gifimageview.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+       // view.addSubview(gifimageview)
+        UIApplication.shared.keyWindow?.addSubview(gifimageview)
+        gifimageview.image = UIImage.gif(name: "Shutter")
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(gifDidStop(sender:)), userInfo: nil, repeats: false)
+        
+        
+    }
+    
+    func gifDidStop(sender: UIImageView) {
+        print("gifDidStop")
+        gifimageview.isHidden = true
+        
+    }
+
 
      // MARK: - Check validations
     
@@ -44,20 +67,30 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     @IBAction func Login_Action(_ sender: Any) {
         
 
-      emailid.text = "chaitanyakumari4b5@gmail.com"
-        password.text = "chaithu"
-//        
+//      emailid.text = "chaitanyakumari4b5@gmail.com"
+//        password.text = "chaithu"
+
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0){
             
-           // _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill all the feilds", style: AlertStyle.none)
+             Utility.showAlert(title: "Alert", message: "Please fill all the feilds ", controller: self,completion:nil)
+            
+//            _ = SweetAlert().showAlert("Alert!", subTitle: "Please fill all the feilds", style: AlertStyle.none)
+            return
             
         }else if(emailid.text?.characters.count == 0 ){
             
-            // _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your registered Emailid", style: AlertStyle.none)
+             Utility.showAlert(title: "Alert", message: "Please enter your registered Emailid", controller: self,completion:nil)
+            
+//            _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your registered Emailid", style: AlertStyle.none)
+            return
             
         }else if(password.text?.characters.count == 0 ){
             
-             // _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your password", style: AlertStyle.none)
+             Utility.showAlert(title: "Alert", message: "Please enter your password", controller: self,completion:nil)
+            
+//             _ = SweetAlert().showAlert("Alert!", subTitle: "Please enter your password", style: AlertStyle.none)
+            
+            return
             
         }else{
             
@@ -81,6 +114,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                             
                             
                             DispatchQueue.main.async {
+                                
                                 self.performSegue(withIdentifier: "ShowDashboard", sender: nil)
                             }
 

@@ -20,14 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
-        if let userId =  UserDefaults.standard.value(forKey: "userId") {
+            if let userId =  UserDefaults.standard.value(forKey: "userId") {
             print(userId)
+            UserDefaults.standard.set(true, forKey: "afterlogin")
             let stroyBoard = UIStoryboard(name: "Main", bundle: nil)
             let askFeedbackVc = stroyBoard.instantiateViewController(withIdentifier: "DashBoard")
             self.window?.rootViewController = askFeedbackVc
-            
         
         }
 
@@ -74,10 +75,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+         
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil)
+
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
