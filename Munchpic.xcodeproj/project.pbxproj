@@ -52,7 +52,7 @@
 		7BE1C8E61EFE8267001570BD /* TrendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E51EFE8267001570BD /* TrendsModel.swift */; };
 		7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E71EFEDBC9001570BD /* ProfileHeaderView.swift */; };
 		7BE1C8EA1EFEDBC9001570BD /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E81EFEDBC9001570BD /* ProfileHeaderView.xib */; };
-		870940F11EE6DA3E00292713 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 870940F01EE6DA3E00292713 /* logo.png */; };
+		870940F11EE6DA3E00292713 /* logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 870940F01EE6DA3E00292713 /* logo1.png */; };
 		87748A901EE58AE8007064D1 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8D1EE58AE8007064D1 /* 1.png */; };
 		87748A911EE58AE8007064D1 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8E1EE58AE8007064D1 /* 2.png */; };
 		87748A921EE58AE8007064D1 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8F1EE58AE8007064D1 /* 3.png */; };
@@ -172,7 +172,7 @@
 		7BE1C8E51EFE8267001570BD /* TrendsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendsModel.swift; sourceTree = "<group>"; };
 		7BE1C8E71EFEDBC9001570BD /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = HeaderViews/ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C8E81EFEDBC9001570BD /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileHeaderView.xib; path = HeaderViews/ProfileHeaderView.xib; sourceTree = "<group>"; };
-		870940F01EE6DA3E00292713 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Controller/logo.png; sourceTree = "<group>"; };
+		870940F01EE6DA3E00292713 /* logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo1.png; path = Controller/logo1.png; sourceTree = "<group>"; };
 		87748A8D1EE58AE8007064D1 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		87748A8E1EE58AE8007064D1 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		87748A8F1EE58AE8007064D1 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 				87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */,
 				C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */,
 				87B1E6CB1EDC4B0300A331C0 /* userimage.png */,
-				870940F01EE6DA3E00292713 /* logo.png */,
+				870940F01EE6DA3E00292713 /* logo1.png */,
 				87B1E6D11EDC4B1800A331C0 /* txtbg.png */,
 				87B1E6D31EDC4B5600A331C0 /* checkbox@3.png */,
 				87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */,
@@ -592,7 +592,7 @@
 				87B1E6D71EDC4B5600A331C0 /* checkbox@3.png in Resources */,
 				C10FB5C21F4C5D0A0096DF60 /* MpsplashImage.png in Resources */,
 				7B95BAF41F0F861300404220 /* UserPosts.storyboard in Resources */,
-				870940F11EE6DA3E00292713 /* logo.png in Resources */,
+				870940F11EE6DA3E00292713 /* logo1.png in Resources */,
 				7B3576591ED9AA8500FF610A /* Assets.xcassets in Resources */,
 				87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */,
 				87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */,
@@ -669,7 +669,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4BF6F6BC4EFD81932D0D349C /* [CP] Embed Pods Frameworks */ = {
@@ -729,7 +729,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DD085BDC6F48CF7B7437AB9F /* [CP] Check Pods Manifest.lock */ = {
@@ -744,7 +744,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FEFB5EAAB281266AD1227F9D /* [CP] Copy Pods Resources */ = {

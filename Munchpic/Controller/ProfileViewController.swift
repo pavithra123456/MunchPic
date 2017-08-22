@@ -37,9 +37,7 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        lovesTableView.delegate = self
+                lovesTableView.delegate = self
         
         //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
         //        self.collectionview.reloadData()
@@ -164,6 +162,9 @@ class ProfileViewController: UIViewController{
                     self.userPostsArray.append(model)
                 }
                 DispatchQueue.main.async {
+                    self.collectionView.dataSource = self
+                   self.collectionView.delegate = self
+
                     self.collectionView.isHidden = false
                     self.collectionviewheight.constant = self.collectionView.contentSize.height
                     
@@ -315,7 +316,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
         let section = indexPath.section * 2
-        if collectionViewDataValue == "posts" {
+        if collectionViewDataValue == "posts" && userPostsArray.count != 0 {
             var obj = userPostsArray[indexPath.row]
             if indexPath.row == 0 {
                 obj = userPostsArray[ section]

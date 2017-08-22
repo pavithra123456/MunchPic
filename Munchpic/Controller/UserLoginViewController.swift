@@ -75,9 +75,9 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     @IBAction func Login_Action(_ sender: Any) {
         
 
-        emailid.text = "chaitanyakumari4b5@gmail.com"
-        password.text = "chaithu"
-//
+//      emailid.text = "chaitanyakumari4b5@gmail.com"
+//        password.text = "chaithu"
+
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0){
             
              Utility.showAlert(title: "Alert", message: "Please fill all the feilds ", controller: self,completion:nil)
@@ -223,7 +223,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
             
             if let result = responsedict["userId"] {
                 UserDefaults.standard.set(result, forKey: "userId")
-                
+                UserDefaults.standard.synchronize()
                 User.sharedUserInstance.usertId = Int(result as! String)!
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "ShowDashboard", sender: nil)

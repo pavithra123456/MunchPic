@@ -24,6 +24,7 @@ class DashboardViewController: UIViewController {
     var windowBorder: UIView?
     var searchBorder: UIView?
     var profileBorder: UIView?
+
     var gifimageview = UIImageView()
     var splashimage = UIImageView()
     var boolforgif = Bool()
@@ -177,7 +178,7 @@ extension UIView {
     }
     
     /// Add borders to UIView based on position.
-    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.0) -> UIView {
+    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.3) -> UIView {
         
         let borderName = "bottomBorder"
         

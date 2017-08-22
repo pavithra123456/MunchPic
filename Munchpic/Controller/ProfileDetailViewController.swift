@@ -41,6 +41,9 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         // Do any additional setup after loading the view.
         getProfileDetails()
         self.nameTxtField.delegate = self
+        self.countryTableview.dataSource = self
+        self.countryTableview.delegate = self
+
         
         self.userPic.layoutIfNeeded()
         self.userPic.layer.cornerRadius = self.userPic.frame.size.width/2
@@ -409,6 +412,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == countryTxtField{
             self.countryTableview.isHidden = false
+
 //            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
         }
     }

@@ -391,7 +391,8 @@ class ServiceLayer: NSObject {
     
     
     class func excuteQuery(url:String,postbody:String,completion:@escaping (AnyObject?,Bool,String)->Void) {
-        
+        print("request for \(postbody)")
+
         let url = URL(string: url)
         var req =  URLRequest(url: url!)
         req.httpMethod = "POST"
@@ -412,13 +413,14 @@ class ServiceLayer: NSObject {
             }
             
             let responseString = String(data: data, encoding: .utf8)
-            print("responseString = \(String(describing: responseString))")
+            //print("responseString = \(String(describing: responseString))")
             do {
                 let repsonseJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
                 print(repsonseJson["result"])
                 completion(repsonseJson["result"] as? [[String : AnyObject]] as AnyObject, true, "Success")
             }
             catch {
+                print("response for \(url)")
                 completion(nil, false, responseString!)
 
             }
