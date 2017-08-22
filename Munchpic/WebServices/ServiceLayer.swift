@@ -379,6 +379,7 @@ class ServiceLayer: NSObject {
                 completion(response as? [[String : AnyObject]] , true, "Success")
                 
             }
+                
             else {
                 
             }
@@ -414,7 +415,7 @@ class ServiceLayer: NSObject {
             print("responseString = \(String(describing: responseString))")
             do {
                 let repsonseJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
-               // print(repsonseJson["result"])
+                print(repsonseJson["result"])
                 completion(repsonseJson["result"] as? [[String : AnyObject]] as AnyObject, true, "Success")
             }
             catch {

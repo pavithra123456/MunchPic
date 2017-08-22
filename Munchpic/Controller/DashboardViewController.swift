@@ -25,6 +25,7 @@ class DashboardViewController: UIViewController {
     var searchBorder: UIView?
     var profileBorder: UIView?
     var gifimageview = UIImageView()
+    var splashimage = UIImageView()
     var boolforgif = Bool()
   
     override func viewDidLoad() {
@@ -41,7 +42,10 @@ class DashboardViewController: UIViewController {
             
         }else{
             
-             UserDefaults.standard.set(false, forKey: "afterlogin")
+            splashimage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+            UIApplication.shared.keyWindow?.addSubview(splashimage)
+            splashimage.image = UIImage(named : "MpsplashImage.png")
+            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(splshimagection(sender:)), userInfo: nil, repeats: false)
 
         }
         
@@ -52,8 +56,13 @@ class DashboardViewController: UIViewController {
 
     
     func gifDidStop(sender: UIImageView) {
-        print("gifDidStop")
         gifimageview.isHidden = true
+        
+    }
+    
+    func splshimagection(sender: UIImageView) {
+        
+        splashimage.isHidden = true
         
     }
 

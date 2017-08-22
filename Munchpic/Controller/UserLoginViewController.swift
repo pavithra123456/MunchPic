@@ -20,6 +20,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     @IBOutlet var emailid: UITextField!
     var gifimageview = UIImageView()
 
+    @IBOutlet weak var mscrollview: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +30,13 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
         emailid.delegate = self
 
     }
+    
+    override func viewDidLayoutSubviews() {
+        mscrollview.isScrollEnabled = true
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height
+        )
+    }
+
     
     func methodOfReceivedNotification(notification: Notification){
         
