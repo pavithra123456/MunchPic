@@ -52,7 +52,7 @@
 		7BE1C8E61EFE8267001570BD /* TrendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E51EFE8267001570BD /* TrendsModel.swift */; };
 		7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E71EFEDBC9001570BD /* ProfileHeaderView.swift */; };
 		7BE1C8EA1EFEDBC9001570BD /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE1C8E81EFEDBC9001570BD /* ProfileHeaderView.xib */; };
-		870940F11EE6DA3E00292713 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 870940F01EE6DA3E00292713 /* logo.png */; };
+		870940F11EE6DA3E00292713 /* logo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 870940F01EE6DA3E00292713 /* logo1.png */; };
 		87748A901EE58AE8007064D1 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8D1EE58AE8007064D1 /* 1.png */; };
 		87748A911EE58AE8007064D1 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8E1EE58AE8007064D1 /* 2.png */; };
 		87748A921EE58AE8007064D1 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87748A8F1EE58AE8007064D1 /* 3.png */; };
@@ -155,7 +155,7 @@
 		7BE1C8E51EFE8267001570BD /* TrendsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendsModel.swift; sourceTree = "<group>"; };
 		7BE1C8E71EFEDBC9001570BD /* ProfileHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileHeaderView.swift; path = HeaderViews/ProfileHeaderView.swift; sourceTree = "<group>"; };
 		7BE1C8E81EFEDBC9001570BD /* ProfileHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileHeaderView.xib; path = HeaderViews/ProfileHeaderView.xib; sourceTree = "<group>"; };
-		870940F01EE6DA3E00292713 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Controller/logo.png; sourceTree = "<group>"; };
+		870940F01EE6DA3E00292713 /* logo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo1.png; path = Controller/logo1.png; sourceTree = "<group>"; };
 		87748A8D1EE58AE8007064D1 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		87748A8E1EE58AE8007064D1 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		87748A8F1EE58AE8007064D1 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
@@ -388,7 +388,7 @@
 				87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */,
 				C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */,
 				87B1E6CB1EDC4B0300A331C0 /* userimage.png */,
-				870940F01EE6DA3E00292713 /* logo.png */,
+				870940F01EE6DA3E00292713 /* logo1.png */,
 				87B1E6D11EDC4B1800A331C0 /* txtbg.png */,
 				87B1E6D31EDC4B5600A331C0 /* checkbox@3.png */,
 				87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */,
@@ -513,7 +513,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = QSLY5SF2LD;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					7B3576611ED9AA8500FF610A = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -568,7 +568,7 @@
 				87748A901EE58AE8007064D1 /* 1.png in Resources */,
 				87B1E6D71EDC4B5600A331C0 /* checkbox@3.png in Resources */,
 				7B95BAF41F0F861300404220 /* UserPosts.storyboard in Resources */,
-				870940F11EE6DA3E00292713 /* logo.png in Resources */,
+				870940F11EE6DA3E00292713 /* logo1.png in Resources */,
 				7B3576591ED9AA8500FF610A /* Assets.xcassets in Resources */,
 				87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */,
 				87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */,
@@ -965,15 +965,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = QSLY5SF2LD;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Munchpic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a0ed87de-7a6e-433d-983f-f86ce239bf4c";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.lineology.app";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Munchpic/Munchpic-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

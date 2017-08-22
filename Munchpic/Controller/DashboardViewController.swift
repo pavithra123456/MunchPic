@@ -26,8 +26,6 @@ class DashboardViewController: UIViewController {
     var profileBorder: UIView?
     
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         homeBorder = homeBtn.addBorder(borderPostion: .bottom)
@@ -142,7 +140,7 @@ extension UIView {
     }
     
     /// Add borders to UIView based on position.
-    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.0) -> UIView {
+    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.3) -> UIView {
         
         let borderName = "bottomBorder"
         
