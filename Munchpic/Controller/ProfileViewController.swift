@@ -318,7 +318,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         let section = indexPath.section * 2
         if collectionViewDataValue == "posts" && userPostsArray.count != 0 {
             var obj = userPostsArray[indexPath.row]
-            if indexPath.row == 0 {
+            if indexPath.row == 0  && userPostsArray.count != 0 {
                 obj = userPostsArray[ section]
             }
             else {

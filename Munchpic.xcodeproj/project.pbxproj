@@ -75,8 +75,6 @@
 		87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */; };
 		87B1E6E41EDC504300A331C0 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6E31EDC504300A331C0 /* Reachability.swift */; };
 		C10FB5C21F4C5D0A0096DF60 /* MpsplashImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C10FB5C11F4C5D0A0096DF60 /* MpsplashImage.png */; };
-		C125112A1F3AF26700678D78 /* SwiftGifOrigin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12511281F3AF14000678D78 /* SwiftGifOrigin.framework */; };
-		C125112B1F3AF26700678D78 /* SwiftGifOrigin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C12511281F3AF14000678D78 /* SwiftGifOrigin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */; };
 		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
 		C1A560701F2761E000738E4B /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */; };
@@ -111,7 +109,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C125112B1F3AF26700678D78 /* SwiftGifOrigin.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +197,6 @@
 		912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA15765971EB4BD62F67CDF0 /* Pods-Munchpic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Munchpic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Munchpic/Pods-Munchpic.debug.xcconfig"; sourceTree = "<group>"; };
 		C10FB5C11F4C5D0A0096DF60 /* MpsplashImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MpsplashImage.png; sourceTree = "<group>"; };
-		C12511281F3AF14000678D78 /* SwiftGifOrigin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftGifOrigin.framework; path = "../../../Library/Developer/Xcode/DerivedData/Munchpic-bcqhzrozwuwdadfsrhrczikuibkn/Build/Products/Debug-iphonesimulator/SwiftGifOrigin/SwiftGifOrigin.framework"; sourceTree = "<group>"; };
 		C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camaraicon.jpg; sourceTree = "<group>"; };
 		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPostDetailsViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B754CB104409B1AD97BB7F9 /* Pods_Munchpic.framework in Frameworks */,
-				C125112A1F3AF26700678D78 /* SwiftGifOrigin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +420,6 @@
 		A36F4A394C41580465F4F571 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C12511281F3AF14000678D78 /* SwiftGifOrigin.framework */,
 				1F152B3D9BFBD90DB42B033F /* Pods_Munchpic.framework */,
 				DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */,
 				912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */,
