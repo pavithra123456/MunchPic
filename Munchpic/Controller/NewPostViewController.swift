@@ -298,7 +298,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     func selectimage(_ sender: Any){
         
-        let actionSheetController = UIAlertController(title: "Uplaod your photo", message: "", preferredStyle: .actionSheet)
+        let actionSheetController = UIAlertController(title: "Upload your photo", message: "", preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
             // Just dismiss the action sheet

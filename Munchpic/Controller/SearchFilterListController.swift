@@ -122,6 +122,7 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
                 DispatchQueue.main.async {
                     if self.fileteredArray.count == 0 {
                         Toast.showToast(text: "No result found", toView: self.view)
+                        self.tableview.isHidden = true
                     }
                     self.tableview.reloadData()
                 }

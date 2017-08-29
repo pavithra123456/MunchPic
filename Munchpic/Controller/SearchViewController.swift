@@ -16,11 +16,11 @@ enum SubCategory : String{
 }
 
 enum Cuisine : String{
-    case NorthIndia = "North India"
+    case NorthIndia = "North Indian"
     case Rajasthani
     case Gujarathi
     case Chinese
-    case SouthIndia = "South India"
+    case SouthIndia = "South Indian"
     case NorthEastIndia = "North East India"
 }
 

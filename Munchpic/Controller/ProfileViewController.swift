@@ -281,9 +281,9 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
                 }.resume()
         }
         
-        tableviewheight.constant = lovesTableView.contentSize.height
-        mscrollview.contentSize.height = lovesTableView.contentSize.height + 300
-        collectionviewheight.constant = collectionView.contentSize.height
+//        tableviewheight.constant = lovesTableView.contentSize.height
+//        mscrollview.contentSize.height = lovesTableView.contentSize.height + 300
+//        collectionviewheight.constant = collectionView.contentSize.height
         
         return cell
     }
@@ -408,8 +408,8 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         
         
         
-        collectionviewheight.constant = collectionView.contentSize.height
-        mscrollview.contentSize.height = collectionView.contentSize.height + 300
+//        collectionviewheight.constant = collectionView.contentSize.height
+//        mscrollview.contentSize.height = collectionView.contentSize.height + 300
         
         
         return cell
