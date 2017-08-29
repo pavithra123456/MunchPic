@@ -64,6 +64,7 @@ class PostModel: NSObject {
         model.userName = postobject["userName"] as? String ?? ""
         model.dishName = postobject["dishName"] as? String ?? ""
         model.cuisine = postobject["cuisine"] as? String ?? ""
+        model.category = postobject["category"] as? String ?? ""
 
         
         model.descriptionArray.append(postobject["description1"] as? String ?? "")

@@ -65,13 +65,18 @@ class ProfileViewController: UIViewController{
             
             
         }
+        if let userName =  UserDefaults.standard.value(forKey: "name") {
+            self.profileName.text = userName as? String
+        }
+        
         getUserPosts()
 
         
     }
     
     override func viewDidLayoutSubviews() {
-        collectionviewheight.constant = collectionView.contentSize.height
+        mscrollview.contentSize.height = self.profileName.frame.origin.y + 35
+
         collectionView.isHidden = false
         self.cameraButtonAction(nil)
     }
@@ -86,7 +91,6 @@ class ProfileViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
 
-        mscrollview.contentSize.height = self.view.frame.size.height
         
         collectionView.reloadData()
         if lovesTableView.isHidden {
@@ -166,7 +170,6 @@ class ProfileViewController: UIViewController{
                    self.collectionView.delegate = self
 
                     self.collectionView.isHidden = false
-                    self.collectionviewheight.constant = self.collectionView.contentSize.height
                     
                     self.collectionView.reloadData()
                     
@@ -199,26 +202,21 @@ class ProfileViewController: UIViewController{
     
     @IBAction func collectionButtonAction(_ sender: Any?) {
         
-        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "collection"
-        collectionviewheight.constant = collectionView.contentSize.height
         collectionView.reloadData()
     }
     
     @IBAction func cameraButtonAction(_ sender: Any?) {
         getUserPosts()
-        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "posts"
-        collectionviewheight.constant = collectionView.contentSize.height
         self.collectionView.reloadData()
     }
     
     @IBAction func lovesButtonAction(_ sender: Any) {
-        mscrollview.contentSize.height = self.view.frame.size.height
         self.lovesTableView.isHidden = false
         self.collectionView.isHidden = true
         lovesTableView.reloadData()
@@ -280,10 +278,6 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
                 })
                 }.resume()
         }
-        
-//        tableviewheight.constant = lovesTableView.contentSize.height
-//        mscrollview.contentSize.height = lovesTableView.contentSize.height + 300
-//        collectionviewheight.constant = collectionView.contentSize.height
         
         return cell
     }
@@ -407,11 +401,6 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         }
         
         
-        
-//        collectionviewheight.constant = collectionView.contentSize.height
-//        mscrollview.contentSize.height = collectionView.contentSize.height + 300
-        
-        
         return cell
         
     }
@@ -458,7 +447,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             obj = collectionArray[1 + section] as AnyObject
         }
         
-        vc.toCategory = ((CollectionCategory.init(rawValue:(obj?["categoryName"] as! String).replacingOccurrences(of: " ", with: "")))?.rawValue)!
+        vc.toCategory = (obj?["categoryName"] as! String) //((CollectionCategory.init(rawValue:(obj?["categoryName"] as! String).replacingOccurrences(of: " ", with: "")))?.rawValue)!
         
         self.navigationController?.pushViewController(vc, animated: true)
         

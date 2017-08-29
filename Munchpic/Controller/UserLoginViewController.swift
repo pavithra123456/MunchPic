@@ -75,8 +75,8 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     @IBAction func Login_Action(_ sender: Any) {
         
 
-//      emailid.text = "chaitanyakumari4b5@gmail.com"
-//        password.text = "chaithu"
+      emailid.text = "chaitanyakumari4b5@gmail.com"
+        password.text = "chaithu"
 
         if(emailid.text?.characters.count == 0 && password.text?.characters.count == 0){
             
@@ -120,6 +120,13 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
                                 
                             }
                             
+                            if let result = responsedict["name"] {
+                                UserDefaults.standard.set(result, forKey: "name")
+                                UserDefaults.standard.synchronize()
+                                
+                                User.sharedUserInstance.firstName = result as! String //Int(result as! String)!
+                                
+                            }
                             
                             DispatchQueue.main.async {
                                 

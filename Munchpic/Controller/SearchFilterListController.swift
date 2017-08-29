@@ -60,9 +60,8 @@ class SearchFilterListController: UIViewController ,UITableViewDataSource,UITabl
         
         cell.dishName .text = fileteredArray[indexPath.row].dishName
         cell.cuisineLAbel.text = fileteredArray[indexPath.row].cuisine
-        if fileteredArray[indexPath.row].category != "veg" {
+        if fileteredArray[indexPath.row].category != "Veg" {
             cell.categoryImage.image = UIImage(named: "nonveg")
-
         }
         URLSession.shared.dataTask(with: URL(string:fileteredArray[indexPath.row].ImagePath1)!) { (data1, response, error) in
             DispatchQueue.main.async(execute: {

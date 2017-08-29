@@ -61,14 +61,20 @@ class UserCollectionListController: UIViewController,UITableViewDelegate,UITable
             let prameter = "userId=\(userId) +&toCategory=\(toCategory)"
             ServiceLayer.getCollections(parameter: prameter , completion: { (collectionlist, true,msg) in
                 self.collectionArray = collectionlist!
+                
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
-                    self.tableview.reloadData()
-
+                    if collectionlist?.count == 0 {
+                        self.tableview.isHidden = true
+                        Toast.showToast(text: "No Collections", toView: self.view)
+                    }
+                    else {
+                        self.tableview.reloadData()
+                        self.tableview.tableFooterView = UIView()
+                    }
+                   
                 }
-                
             })
-
         }
     }
         

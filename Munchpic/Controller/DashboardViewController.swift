@@ -31,24 +31,24 @@ class DashboardViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        boolforgif = UserDefaults.standard.bool(forKey: "afterlogin")
-        
-        if(boolforgif == true){
-            
-            gifimageview.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
-            UIApplication.shared.keyWindow?.addSubview(gifimageview)
-            gifimageview.image = UIImage.gif(name: "Shutter")
-            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(gifDidStop(sender:)), userInfo: nil, repeats: false)
-            
-        }else{
-            
-            splashimage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
-            UIApplication.shared.keyWindow?.addSubview(splashimage)
-            splashimage.image = UIImage(named : "MpsplashImage.png")
-            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(splshimagection(sender:)), userInfo: nil, repeats: false)
-
-        }
+//        
+//        boolforgif = UserDefaults.standard.bool(forKey: "afterlogin")
+//        
+//        if(boolforgif == true){
+//            
+//            gifimageview.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+//            UIApplication.shared.keyWindow?.addSubview(gifimageview)
+//            gifimageview.image = UIImage.gif(name: "Shutter")
+//            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(gifDidStop(sender:)), userInfo: nil, repeats: false)
+//            
+//        }else{
+//            
+//            splashimage.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width , height: self.view.frame.size.height)
+//            UIApplication.shared.keyWindow?.addSubview(splashimage)
+//            splashimage.image = UIImage(named : "MpsplashImage.png")
+//            Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(splshimagection(sender:)), userInfo: nil, repeats: false)
+//
+//        }
         
                homeBorder = homeBtn.addBorder(borderPostion: .bottom)
 
