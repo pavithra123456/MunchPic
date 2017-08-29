@@ -475,7 +475,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficulty = 1
-        Utility.showAlert(title: "", message: "Veryeasy to prepare.", controller: self,completion:nil)
         
         
     }
@@ -488,7 +487,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         
         difficulty = 2
-        Utility.showAlert(title: "", message: "Easy to prepare.", controller: self,completion:nil)
         
     }
     
@@ -500,7 +498,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficulty = 3
-        Utility.showAlert(title: "", message: "Medium to prepare.", controller: self,completion:nil)
         
         
     }
@@ -513,7 +510,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficulty = 4
-        Utility.showAlert(title: "", message: "Difficult to prepare.", controller: self,completion:nil)
         
     }
     
@@ -525,7 +521,6 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
         difficulty = 5
-        Utility.showAlert(title: "", message: "Verydifficuly to prepare.", controller: self,completion:nil)
         
     }
     

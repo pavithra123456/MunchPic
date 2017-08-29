@@ -27,6 +27,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     @IBOutlet var malebtn: UIButton!
     @IBOutlet var femalebtn: UIButton!
     @IBOutlet weak var userPic: UIImageView!
+    @IBOutlet weak var countryButton: UIButton!
     let countriesarray = ["India","Pakisthan","Srilanka","Bangladesh","Nepal","Tibet","China","Afghanisthan","Australia","Russia","UK","USA","Africa","France"]
 
     
@@ -68,13 +69,16 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         nameTxtField.isUserInteractionEnabled = false
         aboutTxtField.isUserInteractionEnabled = false
         dobTxtField.isUserInteractionEnabled = false
-        countryTxtField.isUserInteractionEnabled = false
         stateTxtField.isUserInteractionEnabled = false
         cityTxtField.isUserInteractionEnabled = false
         phoneNoTxtField.isUserInteractionEnabled = false
         emailTxtField.isUserInteractionEnabled = false
         malebtn.isUserInteractionEnabled = false
         femalebtn.isUserInteractionEnabled = false
+        countryTxtField.isUserInteractionEnabled = false
+
+        countryButton.isEnabled = false
+        countryTableview.isHidden = true
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -136,7 +140,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             nameTxtField.isUserInteractionEnabled = true
             aboutTxtField.isUserInteractionEnabled = true
             dobTxtField.isUserInteractionEnabled = true
-            countryTxtField.isUserInteractionEnabled = true
             stateTxtField.isUserInteractionEnabled = true
             cityTxtField.isUserInteractionEnabled = true
             phoneNoTxtField.isUserInteractionEnabled = true
@@ -144,8 +147,9 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             profilePicBtn.isUserInteractionEnabled = true
             malebtn.isUserInteractionEnabled = true
             femalebtn.isUserInteractionEnabled = true
+            countryButton.isEnabled = true
 
-             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+200)
+//             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: editBtn.frame.origin.y + editBtn.frame.size.height)
         }
             
         else {
@@ -164,7 +168,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         
         
         if let userId =  UserDefaults.standard.value(forKey: "userId") {
-            //MBProgressHUD.showAdded(to: self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             
            
             ServiceLayer.getusetInfo(forUserID: userId as! String , completion: { (respose, status, msg) in
@@ -408,10 +412,16 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         textField.resignFirstResponder()
         
     }
-
+   
+    
+    @IBAction func showCountryTableview(_ sender: Any) {
+        self.countryTableview.isHidden = false
+        self.countryTableview.reloadData()
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == countryTxtField{
-            self.countryTableview.isHidden = false
+            textField.inputView = nil
 
 //            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
         }
@@ -459,6 +469,8 @@ extension ProfileDetailViewController:UITableViewDataSource,UITableViewDelegate 
         
             countryTxtField.text = self.countriesarray[indexPath.row] as? String
             countryTxtField.resignFirstResponder()
+        self.countryTableview.isHidden = true
+        
     }
 
 }

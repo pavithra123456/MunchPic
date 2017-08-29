@@ -49,7 +49,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
     }
     
     override func viewDidLayoutSubviews() {
-        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+30)
+        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height + 20)
     }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

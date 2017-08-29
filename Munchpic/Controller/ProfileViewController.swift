@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController{
     }
     
     override func viewDidLayoutSubviews() {
-        mscrollview.contentSize.height = self.profileName.frame.origin.y + 35
+        mscrollview.contentSize.height = self.profileName.frame.origin.y + collectionView.frame.height + 110
 
         collectionView.isHidden = false
         self.cameraButtonAction(nil)
