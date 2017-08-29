@@ -6,7 +6,7 @@ target 'Munchpic' do
   use_frameworks!
 
   # Pods for Munchpic
-	pod ‘Alamofire’
+	pod 'Alamofire'
     pod 'MBProgressHUD' , '1.0.0'
     
     # Pods for LoginComponent
