@@ -298,7 +298,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     func selectimage(_ sender: Any){
         
-        let actionSheetController = UIAlertController(title: "Upload your photo", message: "", preferredStyle: .actionSheet)
+        let actionSheetController = UIAlertController(title: "Select source", message: "", preferredStyle: .actionSheet)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action -> Void in
             // Just dismiss the action sheet
@@ -474,6 +474,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        Toast.showToast(text: "Very Easy to prepare", toView: self.view)
         difficulty = 1
         
         
@@ -485,6 +486,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "B8B8B8")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        Toast.showToast(text: "Easy to prepare", toView: self.view)
         
         difficulty = 2
         
@@ -497,6 +499,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        Toast.showToast(text: "Medium", toView: self.view)
         difficulty = 3
         
         
@@ -509,6 +512,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "B8B8B8")
+        Toast.showToast(text: "Difficult to prepare", toView: self.view)
         difficulty = 4
         
     }
@@ -520,6 +524,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         mediumBtn.backgroundColor = UIColor(hex: "DE763E")
         difficultBtn.backgroundColor = UIColor(hex: "CF6049")
         verudifficultBtn.backgroundColor = UIColor(hex: "CF4B49")
+        Toast.showToast(text: "Very Difficult to prepare", toView: self.view)
         difficulty = 5
         
     }

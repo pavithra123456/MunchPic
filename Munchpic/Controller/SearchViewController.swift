@@ -139,16 +139,24 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        let button = UIButton()
+        self.showFilterList(button)
+    }
 
     @IBAction func vegBtnAction(_ sender: UIButton) {
         if category == "veg" {
             category = "NonVeg"
             sender.setImage(UIImage(named:"nonveg"), for: .normal)
+            Toast.showToast(text: "NonVeg", toView: self.view)
             
         }
         else {
             sender.setImage(UIImage(named:"veg"), for: .normal)
             category = "veg"
+            Toast.showToast(text: "Veg", toView: self.view)
         }
         
     }

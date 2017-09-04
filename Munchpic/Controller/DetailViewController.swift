@@ -17,6 +17,9 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     @IBOutlet weak var scrollview: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var DiscriptionBtn: UIButton!
+    @IBOutlet weak var IngrediantsBtn: UIButton!
+    
     @IBOutlet weak var collectionLabel: UILabel!
     @IBOutlet weak var commentsLabel: UILabel!
     @IBOutlet weak var mainImageview: UIImageView!
@@ -397,25 +400,45 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         let view =  cell?.viewWithTag(3)!
-        
-        
-        view?.layer.borderColor = UIColor.gray.cgColor
         view?.layer.borderWidth = 1
         let label =  view?.viewWithTag(10) as! UILabel
 
         if let detail = postDetails {
             if isShowingDescription {
-                label.text = "step \(indexPath.row+1) : " + (detail.descriptionArray[indexPath.row])   //( detail[key] as? String)!
+                
+                let disstr : String = detail.descriptionArray[indexPath.row] as String
+                if((disstr == "") || (disstr == "null")){
+                    view?.layer.borderColor = UIColor.clear.cgColor
+                    label.text = ""
+               
+                }else{
+                    
+                    label.text = "step \(indexPath.row+1) : " + (detail.descriptionArray[indexPath.row])   //( detail[key] as? String)!
+                    view?.layer.borderColor = UIColor.gray.cgColor
+            
+                }
 
             }
             else {
-                label.text = "\(indexPath.row+1). " + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
+                
+                let ingstr : String = (postDetails?.ingredientsArray[indexPath.row])! as String
+                if((ingstr == "") || (ingstr == "null")){
+                    view?.layer.borderColor = UIColor.clear.cgColor
+                    label.text = ""
+                }else{
+                    
+                    label.text = "\(indexPath.row+1). " + (postDetails?.ingredientsArray[indexPath.row])! //( detail[key] as? String)!
+                    view?.layer.borderColor = UIColor.gray.cgColor
+
+                }
 
             }
         }
         
         tableheightconstraint.constant = tableView.contentSize.height + 30
         scrollview.contentSize = CGSize(width: self.view.frame.size.width, height:scrollview.frame.size.width+tableView.contentSize.height+300)
+        
+        
         return cell!
     }
 
@@ -523,12 +546,15 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     }
     
     @IBAction func showIngredients(_ sender: Any) {
+        
+        IngrediantsBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+        DiscriptionBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        
         isShowingDescription = false
         if let dishName = postDetails?.dishName {
             headingLabel.text = "\(dishName) Ingredients:"
         }
         
-
         self.tableView.reloadData()
         
         self.tableView.beginUpdates()
@@ -542,6 +568,11 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     }
     
     @IBAction func showDescription(_ sender: Any) {
+        
+        IngrediantsBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        DiscriptionBtn.setTitleColor(UIColor.lightGray, for: UIControlState.normal)
+        
+        
         isShowingDescription = true
         if let dishName = postDetails?.dishName {
             headingLabel.text = "How to prepare \(dishName)"
@@ -589,8 +620,6 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
     
     
     @IBAction func editpostaction(_ sender: Any) {
-        
-        
         
         let storyboad = UIStoryboard(name: "Main", bundle: Bundle.main)
         let editpostvc = storyboad.instantiateViewController(withIdentifier: "editpostid") as! NewPostViewController

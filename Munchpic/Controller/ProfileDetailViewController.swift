@@ -190,16 +190,17 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     self.emailTxtField.text = respose?[0]["email"] as? String
                     self.genderstring = (respose?[0]["gender"])! as! NSString
                     self.countryTableview.reloadData()
+                    
+                    
+                    
                     if(self.genderstring == "male"){
                         
                         self.malebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
                         self.femalebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
-                        
                     }else if(self.genderstring == "female"){
                         
                         self.malebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)
                         self.femalebtn.setImage(UIImage(named : "rd2.png"), for: UIControlState.normal)
-                        
                     }else{
                         
                         self.malebtn.setImage(UIImage(named : "rd1.png"), for: UIControlState.normal)

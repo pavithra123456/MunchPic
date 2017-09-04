@@ -16,7 +16,7 @@ enum CollectionCategory :String {
     case MyFavourtites
 }
 
-class ProfileViewController: UIViewController{
+class ProfileViewController: UIViewController,UIScrollViewDelegate{
     @IBOutlet weak var profilePic: UIImageView!
     
     @IBOutlet weak var mscrollview: UIScrollView!
@@ -37,7 +37,11 @@ class ProfileViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                lovesTableView.delegate = self
+        lovesTableView.delegate = self
+        lovesTableView.dataSource = self
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+
         
         //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
         //        self.collectionview.reloadData()
@@ -70,7 +74,7 @@ class ProfileViewController: UIViewController{
         }
         
         getUserPosts()
-
+        
         
     }
     
@@ -82,24 +86,42 @@ class ProfileViewController: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+       // mscrollview.contentSize.height = self.view.frame.size.height
         self.getCollectioncategories()
-        getLoves()
-        getUserPosts()
+        self.getLoves()
+        self.getUserPosts()
+       
+//        if lovesTableView.isHidden == true{
+//            
+//            self.collectionView.isHidden = false
+//            collectionView.reloadData()
+//            
+//        }else if collectionView.isHidden == true{
+//            let button = UIButton()
+//            self.lovesButtonAction(button)
+//            
+//        }
+        
         collectionView.isHidden = false
         lovesTableView.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
-        
         collectionView.reloadData()
         if lovesTableView.isHidden {
             self.collectionView.isHidden = false
         }
-        
     }
-    
-    
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        
+//        if lovesTableView.isHidden == true{
+//            self.collectionView.isHidden = false
+//            collectionView.reloadData()
+//        }else if collectionView.isHidden == true{
+//            self.getLoves()
+//            self.lovesTableView.isHidden = false
+//            lovesTableView.reloadData()
+//        }
+//        
+//    }
     
     
     func getUserPosts () {
@@ -166,9 +188,7 @@ class ProfileViewController: UIViewController{
                     self.userPostsArray.append(model)
                 }
                 DispatchQueue.main.async {
-                    self.collectionView.dataSource = self
-                   self.collectionView.delegate = self
-
+                   
                     self.collectionView.isHidden = false
                     
                     self.collectionView.reloadData()
@@ -201,14 +221,17 @@ class ProfileViewController: UIViewController{
     //MARK: - ButtonActions
     
     @IBAction func collectionButtonAction(_ sender: Any?) {
-        
+        mscrollview.contentSize.height = self.view.frame.size.height
+        self.getCollectioncategories()
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
         collectionViewDataValue = "collection"
-        collectionView.reloadData()
+       // collectionView.reloadData()
+        
     }
     
     @IBAction func cameraButtonAction(_ sender: Any?) {
+        mscrollview.contentSize.height = self.view.frame.size.height
         getUserPosts()
         self.lovesTableView.isHidden = true
         self.collectionView.isHidden = false
@@ -217,6 +240,8 @@ class ProfileViewController: UIViewController{
     }
     
     @IBAction func lovesButtonAction(_ sender: Any) {
+        mscrollview.contentSize.height = self.view.frame.size.height
+        self.getLoves()
         self.lovesTableView.isHidden = false
         self.collectionView.isHidden = true
         lovesTableView.reloadData()
@@ -277,7 +302,14 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
                     }
                 })
                 }.resume()
+            
+            
+            tableviewheight.constant = lovesTableView.contentSize.height
+            mscrollview.contentSize.height = lovesTableView.contentSize.height + 250
         }
+        
+        
+        
         
         return cell
     }
@@ -310,6 +342,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileCell", for:indexPath) as! CustomCollectionViewCell
         let section = indexPath.section * 2
+        
         if collectionViewDataValue == "posts" && userPostsArray.count != 0 {
             var obj = userPostsArray[indexPath.row]
             if indexPath.row == 0  && userPostsArray.count != 0 {
@@ -353,6 +386,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                 }.resume()
             
             cell.nameLabel.text = "" //userPostsArray[indexPath.row].dishName
+            
+            collectionviewheight.constant = collectionView.contentSize.height
+            mscrollview.contentSize.height = collectionView.contentSize.height + 250
+
         }
             
         else {
@@ -397,6 +434,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
                 })
                 }.resume()
             cell.nameLabel.text = obj["categoryName"]
+            
+            collectionviewheight.constant = collectionView.contentSize.height
+            mscrollview.contentSize.height = collectionView.contentSize.height + 250
+
             
         }
         

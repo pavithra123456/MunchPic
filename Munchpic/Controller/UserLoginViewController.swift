@@ -13,7 +13,7 @@ import Google
 import  MBProgressHUD
 import SwiftGifOrigin
 
-class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDelegate,GIDSignInUIDelegate {
+class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDelegate,GIDSignInUIDelegate,UIScrollViewDelegate{
     
     
     @IBOutlet var password: UITextField!
@@ -33,7 +33,7 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
     
     override func viewDidLayoutSubviews() {
         mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height
+        mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: self.mscrollview.contentSize.height + 100
         )
     }
 
@@ -59,7 +59,6 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
      // MARK: - Check validations
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-                  textField.resignFirstResponder()
 
 //        if(textField == emailid){
 //            password.becomeFirstResponder()
@@ -67,7 +66,10 @@ class UserLoginViewController: UIViewController,UITextFieldDelegate,GIDSignInDel
 //            textField.resignFirstResponder()
 //        }
         
+        textField.resignFirstResponder()
         return true
+        
+        
     }
 
      // MARK: - Call login
