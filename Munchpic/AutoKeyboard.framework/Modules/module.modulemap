@@ -1,0 +1,10 @@
+framework module AutoKeyboard {
+  umbrella header "AutoKeyboard.h"
+
+  export *
+  module * { export * }
+}
+
+module AutoKeyboard.Swift {
+    header "AutoKeyboard-Swift.h"
+}

@@ -92,6 +92,7 @@ class DashboardViewController: UIViewController {
         searchContainer.isHidden = true
         searchBorder?.isHidden = true
         self.navigationItem.title = "UserPosts"
+        NotificationCenter.default.post(name: Notification.Name("ProfileNotificationIdentifier"), object: nil)
     }
 
     @IBAction func serachBtnAction(_ sender: Any) {
@@ -109,6 +110,7 @@ class DashboardViewController: UIViewController {
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
         self.navigationItem.title = "Search"
+        
 
         
     }

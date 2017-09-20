@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
     var collectionArray = [[String:String]]()
     var lovesArray = [ProfilkeLovesModel]()
     var userPostsArray = [PostModel]()
-    var collectionViewDataValue = "posts"
+    var collectionViewDataValue = "collection"
     
     @IBOutlet weak var tableviewheight: NSLayoutConstraint!
     @IBOutlet weak var collectionviewheight: NSLayoutConstraint!
@@ -41,6 +41,8 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         lovesTableView.dataSource = self
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        collectionView.isScrollEnabled = false
+        lovesTableView.isScrollEnabled = false
 
         
         //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")
@@ -73,44 +75,45 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
             self.profileName.text = userName as? String
         }
         
-        getUserPosts()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.methodOfReceivedNotification(notification:)), name: Notification.Name("ProfileNotificationIdentifier"), object: nil)
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        mscrollview.contentSize.height = self.profileName.frame.origin.y + collectionView.frame.height + 110
-
-        collectionView.isHidden = false
-        self.cameraButtonAction(nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-       // mscrollview.contentSize.height = self.view.frame.size.height
-        self.getCollectioncategories()
-        self.getLoves()
-        self.getUserPosts()
+      
+        
        
-//        if lovesTableView.isHidden == true{
-//            
-//            self.collectionView.isHidden = false
-//            collectionView.reloadData()
-//            
-//        }else if collectionView.isHidden == true{
-//            let button = UIButton()
-//            self.lovesButtonAction(button)
-//            
-//        }
+        
+    }
+    
+    func methodOfReceivedNotification(notification: Notification){
         
         collectionView.isHidden = false
         lovesTableView.isHidden = true
-        collectionView.reloadData()
-        if lovesTableView.isHidden {
-            self.collectionView.isHidden = false
-        }
+        self.getCollectioncategories()
+        
+        
     }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
+    
+//    override func viewDidLayoutSubviews() {
+//        mscrollview.contentSize.height = collectionView.contentSize.height + 220
+////        collectionView.isHidden = false
+////        self.cameraButtonAction(nil)
+//    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+       // mscrollview.contentSize.height = self.view.frame.size.height
+//        self.getCollectioncategories()
+//        self.getLoves()
+//        self.getUserPosts()
+//        
+//        collectionView.isHidden = false
+//        lovesTableView.isHidden = true
+//        collectionView.reloadData()
+//        if lovesTableView.isHidden {
+//            self.collectionView.isHidden = false
+//        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
 //        
 //        if lovesTableView.isHidden == true{
 //            self.collectionView.isHidden = false
@@ -120,8 +123,10 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
 //            self.lovesTableView.isHidden = false
 //            lovesTableView.reloadData()
 //        }
-//        
-//    }
+        
+       // self.getLoves()
+        
+    }
     
     
     func getUserPosts () {
@@ -204,6 +209,9 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         ServiceLayer.getCollectionCategories { (data, status, msg) in
             self.collectionArray = data as! [[String : String]]
             DispatchQueue.main.async(execute: {
+                self.lovesTableView.isHidden = true
+                self.collectionView.isHidden = false
+                self.collectionViewDataValue = "collection"
                 self.collectionView.reloadData()
             })
         }
@@ -213,6 +221,8 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         ServiceLayer.getLoves { (lovesArray, status, msg) in
             self.lovesArray = lovesArray!
             DispatchQueue.main.async(execute: {
+                self.lovesTableView.isHidden = false
+                self.collectionView.isHidden = true
                 self.lovesTableView.reloadData()
             })
         }
@@ -305,7 +315,7 @@ extension ProfileViewController:UITableViewDataSource ,UITableViewDelegate{
             
             
             tableviewheight.constant = lovesTableView.contentSize.height
-            mscrollview.contentSize.height = lovesTableView.contentSize.height + 250
+            mscrollview.contentSize.height = lovesTableView.contentSize.height + 200
         }
         
         
@@ -335,6 +345,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 2
     }
     
@@ -388,7 +399,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             cell.nameLabel.text = "" //userPostsArray[indexPath.row].dishName
             
             collectionviewheight.constant = collectionView.contentSize.height
-            mscrollview.contentSize.height = collectionView.contentSize.height + 250
+            mscrollview.contentSize.height = collectionView.contentSize.height + 220
 
         }
             
@@ -436,7 +447,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
             cell.nameLabel.text = obj["categoryName"]
             
             collectionviewheight.constant = collectionView.contentSize.height
-            mscrollview.contentSize.height = collectionView.contentSize.height + 250
+            mscrollview.contentSize.height = collectionView.contentSize.height + 220
 
             
         }
@@ -495,6 +506,7 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout,UICollection
     }
     
 }
+
 /*
  // MARK: - Navigation
  

@@ -36,6 +36,9 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     
     var genderstring = NSString()
     
+    var pickerView:UIView = UIView()
+    var datePicker:UIDatePicker = UIDatePicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -88,22 +91,22 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
    
    
     
-    func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            // keyboardHeight = keyboardRectangle.height
-            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
-        }
-    }
-    
-    func keyboardWillHide(_ notification: Notification) {
-        
-        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardRectangle = keyboardFrame.cgRectValue
-            // keyboardHeight = keyboardRectangle.height
-            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y - keyboardRectangle.height
-        }
-    }
+//    func keyboardWillShow(_ notification: Notification) {
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardRectangle = keyboardFrame.cgRectValue
+//            // keyboardHeight = keyboardRectangle.height
+//            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y + keyboardRectangle.height
+//        }
+//    }
+//    
+//    func keyboardWillHide(_ notification: Notification) {
+//        
+//        if let keyboardFrame: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+//            let keyboardRectangle = keyboardFrame.cgRectValue
+//            // keyboardHeight = keyboardRectangle.height
+//            self.scrollview.contentOffset.y =  self.scrollview.contentOffset.y - keyboardRectangle.height
+//        }
+//    }
     
     
     override func didReceiveMemoryWarning() {
@@ -111,10 +114,13 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidLayoutSubviews() {
-        scrollview.isScrollEnabled = true
-        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height)
-    }
+//    override func viewDidLayoutSubviews() {
+//        
+//            scrollview.isScrollEnabled = true
+//            scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height)
+//       
+//        
+//    }
 
     
     // MARK: - mail button selected
@@ -136,7 +142,9 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     @IBAction func editAction(_ sender: UIButton) {
         if sender.currentTitle == "EDIT" {
             sender.setTitle("UPDATE", for: .normal)
+            scrollview.isScrollEnabled = true
             
+           // scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height + 200)
             nameTxtField.isUserInteractionEnabled = true
             aboutTxtField.isUserInteractionEnabled = true
             dobTxtField.isUserInteractionEnabled = true
@@ -149,7 +157,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             femalebtn.isUserInteractionEnabled = true
             countryButton.isEnabled = true
 
-//             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: editBtn.frame.origin.y + editBtn.frame.size.height)
+            
         }
             
         else {
@@ -172,6 +180,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             
            
             ServiceLayer.getusetInfo(forUserID: userId as! String , completion: { (respose, status, msg) in
+                
+                print(respose)
                 DispatchQueue.main.async(execute: {
                     
                     MBProgressHUD.hide(for: self.view, animated: true)
@@ -397,36 +407,241 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-
+   
+    
 
     //MARK: - Textfielkd Delegates
     func textFieldDidEndEditing(_ textField: UITextField) {
         scrollview.contentOffset.y = 0
+        
         if textField == countryTxtField {
             self.countryTableview.isHidden = true
             countryTableview.reloadData()
+           
         }
         textField.resignFirstResponder()
         
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if(textField == countryTxtField){
+            
+            textField.resignFirstResponder()
+            self.selectdobpicker()
+            
+        }else if textField == countryTxtField{
+            textField.inputView = nil
+           
+            
+            //            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
+        }
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        if(textField == countryTxtField){
+            self.hideKeyboard()
+        }
+        
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == nameTxtField{
+         aboutTxtField.becomeFirstResponder()
+        }else if textField == aboutTxtField{
+            textField.resignFirstResponder()
+            self.selectdobpicker()
+        }else if textField == stateTxtField{
+            cityTxtField.becomeFirstResponder()
+           // scrollview.setContentOffset(CGPoint(x:0,y:200), animated: true)
+        }else if textField == cityTxtField{
+            phoneNoTxtField.becomeFirstResponder()
+        }else if textField == phoneNoTxtField{
+            emailTxtField.becomeFirstResponder()
+        }else if textField == emailTxtField{
+            textField.resignFirstResponder()
+           // scrollview.setContentOffset(CGPoint.zero, animated: true)
+        }else{
+            
+            textField.resignFirstResponder()
+        }
+
+        return true
+    }
+    
+    func hideKeyboard(){
+        
+        nameTxtField.resignFirstResponder()
+        aboutTxtField.resignFirstResponder()
+        dobTxtField.resignFirstResponder()
+        stateTxtField.resignFirstResponder()
+        cityTxtField.resignFirstResponder()
+        phoneNoTxtField.resignFirstResponder()
+        emailTxtField.resignFirstResponder()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerAutoKeyboard { (result) in
+            print("keyboard status \(result.status)")
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unRegisterAutoKeyboard()
+    }
+
+
    
     
     @IBAction func showCountryTableview(_ sender: Any) {
+        self.hideKeyboard()
         self.countryTableview.isHidden = false
         self.countryTableview.reloadData()
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == countryTxtField{
-            textField.inputView = nil
-
-//            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
+    
+    func selectdobpicker(){
+        
+        
+        scrollview.isScrollEnabled = false
+        pickerView.removeFromSuperview()
+        
+        
+        if (UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad)
+        {
+            // Ipad
+            if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation))
+            {
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
+                
+            }else{
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 250)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-300, width: self.view.frame.size.width, height: 200)
+                
+            }
+            
         }
+        else
+        {
+            // Iphone
+            if(UIDeviceOrientationIsLandscape(UIDevice.current
+                .orientation))
+            {
+                //  mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 200)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height - 200, width: self.view.frame.size.width, height: 200)
+            }else{
+                // mscrollview .scrollRectToVisible(CGRect(x: 0, y: 0, width: 1, height: 1), animated: false)
+                datePicker.frame = CGRect(x: 0,y: 44,width: self.view.frame.size.width,height: 180)
+                pickerView.frame = CGRect(x: 0, y: self.view.frame.size.height-220, width: self.view.frame.size.width, height: 200)
+                
+            }
+        }
+        
+        
+        pickerView.backgroundColor = UIColor.white
+        datePicker.datePickerMode = UIDatePickerMode.date
+        datePicker.backgroundColor = UIColor.white
+        datePicker.date = NSDate() as Date
+        
+        //datePicker.tag = (sender as AnyObject).tag
+        
+        let toolbar = UIToolbar()
+        toolbar.frame = CGRect(x: 0,y: 0,width: pickerView.frame.size.width,height: 44)
+        toolbar.barStyle = UIBarStyle.blackTranslucent;
+        //toolbar.backgroundColor = [UIColor whiteColor];
+        
+        let flexibleSpaceLeft = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        
+        let cancelbtn = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(RegistrationViewController.cancelbutton(sender:)))
+        cancelbtn.tintColor = UIColor.white
+        //cancelbtn.tag = (sender as AnyObject).tag
+        
+        let donebtn = UIBarButtonItem(title: "Done", style: .plain, target: self,action:#selector(RegistrationViewController.donebutton(sender:)))
+        donebtn.tintColor = UIColor.white
+        
+        //donebtn.tag = (sender as AnyObject).tag
+        
+        
+        let toolbarButtonItems = [
+            cancelbtn,
+            flexibleSpaceLeft,
+            donebtn
+        ]
+        toolbar.setItems(toolbarButtonItems, animated: true)
+        
+        
+        pickerView .addSubview(toolbar)
+        pickerView .addSubview(datePicker)
+        self.view.addSubview(pickerView)
+        
     }
+    
+    
+    func cancelbutton(sender: UIBarButtonItem) {
+        
+        pickerView.removeFromSuperview()
+        scrollview.isScrollEnabled = true
+    }
+    
+    func donebutton(sender: UIBarButtonItem) {
+        LabelTitle(sender: sender)
+        pickerView.removeFromSuperview()
+        scrollview.isScrollEnabled = true
+    }
+    
+    
+    
+    func LabelTitle(sender: AnyObject) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        dateFormatter.dateFormat = "d-MMM-yyy"
+        
+        let value:NSString =  dateFormatter .string(from: datePicker.date) as NSString
+        let currDate = NSDate()
+        let newDate =  dateFormatter .string(from: currDate as Date)
+        
+        let date1:NSDate = dateFormatter .date(from: value as String)! as NSDate
+        let date2:NSDate = dateFormatter .date(from: newDate)! as NSDate
+        
+        
+        let dateComparisionResult:ComparisonResult = date1.compare(date2 as Date)
+        
+        if dateComparisionResult == ComparisonResult.orderedDescending
+        {
+            
+            Utility.showAlert(title: "Warning!", message: "Invalid Date,Please select a valid date.", controller: self,completion:nil)
+            
+            
+        }
+            
+        else if dateComparisionResult == ComparisonResult.orderedAscending
+        {
+            
+            dobTxtField.text = value as String
+        }
+            
+        else if dateComparisionResult == ComparisonResult.orderedSame
+        {
+            
+            
+            dobTxtField.text = value as String
+        }
+        
+    }
+
+  
     
     /*
     // MARK: - Navigation
@@ -440,6 +655,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
 
 }
 extension ProfileDetailViewController:UITableViewDataSource,UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
             return countriesarray.count
@@ -451,8 +667,6 @@ extension ProfileDetailViewController:UITableViewDataSource,UITableViewDelegate 
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell") as UITableViewCell!
 
         cell.textLabel?.text = self.countriesarray[indexPath.row] as? String
-        
-        
         cell.textLabel?.textColor = UIColor.black
         cell.backgroundColor = UIColor.white
 

@@ -68,8 +68,6 @@
 		87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D11EDC4B1800A331C0 /* txtbg.png */; };
 		87B1E6D71EDC4B5600A331C0 /* checkbox@3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D31EDC4B5600A331C0 /* checkbox@3.png */; };
 		87B1E6D81EDC4B5600A331C0 /* uncheckbox@3.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */; };
-		87B1E6D91EDC4B5600A331C0 /* rd1.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D51EDC4B5600A331C0 /* rd1.png */; };
-		87B1E6DA1EDC4B5600A331C0 /* rd2.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6D61EDC4B5600A331C0 /* rd2.png */; };
 		87B1E6DC1EDC4B8B00A331C0 /* 144_app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */; };
 		87B1E6DE1EDC4C4F00A331C0 /* main_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */; };
 		87B1E6E01EDC4C7500A331C0 /* UserLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */; };
@@ -77,6 +75,12 @@
 		C10FB5C21F4C5D0A0096DF60 /* MpsplashImage.png in Resources */ = {isa = PBXBuildFile; fileRef = C10FB5C11F4C5D0A0096DF60 /* MpsplashImage.png */; };
 		C1378D6D1F28BAD3003D9CD7 /* camaraicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */; };
 		C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */; };
+		C18AAA3B1F7274E800161085 /* rd1.png in Resources */ = {isa = PBXBuildFile; fileRef = C18AAA3A1F7274E800161085 /* rd1.png */; };
+		C18AAA3D1F7274ED00161085 /* rd2.png in Resources */ = {isa = PBXBuildFile; fileRef = C18AAA3C1F7274ED00161085 /* rd2.png */; };
+		C18AAA3F1F729C2900161085 /* AutoKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18AAA3E1F729C2900161085 /* AutoKeyboard.swift */; };
+		C18AAA411F729C3600161085 /* AutoKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; };
+		C18AAA421F729CEE00161085 /* AutoKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; };
+		C18AAA431F729CEE00161085 /* AutoKeyboard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C1A560701F2761E000738E4B /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */; };
 		C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */; };
 		C1B3F0FD1F3448C6002572DD /* Proxima Nova Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */; };
@@ -109,6 +113,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				C18AAA431F729CEE00161085 /* AutoKeyboard.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,8 +190,6 @@
 		87B1E6D11EDC4B1800A331C0 /* txtbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = txtbg.png; sourceTree = "<group>"; };
 		87B1E6D31EDC4B5600A331C0 /* checkbox@3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkbox@3.png"; sourceTree = "<group>"; };
 		87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "uncheckbox@3.png"; sourceTree = "<group>"; };
-		87B1E6D51EDC4B5600A331C0 /* rd1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rd1.png; sourceTree = "<group>"; };
-		87B1E6D61EDC4B5600A331C0 /* rd2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rd2.png; sourceTree = "<group>"; };
 		87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144_app_icon.png; sourceTree = "<group>"; };
 		87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_bg.jpg; sourceTree = "<group>"; };
 		87B1E6DF1EDC4C7500A331C0 /* UserLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +202,10 @@
 		C10FB5C11F4C5D0A0096DF60 /* MpsplashImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MpsplashImage.png; sourceTree = "<group>"; };
 		C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = camaraicon.jpg; sourceTree = "<group>"; };
 		C15F15CB1F20D36F006977B3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		C18AAA3A1F7274E800161085 /* rd1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rd1.png; sourceTree = "<group>"; };
+		C18AAA3C1F7274ED00161085 /* rd2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rd2.png; sourceTree = "<group>"; };
+		C18AAA3E1F729C2900161085 /* AutoKeyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoKeyboard.swift; sourceTree = "<group>"; };
+		C18AAA401F729C3600161085 /* AutoKeyboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AutoKeyboard.framework; sourceTree = "<group>"; };
 		C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPostDetailsViewController.swift; sourceTree = "<group>"; };
 		C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Light.otf"; path = "../Proxima Nova Light.otf"; sourceTree = "<group>"; };
 		C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Regular.otf"; path = "../Proxima Nova Regular.otf"; sourceTree = "<group>"; };
@@ -212,6 +219,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C18AAA411F729C3600161085 /* AutoKeyboard.framework in Frameworks */,
+				C18AAA421F729CEE00161085 /* AutoKeyboard.framework in Frameworks */,
 				6B754CB104409B1AD97BB7F9 /* Pods_Munchpic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,6 +280,7 @@
 		7B3576501ED9AA8500FF610A /* Munchpic */ = {
 			isa = PBXGroup;
 			children = (
+				C18AAA401F729C3600161085 /* AutoKeyboard.framework */,
 				C1B3F0F81F34489B002572DD /* Fonts */,
 				87B1E6CA1EDC4AE700A331C0 /* Images */,
 				7B3576511ED9AA8500FF610A /* AppDelegate.swift */,
@@ -317,6 +327,7 @@
 				7B5A6EE31EE7BFDF00197241 /* CustomCollectionViewCell.swift */,
 				7B5A6EE41EE7BFDF00197241 /* CustomTableViewCell.swift */,
 				87B1E6E31EDC504300A331C0 /* Reachability.swift */,
+				C18AAA3E1F729C2900161085 /* AutoKeyboard.swift */,
 				7B95BAEF1F0CEE8300404220 /* UserLogin */,
 				7B5A6EE71EE7C35400197241 /* DashboardViewController.swift */,
 				7B95BAF01F0CEE9D00404220 /* HomePage */,
@@ -408,8 +419,8 @@
 				87B1E6D11EDC4B1800A331C0 /* txtbg.png */,
 				87B1E6D31EDC4B5600A331C0 /* checkbox@3.png */,
 				87B1E6D41EDC4B5600A331C0 /* uncheckbox@3.png */,
-				87B1E6D51EDC4B5600A331C0 /* rd1.png */,
-				87B1E6D61EDC4B5600A331C0 /* rd2.png */,
+				C18AAA3C1F7274ED00161085 /* rd2.png */,
+				C18AAA3A1F7274E800161085 /* rd1.png */,
 				87AC69001F188F4D008F2CA9 /* cam.png */,
 				87AC69011F188F4D008F2CA9 /* Nonveg.png */,
 				87AC69021F188F4D008F2CA9 /* veg.png */,
@@ -571,10 +582,10 @@
 			files = (
 				C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */,
 				C1B3F0FD1F3448C6002572DD /* Proxima Nova Regular.otf in Resources */,
+				C18AAA3D1F7274ED00161085 /* rd2.png in Resources */,
 				C1B3F0FE1F3448C6002572DD /* Proxima Nova Semibold.otf in Resources */,
 				7B24DF941EFFC08F00AD85EA /* SearchHeaderView.xib in Resources */,
 				87B1E6DC1EDC4B8B00A331C0 /* 144_app_icon.png in Resources */,
-				87B1E6D91EDC4B5600A331C0 /* rd1.png in Resources */,
 				7BE1C8EA1EFEDBC9001570BD /* ProfileHeaderView.xib in Resources */,
 				87B1E6CE1EDC4B0D00A331C0 /* bottom_bg.png in Resources */,
 				7B35765C1ED9AA8500FF610A /* LaunchScreen.storyboard in Resources */,
@@ -590,6 +601,7 @@
 				7B3576591ED9AA8500FF610A /* Assets.xcassets in Resources */,
 				87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */,
 				87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */,
+				C18AAA3B1F7274E800161085 /* rd1.png in Resources */,
 				7B142CDD1F150A90005559A8 /* GoogleService-Info.plist in Resources */,
 				87B1E6D81EDC4B5600A331C0 /* uncheckbox@3.png in Resources */,
 				87748A921EE58AE8007064D1 /* 3.png in Resources */,
@@ -600,7 +612,6 @@
 				7B99F5921F38604E001D3AEB /* Shutter.gif in Resources */,
 				7B3576571ED9AA8500FF610A /* Main.storyboard in Resources */,
 				87AC69051F188F4D008F2CA9 /* cam.png in Resources */,
-				87B1E6DA1EDC4B5600A331C0 /* rd2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +836,7 @@
 				7B95BAF81F0F8A0F00404220 /* UserPostsController.swift in Sources */,
 				7B5423571F2C9E3700109A10 /* SplashScreenController.swift in Sources */,
 				C15F15CC1F20D36F006977B3 /* ResetPasswordViewController.swift in Sources */,
+				C18AAA3F1F729C2900161085 /* AutoKeyboard.swift in Sources */,
 				7BB9F0921F25F87A004E78AA /* SearchFileterCell.swift in Sources */,
 				7BAF12EB1F2A559A00F8BA63 /* SmilesViewController.swift in Sources */,
 				7BE1C8E91EFEDBC9001570BD /* ProfileHeaderView.swift in Sources */,
@@ -1002,8 +1014,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = QSLY5SF2LD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Munchpic",
+				);
 				INFOPLIST_FILE = Munchpic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1024,8 +1040,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: LINEOLOGY PRIVATE LIMITED (QSLY5SF2LD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = QSLY5SF2LD;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Munchpic",
+				);
 				INFOPLIST_FILE = Munchpic/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lineology.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
