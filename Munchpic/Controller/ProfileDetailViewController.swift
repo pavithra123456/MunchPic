@@ -433,8 +433,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         }else if textField == countryTxtField{
             textField.inputView = nil
            
-            
-            //            countryTableview.frame = CGRect(x: textField.frame.origin.x, y: textField.frame.origin.y, width: countryTableview.frame.width, height: countryTableview.frame.height)
+          
         }
     }
     
