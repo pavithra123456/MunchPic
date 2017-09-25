@@ -187,6 +187,11 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
                     MBProgressHUD.hide(for: self.view, animated: true)
                 })
                 
+                if respose?.count == 0 {
+                    Utility.showAlert(title: "MunchPic", message: "Personal Information cannot retrived.", controller: self, completion:nil)
+                    return
+                }
+                
                 DispatchQueue.main.async {
                     self.nameTxtField.text = respose?[0]["name"] as? String
                     self.aboutTxtField.text = respose?[0]["about"] as? String

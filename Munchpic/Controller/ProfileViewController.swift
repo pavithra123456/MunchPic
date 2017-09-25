@@ -43,6 +43,7 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         self.collectionView.delegate = self
         collectionView.isScrollEnabled = false
         lovesTableView.isScrollEnabled = false
+        lovesTableView.tableFooterView =  UIView()
 
         
         //        self.collectionview.register( UINib(nibName: "ProfileHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "profileHeader")

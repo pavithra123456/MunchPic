@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ecK-rU-SI2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ecK-rU-SI2">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -107,7 +107,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="414" height="89"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="962-Gm-T6B" id="qkX-uv-Au1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="88.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sankanthi" translatesAutoresizingMaskIntoConstraints="NO" id="AqU-gH-axY">
@@ -194,7 +194,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="81" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dE1-Sh-U6K">
-                                                        <rect key="frame" x="26.333333333333336" y="10" width="30.000000000000007" height="30"/>
+                                                        <rect key="frame" x="26" y="10" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="7D2-Rw-UIN"/>
                                                             <constraint firstAttribute="width" constant="30" id="H6G-1D-xzf"/>
@@ -225,13 +225,13 @@
                                                 <rect key="frame" x="111" y="0.0" width="81" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiq-CI-V1U">
-                                                        <rect key="frame" x="9.3333333333333286" y="40" width="64.666666666666671" height="21"/>
+                                                        <rect key="frame" x="9" y="40" width="65" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4OH-x8-70G">
-                                                        <rect key="frame" x="26.333333333333343" y="10" width="30" height="30"/>
+                                                        <rect key="frame" x="26" y="10" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="FQg-nf-DPm"/>
                                                             <constraint firstAttribute="height" constant="30" id="bhb-Aa-YcC"/>
@@ -255,13 +255,13 @@
                                                 <rect key="frame" x="222" y="0.0" width="81" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loves" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjl-3v-rx9">
-                                                        <rect key="frame" x="24.333333333333343" y="40" width="33.999999999999972" height="21"/>
+                                                        <rect key="frame" x="25" y="40" width="34" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGJ-5p-nM5">
-                                                        <rect key="frame" x="26.333333333333343" y="10" width="29.999999999999972" height="30"/>
+                                                        <rect key="frame" x="26" y="10" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="WCi-XU-oEQ"/>
                                                             <constraint firstAttribute="width" constant="30" id="l5P-ok-osg"/>
@@ -285,7 +285,7 @@
                                                 <rect key="frame" x="333" y="0.0" width="81" height="50"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-w8-xPm">
-                                                        <rect key="frame" x="26.333333333333314" y="10" width="30" height="30"/>
+                                                        <rect key="frame" x="26" y="10" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="30" id="Nd5-2t-Syo"/>
                                                             <constraint firstAttribute="height" constant="30" id="dTK-gl-jt5"/>
@@ -296,7 +296,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxs-mI-QKf">
-                                                        <rect key="frame" x="24" y="40" width="35.333333333333314" height="21"/>
+                                                        <rect key="frame" x="24" y="40" width="36" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="13"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -396,7 +396,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="57"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modify Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFr-rJ-uzl">
-                                        <rect key="frame" x="149" y="18" width="117.33333333333331" height="21"/>
+                                        <rect key="frame" x="148.33333333333331" y="18" width="117.33333333333331" height="21"/>
                                         <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -571,7 +571,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Male" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="og4-XJ-OtH">
-                                                                <rect key="frame" x="42" y="13.666666666666686" width="92" height="18.333333333333314"/>
+                                                                <rect key="frame" x="42" y="13.333333333333314" width="92" height="18.333333333333371"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="92" id="dTX-e1-M1F"/>
                                                                 </constraints>
@@ -613,7 +613,7 @@
                                                                 </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnT-Bq-lgi">
-                                                                <rect key="frame" x="38" y="13.666666666666686" width="102" height="18.333333333333314"/>
+                                                                <rect key="frame" x="38" y="13.333333333333314" width="102" height="18.333333333333371"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="102" id="TRr-6q-oKZ"/>
                                                                 </constraints>
@@ -873,7 +873,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvU-YM-BWs">
-                                        <rect key="frame" x="132" y="16" width="150.33333333333331" height="21"/>
+                                        <rect key="frame" x="132.33333333333331" y="16" width="150.33333333333331" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="vVJ-ny-Fa8"/>
                                         </constraints>
@@ -962,7 +962,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="serachCell" id="QsG-ex-GwQ" customClass="CustomCollectionViewCell" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="-0.66666666666666663" width="118" height="101"/>
+                                                <rect key="frame" x="0.0" y="-1" width="118" height="101"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="118" height="101"/>
@@ -1015,19 +1015,19 @@
                                         <rect key="frame" x="0.0" y="200" width="414" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L4B-7J-Y1I">
-                                                <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="206" height="200"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="breakfast" translatesAutoresizingMaskIntoConstraints="NO" id="aVP-QT-JzU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="150"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="206" height="150"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAKFAST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPl-7a-axz">
-                                                        <rect key="frame" x="0.0" y="165" width="205.66666666666666" height="21"/>
+                                                        <rect key="frame" x="0.0" y="165" width="206" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUf-IV-ueK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="165"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="206" height="165"/>
                                                         <connections>
                                                             <action selector="showFilterList:" destination="yh9-hu-JQM" eventType="touchUpInside" id="HeU-Ir-uhO"/>
                                                         </connections>
@@ -1049,19 +1049,19 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftk-EO-Xb0">
-                                                <rect key="frame" x="208.66666666666663" y="0.0" width="205.33333333333337" height="200"/>
+                                                <rect key="frame" x="209" y="0.0" width="205" height="200"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lunch" translatesAutoresizingMaskIntoConstraints="NO" id="LKK-Uz-F6G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.33333333333334" height="151"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="205" height="151"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LUNCH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JJ-Xu-YHs">
-                                                        <rect key="frame" x="0.0" y="166" width="205.33333333333334" height="21"/>
+                                                        <rect key="frame" x="0.0" y="166" width="205" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BV-sc-C8f">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.33333333333334" height="166"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="205" height="166"/>
                                                         <connections>
                                                             <action selector="showFilterList:" destination="yh9-hu-JQM" eventType="touchUpInside" id="iPg-p8-y5n"/>
                                                         </connections>
@@ -1091,19 +1091,19 @@
                                         <rect key="frame" x="0.0" y="400" width="414" height="200"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W6B-ex-fwI">
-                                                <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="200"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="206" height="200"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dinner" translatesAutoresizingMaskIntoConstraints="NO" id="YfP-hJ-0bN">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="150"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="206" height="150"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DINNER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJu-L8-OMD">
-                                                        <rect key="frame" x="0.0" y="166" width="205.66666666666666" height="21"/>
+                                                        <rect key="frame" x="0.0" y="166" width="206" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CR2-4t-C2s">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="166"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="206" height="166"/>
                                                         <connections>
                                                             <action selector="showFilterList:" destination="yh9-hu-JQM" eventType="touchUpInside" id="xZx-jh-MtI"/>
                                                         </connections>
@@ -1125,19 +1125,19 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O0W-4b-xFb">
-                                                <rect key="frame" x="208.66666666666663" y="0.0" width="205.33333333333337" height="200"/>
+                                                <rect key="frame" x="209" y="0.0" width="205" height="200"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="desserts" translatesAutoresizingMaskIntoConstraints="NO" id="g8H-k5-kYz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.33333333333334" height="150"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="205" height="150"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESSERTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9z-0Q-kEw">
-                                                        <rect key="frame" x="0.0" y="166" width="205.33333333333334" height="21"/>
+                                                        <rect key="frame" x="0.0" y="166" width="205" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </label>
                                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XKy-Gr-H4K">
-                                                        <rect key="frame" x="0.0" y="0.0" width="205.33333333333334" height="166"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="205" height="166"/>
                                                         <connections>
                                                             <action selector="showFilterList:" destination="yh9-hu-JQM" eventType="touchUpInside" id="Bc3-3X-XhS"/>
                                                         </connections>
@@ -1773,10 +1773,10 @@
                                         <rect key="frame" x="15" y="348" width="383" height="49"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="txtbg.png" translatesAutoresizingMaskIntoConstraints="NO" id="dZl-lX-jxD">
-                                                <rect key="frame" x="0.0" y="0.0" width="190.66666666666666" height="46"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="191" height="46"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txtbg.png" translatesAutoresizingMaskIntoConstraints="NO" id="RdJ-EH-RCF">
-                                                <rect key="frame" x="192.66666666666663" y="0.0" width="190.33333333333337" height="49"/>
+                                                <rect key="frame" x="193" y="0.0" width="190" height="49"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Male" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHu-hP-t8q">
                                                 <rect key="frame" x="47" y="15" width="42" height="21"/>
@@ -1799,7 +1799,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9O-v8-P3p">
-                                                <rect key="frame" x="202.66666666666666" y="10" width="30" height="30"/>
+                                                <rect key="frame" x="203" y="10" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="FN0-hx-YMN"/>
                                                     <constraint firstAttribute="width" constant="30" id="fk0-0t-uVz"/>
@@ -1810,7 +1810,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ykP-1J-1ho">
-                                                <rect key="frame" x="234.66666666666669" y="15" width="79.000000000000057" height="21"/>
+                                                <rect key="frame" x="235" y="15" width="79" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="79" id="1Kj-Oc-UpT"/>
                                                     <constraint firstAttribute="height" constant="21" id="69e-9B-4yn"/>
@@ -2251,7 +2251,7 @@
                         <viewControllerLayoutGuide type="top" id="JsL-68-TLV"/>
                         <viewControllerLayoutGuide type="bottom" id="qXs-eu-Pyp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tJh-6t-WWN">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="tJh-6t-WWN">
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -2262,7 +2262,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdZ-A6-oXX">
-                                                <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="55"/>
                                                 <state key="normal" image="homeicon.png">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2271,7 +2271,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOf-Te-vof" userLabel="windowBtn">
-                                                <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="55"/>
+                                                <rect key="frame" x="104" y="0.0" width="103" height="55"/>
                                                 <state key="normal" image="boxes">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2280,7 +2280,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVC-3S-bR6" userLabel="SearchBtn">
-                                                <rect key="frame" x="207.00000000000003" y="0.0" width="103.66666666666671" height="55"/>
+                                                <rect key="frame" x="207" y="0.0" width="104" height="55"/>
                                                 <state key="normal" image="iconsearch-1">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2289,7 +2289,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKb-gj-v7L" userLabel="ProfileBtn">
-                                                <rect key="frame" x="310.66666666666674" y="0.0" width="103.33333333333331" height="55"/>
+                                                <rect key="frame" x="311" y="0.0" width="103" height="55"/>
                                                 <state key="normal" image="contact-1"/>
                                                 <connections>
                                                     <action selector="profileBtnAction:" destination="xS8-Wy-27x" eventType="touchUpInside" id="Kyo-OC-Vni"/>
@@ -2514,7 +2514,7 @@
                                         <rect key="frame" x="0.0" y="241" width="414" height="323"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PlD-hG-Ee8" id="htF-7L-9kg">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="322.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="322"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dfh-QH-PzR">
@@ -2531,7 +2531,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Rcell" reuseIdentifier="Rcell" id="kfr-2N-cKn" customClass="CustomCollectionViewCell" customModule="Munchpic" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="8.6666666666666661" width="137" height="147"/>
+                                                            <rect key="frame" x="0.0" y="9" width="137" height="147"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137" height="147"/>
@@ -2568,7 +2568,7 @@
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food1" translatesAutoresizingMaskIntoConstraints="NO" id="tkg-3f-j3O">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tkg-3f-j3O">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="162"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="162" id="9u8-lS-BY8"/>
@@ -2770,7 +2770,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j0y-iH-sFh">
-                                        <rect key="frame" x="8.6666666666666643" y="20" width="40" height="40"/>
+                                        <rect key="frame" x="8" y="20" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1DX-9b-c0U"/>
                                             <constraint firstAttribute="width" constant="40" id="eGL-tw-uRC"/>
@@ -2790,7 +2790,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aqg-UT-7DW">
-                                        <rect key="frame" x="367" y="20" width="40" height="40"/>
+                                        <rect key="frame" x="366.33333333333331" y="20" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="10E-Xr-amS"/>
                                             <constraint firstAttribute="height" constant="40" id="h0z-Rf-Nzo"/>
@@ -2809,7 +2809,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nrr-fo-vm0">
-                                                        <rect key="frame" x="26.333333333333329" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="26.666666666666671" y="0.0" width="50" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="151-yn-vmr"/>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="3ld-WZ-zS7"/>
@@ -2846,7 +2846,7 @@
                                                         <state key="normal" image="Time"/>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T0u-CL-zi7">
-                                                        <rect key="frame" x="27.666666666666671" y="50" width="47.666666666666657" height="21"/>
+                                                        <rect key="frame" x="27.333333333333329" y="50" width="47.666666666666657" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -2864,7 +2864,7 @@
                                                 <rect key="frame" x="207.00000000000003" y="0.0" width="103.66666666666671" height="60"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MH-9n-Hzs">
-                                                        <rect key="frame" x="26.333333333333343" y="0.0" width="49.999999999999972" height="50"/>
+                                                        <rect key="frame" x="26.666666666666657" y="0.0" width="50.000000000000028" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="50" id="fVc-21-STE"/>
                                                             <constraint firstAttribute="height" constant="50" id="uvJ-K5-a1y"/>
@@ -2872,7 +2872,7 @@
                                                         <state key="normal" image="Calorie"/>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHs-C9-kbN">
-                                                        <rect key="frame" x="47.333333333333343" y="50" width="10.666666666666657" height="21"/>
+                                                        <rect key="frame" x="46" y="50" width="10.666666666666686" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -2901,7 +2901,7 @@
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGg-gb-Elj">
-                                                        <rect key="frame" x="48.666666666666629" y="50" width="6" height="21"/>
+                                                        <rect key="frame" x="48" y="50" width="6" height="21"/>
                                                         <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="17"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
@@ -3482,7 +3482,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="289" height="48"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h2y-yP-dhn" id="hdu-in-Rw2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="47.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="289" height="47"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GWD-5B-khG">
@@ -3492,7 +3492,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manjunath K.R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdY-c5-0nq">
-                                                                    <rect key="frame" x="64" y="4" width="97.666666666666657" height="21"/>
+                                                                    <rect key="frame" x="64" y="4" width="97.333333333333343" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="Wzc-Z2-rXM"/>
                                                                     </constraints>
@@ -3737,7 +3737,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell1" id="2hE-ZO-joy">
-                                                <rect key="frame" x="0.0" y="-8.6666666666666661" width="413" height="226"/>
+                                                <rect key="frame" x="0.0" y="-9" width="413" height="226"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                     <rect key="frame" x="0.0" y="0.0" width="413" height="226"/>
@@ -5961,7 +5961,7 @@
                                         <rect key="frame" x="5" y="10" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzK-Y5-Ffs" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jcT-4Q-eLY">
                                                         <rect key="frame" x="5" y="0.0" width="567" height="50"/>
@@ -5988,7 +5988,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I81-74-QO6" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tu0-vf-Ltu">
                                                         <rect key="frame" x="5" y="0.0" width="167" height="50"/>
@@ -6030,7 +6030,7 @@
                                         <rect key="frame" x="5" y="70" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xM9-TP-5S6" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cE1-XB-kb9">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6057,7 +6057,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCQ-sO-K9p" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rtl-xN-emd">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6092,7 +6092,7 @@
                                         <rect key="frame" x="5" y="130" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOY-mF-t3H" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9BY-Gz-qly">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6119,7 +6119,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1D-5o-7rc" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DkI-ob-giS">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6154,7 +6154,7 @@
                                         <rect key="frame" x="5" y="190" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EAH-I7-umF" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nzO-gj-UPS">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6181,7 +6181,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAB-ap-6OB" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jn3-Ng-19x">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6216,7 +6216,7 @@
                                         <rect key="frame" x="5" y="250" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEe-hh-ILH" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hDW-LX-E9S">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6243,7 +6243,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3x-k8-2xe" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FwD-eD-QAL">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6278,7 +6278,7 @@
                                         <rect key="frame" x="5" y="310" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RC-q3-ton" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rn8-Vd-fNq">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6305,7 +6305,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tov-MF-Ywb" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Xl-16-ahY">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6337,7 +6337,7 @@
                                         <rect key="frame" x="5" y="370" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3m-ps-qSW" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M1Q-l1-nL5">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6364,7 +6364,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ias-SA-0qn" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sdE-Ge-jEw">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6399,7 +6399,7 @@
                                         <rect key="frame" x="5" y="430" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qtC-cQ-LCb" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ucf-L4-0WV">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6426,7 +6426,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEf-EC-fz6" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LdV-FS-lCE">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6461,7 +6461,7 @@
                                         <rect key="frame" x="5" y="490" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reZ-9V-Q5i" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YZS-ef-z3f">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6488,7 +6488,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2A-lW-awQ" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Ec-B3-Z6d">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6523,7 +6523,7 @@
                                         <rect key="frame" x="5" y="550" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P3V-UY-aNo" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOq-Du-kgS">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6550,7 +6550,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O3D-ag-YzA" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZKV-ay-pMQ">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6585,7 +6585,7 @@
                                         <rect key="frame" x="5" y="610" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WUa-W8-0yE" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eO1-hT-XKs">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6612,7 +6612,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qv9-yF-vrR" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zOk-9u-QbN">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6647,7 +6647,7 @@
                                         <rect key="frame" x="5" y="670" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8g-X2-lEA" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xH-AA-1LV">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6674,7 +6674,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WEr-tW-Rqw" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="91C-JA-cbf">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6709,7 +6709,7 @@
                                         <rect key="frame" x="5" y="730" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgf-V7-TQx" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RbU-QK-Jjc">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6736,7 +6736,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pzs-5R-TNC" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8n4-c5-XwD">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6771,7 +6771,7 @@
                                         <rect key="frame" x="5" y="790" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5v2-O3-PDC" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kf7-0c-KRI">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6798,7 +6798,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGz-Np-Neg" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sY3-6p-37x">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -6833,7 +6833,7 @@
                                         <rect key="frame" x="5" y="850" width="404" height="50"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7XS-MH-qaW" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="309.33333333333331" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="309" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Ingredients" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AvY-5g-yko">
                                                         <rect key="frame" x="5" y="0.0" width="575" height="50"/>
@@ -6860,7 +6860,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2BX-Dr-pMY" customClass="BorderedView" customModule="Munchpic" customModuleProvider="target">
-                                                <rect key="frame" x="313.33333333333326" y="0.0" width="90.666666666666686" height="50"/>
+                                                <rect key="frame" x="313" y="0.0" width="91" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="OTY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T2X-QY-tLc">
                                                         <rect key="frame" x="5" y="0.0" width="169" height="50"/>
@@ -7052,7 +7052,7 @@
             <objects>
                 <navigationController storyboardIdentifier="DashBoard" automaticallyAdjustsScrollViewInsets="NO" id="PPc-Pw-T3V" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translucent="NO" id="QIi-4J-az3">
+                    <navigationBar key="navigationBar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="QIi-4J-az3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.95686274510000002" green="0.26274509800000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -7106,7 +7106,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="412" height="373"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O7J-Iz-6H7" id="NP4-En-sAH">
-                                                    <rect key="frame" x="0.0" y="0.0" width="412" height="372.66666666666669"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="412" height="372"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gujarathi" translatesAutoresizingMaskIntoConstraints="NO" id="M4r-dD-ECz">
@@ -7140,7 +7140,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xbw-dS-YRU">
-                                                            <rect key="frame" x="8" y="324.33333333333331" width="20" height="21"/>
+                                                            <rect key="frame" x="8" y="323.66666666666669" width="20" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="apH-0e-W05"/>
                                                             </constraints>
@@ -7149,7 +7149,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Efforts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d03-Jz-Prr">
-                                                            <rect key="frame" x="145" y="345.66666666666674" width="41" height="18.333333333333314"/>
+                                                            <rect key="frame" x="145" y="345.33333333333331" width="41" height="18.333333333333371"/>
                                                             <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -7776,7 +7776,7 @@
                                                         <rect key="frame" x="0.0" y="28" width="273" height="48"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Fg-6q-6Wm" id="LHk-Km-w3J">
-                                                            <rect key="frame" x="0.0" y="0.0" width="273" height="47.666666666666664"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="273" height="47"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffF-45-35v">
@@ -7786,7 +7786,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manjunath K.R" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="081-qq-Gji">
-                                                                    <rect key="frame" x="64" y="4" width="97.666666666666657" height="21"/>
+                                                                    <rect key="frame" x="64" y="4" width="98" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="fqR-d7-gIC"/>
                                                                     </constraints>
@@ -7795,7 +7795,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GE2-J0-Jl4">
-                                                                    <rect key="frame" x="84" y="23" width="171" height="18"/>
+                                                                    <rect key="frame" x="84" y="23" width="171" height="19"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="171" id="1ji-5v-Hyl"/>
                                                                     </constraints>
@@ -7930,7 +7930,6 @@
         <image name="emoji6" width="286" height="286"/>
         <image name="face" width="250" height="250"/>
         <image name="facebook-1" width="64" height="64"/>
-        <image name="food1" width="260" height="226"/>
         <image name="googleimage" width="256" height="256"/>
         <image name="homeicon.png" width="19" height="19"/>
         <image name="iconsearch" width="50" height="50"/>

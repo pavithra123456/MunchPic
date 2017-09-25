@@ -78,8 +78,6 @@
 		C18AAA3B1F7274E800161085 /* rd1.png in Resources */ = {isa = PBXBuildFile; fileRef = C18AAA3A1F7274E800161085 /* rd1.png */; };
 		C18AAA3D1F7274ED00161085 /* rd2.png in Resources */ = {isa = PBXBuildFile; fileRef = C18AAA3C1F7274ED00161085 /* rd2.png */; };
 		C18AAA3F1F729C2900161085 /* AutoKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18AAA3E1F729C2900161085 /* AutoKeyboard.swift */; };
-		C18AAA411F729C3600161085 /* AutoKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; };
-		C18AAA421F729CEE00161085 /* AutoKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; };
 		C18AAA431F729CEE00161085 /* AutoKeyboard.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C18AAA401F729C3600161085 /* AutoKeyboard.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C1A560701F2761E000738E4B /* GetPostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A5606F1F2761E000738E4B /* GetPostDetailsViewController.swift */; };
 		C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */; };
@@ -219,8 +217,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C18AAA411F729C3600161085 /* AutoKeyboard.framework in Frameworks */,
-				C18AAA421F729CEE00161085 /* AutoKeyboard.framework in Frameworks */,
 				6B754CB104409B1AD97BB7F9 /* Pods_Munchpic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
