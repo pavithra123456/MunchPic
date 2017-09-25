@@ -133,7 +133,7 @@ class SearchViewController: UIViewController,UICollectionViewDelegateFlowLayout,
         let vc = storyBoard.instantiateViewController(withIdentifier: "SearchFilterCtrl") as!SearchFilterListController
         vc.category = category
         vc.cuisine = ""
-        vc.searchBar = searchbar.text!
+        vc.searchBar = ""
         if let value = (subCategory?.rawValue) {
             vc.subCategory = value
         }

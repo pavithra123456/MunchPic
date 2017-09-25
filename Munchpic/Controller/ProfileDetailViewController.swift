@@ -28,6 +28,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     @IBOutlet var femalebtn: UIButton!
     @IBOutlet weak var userPic: UIImageView!
     @IBOutlet weak var countryButton: UIButton!
+    var tapguesture : UITapGestureRecognizer?
+    
     let countriesarray = ["India","Pakisthan","Srilanka","Bangladesh","Nepal","Tibet","China","Afghanisthan","Australia","Russia","UK","USA","Africa","France"]
 
     
@@ -83,6 +85,8 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         countryButton.isEnabled = false
         countryTableview.isHidden = true
         
+        addGuestures()
+        
 //        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(ProfileDetailViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 //        
@@ -122,6 +126,13 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
 //        
 //    }
 
+    func addGuestures() {
+        tapguesture = UITapGestureRecognizer.init(target: self, action: #selector(hideKeyboard))
+        tapguesture?.isEnabled = true
+        self.view.addGestureRecognizer(tapguesture!)
+    }
+    
+   
     
     // MARK: - mail button selected
     @IBAction func malebtn_Action(_ sender: Any) {
@@ -430,6 +441,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
+        
         if(textField == countryTxtField){
             
             textField.resignFirstResponder()
@@ -437,13 +449,13 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             
         }else if textField == countryTxtField{
             textField.inputView = nil
-           
           
         }
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
+        self.countryTableview.isHidden = true
         if(textField == countryTxtField){
             self.hideKeyboard()
         }
@@ -485,7 +497,6 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         cityTxtField.resignFirstResponder()
         phoneNoTxtField.resignFirstResponder()
         emailTxtField.resignFirstResponder()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

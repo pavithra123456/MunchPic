@@ -180,7 +180,7 @@ extension UIView {
     }
     
     /// Add borders to UIView based on position.
-    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.3) -> UIView {
+    func addBorder(borderPostion: BorderPosition, borderColor: UIColor = UIColor.yellow, borderWidth: CGFloat = 1.5) -> UIView {
         
         let borderName = "bottomBorder"
         
