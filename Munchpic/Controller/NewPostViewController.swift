@@ -32,6 +32,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     let swipeGestureRight = UISwipeGestureRecognizer()
     var postIdis = Int()
     var postDetails :[String:AnyObject]?
+    var scrollingbool = Bool()
+    
     
     
     @IBOutlet var mscrollview: UIScrollView!
@@ -127,10 +129,12 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             }
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(NewPostViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
+    
+  
     
     func keyboardWillShow(_ notification: Notification) {
         
@@ -153,8 +157,15 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     
     
     override func viewDidLayoutSubviews() {
+        
         mscrollview.isScrollEnabled = true
-        mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+350)
+        if(downint>7){
+             mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: 1800)
+        }else{
+             mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: 1500)
+        }
+    
+       
     }
     
     func UpdateUI(){
@@ -265,9 +276,11 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return 3
         
-    }
+        }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)
         let imgView = cell.viewWithTag(1) as! UIImageView
@@ -286,11 +299,13 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         indexval = 0
         
     }
+    
     @IBAction func cam2(_ sender: Any) {
         self.selectimage(sender)
         indexval = 1
         
     }
+    
     @IBAction func cam3(_ sender: Any) {
         self.selectimage(sender)
         indexval = 2
@@ -393,16 +408,18 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
         if(textField == titileTextField){
             
+            
+            self.hidekeyboard()
             selectCategory.becomeFirstResponder()
             
         }else if(textField == selectCategory){
-            
-            textField.resignFirstResponder()
+           
+            self.hidekeyboard()
             selectcuisine.becomeFirstResponder()
             
         }else if( textField == selectcuisine){
             
-            textField.resignFirstResponder()
+            self.hidekeyboard()
             timelabel.becomeFirstResponder()
             
         }else{
@@ -414,16 +431,30 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         return true
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+       
+        if(textField == selectCategory){
+            self.hidekeyboard()
+        }else if( textField == selectcuisine){
+            self.hidekeyboard()
+        }
+        
+        return true
+    }
+
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         let pos = self.view.convert(textField.frame.origin, to: self.view)
         print(pos)
        
         if(textField == selectCategory){
-            
+            self.hidekeyboard()
             titileTextField.resignFirstResponder()
             categorystr = "selectCategory"
-            //countryview.isHidden = false
+            self.hidekeyboard()
             categorytable.reloadData()
             categorytable.frame = CGRect(x: (textField.superview?.frame.origin.x)!, y: (textField.superview?.frame.origin.y)!-10, width: categorytable.frame.width, height: categorytable.frame.height)
             
@@ -433,7 +464,7 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         }else if( textField == selectcuisine){
             
             categorystr = "selectcuisine"
-            //countryview.isHidden = false
+            self.hidekeyboard()
             categorytable.reloadData()
             //selectcuisine.resignFirstResponder()
             categorytable.frame = CGRect(x: (textField.superview?.frame.origin.x)!, y: (textField.superview?.frame.origin.y)!-10, width: categorytable.frame.width, height: categorytable.frame.height)
@@ -452,6 +483,23 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
         
     }
     
+    func hidekeyboard(){
+        
+        titileTextField.resignFirstResponder()
+        selectCategory.resignFirstResponder()
+        selectcuisine.resignFirstResponder()
+        timelabel.resignFirstResponder()
+        step1.resignFirstResponder()
+        step2.resignFirstResponder()
+        setp3.resignFirstResponder()
+        step4.resignFirstResponder()
+        step5.resignFirstResponder()
+        step6.resignFirstResponder()
+        step7.resignFirstResponder()
+        step8.resignFirstResponder()
+        step9.resignFirstResponder()
+        step10.resignFirstResponder()
+    }
     
     
     @IBAction func vegandnonvegbtn_Action(_ sender: Any) {
@@ -551,8 +599,8 @@ class NewPostViewController: UIViewController,UINavigationControllerDelegate,UII
             if(downint == 6){
                 BV6.isHidden = false
             }else if(downint == 7){
-                BV7.isHidden = false
-            mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+200)
+            BV7.isHidden = false
+            mscrollview.contentSize = CGSize(width: mscrollview.contentSize.width, height: mscrollview.contentSize.height+300)
                 
             }else if(downint == 8){
                 BV8.isHidden = false

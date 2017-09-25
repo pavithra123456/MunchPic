@@ -60,7 +60,6 @@
 		87AC69051F188F4D008F2CA9 /* cam.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69001F188F4D008F2CA9 /* cam.png */; };
 		87AC69061F188F4D008F2CA9 /* Nonveg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69011F188F4D008F2CA9 /* Nonveg.png */; };
 		87AC69071F188F4D008F2CA9 /* veg.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AC69021F188F4D008F2CA9 /* veg.png */; };
-		87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CF81EE57B9800EEC7A3 /* homeicon.png */; };
 		87AF5CFB1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */; };
 		87AF5CFD1EE57C6C00EEC7A3 /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 87AF5CFC1EE57C6C00EEC7A3 /* about.png */; };
 		87B1E6CC1EDC4B0300A331C0 /* userimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 87B1E6CB1EDC4B0300A331C0 /* userimage.png */; };
@@ -83,6 +82,7 @@
 		C1B3F0FC1F3448C6002572DD /* Proxima Nova Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */; };
 		C1B3F0FD1F3448C6002572DD /* Proxima Nova Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */; };
 		C1B3F0FE1F3448C6002572DD /* Proxima Nova Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C1B3F0FB1F3448C6002572DD /* Proxima Nova Semibold.otf */; };
+		C1C1599A1F793AF3004B5EFA /* homeicon.png in Resources */ = {isa = PBXBuildFile; fileRef = C1C159991F793AF3004B5EFA /* homeicon.png */; };
 		DC27A2D94EC41819E2069395 /* Pods_MunchpicTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */; };
 		DD6961A5045E66814DC7CF7C /* Pods_MunchpicUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912951A2373444D11D53EEA4 /* Pods_MunchpicUITests.framework */; };
 /* End PBXBuildFile section */
@@ -180,7 +180,6 @@
 		87AC69001F188F4D008F2CA9 /* cam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cam.png; sourceTree = "<group>"; };
 		87AC69011F188F4D008F2CA9 /* Nonveg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Nonveg.png; sourceTree = "<group>"; };
 		87AC69021F188F4D008F2CA9 /* veg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = veg.png; sourceTree = "<group>"; };
-		87AF5CF81EE57B9800EEC7A3 /* homeicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeicon.png; sourceTree = "<group>"; };
 		87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onlineresearchfeedbackicon.png; sourceTree = "<group>"; };
 		87AF5CFC1EE57C6C00EEC7A3 /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
 		87B1E6CB1EDC4B0300A331C0 /* userimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userimage.png; sourceTree = "<group>"; };
@@ -208,6 +207,7 @@
 		C1B3F0F91F3448C6002572DD /* Proxima Nova Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Light.otf"; path = "../Proxima Nova Light.otf"; sourceTree = "<group>"; };
 		C1B3F0FA1F3448C6002572DD /* Proxima Nova Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Regular.otf"; path = "../Proxima Nova Regular.otf"; sourceTree = "<group>"; };
 		C1B3F0FB1F3448C6002572DD /* Proxima Nova Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Proxima Nova Semibold.otf"; path = "../Proxima Nova Semibold.otf"; sourceTree = "<group>"; };
+		C1C159991F793AF3004B5EFA /* homeicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeicon.png; sourceTree = "<group>"; };
 		D97D6F6D3DC9587022628620 /* Pods-MunchpicTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MunchpicTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MunchpicTests/Pods-MunchpicTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DAB008E4731109BD451A3FF1 /* Pods_MunchpicTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MunchpicTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -406,9 +406,9 @@
 				87AF5CFA1EE57BA300EEC7A3 /* onlineresearchfeedbackicon.png */,
 				87B1E6CD1EDC4B0D00A331C0 /* bottom_bg.png */,
 				87AF5CFC1EE57C6C00EEC7A3 /* about.png */,
-				87AF5CF81EE57B9800EEC7A3 /* homeicon.png */,
 				87B1E6DD1EDC4C4F00A331C0 /* main_bg.jpg */,
 				87B1E6DB1EDC4B8B00A331C0 /* 144_app_icon.png */,
+				C1C159991F793AF3004B5EFA /* homeicon.png */,
 				C1378D6C1F28BAD3003D9CD7 /* camaraicon.jpg */,
 				87B1E6CB1EDC4B0300A331C0 /* userimage.png */,
 				870940F01EE6DA3E00292713 /* logo1.png */,
@@ -593,10 +593,10 @@
 				87B1E6D71EDC4B5600A331C0 /* checkbox@3.png in Resources */,
 				C10FB5C21F4C5D0A0096DF60 /* MpsplashImage.png in Resources */,
 				7B95BAF41F0F861300404220 /* UserPosts.storyboard in Resources */,
+				C1C1599A1F793AF3004B5EFA /* homeicon.png in Resources */,
 				870940F11EE6DA3E00292713 /* logo1.png in Resources */,
 				7B3576591ED9AA8500FF610A /* Assets.xcassets in Resources */,
 				87B1E6D21EDC4B1800A331C0 /* txtbg.png in Resources */,
-				87AF5CF91EE57B9800EEC7A3 /* homeicon.png in Resources */,
 				C18AAA3B1F7274E800161085 /* rd1.png in Resources */,
 				7B142CDD1F150A90005559A8 /* GoogleService-Info.plist in Resources */,
 				87B1E6D81EDC4B5600A331C0 /* uncheckbox@3.png in Resources */,

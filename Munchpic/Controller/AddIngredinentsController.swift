@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 
-class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollViewDelegate{
+class AddIngredinentsController: UIViewController,UITextFieldDelegate,UIScrollViewDelegate{
 
     @IBOutlet weak var ingredients1: UITextField!
     @IBOutlet weak var ingredients2: UITextField!
@@ -58,9 +58,25 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
+        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height)
 //        mainstackview.contentMode = UIViewContentMode(rawValue: Int(scrollview.contentSize.height))!
         
+        ingredients1.delegate = self
+        ingredients2.delegate = self
+        ingredients3.delegate = self
+        ingredients4.delegate = self
+        ingredients5.delegate = self
+        ingredients6.delegate = self
+        ingredients7.delegate = self
+        ingredients8.delegate = self
+         ingredients9.delegate = self
+         ingredients10.delegate = self
+         ingredients11.delegate = self
+         ingredients12.delegate = self
+         ingredients13.delegate = self
+         ingredients14.delegate = self
+         ingredients15.delegate = self
+
         
         if(UserDefaults.standard.bool(forKey: "editvisible") == true){
             
@@ -89,7 +105,18 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
     
     override func viewDidLayoutSubviews() {
         scrollview.isScrollEnabled = true
-        scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: scrollview.contentSize.height+350)
+       
+        if(downint > 6 && downint < 10){
+            
+            scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 900)
+            
+        }else if(downint > 10 ){
+            
+             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 1300)
+        }else{
+            
+             scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 500)
+        }
         
     }
     
@@ -112,8 +139,11 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
         ingredients14.text = postDetails?["ingradients14"] as? String
         ingredients15.text = postDetails?["ingradients15"] as? String
         
-
-        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @IBAction func add_Action(_ sender: Any) {
@@ -131,6 +161,7 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
             
             if(downint == 6){
                 sv6.isHidden = false
+                scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 900)
             }else if(downint == 7){
                 sv7.isHidden = false
                 
@@ -142,6 +173,7 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
                 
             }else if(downint == 10){
                 sv10.isHidden = false
+                scrollview.contentSize = CGSize(width: scrollview.contentSize.width, height: 1300)
                 
             }else if(downint == 11){
                 sv11.isHidden = false
@@ -302,10 +334,7 @@ class AddIngredinentsController: UIViewController ,UITextFieldDelegate,UIScrollV
         let _ = self.navigationController?.popViewController(animated: true)
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+    
     
     
     

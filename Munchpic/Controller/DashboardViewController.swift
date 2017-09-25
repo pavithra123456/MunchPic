@@ -79,6 +79,11 @@ class DashboardViewController: UIViewController {
     @IBAction func profileBtnAction(_ sender: Any) {
         homeBtn.tintColor = UIColor.yellow
         profileBorder = profileBtn.addBorder(borderPostion: .bottom)
+        
+        profileBtn.setImage(UIImage(named:"contact_yellow"), for: UIControlState.normal)
+        searchBtn.setImage(UIImage(named : "iconsearch-1"), for: UIControlState.normal)
+        windowBtn.setImage(UIImage(named : "boxes"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
 
         profileContainer.isHidden = false
         profileBorder?.isHidden = false
@@ -91,8 +96,11 @@ class DashboardViewController: UIViewController {
         
         searchContainer.isHidden = true
         searchBorder?.isHidden = true
+        
         self.navigationItem.title = "UserPosts"
         NotificationCenter.default.post(name: Notification.Name("ProfileNotificationIdentifier"), object: nil)
+        
+        
     }
 
     @IBAction func serachBtnAction(_ sender: Any) {
@@ -110,6 +118,11 @@ class DashboardViewController: UIViewController {
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
         self.navigationItem.title = "Search"
+        
+        searchBtn.setImage(UIImage(named : "iconsearch_yellow"), for: UIControlState.normal)
+        profileBtn.setImage(UIImage(named:"contact-1"), for: UIControlState.normal)
+        windowBtn.setImage(UIImage(named : "boxes"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
         
 
         
@@ -130,7 +143,11 @@ class DashboardViewController: UIViewController {
         profileContainer.isHidden = true
         profileBorder?.isHidden = true
         self.navigationItem.title = "Comapaigns"
-
+        
+        windowBtn.setImage(UIImage(named : "boxes_yellow"), for: UIControlState.normal)
+        profileBtn.setImage(UIImage(named:"contact-1"), for: UIControlState.normal)
+        searchBtn.setImage(UIImage(named : "iconsearch-1"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
     }
     
     @IBAction func homeBtnAction(_ sender: Any) {
@@ -149,6 +166,10 @@ class DashboardViewController: UIViewController {
         profileBorder?.isHidden = true
         self.navigationItem.title = "Home"
 
+        homeBtn.setImage(UIImage(named : "homepic_yellow"), for: UIControlState.normal)
+        profileBtn.setImage(UIImage(named:"contact-1"), for: UIControlState.normal)
+        searchBtn.setImage(UIImage(named : "iconsearch-1"), for: UIControlState.normal)
+        windowBtn.setImage(UIImage(named : "boxes"), for: UIControlState.normal)
         
     }
     /*

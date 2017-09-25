@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "homeiconnew.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "homepic.png",
       "scale" : "2x"
     },
     {

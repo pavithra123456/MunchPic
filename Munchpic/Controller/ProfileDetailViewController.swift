@@ -129,7 +129,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     func addGuestures() {
         tapguesture = UITapGestureRecognizer.init(target: self, action: #selector(hideKeyboard))
         tapguesture?.isEnabled = true
-        self.view.addGestureRecognizer(tapguesture!)
+        scrollview.addGestureRecognizer(tapguesture!)
     }
     
    
@@ -442,7 +442,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         
-        if(textField == countryTxtField){
+        if(textField == dobTxtField){
             
             textField.resignFirstResponder()
             self.selectdobpicker()
@@ -457,7 +457,7 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
         
         self.countryTableview.isHidden = true
         if(textField == countryTxtField){
-            self.hideKeyboard()
+                self.hideKeyboard()
         }
         
         return true
@@ -472,14 +472,14 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
             self.selectdobpicker()
         }else if textField == stateTxtField{
             cityTxtField.becomeFirstResponder()
-           // scrollview.setContentOffset(CGPoint(x:0,y:200), animated: true)
+           
         }else if textField == cityTxtField{
             phoneNoTxtField.becomeFirstResponder()
         }else if textField == phoneNoTxtField{
             emailTxtField.becomeFirstResponder()
         }else if textField == emailTxtField{
             textField.resignFirstResponder()
-           // scrollview.setContentOffset(CGPoint.zero, animated: true)
+           
         }else{
             
             textField.resignFirstResponder()
@@ -515,9 +515,14 @@ class ProfileDetailViewController: UIViewController ,UITextFieldDelegate,UIImage
    
     
     @IBAction func showCountryTableview(_ sender: Any) {
+        
+        tapguesture?.isEnabled = false
         self.hideKeyboard()
-        self.countryTableview.isHidden = false
-        self.countryTableview.reloadData()
+        scrollview.isScrollEnabled = false
+        countryTableview.isHidden = false
+        countryTableview.reloadData()
+
+        
     }
     
     
@@ -695,12 +700,11 @@ extension ProfileDetailViewController:UITableViewDataSource,UITableViewDelegate 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        
+         tapguesture?.isEnabled = true
             countryTxtField.text = self.countriesarray[indexPath.row] as? String
             countryTxtField.resignFirstResponder()
-        self.countryTableview.isHidden = true
-        
+           self.countryTableview.isHidden = true
+            scrollview.isScrollEnabled = true
     }
 
 }
