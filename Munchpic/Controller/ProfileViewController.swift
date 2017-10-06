@@ -1,3 +1,4 @@
+
 //
 //  ProfileViewController.swift
 //  Munchpic
@@ -79,11 +80,10 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         
         NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.methodOfReceivedNotification(notification:)), name: Notification.Name("ProfileNotificationIdentifier"), object: nil)
         
-      
-        
        
         
     }
+    
     
     func methodOfReceivedNotification(notification: Notification){
         
@@ -94,40 +94,21 @@ class ProfileViewController: UIViewController,UIScrollViewDelegate{
         
     }
     
-//    override func viewDidLayoutSubviews() {
-//        mscrollview.contentSize.height = collectionView.contentSize.height + 220
-////        collectionView.isHidden = false
-////        self.cameraButtonAction(nil)
-//    }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-       // mscrollview.contentSize.height = self.view.frame.size.height
-//        self.getCollectioncategories()
+       
 //        self.getLoves()
 //        self.getUserPosts()
-//        
-//        collectionView.isHidden = false
+//       
 //        lovesTableView.isHidden = true
-//        collectionView.reloadData()
-//        if lovesTableView.isHidden {
-//            self.collectionView.isHidden = false
-//        }
+//        collectionView.isHidden = false
+//        
+//        self.getCollectioncategories()
+        
+        
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-//        
-//        if lovesTableView.isHidden == true{
-//            self.collectionView.isHidden = false
-//            collectionView.reloadData()
-//        }else if collectionView.isHidden == true{
-//            self.getLoves()
-//            self.lovesTableView.isHidden = false
-//            lovesTableView.reloadData()
-//        }
-        
-       // self.getLoves()
-        
-    }
     
     
     func getUserPosts () {

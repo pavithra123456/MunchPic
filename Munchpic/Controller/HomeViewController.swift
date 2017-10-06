@@ -72,6 +72,7 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
         
         
         self.Hometableview.estimatedRowHeight = 300
+        self.Hometableview.isScrollEnabled = false
         self.Hometableview.delegate = self
         slidearrayData = ["1.png","2.png","3.png","1.png","2.png","3.png","1.png","2.png"]
         
@@ -304,12 +305,13 @@ class HomeViewController: UIViewController ,UITableViewDelegate,UITableViewDataS
                 })
                 }.resume()
             
-            mscrollview.isScrollEnabled = true
-            mscrollview.isUserInteractionEnabled = true
-            
+//            mscrollview.isScrollEnabled = true
+//            mscrollview.isUserInteractionEnabled = true
+//            
+          
+//            Hometableview.frame.size.height = Hometableview.contentSize.height
+            heightconstraint.constant = Hometableview.contentSize.height
             mscrollview.contentSize = CGSize(width: self.view.frame.size.width, height: Hometableview.contentSize.height+250)
-            Hometableview.frame.size.height = Hometableview.contentSize.height
-            heightconstraint.constant = Hometableview.frame.size.height
             
             
             return cell

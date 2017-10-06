@@ -83,7 +83,7 @@ class DashboardViewController: UIViewController {
         profileBtn.setImage(UIImage(named:"contact_yellow"), for: UIControlState.normal)
         searchBtn.setImage(UIImage(named : "iconsearch-1"), for: UIControlState.normal)
         windowBtn.setImage(UIImage(named : "boxes"), for: UIControlState.normal)
-        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon_white"), for: UIControlState.normal)
 
         profileContainer.isHidden = false
         profileBorder?.isHidden = false
@@ -122,7 +122,7 @@ class DashboardViewController: UIViewController {
         searchBtn.setImage(UIImage(named : "iconsearch_yellow"), for: UIControlState.normal)
         profileBtn.setImage(UIImage(named:"contact-1"), for: UIControlState.normal)
         windowBtn.setImage(UIImage(named : "boxes"), for: UIControlState.normal)
-        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon_white"), for: UIControlState.normal)
         
 
         
@@ -147,7 +147,7 @@ class DashboardViewController: UIViewController {
         windowBtn.setImage(UIImage(named : "boxes_yellow"), for: UIControlState.normal)
         profileBtn.setImage(UIImage(named:"contact-1"), for: UIControlState.normal)
         searchBtn.setImage(UIImage(named : "iconsearch-1"), for: UIControlState.normal)
-        homeBtn.setImage(UIImage(named : "homeicon.png"), for: UIControlState.normal)
+        homeBtn.setImage(UIImage(named : "homeicon_white"), for: UIControlState.normal)
     }
     
     @IBAction func homeBtnAction(_ sender: Any) {

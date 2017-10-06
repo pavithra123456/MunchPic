@@ -422,7 +422,7 @@ class DetailViewController: UIViewController ,UITableViewDataSource,UITableViewD
             else {
                 
                 let ingstr : String = (postDetails?.ingredientsArray[indexPath.row])! as String
-                if((ingstr == "") || (ingstr == "null")){
+                if((ingstr == "") || (ingstr == "null") || (ingstr == " , ")){
                     view?.layer.borderColor = UIColor.clear.cgColor
                     label.text = ""
                 }else{
